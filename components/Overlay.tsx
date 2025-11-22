@@ -12,6 +12,8 @@ interface ContentItem {
   description: string;
   link: string;
   date?: string;
+  videoUrl?: string; // Local video URL for embedded playback
+  technologies?: string[]; // Technologies used for this specific item
 }
 
 // Project Collection (Parent)
@@ -31,14 +33,24 @@ interface ProjectCollection {
 const projects: ProjectCollection[] = [
   {
     id: 'p1',
-    title: 'Flux & Flow',
+    title: 'AI Video Samples',
     category: 'Generative Video Collection',
     mainType: 'video',
-    description: 'Soraとモーショングラフィックスを融合させた、物理法則を超越する流体表現の実験記録。',
-    longDescription: 'OpenAIのSoraが生成した物理法則を超越した流体シミュレーション映像をベースに、After Effectsでのポストプロセスを経て、日本の四季や感情の色彩を重ね合わせました。「移ろい」をテーマにしたループ映像集です。',
-    technologies: ['Sora', 'After Effects', 'TouchDesigner', 'Runway Gen-2'],
+    description: '多数の動画生成AIモデルを使用し、生成結果の違いや組み合わせをテストした映像コレクション。',
+    longDescription: '多数の動画生成AIモデルを使用し、生成結果の違いや組み合わせをテストした映像コレクション。Veo3.1・Sora2・Hailuo・PixVerse・Vidu・Kling などを用い、ワークフローの検証を目的として制作しています。',
+    technologies: ['Veo3.1', 'Sora2', 'Hailuo', 'PixVerse', 'Vidu', 'Kling'],
     year: '2024',
     items: [
+      {
+        id: 'v0',
+        title: '芝犬ドギーダンス',
+        type: 'video',
+        description: '久しぶりの芝犬ドギーダンス🐕🎶\nHailuo2.3はダンスがかなり良くなった😆\nMidjourneyとnanobananaで画像生成後にHailuoでi2v、Sunoで作った音に合わせて完成🎥',
+        link: 'https://twitter.com/takamasa045',
+        date: '2024.11',
+        videoUrl: '/videos/shiba-doggy-dance.mp4',
+        technologies: ['Midjourney', 'nanobananapro', 'Hailuo 2.3', 'Suno']
+      },
       {
         id: 'v1',
         title: 'Spring Haze / 春霞',
@@ -67,12 +79,12 @@ const projects: ProjectCollection[] = [
   },
   {
     id: 'p2',
-    title: 'Spirit Frequency',
-    category: 'AI Ambient Music',
+    title: 'MV Collection',
+    category: 'AI Music Video',
     mainType: 'music',
-    description: 'Suno AIと自然音を調和させた、瞑想と集中力を高めるための音響作品集。',
-    longDescription: '長野県内の実際の神社の風音や水音をフィールドレコーディングし、それらをプロンプトとしてSuno AIに入力。生成された旋律は、特定の周波数帯域（ソルフェジオ周波数）を意識して調整されています。',
-    technologies: ['Suno AI', 'Logic Pro', 'Field Recording'],
+    description: 'Suno AIで生成した楽曲に、動画生成AIで映像を組み合わせたミュージックビデオコレクション。',
+    longDescription: 'Suno AIで生成した楽曲をベースに、Hailuo・Veo・Soraなどの動画生成AIで映像を制作。音と映像の両方をAIで生成し、編集・合成することで完成させたMV作品集です。',
+    technologies: ['Suno AI', 'Hailuo', 'Veo', 'Sora', 'Premiere Pro'],
     year: '2024',
     items: [
       {
@@ -562,15 +574,26 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
 // --- COMPONENT: INDIVIDUAL CONTENT ITEM CARD ---
 const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
   return (
-    <motion.div 
+    <motion.div
       variants={fadeUp}
       className="bg-stone-950/40 border border-emerald-900/30 hover:border-emerald-500/50 rounded-sm overflow-hidden group transition-all duration-300 flex flex-col"
     >
       {/* Visual Thumbnail Area */}
-      <div className="h-48 w-full relative overflow-hidden bg-black">
-        <MediaBackground type={item.type} />
+      <div className={`${item.videoUrl ? 'aspect-video' : 'h-48'} w-full relative overflow-hidden bg-black`}>
+        {item.videoUrl ? (
+          <video
+            src={item.videoUrl}
+            controls
+            loop
+            playsInline
+            className="w-full h-full object-cover"
+            poster=""
+          />
+        ) : (
+          <MediaBackground type={item.type} />
+        )}
         {/* Type Badge */}
-        <div className="absolute top-2 left-2 bg-black/60 backdrop-blur px-2 py-1 text-[10px] text-emerald-400 font-mono uppercase rounded-sm border border-white/5">
+        <div className="absolute top-2 left-2 bg-black/60 backdrop-blur px-2 py-1 text-[10px] text-emerald-400 font-mono uppercase rounded-sm border border-white/5 z-10">
           {item.type}
         </div>
       </div>
@@ -580,15 +603,29 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
         <div>
           <div className="flex justify-between items-start mb-2">
              <h4 className="text-lg font-serif text-stone-200 group-hover:text-white transition-colors">{item.title}</h4>
-             {item.date && <span className="text-[10px] text-stone-600 font-mono mt-1">{item.date}</span>}
+             {item.date && <span className="text-[10px] text-stone-600 font-mono mt-1 whitespace-nowrap ml-2">{item.date}</span>}
           </div>
-          <p className="text-sm text-stone-500 leading-relaxed mb-6 font-light">{item.description}</p>
+          <p className="text-sm text-stone-500 leading-relaxed mb-4 font-light whitespace-pre-line">{item.description}</p>
+
+          {/* Technology Tags */}
+          {item.technologies && item.technologies.length > 0 && (
+            <div className="flex flex-wrap gap-1.5 mb-4">
+              {item.technologies.map(tech => (
+                <span
+                  key={tech}
+                  className="bg-emerald-950/50 text-emerald-400/80 px-2 py-0.5 text-[10px] rounded-sm border border-emerald-900/30"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          )}
         </div>
 
-        <a 
+        <a
           href={item.link}
           target="_blank"
-          rel="noopener noreferrer" 
+          rel="noopener noreferrer"
           className="inline-flex items-center justify-center w-full py-3 text-xs font-mono tracking-widest text-emerald-500 border border-emerald-900/50 hover:bg-emerald-900/20 hover:border-emerald-500 rounded-sm transition-all"
         >
            VIEW CONTENT ↗
