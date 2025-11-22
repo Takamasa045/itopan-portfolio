@@ -239,14 +239,27 @@ export const Overlay: React.FC = () => {
                    <li className="flex items-start gap-2"><span className="text-emerald-500 mt-1">❖</span> 技術コンサルティング</li>
                 </ul>
 
-                <a 
-                  href="https://twitter.com/messages/compose?recipient_id=takamasa045" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block w-full text-center bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-stone-200 py-4 transition-all duration-300 rounded-sm hover:tracking-widest"
-                >
-                  X (Twitter) でDMを送る
-                </a>
+                <div className="flex flex-col gap-4">
+                  <a 
+                    href="https://twitter.com/messages/compose?recipient_id=takamasa045" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-stone-200 py-4 transition-all duration-300 rounded-sm hover:tracking-widest"
+                  >
+                    X (Twitter) でDMを送る
+                  </a>
+                  
+                  {/* Google Form Button - Replace the href with your actual Google Form URL */}
+                  <a 
+                    href="https://docs.google.com/forms/" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block w-full text-center bg-stone-800/40 hover:bg-stone-700/60 border border-stone-600/50 text-stone-200 py-4 transition-all duration-300 rounded-sm hover:tracking-widest"
+                  >
+                    Googleフォームでお問い合わせ
+                  </a>
+                </div>
+                
                 <p className="text-[10px] text-stone-600 mt-3 text-center">
                   法人向けコンサルティングについては、X (Twitter) のDMよりお問い合わせください
                 </p>

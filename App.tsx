@@ -1,26 +1,25 @@
 import React, { Suspense } from 'react';
-import { Canvas, ThreeElements } from '@react-three/fiber';
+import { Canvas } from '@react-three/fiber';
 import { Loader } from '@react-three/drei';
 import { Experience } from './components/Experience';
 
 // Augment the global JSX namespace to include Three.js elements
-// We must explicitly list the elements because 'ThreeElements' is a mapped type 
-// and TypeScript interfaces cannot extend mapped types directly.
+// We use 'any' to ensure compatibility and avoid strict type resolution issues
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      color: ThreeElements['color'];
-      ambientLight: ThreeElements['ambientLight'];
-      directionalLight: ThreeElements['directionalLight'];
-      fog: ThreeElements['fog'];
-      group: ThreeElements['group'];
-      mesh: ThreeElements['mesh'];
-      coneGeometry: ThreeElements['coneGeometry'];
-      meshStandardMaterial: ThreeElements['meshStandardMaterial'];
-      icosahedronGeometry: ThreeElements['icosahedronGeometry'];
-      torusGeometry: ThreeElements['torusGeometry'];
-      meshBasicMaterial: ThreeElements['meshBasicMaterial'];
-      boxGeometry: ThreeElements['boxGeometry'];
+      color: any;
+      ambientLight: any;
+      directionalLight: any;
+      fog: any;
+      group: any;
+      mesh: any;
+      coneGeometry: any;
+      meshStandardMaterial: any;
+      icosahedronGeometry: any;
+      torusGeometry: any;
+      meshBasicMaterial: any;
+      boxGeometry: any;
     }
   }
 }
