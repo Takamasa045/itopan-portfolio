@@ -1,0 +1,3495 @@
+{
+  "schemaVersion": 1,
+  "projectPath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+  "projectRootName": "itopan-portfolio",
+  "graphRenderingMode": "normal",
+  "linkDisplayMode": "all",
+  "graphStats": {
+    "totalNodes": 19,
+    "folders": 2,
+    "files": 17,
+    "images": 0,
+    "videos": 0,
+    "audio": 0,
+    "code": 9,
+    "text": 1,
+    "html": 1,
+    "yaml": 0,
+    "json": 4,
+    "other": 2,
+    "totalLines": 0,
+    "maxLines": 0
+  },
+  "directoryTree": {
+    "name": "itopan-portfolio",
+    "type": "directory",
+    "children": [
+      {
+        "name": ".gitignore",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "App.tsx",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "README.md",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "components",
+        "type": "directory",
+        "children": [
+          {
+            "name": "Experience.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "MountainWorld.tsx",
+            "type": "file",
+            "lines": 0
+          },
+          {
+            "name": "Overlay.tsx",
+            "type": "file",
+            "lines": 0
+          }
+        ]
+      },
+      {
+        "name": "index.css",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "index.html",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "index.tsx",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "metadata.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "package-lock.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "package.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "postcss.config.js",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "tailwind.config.js",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "tsconfig.json",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "types.ts",
+        "type": "file",
+        "lines": 0
+      },
+      {
+        "name": "vite.config.ts",
+        "type": "file",
+        "lines": 0
+      }
+    ]
+  },
+  "graphData": {
+    "nodes": [
+      {
+        "id": "itopan-portfolio",
+        "name": "itopan-portfolio",
+        "path": "itopan-portfolio",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#4d515a",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": null,
+        "childFileCount": 14,
+        "x": 0.9006115342876774,
+        "y": 10.239234988625435,
+        "z": -2.8316745634621348,
+        "vx": 0.002965692101155709,
+        "vy": -0.02760433616324941,
+        "vz": 0.004594856516955194
+      },
+      {
+        "id": "itopan-portfolio/.gitignore",
+        "name": ".gitignore",
+        "path": "itopan-portfolio/.gitignore",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#57606f",
+        "baseColor": "#57606f",
+        "originalColor": "#57606f",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 17.534206134461687,
+        "y": -10.0107988769716,
+        "z": -33.64446175947347,
+        "vx": 0.0022395207537441197,
+        "vy": -0.02716670484338788,
+        "vz": 0.004886607990620311
+      },
+      {
+        "id": "itopan-portfolio/App.tsx",
+        "name": "App.tsx",
+        "path": "itopan-portfolio/App.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#61dafb",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": -2.0230446884599083,
+        "y": 53.27064977679626,
+        "z": -7.994756767119537,
+        "vx": 0.006241364280270892,
+        "vy": -0.027074690016163673,
+        "vz": 0.005238985634278766
+      },
+      {
+        "id": "itopan-portfolio/README.md",
+        "name": "README.md",
+        "path": "itopan-portfolio/README.md",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#3498db",
+        "baseColor": "#3498db",
+        "originalColor": "#3498db",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": -38.06456335486052,
+        "y": 24.07076889147722,
+        "z": -8.910837964374,
+        "vx": 0.0002734128512560552,
+        "vy": -0.03577467257803967,
+        "vz": 0.005035118301364377
+      },
+      {
+        "id": "itopan-portfolio/components",
+        "name": "components",
+        "path": "itopan-portfolio/components",
+        "type": "directory",
+        "lines": 0,
+        "val": 14,
+        "color": "#4d515a",
+        "baseColor": "#4ec9b0",
+        "originalColor": "#4ec9b0",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 3,
+        "x": -4.941132885831325,
+        "y": -53.217813229637116,
+        "z": 14.627428464958482,
+        "vx": -0.0012823718998171921,
+        "vy": -0.02591839895649565,
+        "vz": 0.008683541348065524
+      },
+      {
+        "id": "itopan-portfolio/components/Experience.tsx",
+        "name": "Experience.tsx",
+        "path": "itopan-portfolio/components/Experience.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#61dafb",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio/components",
+        "childFileCount": 0,
+        "x": -11.761917014973404,
+        "y": -75.29754088525418,
+        "z": 45.842092070867736,
+        "vx": -0.0034400372146740172,
+        "vy": -0.02981974698153455,
+        "vz": 0.009211659322979621
+      },
+      {
+        "id": "itopan-portfolio/components/MountainWorld.tsx",
+        "name": "MountainWorld.tsx",
+        "path": "itopan-portfolio/components/MountainWorld.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#61dafb",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio/components",
+        "childFileCount": 0,
+        "x": -26.245394007112328,
+        "y": -84.88479621549926,
+        "z": 6.7375403191066,
+        "vx": -0.0033701197749896163,
+        "vy": -0.028119645471235362,
+        "vz": 0.010146833475778803
+      },
+      {
+        "id": "itopan-portfolio/components/Overlay.tsx",
+        "name": "Overlay.tsx",
+        "path": "itopan-portfolio/components/Overlay.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#61dafb",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio/components",
+        "childFileCount": 0,
+        "x": 15.160419955891333,
+        "y": -86.57987827551236,
+        "z": 14.218403115318921,
+        "vx": -0.002167685082514531,
+        "vy": -0.028650041529150762,
+        "vz": 0.009127497143015844
+      },
+      {
+        "id": "itopan-portfolio/index.css",
+        "name": "index.css",
+        "path": "itopan-portfolio/index.css",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#1572b6",
+        "baseColor": "#1572b6",
+        "originalColor": "#1572b6",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 33.830739776026114,
+        "y": -11.041117550237484,
+        "z": 5.748270615365163,
+        "vx": 0.006813865564597589,
+        "vy": -0.022851134922549834,
+        "vz": 0.003419698615125864
+      },
+      {
+        "id": "itopan-portfolio/index.html",
+        "name": "index.html",
+        "path": "itopan-portfolio/index.html",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#e44d26",
+        "baseColor": "#e44d26",
+        "originalColor": "#e44d26",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": true,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 21.499563861479093,
+        "y": 38.88761793508556,
+        "z": -27.70424572486538,
+        "vx": -0.0043042148613352425,
+        "vy": -0.02499470452675054,
+        "vz": 0.001965908174185679
+      },
+      {
+        "id": "itopan-portfolio/index.tsx",
+        "name": "index.tsx",
+        "path": "itopan-portfolio/index.tsx",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#61dafb",
+        "baseColor": "#61dafb",
+        "originalColor": "#61dafb",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 40.136955750071586,
+        "y": 23.781585524682946,
+        "z": -11.176453250617865,
+        "vx": 0.0012806559744219404,
+        "vy": -0.02632537739769516,
+        "vz": -0.00008914598154627015
+      },
+      {
+        "id": "itopan-portfolio/metadata.json",
+        "name": "metadata.json",
+        "path": "itopan-portfolio/metadata.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#8e44ad",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 2.9403124152303035,
+        "y": 17.54702102346557,
+        "z": -44.36058350451978,
+        "vx": -0.005632146673654223,
+        "vy": -0.026835054468490552,
+        "vz": 0.004702540783919115
+      },
+      {
+        "id": "itopan-portfolio/package-lock.json",
+        "name": "package-lock.json",
+        "path": "itopan-portfolio/package-lock.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#8e44ad",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 0.011731666327940806,
+        "y": 11.281863092427507,
+        "z": 38.121208117304015,
+        "vx": 0.0023015943410477284,
+        "vy": -0.030283301161215276,
+        "vz": 0.005211619865342433
+      },
+      {
+        "id": "itopan-portfolio/package.json",
+        "name": "package.json",
+        "path": "itopan-portfolio/package.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#8e44ad",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 16.16953016112343,
+        "y": 47.040642999886444,
+        "z": 13.554992684047008,
+        "vx": 0.0019252191604163318,
+        "vy": -0.02701164179758269,
+        "vz": 0.004543834996396324
+      },
+      {
+        "id": "itopan-portfolio/postcss.config.js",
+        "name": "postcss.config.js",
+        "path": "itopan-portfolio/postcss.config.js",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#f7df1e",
+        "baseColor": "#f7df1e",
+        "originalColor": "#f7df1e",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": -32.72894680498335,
+        "y": -4.178604711434814,
+        "z": 12.770135008426092,
+        "vx": 0.00415522893911925,
+        "vy": -0.030951472876937523,
+        "vz": 0.005116364375742684
+      },
+      {
+        "id": "itopan-portfolio/tailwind.config.js",
+        "name": "tailwind.config.js",
+        "path": "itopan-portfolio/tailwind.config.js",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#f7df1e",
+        "baseColor": "#f7df1e",
+        "originalColor": "#f7df1e",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": 29.66690646154433,
+        "y": 25.036902702153064,
+        "z": 23.97297310116774,
+        "vx": 0.0006887311252271044,
+        "vy": -0.02404228495909359,
+        "vz": 0.004439174608282485
+      },
+      {
+        "id": "itopan-portfolio/tsconfig.json",
+        "name": "tsconfig.json",
+        "path": "itopan-portfolio/tsconfig.json",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#8e44ad",
+        "baseColor": "#8e44ad",
+        "originalColor": "#8e44ad",
+        "defaultGlow": 0.18,
+        "glowIntensity": 0.18,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": -21.907401975510044,
+        "y": -3.262181857399571,
+        "z": -34.141706860715196,
+        "vx": 0.003703959700845312,
+        "vy": -0.023122690825613957,
+        "vz": 0.0038728626898738745
+      },
+      {
+        "id": "itopan-portfolio/types.ts",
+        "name": "types.ts",
+        "path": "itopan-portfolio/types.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#3178c6",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": -18.963548522239115,
+        "y": 40.25264871157617,
+        "z": -26.77853878451502,
+        "vx": -0.001010258132808442,
+        "vy": -0.021991494949059002,
+        "vz": 0.014233258679696988
+      },
+      {
+        "id": "itopan-portfolio/vite.config.ts",
+        "name": "vite.config.ts",
+        "path": "itopan-portfolio/vite.config.ts",
+        "type": "file",
+        "lines": 0,
+        "val": 6,
+        "color": "#3178c6",
+        "baseColor": "#3178c6",
+        "originalColor": "#3178c6",
+        "defaultGlow": 0.1,
+        "glowIntensity": 0.1,
+        "highlighted": false,
+        "parentPath": "itopan-portfolio",
+        "childFileCount": 0,
+        "x": -21.201384746739937,
+        "y": 36.54678209575987,
+        "z": 22.059670230161007,
+        "vx": 0.0022613045812717157,
+        "vy": -0.028476465586103762,
+        "vz": 0.005113330520304846
+      }
+    ],
+    "links": [
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/.gitignore",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/App.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/README.md",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/components",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio/components",
+        "target": "itopan-portfolio/components/Experience.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio/components",
+        "target": "itopan-portfolio/components/MountainWorld.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio/components",
+        "target": "itopan-portfolio/components/Overlay.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/index.css",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/index.html",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/index.tsx",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/metadata.json",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/package-lock.json",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/package.json",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/postcss.config.js",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/tailwind.config.js",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/tsconfig.json",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/types.ts",
+        "type": "tree"
+      },
+      {
+        "source": "itopan-portfolio",
+        "target": "itopan-portfolio/vite.config.ts",
+        "type": "tree"
+      }
+    ]
+  },
+  "trackedFiles": [
+    ".gitignore",
+    "App.tsx",
+    "README.md",
+    "components/Experience.tsx",
+    "components/MountainWorld.tsx",
+    "components/Overlay.tsx",
+    "index.html",
+    "index.tsx",
+    "metadata.json",
+    "package.json",
+    "tsconfig.json",
+    "types.ts",
+    "vite.config.ts"
+  ],
+  "uiState": {
+    "expandedDirs": [
+      "itopan-portfolio",
+      "itopan-portfolio/itopan-portfolio",
+      "itopan-portfolio/.kamui",
+      "itopan-portfolio/itopan-portfolio/.kamui",
+      "itopan-portfolio/.kamui/gantte",
+      "itopan-portfolio/itopan-portfolio/.kamui/gantte",
+      "itopan-portfolio/.kamui/prompt",
+      "itopan-portfolio/itopan-portfolio/.kamui/prompt",
+      "task-1763803145007-6cd7f1",
+      "task-1763803147623-0def76",
+      "task-1763803150191-4640b8",
+      "task-1763803152768-c3db7a",
+      "task-1763803155345-1986c9",
+      "itopan-portfolio/components",
+      "itopan-portfolio/itopan-portfolio/components",
+      "itopan-portfolio/task-1763803150191-4640b8",
+      "task-1763803150191-4640b8/omponents",
+      "itopan-portfolio/task-1763803150191-4640b8/omponents",
+      "itopan-portfolio/task-1763803147623-0def76",
+      "task-1763803147623-0def76/task-1763803147623-0def76",
+      "task-1763805481491-c23e78",
+      "task-1763805484209-3260a4",
+      "task-1763805486991-9d2273",
+      "task-1763805489747-6f0b72"
+    ],
+    "selectedPath": null
+  },
+  "directoryTreeMeta": {
+    "mode": "full",
+    "maxDepthApplied": 10,
+    "maxEntriesPerDirectory": 0,
+    "isPartial": false
+  },
+  "gitHistoryMeta": {
+    "mode": "full",
+    "isPartial": false,
+    "branchPulse": {
+      "generatedAt": 1763807161444,
+      "targets": [
+        "main",
+        "task/task-1763805481491-c23e78",
+        "task/task-1763805486991-9d2273",
+        "task/task-1763805489747-6f0b72",
+        "master"
+      ],
+      "statsByBranch": {
+        "task/task-1763805489747-6f0b72": {
+          "branch": "task/task-1763805489747-6f0b72",
+          "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "baseRef": "main",
+          "baseHead": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "mergeBase": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "task/task-1763805481491-c23e78": {
+          "branch": "task/task-1763805481491-c23e78",
+          "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "baseRef": "main",
+          "baseHead": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "mergeBase": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "task/task-1763805486991-9d2273": {
+          "branch": "task/task-1763805486991-9d2273",
+          "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "baseRef": "main",
+          "baseHead": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "mergeBase": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        },
+        "main": {
+          "branch": "main",
+          "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "baseRef": "origin/main",
+          "baseHead": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "mergeBase": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "divergence": {
+            "aheadCount": 0,
+            "fileCount": 0
+          },
+          "baseline": {
+            "aheadCount": 0,
+            "behindCount": 0,
+            "fileCount": 0
+          },
+          "upstream": null
+        }
+      }
+    }
+  },
+  "gitHistoryState": {
+    "selectedTimelineIndex": 1,
+    "activeCommitHash": "a7a420d5365afe35aeb0b231ada4e9574ae327a2",
+    "entries": [
+      {
+        "type": "live",
+        "label": "現在のコードベース",
+        "files": [],
+        "branch": "task/task-1763805481491-c23e78",
+        "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+        "timestamp": 1763807163859,
+        "lane": 0,
+        "branchLabel": "task/task-1763805481491-c23e78",
+        "branchTags": [
+          "task/task-1763805481491-c23e78"
+        ],
+        "isDefaultWorktree": true,
+        "branchColor": "#4f85e8",
+        "index": 0
+      },
+      {
+        "type": "commit",
+        "label": "Fix entry point and remove import map",
+        "commit": {
+          "hash": "a7a420d5365afe35aeb0b231ada4e9574ae327a2",
+          "subject": "Fix entry point and remove import map",
+          "author": "Takamasa Ito",
+          "timestamp": 1763804792,
+          "parents": [
+            "3806839bec510f85dd575499db5f763ed627ed6e"
+          ],
+          "parent": "3806839bec510f85dd575499db5f763ed627ed6e",
+          "refs": "task/task-1763803150191-4640b8",
+          "branches": [
+            "task/task-1763803150191-4640b8"
+          ]
+        },
+        "commitHash": "a7a420d5365afe35aeb0b231ada4e9574ae327a2",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "3806839bec510f85dd575499db5f763ed627ed6e",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "task/task-1763803150191-4640b8",
+        "branchColor": "#e84f4f",
+        "branchTags": [
+          "task/task-1763803150191-4640b8"
+        ],
+        "index": 1
+      },
+      {
+        "type": "commit",
+        "label": "fix: mount app entry in index.html",
+        "commit": {
+          "hash": "2b1af6ce2ec025f7ea61dc288d6098bb1d61972d",
+          "subject": "fix: mount app entry in index.html",
+          "author": "Takamasa Ito",
+          "timestamp": 1763804666,
+          "parents": [
+            "cdcff811b97bc3378794a049f3f8c9d060a4b618"
+          ],
+          "parent": "cdcff811b97bc3378794a049f3f8c9d060a4b618",
+          "refs": "task/task-1763803147623-0def76",
+          "branches": [
+            "task/task-1763803147623-0def76"
+          ]
+        },
+        "commitHash": "2b1af6ce2ec025f7ea61dc288d6098bb1d61972d",
+        "lane": 2,
+        "parentLinks": [
+          {
+            "hash": "cdcff811b97bc3378794a049f3f8c9d060a4b618",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "task/task-1763803147623-0def76",
+        "branchColor": "#4fe84f",
+        "branchTags": [
+          "task/task-1763803147623-0def76"
+        ],
+        "index": 2
+      },
+      {
+        "type": "commit",
+        "label": "Set up local Tailwind build",
+        "commit": {
+          "hash": "3806839bec510f85dd575499db5f763ed627ed6e",
+          "subject": "Set up local Tailwind build",
+          "author": "Takamasa Ito",
+          "timestamp": 1763804540,
+          "parents": [
+            "d195dfab830b34fbffceac98ab4ebef559800487"
+          ],
+          "parent": "d195dfab830b34fbffceac98ab4ebef559800487",
+          "refs": "",
+          "branches": [
+            "task/task-1763803150191-4640b8"
+          ]
+        },
+        "commitHash": "3806839bec510f85dd575499db5f763ed627ed6e",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "d195dfab830b34fbffceac98ab4ebef559800487",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "task/task-1763803150191-4640b8",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 3
+      },
+      {
+        "type": "commit",
+        "label": "feat: add scene glow and quick nav",
+        "commit": {
+          "hash": "cdcff811b97bc3378794a049f3f8c9d060a4b618",
+          "subject": "feat: add scene glow and quick nav",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803863,
+          "parents": [
+            "56374b9f03a22bdac16efc605798a7758db6de71"
+          ],
+          "parent": "56374b9f03a22bdac16efc605798a7758db6de71",
+          "refs": "",
+          "branches": [
+            "task/task-1763803147623-0def76"
+          ]
+        },
+        "commitHash": "cdcff811b97bc3378794a049f3f8c9d060a4b618",
+        "lane": 2,
+        "parentLinks": [
+          {
+            "hash": "56374b9f03a22bdac16efc605798a7758db6de71",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "task/task-1763803147623-0def76",
+        "branchColor": "#4fe84f",
+        "branchTags": [],
+        "index": 4
+      },
+      {
+        "type": "commit",
+        "label": "ナビ導線とマガジン強化",
+        "commit": {
+          "hash": "acb86e1f8c9ca2c20d9b1d7d401034c77d1a9429",
+          "subject": "ナビ導線とマガジン強化",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803841,
+          "parents": [
+            "761ac98a0c4d9dfa4d0018757449c2ea94c0760c"
+          ],
+          "parent": "761ac98a0c4d9dfa4d0018757449c2ea94c0760c",
+          "refs": "task/task-1763803145007-6cd7f1",
+          "branches": [
+            "task/task-1763803145007-6cd7f1"
+          ]
+        },
+        "commitHash": "acb86e1f8c9ca2c20d9b1d7d401034c77d1a9429",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "761ac98a0c4d9dfa4d0018757449c2ea94c0760c",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "task/task-1763803145007-6cd7f1",
+        "branchColor": "#e8e84f",
+        "branchTags": [
+          "task/task-1763803145007-6cd7f1"
+        ],
+        "index": 5
+      },
+      {
+        "type": "commit",
+        "label": "Add floating nav and roadmap cues",
+        "commit": {
+          "hash": "d195dfab830b34fbffceac98ab4ebef559800487",
+          "subject": "Add floating nav and roadmap cues",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803832,
+          "parents": [
+            "fcfc69ac3a7f906fda6aafe6134369ca6f0a587b"
+          ],
+          "parent": "fcfc69ac3a7f906fda6aafe6134369ca6f0a587b",
+          "refs": "",
+          "branches": [
+            "task/task-1763803150191-4640b8"
+          ]
+        },
+        "commitHash": "d195dfab830b34fbffceac98ab4ebef559800487",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "fcfc69ac3a7f906fda6aafe6134369ca6f0a587b",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "task/task-1763803150191-4640b8",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 6
+      },
+      {
+        "type": "commit",
+        "label": "Enhance overlay flows",
+        "commit": {
+          "hash": "fcfc69ac3a7f906fda6aafe6134369ca6f0a587b",
+          "subject": "Enhance overlay flows",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803745,
+          "parents": [
+            "f027d7b9ca45e00c65f936993a983ed9a7b03ff6"
+          ],
+          "parent": "f027d7b9ca45e00c65f936993a983ed9a7b03ff6",
+          "refs": "",
+          "branches": [
+            "task/task-1763803150191-4640b8"
+          ]
+        },
+        "commitHash": "fcfc69ac3a7f906fda6aafe6134369ca6f0a587b",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "f027d7b9ca45e00c65f936993a983ed9a7b03ff6",
+            "lane": 0
+          }
+        ],
+        "primaryBranchName": "task/task-1763803150191-4640b8",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 7
+      },
+      {
+        "type": "commit",
+        "label": "モーション強化と情報整理",
+        "commit": {
+          "hash": "761ac98a0c4d9dfa4d0018757449c2ea94c0760c",
+          "subject": "モーション強化と情報整理",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803731,
+          "parents": [
+            "f8d160cd7751fbdf1bb65ec73fb0f1eb40933444"
+          ],
+          "parent": "f8d160cd7751fbdf1bb65ec73fb0f1eb40933444",
+          "refs": "",
+          "branches": [
+            "task/task-1763803145007-6cd7f1"
+          ]
+        },
+        "commitHash": "761ac98a0c4d9dfa4d0018757449c2ea94c0760c",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "f8d160cd7751fbdf1bb65ec73fb0f1eb40933444",
+            "lane": 2
+          }
+        ],
+        "primaryBranchName": "task/task-1763803145007-6cd7f1",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 8
+      },
+      {
+        "type": "commit",
+        "label": "feat: polish overlay UI",
+        "commit": {
+          "hash": "56374b9f03a22bdac16efc605798a7758db6de71",
+          "subject": "feat: polish overlay UI",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803664,
+          "parents": [
+            "0b0bc2824566cda99d51104d3132a96e076f8015"
+          ],
+          "parent": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "refs": "",
+          "branches": [
+            "task/task-1763803147623-0def76"
+          ]
+        },
+        "commitHash": "56374b9f03a22bdac16efc605798a7758db6de71",
+        "lane": 2,
+        "parentLinks": [
+          {
+            "hash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "task/task-1763803147623-0def76",
+        "branchColor": "#4fe84f",
+        "branchTags": [],
+        "index": 9
+      },
+      {
+        "type": "commit",
+        "label": "Polish overlay UI styling",
+        "commit": {
+          "hash": "f027d7b9ca45e00c65f936993a983ed9a7b03ff6",
+          "subject": "Polish overlay UI styling",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803569,
+          "parents": [
+            "0b0bc2824566cda99d51104d3132a96e076f8015"
+          ],
+          "parent": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "refs": "",
+          "branches": [
+            "task/task-1763803150191-4640b8"
+          ]
+        },
+        "commitHash": "f027d7b9ca45e00c65f936993a983ed9a7b03ff6",
+        "lane": 1,
+        "parentLinks": [
+          {
+            "hash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "task/task-1763803150191-4640b8",
+        "branchColor": "#e84f4f",
+        "branchTags": [],
+        "index": 10
+      },
+      {
+        "type": "commit",
+        "label": "UIリファインとテーマ更新",
+        "commit": {
+          "hash": "f8d160cd7751fbdf1bb65ec73fb0f1eb40933444",
+          "subject": "UIリファインとテーマ更新",
+          "author": "Takamasa Ito",
+          "timestamp": 1763803559,
+          "parents": [
+            "0b0bc2824566cda99d51104d3132a96e076f8015"
+          ],
+          "parent": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "refs": "",
+          "branches": [
+            "task/task-1763803145007-6cd7f1"
+          ]
+        },
+        "commitHash": "f8d160cd7751fbdf1bb65ec73fb0f1eb40933444",
+        "lane": 3,
+        "parentLinks": [
+          {
+            "hash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "task/task-1763803145007-6cd7f1",
+        "branchColor": "#e8e84f",
+        "branchTags": [],
+        "index": 11
+      },
+      {
+        "type": "unstaged",
+        "label": "未ステージ [main] (8)",
+        "files": [
+          ".kamui/gantte/test.yaml",
+          ".kamui/model-versions-cache.json",
+          ".kamui/prompt/custom-prompt.txt",
+          ".kamui/prompt/launch-prompt.txt",
+          ".kamui/prompt/merge-prompt.txt",
+          ".kamui/prompt/restart-prompt.txt",
+          ".kamui/system-graph-state.json",
+          ".kamui/tasks-state.json"
+        ],
+        "branch": "main",
+        "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio",
+        "timestamp": 1763807161126,
+        "sortOrder": 0,
+        "lane": 0,
+        "branchColor": "#4f85e8",
+        "index": 12
+      },
+      {
+        "type": "unstaged",
+        "label": "未ステージ (4)",
+        "files": [
+          "components/Overlay.tsx",
+          "index.html",
+          "package-lock.json",
+          "public/media/shiba-doggy-dance.mp4"
+        ],
+        "branch": "task/task-1763805481491-c23e78",
+        "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+        "timestamp": 1763807163859,
+        "sortOrder": 0,
+        "lane": 29,
+        "branchColor": "#4fe8b8",
+        "index": 13
+      },
+      {
+        "type": "staged",
+        "label": "ステージ済み (1)",
+        "files": [
+          "omponents/Experience.tsx"
+        ],
+        "branch": "task/task-1763805481491-c23e78",
+        "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+        "timestamp": 1763807163859,
+        "sortOrder": 1,
+        "lane": 29,
+        "branchColor": "#4fe8b8",
+        "index": 14
+      },
+      {
+        "type": "unstaged",
+        "label": "未ステージ [task/task-1763805486991-9d2273] (3)",
+        "files": [
+          "index.html",
+          "package-lock.json",
+          "public/videos/shiba-doggy-dance.mp4"
+        ],
+        "branch": "task/task-1763805486991-9d2273",
+        "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+        "timestamp": 1763807161141,
+        "sortOrder": 0,
+        "lane": 30,
+        "branchColor": "#b84fe8",
+        "index": 15
+      },
+      {
+        "type": "staged",
+        "label": "ステージ済み [task/task-1763805486991-9d2273] (1)",
+        "files": [
+          "omponents/Overlay.tsx"
+        ],
+        "branch": "task/task-1763805486991-9d2273",
+        "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+        "timestamp": 1763807161141,
+        "sortOrder": 1,
+        "lane": 30,
+        "branchColor": "#b84fe8",
+        "index": 16
+      },
+      {
+        "type": "anchor",
+        "label": "[main]",
+        "branch": "main",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio",
+        "parentCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "lane": 0,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [
+          {
+            "type": "unstaged",
+            "label": "未ステージ [main] (8)",
+            "files": [
+              ".kamui/gantte/test.yaml",
+              ".kamui/model-versions-cache.json",
+              ".kamui/prompt/custom-prompt.txt",
+              ".kamui/prompt/launch-prompt.txt",
+              ".kamui/prompt/merge-prompt.txt",
+              ".kamui/prompt/restart-prompt.txt",
+              ".kamui/system-graph-state.json",
+              ".kamui/tasks-state.json"
+            ],
+            "branch": "main",
+            "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "worktreePath": "/Users/takamasa/apps/itopan-portfolio",
+            "timestamp": 1763807161126,
+            "sortOrder": 0,
+            "lane": 0,
+            "branchColor": "#4f85e8",
+            "index": 12
+          }
+        ],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "main",
+        "taskId": "main",
+        "taskStatus": null,
+        "taskStatusLabel": null,
+        "taskName": null,
+        "tooltip": "ID: main\nBranch: main\nWorktree: Users/takamasa/apps/itopan-portfolio",
+        "branchColor": "#4f85e8",
+        "index": 17
+      },
+      {
+        "type": "anchor",
+        "label": "[実行中] CodexCLI1: /Users/takamasa/Downl…",
+        "branch": "task/task-1763805481491-c23e78",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+        "parentCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "lane": 29,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [
+          {
+            "type": "unstaged",
+            "label": "未ステージ (4)",
+            "files": [
+              "components/Overlay.tsx",
+              "index.html",
+              "package-lock.json",
+              "public/media/shiba-doggy-dance.mp4"
+            ],
+            "branch": "task/task-1763805481491-c23e78",
+            "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+            "timestamp": 1763807163859,
+            "sortOrder": 0,
+            "lane": 29,
+            "branchColor": "#4fe8b8",
+            "index": 13
+          },
+          {
+            "type": "staged",
+            "label": "ステージ済み (1)",
+            "files": [
+              "omponents/Experience.tsx"
+            ],
+            "branch": "task/task-1763805481491-c23e78",
+            "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+            "timestamp": 1763807163859,
+            "sortOrder": 1,
+            "lane": 29,
+            "branchColor": "#4fe8b8",
+            "index": 14
+          }
+        ],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "task/task-1763805481491-c23e78",
+        "taskId": "task-1763805481491-c23e78",
+        "taskStatus": "running",
+        "taskStatusLabel": "実行中",
+        "taskName": "CodexCLI1: /Users/takamasa/Downloads/ll.mp4　この動画をビデオコンテンツにうまく格納して欲しい。\n紹介も文字は下記を参考にしてUIを整えて。\n久しぶりの芝犬ドギーダンス🐕🎶\n@Hailuo_AI\n \n\nHailuo2.3はダンスがかなり良くなったね😆\n\nMidjourneyとnanobananaで画像生成後にHailuoでi2v\nSunoで作った音に合わせて完成🎥",
+        "tooltip": "タスク: CodexCLI1: /Users/takamasa/Downloads/ll.mp4　この動画をビデオコンテンツにうまく格納して欲しい。\n紹介も文字は下記を参考にしてUIを整えて。\n久しぶりの芝犬ドギーダンス🐕🎶\n@Hailuo_AI\n \n\nHailuo2.3はダンスがかなり良くなったね😆\n\nMidjourneyとnanobananaで画像生成後にHailuoでi2v\nSunoで作った音に合わせて完成🎥\nステータス: 実行中\nID: task-1763805481491-c23e78\nBranch: task/task-1763805481491-c23e78\nWorktree: Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+        "branchColor": "#4fe8b8",
+        "index": 18
+      },
+      {
+        "type": "anchor",
+        "label": "[実行中] ClaudeCode1: /Users/takamasa/Dow…",
+        "branch": "task/task-1763805486991-9d2273",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+        "parentCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "lane": 30,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [
+          {
+            "type": "unstaged",
+            "label": "未ステージ [task/task-1763805486991-9d2273] (3)",
+            "files": [
+              "index.html",
+              "package-lock.json",
+              "public/videos/shiba-doggy-dance.mp4"
+            ],
+            "branch": "task/task-1763805486991-9d2273",
+            "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+            "timestamp": 1763807161141,
+            "sortOrder": 0,
+            "lane": 30,
+            "branchColor": "#b84fe8",
+            "index": 15
+          },
+          {
+            "type": "staged",
+            "label": "ステージ済み [task/task-1763805486991-9d2273] (1)",
+            "files": [
+              "omponents/Overlay.tsx"
+            ],
+            "branch": "task/task-1763805486991-9d2273",
+            "targetCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+            "timestamp": 1763807161141,
+            "sortOrder": 1,
+            "lane": 30,
+            "branchColor": "#b84fe8",
+            "index": 16
+          }
+        ],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "task/task-1763805486991-9d2273",
+        "taskId": "task-1763805486991-9d2273",
+        "taskStatus": "running",
+        "taskStatusLabel": "実行中",
+        "taskName": "ClaudeCode1: /Users/takamasa/Downloads/ll.mp4　この動画をビデオコンテンツにうまく格納して欲しい。\n紹介も文字は下記を参考にしてUIを整えて。\n久しぶりの芝犬ドギーダンス🐕🎶\n@Hailuo_AI\n \n\nHailuo2.3はダンスがかなり良くなったね😆\n\nMidjourneyとnanobananaで画像生成後にHailuoでi2v\nSunoで作った音に合わせて完成🎥",
+        "tooltip": "タスク: ClaudeCode1: /Users/takamasa/Downloads/ll.mp4　この動画をビデオコンテンツにうまく格納して欲しい。\n紹介も文字は下記を参考にしてUIを整えて。\n久しぶりの芝犬ドギーダンス🐕🎶\n@Hailuo_AI\n \n\nHailuo2.3はダンスがかなり良くなったね😆\n\nMidjourneyとnanobananaで画像生成後にHailuoでi2v\nSunoで作った音に合わせて完成🎥\nステータス: 実行中\nID: task-1763805486991-9d2273\nBranch: task/task-1763805486991-9d2273\nWorktree: Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+        "branchColor": "#b84fe8",
+        "index": 19
+      },
+      {
+        "type": "anchor",
+        "label": "[作業中] 🔍Monitor: /Users/takamasa/Downl…",
+        "branch": "task/task-1763805489747-6f0b72",
+        "worktreePath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805489747-6f0b72",
+        "parentCommitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "lane": 31,
+        "isMerged": false,
+        "mergeCommitHash": null,
+        "statusChildren": [],
+        "isDefaultWorktree": false,
+        "renderMode": "node",
+        "shouldHide": false,
+        "tagLabel": "task/task-1763805489747-6f0b72",
+        "taskId": "task-1763805489747-6f0b72",
+        "taskStatus": "working",
+        "taskStatusLabel": "作業中",
+        "taskName": "🔍Monitor: /Users/takamasa/Downloads/ll.mp4　この動画をビデオコンテンツにうまく格納して欲しい。\n紹介も文字は下記を参考にしてUIを整えて。\n久しぶりの芝犬ドギーダンス🐕🎶\n@Hailuo_AI\n \n\nHailuo2.3はダンスがかなり良くなったね😆\n\nMidjourneyとnanobananaで画像生成後にHailuoでi2v\nSunoで作った音に合わせて完成🎥",
+        "tooltip": "タスク: 🔍Monitor: /Users/takamasa/Downloads/ll.mp4　この動画をビデオコンテンツにうまく格納して欲しい。\n紹介も文字は下記を参考にしてUIを整えて。\n久しぶりの芝犬ドギーダンス🐕🎶\n@Hailuo_AI\n \n\nHailuo2.3はダンスがかなり良くなったね😆\n\nMidjourneyとnanobananaで画像生成後にHailuoでi2v\nSunoで作った音に合わせて完成🎥\nステータス: 作業中\nID: task-1763805489747-6f0b72\nBranch: task/task-1763805489747-6f0b72\nWorktree: Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805489747-6f0b72",
+        "branchColor": "#e8e84f",
+        "index": 20
+      },
+      {
+        "type": "commit",
+        "label": "feat: Add project data and overlay component",
+        "commit": {
+          "hash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+          "subject": "feat: Add project data and overlay component",
+          "author": "Itopan",
+          "timestamp": 1763787846,
+          "parents": [
+            "198377bac49b970b983aace6d926fae0d3ac4341"
+          ],
+          "parent": "198377bac49b970b983aace6d926fae0d3ac4341",
+          "refs": "HEAD -> task/task-1763805481491-c23e78, origin/main, origin/HEAD, task/task-1763805489747-6f0b72, task/task-1763805486991-9d2273, task/task-1763805484209-3260a4, task/task-1763803155345-1986c9, task/task-1763803152768-c3db7a, main",
+          "branches": [
+            "HEAD -> task/task-1763805481491-c23e78",
+            "origin/main",
+            "origin/HEAD",
+            "task/task-1763805489747-6f0b72",
+            "task/task-1763805486991-9d2273",
+            "task/task-1763805484209-3260a4",
+            "task/task-1763803155345-1986c9",
+            "task/task-1763803152768-c3db7a",
+            "main",
+            "task/task-1763805481491-c23e78"
+          ]
+        },
+        "commitHash": "0b0bc2824566cda99d51104d3132a96e076f8015",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "198377bac49b970b983aace6d926fae0d3ac4341",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "task/task-1763803152768-c3db7a",
+          "task/task-1763803155345-1986c9",
+          "task/task-1763805484209-3260a4"
+        ],
+        "worktrees": [
+          {
+            "path": "/Users/takamasa/apps/itopan-portfolio",
+            "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "branch": "main",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [],
+              "unstaged": [],
+              "untracked": [
+                {
+                  "path": ".kamui/gantte/test.yaml",
+                  "status": "untracked",
+                  "rawPath": ".kamui/gantte/test.yaml",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/model-versions-cache.json",
+                  "status": "untracked",
+                  "rawPath": ".kamui/model-versions-cache.json",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/prompt/custom-prompt.txt",
+                  "status": "untracked",
+                  "rawPath": ".kamui/prompt/custom-prompt.txt",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/prompt/launch-prompt.txt",
+                  "status": "untracked",
+                  "rawPath": ".kamui/prompt/launch-prompt.txt",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/prompt/merge-prompt.txt",
+                  "status": "untracked",
+                  "rawPath": ".kamui/prompt/merge-prompt.txt",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/prompt/restart-prompt.txt",
+                  "status": "untracked",
+                  "rawPath": ".kamui/prompt/restart-prompt.txt",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/system-graph-state.json",
+                  "status": "untracked",
+                  "rawPath": ".kamui/system-graph-state.json",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".kamui/tasks-state.json",
+                  "status": "untracked",
+                  "rawPath": ".kamui/tasks-state.json",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".worktrees/task-1763805481491-c23e78/",
+                  "status": "untracked",
+                  "rawPath": ".worktrees/task-1763805481491-c23e78/",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".worktrees/task-1763805486991-9d2273/",
+                  "status": "untracked",
+                  "rawPath": ".worktrees/task-1763805486991-9d2273/",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": ".worktrees/task-1763805489747-6f0b72/",
+                  "status": "untracked",
+                  "rawPath": ".worktrees/task-1763805489747-6f0b72/",
+                  "timestamp": 1763807161126
+                }
+              ],
+              "capturedAt": 1763807161126
+            },
+            "normalizedPath": "/Users/takamasa/apps/itopan-portfolio",
+            "lane": 0
+          },
+          {
+            "path": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+            "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "branch": "task/task-1763805481491-c23e78",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [
+                {
+                  "path": "omponents/Experience.tsx",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "omponents/Experience.tsx",
+                  "timestamp": 1763807161126
+                }
+              ],
+              "unstaged": [
+                {
+                  "path": "components/Overlay.tsx",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "components/Overlay.tsx",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": "index.html",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "index.html",
+                  "timestamp": 1763807161126
+                }
+              ],
+              "untracked": [
+                {
+                  "path": "package-lock.json",
+                  "status": "untracked",
+                  "rawPath": "package-lock.json",
+                  "timestamp": 1763807161126
+                },
+                {
+                  "path": "public/media/shiba-doggy-dance.mp4",
+                  "status": "untracked",
+                  "rawPath": "public/media/shiba-doggy-dance.mp4",
+                  "timestamp": 1763807161126
+                }
+              ],
+              "capturedAt": 1763807161126
+            },
+            "normalizedPath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805481491-c23e78",
+            "lane": 29
+          },
+          {
+            "path": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+            "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "branch": "task/task-1763805486991-9d2273",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [
+                {
+                  "path": "omponents/Overlay.tsx",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "omponents/Overlay.tsx",
+                  "timestamp": 1763807161141
+                }
+              ],
+              "unstaged": [
+                {
+                  "path": "index.html",
+                  "originalPath": null,
+                  "status": "modified",
+                  "rawPath": "index.html",
+                  "timestamp": 1763807161141
+                }
+              ],
+              "untracked": [
+                {
+                  "path": "package-lock.json",
+                  "status": "untracked",
+                  "rawPath": "package-lock.json",
+                  "timestamp": 1763807161141
+                },
+                {
+                  "path": "public/videos/shiba-doggy-dance.mp4",
+                  "status": "untracked",
+                  "rawPath": "public/videos/shiba-doggy-dance.mp4",
+                  "timestamp": 1763807161141
+                }
+              ],
+              "capturedAt": 1763807161141
+            },
+            "normalizedPath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805486991-9d2273",
+            "lane": 30
+          },
+          {
+            "path": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805489747-6f0b72",
+            "head": "0b0bc2824566cda99d51104d3132a96e076f8015",
+            "branch": "task/task-1763805489747-6f0b72",
+            "isMerged": false,
+            "mergeCommitHash": null,
+            "status": {
+              "staged": [],
+              "unstaged": [],
+              "untracked": [],
+              "capturedAt": 1763807161141
+            },
+            "normalizedPath": "/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1763805489747-6f0b72",
+            "lane": 31
+          }
+        ],
+        "index": 21
+      },
+      {
+        "type": "commit",
+        "label": "feat: Improve JSX type definitions and add contact form link",
+        "commit": {
+          "hash": "198377bac49b970b983aace6d926fae0d3ac4341",
+          "subject": "feat: Improve JSX type definitions and add contact form link",
+          "author": "Itopan",
+          "timestamp": 1763785445,
+          "parents": [
+            "91180a7fed153e0e67ed97da6ec1b542a7c9ae40"
+          ],
+          "parent": "91180a7fed153e0e67ed97da6ec1b542a7c9ae40",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763805481491-c23e78",
+            "task/task-1763805486991-9d2273",
+            "task/task-1763805489747-6f0b72"
+          ]
+        },
+        "commitHash": "198377bac49b970b983aace6d926fae0d3ac4341",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "91180a7fed153e0e67ed97da6ec1b542a7c9ae40",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 22
+      },
+      {
+        "type": "commit",
+        "label": "feat: Initialize project with React, Three.js, and Vite",
+        "commit": {
+          "hash": "91180a7fed153e0e67ed97da6ec1b542a7c9ae40",
+          "subject": "feat: Initialize project with React, Three.js, and Vite",
+          "author": "Itopan",
+          "timestamp": 1763785110,
+          "parents": [
+            "4ac6dc4b576a864d533c4314825f11fce41ac31e"
+          ],
+          "parent": "4ac6dc4b576a864d533c4314825f11fce41ac31e",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763805481491-c23e78",
+            "task/task-1763805486991-9d2273",
+            "task/task-1763805489747-6f0b72"
+          ]
+        },
+        "commitHash": "91180a7fed153e0e67ed97da6ec1b542a7c9ae40",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "4ac6dc4b576a864d533c4314825f11fce41ac31e",
+            "lane": 1
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 23
+      },
+      {
+        "type": "commit",
+        "label": "Initial commit",
+        "commit": {
+          "hash": "4ac6dc4b576a864d533c4314825f11fce41ac31e",
+          "subject": "Initial commit",
+          "author": "Itopan",
+          "timestamp": 1763785101,
+          "parents": [],
+          "parent": null,
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763805481491-c23e78",
+            "task/task-1763805486991-9d2273",
+            "task/task-1763805489747-6f0b72"
+          ]
+        },
+        "commitHash": "4ac6dc4b576a864d533c4314825f11fce41ac31e",
+        "lane": 0,
+        "parentLinks": [],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 24
+      },
+      {
+        "type": "commit",
+        "label": "Merge branch 'task/task-1763712340542-96c238'",
+        "commit": {
+          "hash": "90194270003a9b0b84156417980e29d1115c7cf9",
+          "subject": "Merge branch 'task/task-1763712340542-96c238'",
+          "author": "Takamasa Ito",
+          "timestamp": 1763718492,
+          "parents": [
+            "09a84bf4d0194c6daf83e53d1ddd62232901bdac",
+            "95d2e4dc90fb8e5607c00d6bf333f0b98ba67257"
+          ],
+          "parent": "09a84bf4d0194c6daf83e53d1ddd62232901bdac",
+          "refs": "HEAD -> task/task-1763719093723-e09957, origin/main, origin/HEAD, task/task-1763719097064-db13ea, main",
+          "branches": [
+            "HEAD -> task/task-1763719093723-e09957",
+            "origin/main",
+            "origin/HEAD",
+            "task/task-1763719097064-db13ea",
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763712340542-96c238"
+          ]
+        },
+        "commitHash": "90194270003a9b0b84156417980e29d1115c7cf9",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "09a84bf4d0194c6daf83e53d1ddd62232901bdac",
+            "lane": 3
+          },
+          {
+            "hash": "95d2e4dc90fb8e5607c00d6bf333f0b98ba67257",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "task/task-1763712340542-96c238",
+          "task/task-1763719093723-e09957",
+          "task/task-1763719097064-db13ea"
+        ],
+        "index": 25
+      },
+      {
+        "type": "commit",
+        "label": "chore: update kamui state",
+        "commit": {
+          "hash": "09a84bf4d0194c6daf83e53d1ddd62232901bdac",
+          "subject": "chore: update kamui state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763718485,
+          "parents": [
+            "9166d8ef431d3646c8a476f8e13677b2f6667d38"
+          ],
+          "parent": "9166d8ef431d3646c8a476f8e13677b2f6667d38",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "09a84bf4d0194c6daf83e53d1ddd62232901bdac",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "9166d8ef431d3646c8a476f8e13677b2f6667d38",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 26
+      },
+      {
+        "type": "commit",
+        "label": "chore: update kamui state",
+        "commit": {
+          "hash": "9166d8ef431d3646c8a476f8e13677b2f6667d38",
+          "subject": "chore: update kamui state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763718466,
+          "parents": [
+            "01615fec5ba49d49e71ecb4e270c9a7db62b5661"
+          ],
+          "parent": "01615fec5ba49d49e71ecb4e270c9a7db62b5661",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "9166d8ef431d3646c8a476f8e13677b2f6667d38",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "01615fec5ba49d49e71ecb4e270c9a7db62b5661",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 27
+      },
+      {
+        "type": "commit",
+        "label": "feat: スタイルプリセット拡充と自動セクション化強化",
+        "commit": {
+          "hash": "95d2e4dc90fb8e5607c00d6bf333f0b98ba67257",
+          "subject": "feat: スタイルプリセット拡充と自動セクション化強化",
+          "author": "Takamasa Ito",
+          "timestamp": 1763718431,
+          "parents": [
+            "c1e266ea9e209c17a7244af61f314863b0cb7c8b"
+          ],
+          "parent": "c1e266ea9e209c17a7244af61f314863b0cb7c8b",
+          "refs": "task/task-1763712340542-96c238",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "95d2e4dc90fb8e5607c00d6bf333f0b98ba67257",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "c1e266ea9e209c17a7244af61f314863b0cb7c8b",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 28
+      },
+      {
+        "type": "commit",
+        "label": "chore: ignore local test app and drop worktree dirs",
+        "commit": {
+          "hash": "01615fec5ba49d49e71ecb4e270c9a7db62b5661",
+          "subject": "chore: ignore local test app and drop worktree dirs",
+          "author": "Takamasa Ito",
+          "timestamp": 1763715268,
+          "parents": [
+            "ce3b0b9d5bcdc3808db74420bf8e23c6d4bbe8c1"
+          ],
+          "parent": "ce3b0b9d5bcdc3808db74420bf8e23c6d4bbe8c1",
+          "refs": "task/task-1763715444640-1c7c1d, task/task-1763715441341-3d187f",
+          "branches": [
+            "task/task-1763715444640-1c7c1d",
+            "task/task-1763715441341-3d187f",
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "01615fec5ba49d49e71ecb4e270c9a7db62b5661",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "ce3b0b9d5bcdc3808db74420bf8e23c6d4bbe8c1",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "task/task-1763715441341-3d187f",
+          "task/task-1763715444640-1c7c1d"
+        ],
+        "index": 29
+      },
+      {
+        "type": "commit",
+        "label": "Merge branch 'task/task-1763712340542-96c238'",
+        "commit": {
+          "hash": "ce3b0b9d5bcdc3808db74420bf8e23c6d4bbe8c1",
+          "subject": "Merge branch 'task/task-1763712340542-96c238'",
+          "author": "Takamasa Ito",
+          "timestamp": 1763714630,
+          "parents": [
+            "cb004d6c657b5581f8f05b41eb523f7358b67c2b",
+            "c1e266ea9e209c17a7244af61f314863b0cb7c8b"
+          ],
+          "parent": "cb004d6c657b5581f8f05b41eb523f7358b67c2b",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "task/task-1763712340542-96c238"
+          ]
+        },
+        "commitHash": "ce3b0b9d5bcdc3808db74420bf8e23c6d4bbe8c1",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "cb004d6c657b5581f8f05b41eb523f7358b67c2b",
+            "lane": 3
+          },
+          {
+            "hash": "c1e266ea9e209c17a7244af61f314863b0cb7c8b",
+            "lane": 4
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 30
+      },
+      {
+        "type": "commit",
+        "label": "chore: update system graph state",
+        "commit": {
+          "hash": "cb004d6c657b5581f8f05b41eb523f7358b67c2b",
+          "subject": "chore: update system graph state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763714339,
+          "parents": [
+            "30a8acfe0a6359c4d46bb402444dd844e1badadd"
+          ],
+          "parent": "30a8acfe0a6359c4d46bb402444dd844e1badadd",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "cb004d6c657b5581f8f05b41eb523f7358b67c2b",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "30a8acfe0a6359c4d46bb402444dd844e1badadd",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 31
+      },
+      {
+        "type": "commit",
+        "label": "chore: checkpoint main state before merge",
+        "commit": {
+          "hash": "30a8acfe0a6359c4d46bb402444dd844e1badadd",
+          "subject": "chore: checkpoint main state before merge",
+          "author": "Takamasa Ito",
+          "timestamp": 1763714314,
+          "parents": [
+            "1474c4729bf5cb09df5722cee7d89b095a4ece82"
+          ],
+          "parent": "1474c4729bf5cb09df5722cee7d89b095a4ece82",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "30a8acfe0a6359c4d46bb402444dd844e1badadd",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "1474c4729bf5cb09df5722cee7d89b095a4ece82",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 32
+      },
+      {
+        "type": "commit",
+        "label": "chore: update pnpm lockfile for illustration generator",
+        "commit": {
+          "hash": "c1e266ea9e209c17a7244af61f314863b0cb7c8b",
+          "subject": "chore: update pnpm lockfile for illustration generator",
+          "author": "Takamasa Ito",
+          "timestamp": 1763713658,
+          "parents": [
+            "1474c4729bf5cb09df5722cee7d89b095a4ece82"
+          ],
+          "parent": "1474c4729bf5cb09df5722cee7d89b095a4ece82",
+          "refs": "",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "c1e266ea9e209c17a7244af61f314863b0cb7c8b",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "1474c4729bf5cb09df5722cee7d89b095a4ece82",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 33
+      },
+      {
+        "type": "commit",
+        "label": "chore: update pnpm to 10.22.0",
+        "commit": {
+          "hash": "1474c4729bf5cb09df5722cee7d89b095a4ece82",
+          "subject": "chore: update pnpm to 10.22.0",
+          "author": "Takamasa Ito",
+          "timestamp": 1763356051,
+          "parents": [
+            "ecd73b28aa869c2a07f89c1535716f1952b238eb"
+          ],
+          "parent": "ecd73b28aa869c2a07f89c1535716f1952b238eb",
+          "refs": "task/task-1763712964570-48fd69, task/task-1763712805585-faec18, task/task-1763712443970-109b4e, task/task-1763712440585-14d2da, task/task-1763712437182-e8a62e, task/task-1763712433919-21a074, task/task-1763712346516-3e6a2d, task/task-1763712343493-e83272, task/task-1763712337235-861ee8, task/task-1763639823234-9a7dc1, task/task-1763639820755-b96743, task/task-1763639818309-c66813, task/task-1763639815533-3445c0, task/task-1763627481182-5cd9ed, task/task-1763627478669-e33852, task/task-1763627476162-4b001c, task/task-1763627473614-fcd6aa, task/task-1763627470895-c44270, task/task-1763622100677-d5f763, task/task-1763622098231-30427e, task/task-1763622095818-db16dc, task/task-1763622093374-fe6fde, task/task-1763622090670-72aa5a, task/task-1763619555516-0f88db, task/task-1763617879542-4db2fb, task/task-1763617877124-905a5a, task/task-1763617874714-28e3f6, task/task-1763617872346-7aab5a, task/task-1763617869879-5ef13e, task-1763617308406-8057e5",
+          "branches": [
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712805585-faec18",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763712346516-3e6a2d",
+            "task/task-1763712343493-e83272",
+            "task/task-1763712337235-861ee8",
+            "task/task-1763639823234-9a7dc1",
+            "task/task-1763639820755-b96743",
+            "task/task-1763639818309-c66813",
+            "task/task-1763639815533-3445c0",
+            "task/task-1763627481182-5cd9ed",
+            "task/task-1763627478669-e33852",
+            "task/task-1763627476162-4b001c",
+            "task/task-1763627473614-fcd6aa",
+            "task/task-1763627470895-c44270",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763622098231-30427e",
+            "task/task-1763622095818-db16dc",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763619555516-0f88db",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763617877124-905a5a",
+            "task/task-1763617874714-28e3f6",
+            "task/task-1763617872346-7aab5a",
+            "task/task-1763617869879-5ef13e",
+            "task-1763617308406-8057e5",
+            "main",
+            "task/task-1763712340542-96c238",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "1474c4729bf5cb09df5722cee7d89b095a4ece82",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "ecd73b28aa869c2a07f89c1535716f1952b238eb",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "task-1763617308406-8057e5",
+          "task/task-1763617869879-5ef13e",
+          "task/task-1763617872346-7aab5a",
+          "task/task-1763617874714-28e3f6",
+          "task/task-1763617877124-905a5a",
+          "task/task-1763617879542-4db2fb",
+          "task/task-1763619555516-0f88db",
+          "task/task-1763622090670-72aa5a",
+          "task/task-1763622093374-fe6fde",
+          "task/task-1763622095818-db16dc",
+          "task/task-1763622098231-30427e",
+          "task/task-1763622100677-d5f763",
+          "task/task-1763627470895-c44270",
+          "task/task-1763627473614-fcd6aa",
+          "task/task-1763627476162-4b001c",
+          "task/task-1763627478669-e33852",
+          "task/task-1763627481182-5cd9ed",
+          "task/task-1763639815533-3445c0",
+          "task/task-1763639818309-c66813",
+          "task/task-1763639820755-b96743",
+          "task/task-1763639823234-9a7dc1",
+          "task/task-1763712337235-861ee8",
+          "task/task-1763712343493-e83272",
+          "task/task-1763712346516-3e6a2d",
+          "task/task-1763712433919-21a074",
+          "task/task-1763712437182-e8a62e",
+          "task/task-1763712440585-14d2da",
+          "task/task-1763712443970-109b4e",
+          "task/task-1763712805585-faec18",
+          "task/task-1763712964570-48fd69"
+        ],
+        "index": 34
+      },
+      {
+        "type": "commit",
+        "label": "Merge remotion-studio-monorepo changes: merge monorepo/main …",
+        "commit": {
+          "hash": "ecd73b28aa869c2a07f89c1535716f1952b238eb",
+          "subject": "Merge remotion-studio-monorepo changes: merge monorepo/main with updated dependencies and new features",
+          "author": "Takamasa Ito",
+          "timestamp": 1763355149,
+          "parents": [
+            "3ee1187b2c88bbedbf93c84c6a348930daeccba6",
+            "c8f0abf161b345d6fc45b62f29ee93ea9e27217c"
+          ],
+          "parent": "3ee1187b2c88bbedbf93c84c6a348930daeccba6",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "ecd73b28aa869c2a07f89c1535716f1952b238eb",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "3ee1187b2c88bbedbf93c84c6a348930daeccba6",
+            "lane": 3
+          },
+          {
+            "hash": "c8f0abf161b345d6fc45b62f29ee93ea9e27217c",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 35
+      },
+      {
+        "type": "commit",
+        "label": "chore: update kamui system state",
+        "commit": {
+          "hash": "c8f0abf161b345d6fc45b62f29ee93ea9e27217c",
+          "subject": "chore: update kamui system state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763354546,
+          "parents": [
+            "b29ed8056cdc129c6d39f3a957273e6363e3dc0c"
+          ],
+          "parent": "b29ed8056cdc129c6d39f3a957273e6363e3dc0c",
+          "refs": "monorepo/main",
+          "branches": [
+            "monorepo/main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "c8f0abf161b345d6fc45b62f29ee93ea9e27217c",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "b29ed8056cdc129c6d39f3a957273e6363e3dc0c",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/main"
+        ],
+        "index": 36
+      },
+      {
+        "type": "commit",
+        "label": "Merge branch 'task/task-1763353249749-3db891'",
+        "commit": {
+          "hash": "b29ed8056cdc129c6d39f3a957273e6363e3dc0c",
+          "subject": "Merge branch 'task/task-1763353249749-3db891'",
+          "author": "Takamasa Ito",
+          "timestamp": 1763354452,
+          "parents": [
+            "4cc42b77e03eac934edd9258ca5ec1cbc5e6ee68",
+            "fe0965ee714143c7b8c3ac28fc3aee7923c6c376"
+          ],
+          "parent": "4cc42b77e03eac934edd9258ca5ec1cbc5e6ee68",
+          "refs": "",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "task/task-1763353249749-3db891"
+          ]
+        },
+        "commitHash": "b29ed8056cdc129c6d39f3a957273e6363e3dc0c",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "4cc42b77e03eac934edd9258ca5ec1cbc5e6ee68",
+            "lane": 5
+          },
+          {
+            "hash": "fe0965ee714143c7b8c3ac28fc3aee7923c6c376",
+            "lane": 6
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [
+          "task/task-1763353249749-3db891"
+        ],
+        "index": 37
+      },
+      {
+        "type": "commit",
+        "label": "chore: update kamui tasks state",
+        "commit": {
+          "hash": "4cc42b77e03eac934edd9258ca5ec1cbc5e6ee68",
+          "subject": "chore: update kamui tasks state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763354448,
+          "parents": [
+            "b45d3e5e791720902ae83017f68b4433ee8403b1"
+          ],
+          "parent": "b45d3e5e791720902ae83017f68b4433ee8403b1",
+          "refs": "",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "4cc42b77e03eac934edd9258ca5ec1cbc5e6ee68",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "b45d3e5e791720902ae83017f68b4433ee8403b1",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 38
+      },
+      {
+        "type": "commit",
+        "label": "docs: add Japanese versions of documentation and update link…",
+        "commit": {
+          "hash": "fe0965ee714143c7b8c3ac28fc3aee7923c6c376",
+          "subject": "docs: add Japanese versions of documentation and update links in README.ja.md",
+          "author": "Takamasa Ito",
+          "timestamp": 1763354435,
+          "parents": [
+            "b45d3e5e791720902ae83017f68b4433ee8403b1"
+          ],
+          "parent": "b45d3e5e791720902ae83017f68b4433ee8403b1",
+          "refs": "monorepo/task/task-1763353249749-3db891",
+          "branches": [
+            "monorepo/task/task-1763353249749-3db891",
+            "task/task-1763353249749-3db891",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "fe0965ee714143c7b8c3ac28fc3aee7923c6c376",
+        "lane": 19,
+        "parentLinks": [
+          {
+            "hash": "b45d3e5e791720902ae83017f68b4433ee8403b1",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "monorepo/task/task-1763353249749-3db891",
+        "branchColor": "#4fe8b8",
+        "branchTags": [
+          "monorepo/task/task-1763353249749-3db891"
+        ],
+        "index": 39
+      },
+      {
+        "type": "commit",
+        "label": "Merge branch 'task/task-1763348756907-d126a3'",
+        "commit": {
+          "hash": "b45d3e5e791720902ae83017f68b4433ee8403b1",
+          "subject": "Merge branch 'task/task-1763348756907-d126a3'",
+          "author": "Takamasa Ito",
+          "timestamp": 1763350787,
+          "parents": [
+            "df405543944a50e549e19b3d8b629f5e0ebd70ca",
+            "95ddd7baf8aadcf1ff0ca00cc940312b81a93016"
+          ],
+          "parent": "df405543944a50e549e19b3d8b629f5e0ebd70ca",
+          "refs": "monorepo/task/task-1763353251866-4752c3, monorepo/task/task-1763353247538-414724",
+          "branches": [
+            "monorepo/task/task-1763353251866-4752c3",
+            "monorepo/task/task-1763353247538-414724",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "task/task-1763348756907-d126a3"
+          ]
+        },
+        "commitHash": "b45d3e5e791720902ae83017f68b4433ee8403b1",
+        "lane": 20,
+        "parentLinks": [
+          {
+            "hash": "df405543944a50e549e19b3d8b629f5e0ebd70ca",
+            "lane": 5
+          },
+          {
+            "hash": "95ddd7baf8aadcf1ff0ca00cc940312b81a93016",
+            "lane": 7
+          }
+        ],
+        "primaryBranchName": "monorepo/task/task-1763353251866-4752c3",
+        "branchColor": "#e8a84f",
+        "branchTags": [
+          "monorepo/task/task-1763353247538-414724",
+          "monorepo/task/task-1763353251866-4752c3",
+          "task/task-1763348756907-d126a3"
+        ],
+        "index": 40
+      },
+      {
+        "type": "commit",
+        "label": "chore: update kamui tasks state",
+        "commit": {
+          "hash": "df405543944a50e549e19b3d8b629f5e0ebd70ca",
+          "subject": "chore: update kamui tasks state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763350781,
+          "parents": [
+            "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c"
+          ],
+          "parent": "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c",
+          "refs": "",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "df405543944a50e549e19b3d8b629f5e0ebd70ca",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 41
+      },
+      {
+        "type": "commit",
+        "label": "docs: simplify README and reorganize documentation",
+        "commit": {
+          "hash": "95ddd7baf8aadcf1ff0ca00cc940312b81a93016",
+          "subject": "docs: simplify README and reorganize documentation",
+          "author": "Takamasa Ito",
+          "timestamp": 1763350756,
+          "parents": [
+            "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c"
+          ],
+          "parent": "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c",
+          "refs": "monorepo/task/task-1763348756907-d126a3",
+          "branches": [
+            "monorepo/task/task-1763348756907-d126a3",
+            "task/task-1763348756907-d126a3",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "95ddd7baf8aadcf1ff0ca00cc940312b81a93016",
+        "lane": 23,
+        "parentLinks": [
+          {
+            "hash": "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "monorepo/task/task-1763348756907-d126a3",
+        "branchColor": "#e8e84f",
+        "branchTags": [
+          "monorepo/task/task-1763348756907-d126a3"
+        ],
+        "index": 42
+      },
+      {
+        "type": "commit",
+        "label": "Merge remote-tracking branch 'origin/main' into main",
+        "commit": {
+          "hash": "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c",
+          "subject": "Merge remote-tracking branch 'origin/main' into main",
+          "author": "Takamasa Ito",
+          "timestamp": 1763348484,
+          "parents": [
+            "5def1c553de47ca73cff78b933130408ce794fcd",
+            "f140324fe74dc4f9d7ccace7fdd1a97aae3cdc1f"
+          ],
+          "parent": "5def1c553de47ca73cff78b933130408ce794fcd",
+          "refs": "monorepo/task/task-1763348765373-34cfd4, monorepo/task/task-1763348763266-4173c1, monorepo/task/task-1763348761150-25456a, monorepo/task/task-1763348759035-ac0754",
+          "branches": [
+            "monorepo/task/task-1763348765373-34cfd4",
+            "monorepo/task/task-1763348763266-4173c1",
+            "monorepo/task/task-1763348761150-25456a",
+            "monorepo/task/task-1763348759035-ac0754",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "main"
+          ]
+        },
+        "commitHash": "0d45266e6d3c2bcc7c25b40d3bae5e163b0ca87c",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "5def1c553de47ca73cff78b933130408ce794fcd",
+            "lane": 5
+          },
+          {
+            "hash": "f140324fe74dc4f9d7ccace7fdd1a97aae3cdc1f",
+            "lane": 8
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/task/task-1763348759035-ac0754",
+          "monorepo/task/task-1763348761150-25456a",
+          "monorepo/task/task-1763348763266-4173c1",
+          "monorepo/task/task-1763348765373-34cfd4"
+        ],
+        "index": 43
+      },
+      {
+        "type": "commit",
+        "label": "Merge task/task-1763342135254-d312a3 into main",
+        "commit": {
+          "hash": "5def1c553de47ca73cff78b933130408ce794fcd",
+          "subject": "Merge task/task-1763342135254-d312a3 into main",
+          "author": "Takamasa Ito",
+          "timestamp": 1763348300,
+          "parents": [
+            "48c8dceebd9dc1e27711bbf3cf48b035e9d64114",
+            "18591cf9b2f3c60c7f8d294f155ec43ea0d6b290"
+          ],
+          "parent": "48c8dceebd9dc1e27711bbf3cf48b035e9d64114",
+          "refs": "",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "task/task-1763342135254-d312a3"
+          ]
+        },
+        "commitHash": "5def1c553de47ca73cff78b933130408ce794fcd",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "48c8dceebd9dc1e27711bbf3cf48b035e9d64114",
+            "lane": 5
+          },
+          {
+            "hash": "18591cf9b2f3c60c7f8d294f155ec43ea0d6b290",
+            "lane": 9
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [
+          "task/task-1763342135254-d312a3"
+        ],
+        "index": 44
+      },
+      {
+        "type": "commit",
+        "label": "chore: update tasks state",
+        "commit": {
+          "hash": "48c8dceebd9dc1e27711bbf3cf48b035e9d64114",
+          "subject": "chore: update tasks state",
+          "author": "Takamasa Ito",
+          "timestamp": 1763348293,
+          "parents": [
+            "cf88f60278af3154fb849d8586cefb9ba9e1ea90"
+          ],
+          "parent": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+          "refs": "",
+          "branches": [
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "48c8dceebd9dc1e27711bbf3cf48b035e9d64114",
+        "lane": 4,
+        "parentLinks": [
+          {
+            "hash": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "task/task-1763712340542-96c238",
+        "branchColor": "#e84f7f",
+        "branchTags": [],
+        "index": 45
+      },
+      {
+        "type": "commit",
+        "label": "feat(ci): implement comprehensive monorepo improvements",
+        "commit": {
+          "hash": "18591cf9b2f3c60c7f8d294f155ec43ea0d6b290",
+          "subject": "feat(ci): implement comprehensive monorepo improvements",
+          "author": "Takamasa Ito",
+          "timestamp": 1763348273,
+          "parents": [
+            "cf88f60278af3154fb849d8586cefb9ba9e1ea90"
+          ],
+          "parent": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+          "refs": "monorepo/task/task-1763342135254-d312a3",
+          "branches": [
+            "monorepo/task/task-1763342135254-d312a3",
+            "task/task-1763342135254-d312a3",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "18591cf9b2f3c60c7f8d294f155ec43ea0d6b290",
+        "lane": 25,
+        "parentLinks": [
+          {
+            "hash": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "monorepo/task/task-1763342135254-d312a3",
+        "branchColor": "#4fe8b8",
+        "branchTags": [
+          "monorepo/task/task-1763342135254-d312a3"
+        ],
+        "index": 46
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #3 from Takamasa045/codex/implement-seede…",
+        "commit": {
+          "hash": "f140324fe74dc4f9d7ccace7fdd1a97aae3cdc1f",
+          "subject": "Merge pull request #3 from Takamasa045/codex/implement-seeded-random-generator-in-random.ts",
+          "author": "Itopan",
+          "timestamp": 1763018627,
+          "parents": [
+            "0364cec0abaf6f39b64c60780ca3464f32992686",
+            "0e85ee205282954e28b5d062580daf41b3638f80"
+          ],
+          "parent": "0364cec0abaf6f39b64c60780ca3464f32992686",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "Takamasa045/codex/implement-seeded-random-generator-in-random.ts"
+          ]
+        },
+        "commitHash": "f140324fe74dc4f9d7ccace7fdd1a97aae3cdc1f",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "0364cec0abaf6f39b64c60780ca3464f32992686",
+            "lane": 8
+          },
+          {
+            "hash": "0e85ee205282954e28b5d062580daf41b3638f80",
+            "lane": 10
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "Takamasa045/codex/implement-seeded-random-generator-in-random.ts"
+        ],
+        "index": 47
+      },
+      {
+        "type": "commit",
+        "label": "Add seeded randomness to LinkedParticles",
+        "commit": {
+          "hash": "0e85ee205282954e28b5d062580daf41b3638f80",
+          "subject": "Add seeded randomness to LinkedParticles",
+          "author": "Itopan",
+          "timestamp": 1763015452,
+          "parents": [
+            "0364cec0abaf6f39b64c60780ca3464f32992686"
+          ],
+          "parent": "0364cec0abaf6f39b64c60780ca3464f32992686",
+          "refs": "monorepo/codex/implement-seeded-random-generator-in-random.ts",
+          "branches": [
+            "monorepo/codex/implement-seeded-random-generator-in-random.ts",
+            "main",
+            "Takamasa045/codex/implement-seeded-random-generator-in-random.ts",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "0e85ee205282954e28b5d062580daf41b3638f80",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "0364cec0abaf6f39b64c60780ca3464f32992686",
+            "lane": 8
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/codex/implement-seeded-random-generator-in-random.ts"
+        ],
+        "index": 48
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #4 from Takamasa045/codex/enhance-seed-at…",
+        "commit": {
+          "hash": "0364cec0abaf6f39b64c60780ca3464f32992686",
+          "subject": "Merge pull request #4 from Takamasa045/codex/enhance-seed-attribute-management",
+          "author": "Itopan",
+          "timestamp": 1763015087,
+          "parents": [
+            "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+            "6d401b619b22f0f3e451a790fb55faba7304268c"
+          ],
+          "parent": "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "Takamasa045/codex/enhance-seed-attribute-management"
+          ]
+        },
+        "commitHash": "0364cec0abaf6f39b64c60780ca3464f32992686",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+            "lane": 8
+          },
+          {
+            "hash": "6d401b619b22f0f3e451a790fb55faba7304268c",
+            "lane": 11
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "Takamasa045/codex/enhance-seed-attribute-management"
+        ],
+        "index": 49
+      },
+      {
+        "type": "commit",
+        "label": "Refine linked particles geometry attribute management",
+        "commit": {
+          "hash": "6d401b619b22f0f3e451a790fb55faba7304268c",
+          "subject": "Refine linked particles geometry attribute management",
+          "author": "Itopan",
+          "timestamp": 1763013859,
+          "parents": [
+            "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2"
+          ],
+          "parent": "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+          "refs": "monorepo/codex/enhance-seed-attribute-management",
+          "branches": [
+            "monorepo/codex/enhance-seed-attribute-management",
+            "main",
+            "Takamasa045/codex/enhance-seed-attribute-management",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "6d401b619b22f0f3e451a790fb55faba7304268c",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+            "lane": 8
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/codex/enhance-seed-attribute-management"
+        ],
+        "index": 50
+      },
+      {
+        "type": "commit",
+        "label": "Refine linked particles geometry attribute management",
+        "commit": {
+          "hash": "5e89dad35fd33b284eb4740739749bffdd68a3cf",
+          "subject": "Refine linked particles geometry attribute management",
+          "author": "Itopan",
+          "timestamp": 1763005700,
+          "parents": [
+            "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e"
+          ],
+          "parent": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+          "refs": "monorepo/pr4-codex",
+          "branches": [
+            "monorepo/pr4-codex"
+          ]
+        },
+        "commitHash": "5e89dad35fd33b284eb4740739749bffdd68a3cf",
+        "lane": 26,
+        "parentLinks": [
+          {
+            "hash": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+            "lane": 12
+          }
+        ],
+        "primaryBranchName": "monorepo/pr4-codex",
+        "branchColor": "#e8e84f",
+        "branchTags": [
+          "monorepo/pr4-codex"
+        ],
+        "index": 51
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #2 from Takamasa045/codex/create-linkedpa…",
+        "commit": {
+          "hash": "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+          "subject": "Merge pull request #2 from Takamasa045/codex/create-linkedparticlesscenemanager-and-integrate",
+          "author": "Itopan",
+          "timestamp": 1763005388,
+          "parents": [
+            "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+            "31de0bdb75daef320b57f0e91083b5d37275f838"
+          ],
+          "parent": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+          "refs": "monorepo/fix/pr4-main",
+          "branches": [
+            "monorepo/fix/pr4-main",
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "Takamasa045/codex/create-linkedparticlesscenemanager-and-integrate"
+          ]
+        },
+        "commitHash": "5404b3875a7fd2c7aaffdffdcac06ce48f7bd0b2",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+            "lane": 12
+          },
+          {
+            "hash": "31de0bdb75daef320b57f0e91083b5d37275f838",
+            "lane": 13
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/fix/pr4-main",
+          "Takamasa045/codex/create-linkedparticlesscenemanager-and-integrate"
+        ],
+        "index": 52
+      },
+      {
+        "type": "commit",
+        "label": "refactor: introduce LinkedParticles scene manager",
+        "commit": {
+          "hash": "31de0bdb75daef320b57f0e91083b5d37275f838",
+          "subject": "refactor: introduce LinkedParticles scene manager",
+          "author": "Itopan",
+          "timestamp": 1763005372,
+          "parents": [
+            "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e"
+          ],
+          "parent": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+          "refs": "",
+          "branches": [
+            "main",
+            "Takamasa045/codex/create-linkedparticlesscenemanager-and-integrate",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "31de0bdb75daef320b57f0e91083b5d37275f838",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+            "lane": 12
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 53
+      },
+      {
+        "type": "commit",
+        "label": "chore: update remaining apps to latest remotion version",
+        "commit": {
+          "hash": "3ee1187b2c88bbedbf93c84c6a348930daeccba6",
+          "subject": "chore: update remaining apps to latest remotion version",
+          "author": "Takamasa Ito",
+          "timestamp": 1762869285,
+          "parents": [
+            "7a33005d120590a8fc26c6ec28b65f81c7bea8dc"
+          ],
+          "parent": "7a33005d120590a8fc26c6ec28b65f81c7bea8dc",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "3ee1187b2c88bbedbf93c84c6a348930daeccba6",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "7a33005d120590a8fc26c6ec28b65f81c7bea8dc",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 54
+      },
+      {
+        "type": "commit",
+        "label": "chore: update 3D dependencies to latest versions across all …",
+        "commit": {
+          "hash": "7a33005d120590a8fc26c6ec28b65f81c7bea8dc",
+          "subject": "chore: update 3D dependencies to latest versions across all apps",
+          "author": "Takamasa Ito",
+          "timestamp": 1762868978,
+          "parents": [
+            "44b37e0e0a13e02f746781d36bc7f3f298b145b1"
+          ],
+          "parent": "44b37e0e0a13e02f746781d36bc7f3f298b145b1",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "7a33005d120590a8fc26c6ec28b65f81c7bea8dc",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "44b37e0e0a13e02f746781d36bc7f3f298b145b1",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 55
+      },
+      {
+        "type": "commit",
+        "label": "chore: update dependencies to latest versions",
+        "commit": {
+          "hash": "44b37e0e0a13e02f746781d36bc7f3f298b145b1",
+          "subject": "chore: update dependencies to latest versions",
+          "author": "Takamasa Ito",
+          "timestamp": 1762868771,
+          "parents": [
+            "b6760d3b0afd5ed896dd63b65f6314353d5b412e"
+          ],
+          "parent": "b6760d3b0afd5ed896dd63b65f6314353d5b412e",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "44b37e0e0a13e02f746781d36bc7f3f298b145b1",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "b6760d3b0afd5ed896dd63b65f6314353d5b412e",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 56
+      },
+      {
+        "type": "commit",
+        "label": "chore: update dependencies and add new scenes",
+        "commit": {
+          "hash": "b6760d3b0afd5ed896dd63b65f6314353d5b412e",
+          "subject": "chore: update dependencies and add new scenes",
+          "author": "Takamasa Ito",
+          "timestamp": 1762868410,
+          "parents": [
+            "f4f9d2a6615ca14fd08ff51f764bb6e152396f9f"
+          ],
+          "parent": "f4f9d2a6615ca14fd08ff51f764bb6e152396f9f",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "b6760d3b0afd5ed896dd63b65f6314353d5b412e",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "f4f9d2a6615ca14fd08ff51f764bb6e152396f9f",
+            "lane": 3
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 57
+      },
+      {
+        "type": "commit",
+        "label": "Merge remotion-studio-monorepo changes: docs, hero image, an…",
+        "commit": {
+          "hash": "f4f9d2a6615ca14fd08ff51f764bb6e152396f9f",
+          "subject": "Merge remotion-studio-monorepo changes: docs, hero image, and official @remotion packages",
+          "author": "Takamasa Ito",
+          "timestamp": 1762868317,
+          "parents": [
+            "5e3e1761478e9bbec7584b8822db06893221c996",
+            "cf88f60278af3154fb849d8586cefb9ba9e1ea90"
+          ],
+          "parent": "5e3e1761478e9bbec7584b8822db06893221c996",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "f4f9d2a6615ca14fd08ff51f764bb6e152396f9f",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "5e3e1761478e9bbec7584b8822db06893221c996",
+            "lane": 3
+          },
+          {
+            "hash": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 58
+      },
+      {
+        "type": "commit",
+        "label": "On main: Stash before merging monorepo changes",
+        "commit": {
+          "hash": "2f2bad965d3e9a0675aeba3584103ce2dad9fd72",
+          "subject": "On main: Stash before merging monorepo changes",
+          "author": "Takamasa Ito",
+          "timestamp": 1762868256,
+          "parents": [
+            "5e3e1761478e9bbec7584b8822db06893221c996",
+            "058c34533d609b7d226969ac0a249394a92d03dd"
+          ],
+          "parent": "5e3e1761478e9bbec7584b8822db06893221c996",
+          "refs": "refs/stash",
+          "branches": [
+            "refs/stash"
+          ]
+        },
+        "commitHash": "2f2bad965d3e9a0675aeba3584103ce2dad9fd72",
+        "lane": 27,
+        "parentLinks": [
+          {
+            "hash": "5e3e1761478e9bbec7584b8822db06893221c996",
+            "lane": 3
+          },
+          {
+            "hash": "058c34533d609b7d226969ac0a249394a92d03dd",
+            "lane": 15
+          }
+        ],
+        "primaryBranchName": "refs/stash",
+        "branchColor": "#4fe84f",
+        "branchTags": [
+          "refs/stash"
+        ],
+        "index": 59
+      },
+      {
+        "type": "commit",
+        "label": "index on main: 5e3e176 feat(3D-test): add BigBang (galaxy+so…",
+        "commit": {
+          "hash": "058c34533d609b7d226969ac0a249394a92d03dd",
+          "subject": "index on main: 5e3e176 feat(3D-test): add BigBang (galaxy+solar) and BlackHole; register compositions, docs and scripts",
+          "author": "Takamasa Ito",
+          "timestamp": 1762868256,
+          "parents": [
+            "5e3e1761478e9bbec7584b8822db06893221c996"
+          ],
+          "parent": "5e3e1761478e9bbec7584b8822db06893221c996",
+          "refs": "",
+          "branches": []
+        },
+        "commitHash": "058c34533d609b7d226969ac0a249394a92d03dd",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "5e3e1761478e9bbec7584b8822db06893221c996",
+            "lane": 3
+          }
+        ],
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 60
+      },
+      {
+        "type": "commit",
+        "label": "Merge pull request #1 from Takamasa045/task/task-17628657356…",
+        "commit": {
+          "hash": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+          "subject": "Merge pull request #1 from Takamasa045/task/task-1762865735672-983aa9",
+          "author": "Itopan",
+          "timestamp": 1762867635,
+          "parents": [
+            "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+            "a5c5eaaa06d2d8fc985b00435d11dafa222c7f44"
+          ],
+          "parent": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+          "refs": "",
+          "branches": [
+            "main",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea",
+            "Takamasa045/task/task-1762865735672-983aa9"
+          ]
+        },
+        "commitHash": "ba5532fbfb29b5f876ee147dcea6c3bf8a25c37e",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+            "lane": 5
+          },
+          {
+            "hash": "a5c5eaaa06d2d8fc985b00435d11dafa222c7f44",
+            "lane": 16
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "Takamasa045/task/task-1762865735672-983aa9"
+        ],
+        "index": 61
+      },
+      {
+        "type": "commit",
+        "label": "chore: automate remotion updates",
+        "commit": {
+          "hash": "a5c5eaaa06d2d8fc985b00435d11dafa222c7f44",
+          "subject": "chore: automate remotion updates",
+          "author": "Takamasa Ito",
+          "timestamp": 1762867238,
+          "parents": [
+            "cf88f60278af3154fb849d8586cefb9ba9e1ea90"
+          ],
+          "parent": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+          "refs": "monorepo/task/task-1762865735672-983aa9",
+          "branches": [
+            "monorepo/task/task-1762865735672-983aa9",
+            "main",
+            "Takamasa045/task/task-1762865735672-983aa9",
+            "task/task-1763712340542-96c238",
+            "task-1763617308406-8057e5",
+            "task/task-1763617879542-4db2fb",
+            "task/task-1763622090670-72aa5a",
+            "task/task-1763622098231-30427e",
+            "task/task-1763712433919-21a074",
+            "task/task-1763622093374-fe6fde",
+            "task/task-1763622100677-d5f763",
+            "task/task-1763712437182-e8a62e",
+            "task/task-1763712443970-109b4e",
+            "task/task-1763712964570-48fd69",
+            "task/task-1763712440585-14d2da",
+            "task/task-1763719093723-e09957",
+            "task/task-1763719097064-db13ea"
+          ]
+        },
+        "commitHash": "a5c5eaaa06d2d8fc985b00435d11dafa222c7f44",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "cf88f60278af3154fb849d8586cefb9ba9e1ea90",
+            "lane": 5
+          }
+        ],
+        "primaryBranchName": "main",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/task/task-1762865735672-983aa9"
+        ],
+        "index": 62
+      },
+      {
+        "type": "commit",
+        "label": "docs: add pnpm Catalog documentation to README (EN/JA)",
+        "commit": {
+          "hash": "d4338749c5b9df0b0abf9bbb23ce7f3b209d150b",
+          "subject": "docs: add pnpm Catalog documentation to README (EN/JA)",
+          "author": "Claude",
+          "timestamp": 1762405215,
+          "parents": [
+            "e9dd0fc63a240692744efda63c6eceb576381830"
+          ],
+          "parent": "e9dd0fc63a240692744efda63c6eceb576381830",
+          "refs": "monorepo/fix/pr4",
+          "branches": [
+            "monorepo/fix/pr4"
+          ]
+        },
+        "commitHash": "d4338749c5b9df0b0abf9bbb23ce7f3b209d150b",
+        "lane": 28,
+        "parentLinks": [
+          {
+            "hash": "e9dd0fc63a240692744efda63c6eceb576381830",
+            "lane": 17
+          }
+        ],
+        "primaryBranchName": "monorepo/fix/pr4",
+        "branchColor": "#4f85e8",
+        "branchTags": [
+          "monorepo/fix/pr4"
+        ],
+        "index": 63
+      },
+      {
+        "type": "commit",
+        "label": "fix: correct pnpm catalog syntax and run install",
+        "commit": {
+          "hash": "e9dd0fc63a240692744efda63c6eceb576381830",
+          "subject": "fix: correct pnpm catalog syntax and run install",
+          "author": "Claude",
+          "timestamp": 1762402820,
+          "parents": [
+            "5ec680daa6ecfc6769f44126f9968e8db5628041"
+          ],
+          "parent": "5ec680daa6ecfc6769f44126f9968e8db5628041",
+          "refs": "",
+          "branches": []
+        },
+        "commitHash": "e9dd0fc63a240692744efda63c6eceb576381830",
+        "lane": 0,
+        "parentLinks": [
+          {
+            "hash": "5ec680daa6ecfc6769f44126f9968e8db5628041",
+            "lane": 17
+          }
+        ],
+        "branchColor": "#4f85e8",
+        "branchTags": [],
+        "index": 64
+      },
+      {
+        "type": "empty",
+        "label": "初期状態 (初回コミット以前)",
+        "files": [],
+        "marker": "pre-history",
+        "index": 65
+      }
+    ]
+  },
+  "projectRoot": "/Users/takamasa/apps/itopan-portfolio",
+  "savedAt": 1763807166692
+}
