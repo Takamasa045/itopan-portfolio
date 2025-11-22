@@ -4,22 +4,22 @@ import { Loader } from '@react-three/drei';
 import { Experience } from './components/Experience';
 
 // Augment the global JSX namespace to include Three.js elements
-// We use 'any' to ensure compatibility and avoid strict type resolution issues
+// We explicitly define the used elements to ensure compatibility
 declare global {
   namespace JSX {
     interface IntrinsicElements {
-      color: any;
       ambientLight: any;
+      boxGeometry: any;
+      color: any;
+      coneGeometry: any;
       directionalLight: any;
       fog: any;
       group: any;
-      mesh: any;
-      coneGeometry: any;
-      meshStandardMaterial: any;
       icosahedronGeometry: any;
-      torusGeometry: any;
+      mesh: any;
       meshBasicMaterial: any;
-      boxGeometry: any;
+      meshStandardMaterial: any;
+      torusGeometry: any;
     }
   }
 }
