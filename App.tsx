@@ -52,7 +52,7 @@ const App: React.FC = () => {
         ITOPAN / イトパン
       </div>
       <div className="fixed top-6 right-6 z-40 pointer-events-none mix-blend-difference text-white/40 text-xs tracking-widest">
-        PORTFOLIO 2024
+        PORTFOLIO
       </div>
     </>
   );
