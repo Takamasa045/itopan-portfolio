@@ -42,11 +42,21 @@ const projects: ProjectCollection[] = [
     year: '2024',
     items: [
       {
+        id: 'v00',
+        title: '猫たちの夜会',
+        type: 'video',
+        description: '飼い主のいない夜、猫たちは密かに集会を開くらしい。🍊🌃\nこたつでぬくぬくしていたはずが、気づけば異次元のパーティーフロアへ…😺✨\nネオンが弾け、ダンスはキレッキレ😹',
+        link: 'https://x.com/takamasa045/status/1992409112815276187',
+        date: '2024.11',
+        videoUrl: '/videos/neko-night-party.mp4',
+        technologies: ['Midjourney', 'NanobananaPro', 'Veo 3.1']
+      },
+      {
         id: 'v0',
         title: '芝犬ドギーダンス',
         type: 'video',
         description: '久しぶりの芝犬ドギーダンス🐕🎶\nHailuo2.3はダンスがかなり良くなった😆\nMidjourneyとnanobananaで画像生成後にHailuoでi2v、Sunoで作った音に合わせて完成🎥',
-        link: 'https://twitter.com/takamasa045',
+        link: 'https://x.com/takamasa045/status/1988223314192724155',
         date: '2024.11',
         videoUrl: '/videos/shiba-doggy-dance.mp4',
         technologies: ['Midjourney', 'nanobananapro', 'Hailuo 2.3', 'Suno']
@@ -87,6 +97,36 @@ const projects: ProjectCollection[] = [
     technologies: ['Suno AI', 'Hailuo', 'Veo', 'Sora', 'Premiere Pro'],
     year: '2024',
     items: [
+      {
+        id: 'm0',
+        title: '松本生成AIハッカソン MV',
+        type: 'music',
+        description: 'ClaudeCode sonnet 4.5 × Remotion × Three.js で3DアニメーションMVを試作🎥✨\nsonnet 4.5、動作がサクサクでめちゃ快適だし頭も良い。探り探りでも1時間足らずで形にできちゃった🎬\n題材は、先日松本で大盛況だった生成AIハッカソンのイベントリリック😆🎤\n長野から世界へ🌏',
+        link: 'https://x.com/takamasa045/status/1972791745080623556',
+        date: '2025.09',
+        videoUrl: '/videos/matsumoto-genai-mv.mp4',
+        technologies: ['Claude Code', 'Remotion', 'Three.js', 'Suno AI']
+      },
+      {
+        id: 'm02',
+        title: 'TextAliveでつくるリリックモーション',
+        type: 'music',
+        description: 'TextAliveでつくるリリックモーション。編集はもちろんRemotion縛り。',
+        link: 'https://x.com/takamasa045/status/1966493897703702690',
+        date: '2025.09',
+        videoUrl: '/videos/textalive-lyric-motion.mp4',
+        technologies: ['TextAlive', 'Remotion']
+      },
+      {
+        id: 'm01',
+        title: 'プレイリスト（時は戻らない Cover）',
+        type: 'music',
+        description: 'Midjourney でイメージ生成 → Nanobanana でカット画像生成 → Hailuo でi2v変換 → 編集 → Sync でリップシンク✨\n特にSyncが最高で、顔を自動認識してくれるから動画をそのまま丸投げできるのが便利すぎる！\nもちろん細かいツッコミどころはあるけど、そこも含めてご愛嬌☺️',
+        link: 'https://x.com/takamasa045/status/1970796919615287615',
+        date: '2024.11',
+        videoUrl: '/videos/playlist-cover-mv.mp4',
+        technologies: ['Midjourney', 'NanobananaPro', 'Hailuo', 'Sync']
+      },
       {
         id: 'm1',
         title: 'Izumo / 出雲',
@@ -251,19 +291,15 @@ export const Overlay: React.FC = () => {
           className="max-w-3xl bg-emerald-950/20 backdrop-blur-sm p-8 md:p-12 rounded-sm border border-emerald-900/30"
         >
           <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl mb-12 font-serif tracking-wide text-stone-200">
-            開発かクリエイティブか、<br/>その境界を溶かす。
+            開発とクリエイティブの境界を、<br/>生成AIでなめらかに溶かす。
           </motion.h3>
-          
+
           <motion.div variants={fadeUp} className="text-sm md:text-lg leading-loose text-stone-300 font-light space-y-6 text-justify">
             <p>
-              生成AIをハブに、コード・デザイン・映像・体験を行き来する。
-              新しいモデル、新しいツール、新しいワークフローが次々と生まれ、
-              開発とクリエイティブの境界がゆるく曖昧になっていく時代。
+              コード・デザイン・映像・体験── 領域を横断しながら、新しいモデルやツール、ワークフローを実際に手で確かめ、"欲しい世界観"をプロトタイプとして形にしていく。
             </p>
             <p>
-              このポートフォリオでは、そうした最先端の動きをキャッチしつつ、
-              「自分が本当に使いたいツール」「自分が見てみたい世界観」を
-              小さなプロジェクトとして試し、そのプロセスと結果を記録していきます。
+              そうした"生成AI時代のものづくり"に向き合う姿勢と、自分が本当に使いたい技術・見てみたい世界観を選び抜いて試したアウトプットを静かにまとめた場所です。
             </p>
           </motion.div>
         </motion.div>
@@ -285,10 +321,10 @@ export const Overlay: React.FC = () => {
             >
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-emerald-500/30 pb-4">
                 <motion.h3 variants={fadeUp} className="text-4xl font-serif text-stone-200">
-                  Projects / 実験
+                  Works / 制作
                 </motion.h3>
                 <motion.p variants={fadeUp} className="text-stone-500 text-sm mt-4 md:mt-0 font-light">
-                  小さなプロトタイプから、実用的なアプリケーションまで。
+                  映像作品からSaasまで。
                 </motion.p>
               </div>
 
@@ -466,6 +502,9 @@ export const Overlay: React.FC = () => {
 
 // --- COMPONENT: LIST CARD (Collection Entry) ---
 const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }> = ({ data, onClick }) => {
+  // Get the latest item's video URL if available
+  const latestVideoUrl = data.items[0]?.videoUrl;
+
   return (
     <motion.div
       variants={fadeUp}
@@ -473,14 +512,13 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
       className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/50 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
     >
       {/* Content Container */}
-      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between bg-gradient-to-t from-[#020403] via-transparent to-transparent opacity-90">
+      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between bg-gradient-to-t from-[#020403] via-[#020403]/60 to-transparent opacity-90">
         <div className="flex justify-between items-start">
           <div className="bg-black/40 backdrop-blur-sm px-3 py-1 border border-white/10 text-emerald-400 text-xs font-mono tracking-wider uppercase rounded-sm">
             {data.mainType}
           </div>
-          <div className="text-stone-500 text-xs font-mono">{data.year}</div>
         </div>
-        
+
         <div className="transform group-hover:translate-y-[-8px] transition-transform duration-500">
           <p className="text-emerald-300 text-xs mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
             {data.category}
@@ -489,15 +527,28 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
           <p className="text-sm text-stone-400 leading-relaxed line-clamp-2 group-hover:line-clamp-none group-hover:text-stone-300">
             {data.description}
           </p>
-          
+
           <div className="mt-4 flex items-center gap-2 text-emerald-400 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
             VIEW COLLECTION <span className="text-lg">→</span>
           </div>
         </div>
       </div>
 
-      {/* Media Preview Background */}
-      <MediaBackground type={data.mainType} />
+      {/* Media Preview Background - Show video if available */}
+      {latestVideoUrl ? (
+        <div className="absolute inset-0 z-0">
+          <video
+            src={latestVideoUrl}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+          />
+        </div>
+      ) : (
+        <MediaBackground type={data.mainType} />
+      )}
     </motion.div>
   );
 };
