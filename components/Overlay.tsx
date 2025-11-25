@@ -51,7 +51,7 @@ const projects: ProjectCollection[] = [
         description: '飼い主のいない夜、猫たちは密かに集会を開くらしい。🍊🌃\nこたつでぬくぬくしていたはずが、気づけば異次元のパーティーフロアへ…😺✨\nネオンが弾け、ダンスはキレッキレ😹',
         link: 'https://x.com/takamasa045/status/1992409112815276187',
         date: '2024.11',
-        videoUrl: '/videos/neko-night-party.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/neko-night-party.mp4`,
         technologies: ['Midjourney', 'NanobananaPro', 'Veo 3.1']
       },
       {
@@ -61,7 +61,7 @@ const projects: ProjectCollection[] = [
         description: '久しぶりの芝犬ドギーダンス🐕🎶\nHailuo2.3はダンスがかなり良くなった😆\nMidjourneyとnanobananaで画像生成後にHailuoでi2v、Sunoで作った音に合わせて完成🎥',
         link: 'https://x.com/takamasa045/status/1988223314192724155',
         date: '2024.11',
-        videoUrl: '/videos/shiba-doggy-dance.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/shiba-doggy-dance.mp4`,
         technologies: ['Midjourney', 'nanobananapro', 'Hailuo 2.3', 'Suno']
       },
       {
@@ -107,7 +107,7 @@ const projects: ProjectCollection[] = [
         description: '自作アプリ「MVマルチショットジェネレーター」で実際にMVを制作🎬✨\nマルチカット画像をkamui codeのwan-v2で動画生成、リップシンクはSync、カット割り・編集はすべてRemotion。\nさらにThree.jsで3Dの星柄アニメーションを重ね、新しい領域に踏み込んだ一作🔥🌌',
         link: 'https://x.com/takamasa045/status/1971568628773658907',
         date: '2025.09.26',
-        videoUrl: '/videos/mv-multishot-generator.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/mv-multishot-generator.mp4`,
         technologies: ['kamui code', 'wan-v2', 'Sync', 'Remotion', 'Three.js']
       },
       {
@@ -117,7 +117,7 @@ const projects: ProjectCollection[] = [
         description: '動画編集ソフトを一切使わずにRemotionだけで作り上げたMV。\n画像はMidjourneyで生成→i2vで動かし、音楽はSunoで友人のビート音源から曲化。\nリリックは現場の愚痴をGPTでテキスト化→再構成。\n編集はRemotion × Claude Code × codexでタイムライン制御、同期、演出を完結。\n"理不尽さ"を愚痴からリリックに変えて、音楽と映像で叩き返した一作🦫',
         link: 'https://x.com/takamasa045/status/1960300333240062196',
         date: '2025.08',
-        videoUrl: '/videos/boss-monkey-harassment2.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/boss-monkey-harassment2.mp4`,
         technologies: ['Midjourney', 'i2v', 'Suno', 'Remotion', 'Claude Code', 'codex']
       },
       {
@@ -127,7 +127,7 @@ const projects: ProjectCollection[] = [
         description: 'ClaudeCode sonnet 4.5 × Remotion × Three.js で3DアニメーションMVを試作🎥✨\nsonnet 4.5、動作がサクサクでめちゃ快適だし頭も良い。探り探りでも1時間足らずで形にできちゃった🎬\n題材は、先日松本で大盛況だった生成AIハッカソンのイベントリリック😆🎤\n長野から世界へ🌏',
         link: 'https://x.com/takamasa045/status/1972791745080623556',
         date: '2025.09.30',
-        videoUrl: '/videos/matsumoto-genai-mv.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/matsumoto-genai-mv.mp4`,
         technologies: ['Claude Code', 'Remotion', 'Three.js', 'Suno AI']
       },
       {
@@ -137,7 +137,7 @@ const projects: ProjectCollection[] = [
         description: 'TextAliveでつくるリリックモーション。編集はもちろんRemotion縛り。',
         link: 'https://x.com/takamasa045/status/1966493897703702690',
         date: '2025.09',
-        videoUrl: '/videos/textalive-lyric-motion.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/textalive-lyric-motion.mp4`,
         technologies: ['TextAlive', 'Remotion']
       },
       {
@@ -147,7 +147,7 @@ const projects: ProjectCollection[] = [
         description: 'Midjourney でイメージ生成 → Nanobanana でカット画像生成 → Hailuo でi2v変換 → 編集 → Sync でリップシンク✨\n特にSyncが最高で、顔を自動認識してくれるから動画をそのまま丸投げできるのが便利すぎる！\nもちろん細かいツッコミどころはあるけど、そこも含めてご愛嬌☺️',
         link: 'https://x.com/takamasa045/status/1970796919615287615',
         date: '2024.11',
-        videoUrl: '/videos/playlist-cover-mv.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/playlist-cover-mv.mp4`,
         technologies: ['Midjourney', 'NanobananaPro', 'Hailuo', 'Sync']
       }
     ]
@@ -169,7 +169,7 @@ const projects: ProjectCollection[] = [
         description: 'Remotionで映像制作を加速させるモノレポを公開。\nテンプレをコピーするだけで新規プロジェクトを即スタート。Three.jsベースの3Dテンプレも同梱し、3DアニメーションMVや演出を即構築可能。\nアニメーション・デザイン・音声処理などを共通パッケージ化し、複数案件でも一貫した品質を担保。pnpmワークスペース&Gitサブモジュールで環境もすっきり。',
         link: 'https://x.com/takamasa045/status/1973148052916699287',
         date: '2025.10.01',
-        videoUrl: '/videos/remotion-studio-monorepo.mp4',
+        videoUrl: `${import.meta.env.BASE_URL}videos/remotion-studio-monorepo.mp4`,
         technologies: ['Remotion', 'Three.js', 'pnpm', 'Monorepo', 'CI/CD']
       },
       {
@@ -179,7 +179,7 @@ const projects: ProjectCollection[] = [
         description: 'MV制作でマルチカットに困った経験を解決するアプリ。\n写真アップロード＆アスペクト比選択 → リリック分析で楽曲の歌詞から最適なマルチカットを自動提案 → AIプロンプトを確認・編集して調整可能。\nnanobananapro連携でMV用マルチカット画像を高速生成。制作のスピードもクオリティも一気に上がります。',
         link: 'https://x.com/takamasa045/status/1971144667258589337',
         date: '2025.09.25',
-        imageUrl: '/images/mv-multishot-generator-app.png',
+        imageUrl: `${import.meta.env.BASE_URL}images/mv-multishot-generator-app.png`,
         technologies: ['You Ware', 'nanobananapro', 'AI駆動分析', 'リリック解析']
       },
       {
@@ -222,7 +222,7 @@ const projects: ProjectCollection[] = [
         description: '「またやりたい」第1回の参加者ほぼ全員がそう答えた、まつもと生成AIハッカソン。\nAIを"使う"から"つくる"へ。たった3時間で、アイデアがプロトタイプになる。\nコードが書けなくてもOK。Manus Proを使えば、誰でも"創る側"に。\n仲間と笑いながら、試しながら、ひらめきが形になっていく体験を。\n\n🗓11/30(日) 13:00–16:00\n📍SWEET WORK（松本）\n🎁 Manus Pro当日使い放題＋2,000クレジット',
         link: 'https://x.com/takamasa045/status/1986742405391942026',
         date: '2025.11.07',
-        imageUrl: '/images/matsumoto-ai-hackathon-manus.png',
+        imageUrl: `${import.meta.env.BASE_URL}images/matsumoto-ai-hackathon-manus.png`,
         technologies: ['Manus Pro', 'ハッカソン', '松本', 'SWEET WORK']
       },
       {
@@ -232,7 +232,7 @@ const projects: ProjectCollection[] = [
         description: '🚀 まつもと生成AIハッカソン Plus 開催します！\n11/9(日) 11:00〜 @サザンガク（松本）\n\nCodex / Claude Code / MCPで、アイデアを"その日"に形に！\n\n1日でMVPをつくる実践型イベント⚡\n\n参加無料・先着12名👇',
         link: 'https://x.com/takamasa045/status/1985174469053428146',
         date: '2025.11.03',
-        imageUrl: '/images/matsumoto-ai-hackathon-plus.jpeg',
+        imageUrl: `${import.meta.env.BASE_URL}images/matsumoto-ai-hackathon-plus.jpeg`,
         technologies: ['Codex', 'Claude Code', 'MCP', 'ハッカソン', '松本', 'サザンガク']
       }
     ]
