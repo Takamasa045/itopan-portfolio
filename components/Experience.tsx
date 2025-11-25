@@ -31,8 +31,8 @@ export const Experience: React.FC = () => {
       {/* Deep forest fog */}
       <fog attach="fog" args={['#020403', 5, 20]} />
 
-      {/* Increased pages for added content (Articles, Contact) */}
-      <ScrollControls pages={7} damping={0.3}>
+      {/* Pages for content sections */}
+      <ScrollControls pages={6} damping={0.3}>
         {/* 3D Content Layer - Moves with Scroll */}
         <MountainWorld />
         
