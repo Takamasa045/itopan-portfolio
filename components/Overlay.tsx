@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
+import { useScroll } from '@react-three/drei';
+import { AboutDetail } from './AboutDetail';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'web' | 'image';
@@ -241,7 +243,41 @@ const staggerContainer: Variants = {
 
 export const Overlay: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [showAboutDetail, setShowAboutDetail] = useState(false);
   const selectedProject = projects.find(p => p.id === selectedProjectId);
+  const scroll = useScroll();
+
+  // Handler for showing About detail with scroll to top
+  const handleShowAbout = () => {
+    // Scroll to top BEFORE state change for immediate effect
+    if (scroll.el) {
+      scroll.el.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    setShowAboutDetail(true);
+  };
+
+  // Also ensure scroll is at top when AboutDetail is shown
+  useEffect(() => {
+    if (showAboutDetail && scroll.el) {
+      // Force scroll to top with requestAnimationFrame for next frame
+      requestAnimationFrame(() => {
+        if (scroll.el) {
+          scroll.el.scrollTo({ top: 0, behavior: 'instant' });
+        }
+      });
+    }
+  }, [showAboutDetail, scroll.el]);
+
+  // Show About Detail page
+  if (showAboutDetail) {
+    return (
+      <div className="w-full text-[#e4e7e5]">
+        <AnimatePresence mode="wait">
+          <AboutDetail key="about-detail" onBack={() => setShowAboutDetail(false)} />
+        </AnimatePresence>
+      </div>
+    );
+  }
 
   return (
     <div className="w-full text-[#e4e7e5]">
@@ -301,6 +337,15 @@ export const Overlay: React.FC = () => {
             <p>
               そうした"生成AI時代のものづくり"に向き合う姿勢と、自分が本当に使いたい技術・見てみたい世界観を選び抜いて試したアウトプットを静かにまとめた場所です。
             </p>
+          </motion.div>
+
+          <motion.div variants={fadeUp} className="mt-10">
+            <button
+              onClick={handleShowAbout}
+              className="inline-block px-8 py-3 border border-emerald-500/50 text-emerald-400 hover:bg-emerald-900/30 hover:text-emerald-200 transition-all duration-300 rounded-sm font-mono text-sm"
+            >
+              About / イトパンについて &rarr;
+            </button>
           </motion.div>
         </motion.div>
       </Section>
@@ -402,94 +447,77 @@ export const Overlay: React.FC = () => {
         </motion.div>
       </Section>
 
-      {/* CONTACT SECTION */}
-      <Section className="items-center justify-center text-center md:text-left relative z-10 pb-20">
-        <motion.div 
+      {/* CONTACT SECTION - Simplified */}
+      <Section className="items-center justify-center text-center relative z-10 pb-20">
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
-          className="w-full max-w-6xl mx-auto bg-emerald-950/40 backdrop-blur-md p-8 md:p-16 rounded-sm border border-emerald-900/30"
+          className="w-full max-w-4xl mx-auto"
         >
-           {/* Header */}
-           <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl font-serif mb-12 text-stone-200 text-center md:text-left">
-            Contact <span className="block md:inline text-base md:text-lg mt-2 md:mt-0 md:ml-4 opacity-60 font-sans font-light">お仕事のご相談・お問い合わせ</span>
-          </motion.h3>
+          {/* Header */}
+          <motion.div variants={fadeUp} className="mb-12">
+            <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">CONTACT</p>
+            <h3 className="text-3xl md:text-5xl font-serif text-stone-200 mb-6">
+              お仕事のご相談
+            </h3>
+            <p className="text-stone-400 font-light max-w-xl mx-auto">
+              生成AIを活用したクリエイティブ制作、開発プロジェクト、イベント登壇など、お気軽にご相談ください。
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20">
-            {/* Left Col - Get in Touch */}
-            <div className="space-y-10">
-              <motion.div variants={fadeUp}>
-                <h4 className="text-emerald-400 font-mono text-sm tracking-widest mb-6 border-l-2 border-emerald-500/50 pl-3">GET IN TOUCH</h4>
-                <div className="space-y-8">
-                  <div>
-                    <p className="text-stone-300 font-serif text-lg">X (Twitter)</p>
-                    <a href="https://twitter.com/takamasa045" target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-white transition-colors block text-xl font-light">@takamasa045</a>
-                    <p className="text-xs text-stone-500 mt-1">DMでのご連絡を受け付けています</p>
-                  </div>
-                  <div>
-                    <p className="text-stone-300 font-serif text-lg">note</p>
-                    <a href="https://note.com/azumimusuhi" target="_blank" rel="noopener noreferrer" className="text-emerald-300 hover:text-white transition-colors block text-xl font-light">note.com/azumimusuhi</a>
-                    <p className="text-xs text-stone-500 mt-1">記事・マガジンをご覧いただけます</p>
-                  </div>
-                </div>
-              </motion.div>
+          {/* Contact Links */}
+          <motion.div variants={fadeUp} className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <a
+              href="https://twitter.com/takamasa045"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-emerald-950/30 border border-emerald-900/30 hover:border-emerald-500/50 rounded-sm p-6 transition-all duration-300"
+            >
+              <p className="text-emerald-400 font-mono text-xs tracking-widest mb-2">X (Twitter)</p>
+              <p className="text-stone-200 text-lg group-hover:text-white transition-colors">@takamasa045</p>
+              <p className="text-stone-600 text-xs mt-2">DMでご連絡ください</p>
+            </a>
 
-              <motion.div variants={fadeUp}>
-                <h4 className="text-emerald-400 font-mono text-sm tracking-widest mb-6 border-l-2 border-emerald-500/50 pl-3">LOCATION</h4>
-                <p className="text-stone-200 text-xl font-serif">長野県北安曇郡</p>
-                <p className="text-sm text-stone-400 mt-2 flex items-center gap-2">
-                  <span className="inline-block w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                  松本市で生成AIイベント開催中
-                </p>
-              </motion.div>
+            <a
+              href="https://note.com/azumimusuhi"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group bg-stone-900/30 border border-stone-800/50 hover:border-emerald-500/50 rounded-sm p-6 transition-all duration-300"
+            >
+              <p className="text-stone-400 font-mono text-xs tracking-widest mb-2">note</p>
+              <p className="text-stone-200 text-lg group-hover:text-white transition-colors">azumimusuhi</p>
+              <p className="text-stone-600 text-xs mt-2">記事・マガジン</p>
+            </a>
+
+            <div className="bg-stone-900/20 border border-stone-800/30 rounded-sm p-6">
+              <p className="text-stone-500 font-mono text-xs tracking-widest mb-2">LOCATION</p>
+              <p className="text-stone-300 text-lg">長野県北安曇郡</p>
+              <p className="text-stone-600 text-xs mt-2 flex items-center justify-center gap-2">
+                <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
+                松本市で活動中
+              </p>
             </div>
+          </motion.div>
 
-            {/* Right Col - Work Request */}
-            <div className="space-y-8">
-              <motion.div variants={fadeUp}>
-                <h4 className="text-emerald-400 font-mono text-sm tracking-widest mb-6 border-l-2 border-emerald-500/50 pl-3">WORK REQUEST</h4>
-                <p className="text-stone-300 leading-relaxed mb-6 text-sm font-light">
-                  生成AIを活用したクリエイティブ制作、開発プロジェクト、<br className="hidden lg:block"/>イベント登壇・ワークショップなど、お気軽にご相談ください。
-                </p>
-                <ul className="space-y-3 text-stone-200 mb-8 text-sm font-light">
-                   <li className="flex items-start gap-2"><span className="text-emerald-500 mt-1">❖</span> 生成AI（画像・動画・音声）を使った制作</li>
-                   <li className="flex items-start gap-2"><span className="text-emerald-500 mt-1">❖</span> Web開発・アプリケーション開発</li>
-                   <li className="flex items-start gap-2"><span className="text-emerald-500 mt-1">❖</span> 生成AIに関する講演・ワークショップ</li>
-                   <li className="flex items-start gap-2"><span className="text-emerald-500 mt-1">❖</span> 技術コンサルティング</li>
-                </ul>
+          {/* CTA to About Page */}
+          <motion.div variants={fadeUp} className="bg-emerald-950/20 border border-emerald-900/30 rounded-sm p-8 mb-12">
+            <p className="text-stone-400 font-light mb-6">
+              私の考え方やお手伝いできることの詳細については
+            </p>
+            <button
+              onClick={handleShowAbout}
+              className="inline-block px-8 py-4 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-emerald-400 hover:text-white transition-all duration-300 rounded-sm font-mono text-sm"
+            >
+              About / イトパンについて &rarr;
+            </button>
+          </motion.div>
 
-                <div className="flex flex-col gap-4">
-                  <a 
-                    href="https://twitter.com/messages/compose?recipient_id=takamasa045" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-stone-200 py-4 transition-all duration-300 rounded-sm hover:tracking-widest"
-                  >
-                    X (Twitter) でDMを送る
-                  </a>
-                  
-                  <a 
-                    href="https://docs.google.com/forms/" 
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block w-full text-center bg-stone-800/40 hover:bg-stone-700/60 border border-stone-600/50 text-stone-200 py-4 transition-all duration-300 rounded-sm hover:tracking-widest"
-                  >
-                    Googleフォームでお問い合わせ
-                  </a>
-                </div>
-                
-                <p className="text-[10px] text-stone-600 mt-3 text-center">
-                  法人向けコンサルティングについては、X (Twitter) のDMよりお問い合わせください
-                </p>
-              </motion.div>
-            </div>
-          </div>
-
-          {/* Footer in Contact Section */}
-          <motion.div variants={fadeUp} className="mt-20 text-center pt-8 border-t border-emerald-900/30">
-             <p className="text-xs text-stone-700">
-              © 2024 Takamasa Ito. All rights reserved.
+          {/* Footer */}
+          <motion.div variants={fadeUp} className="text-center pt-8 border-t border-emerald-900/20">
+            <p className="text-xs text-stone-700">
+              &copy; 2024 Takamasa Ito. All rights reserved.
             </p>
           </motion.div>
 
