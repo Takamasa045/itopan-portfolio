@@ -72,8 +72,6 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
             <span className="text-sm">長野県北安曇郡</span>
           </div>
-          <span className="text-stone-700">|</span>
-          <a href="https://twitter.com/takamasa045" target="_blank" rel="noopener noreferrer" className="text-sm hover:text-emerald-400 transition-colors">@takamasa045</a>
         </motion.div>
       </section>
 
@@ -248,22 +246,13 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
                 </p>
                 <div className="space-y-4">
                   <a
-                    href="https://twitter.com/takamasa045"
+                    href="https://forms.gle/BBfLfsDWmWbPiTLb8"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-stone-200 transition-all duration-300 rounded-sm group"
                   >
-                    <span className="text-emerald-400 group-hover:text-white transition-colors">X (Twitter)</span>
-                    <span className="text-stone-500 text-sm">@takamasa045</span>
-                  </a>
-                  <a
-                    href="https://note.com/azumimusuhi"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-stone-800/40 hover:bg-stone-700/60 border border-stone-600/50 text-stone-200 transition-all duration-300 rounded-sm group"
-                  >
-                    <span className="text-stone-300 group-hover:text-white transition-colors">note</span>
-                    <span className="text-stone-500 text-sm">azumimusuhi</span>
+                    <span className="text-emerald-400 group-hover:text-white transition-colors">お問い合わせフォーム</span>
+                    <span className="text-stone-500 text-sm">&rarr;</span>
                   </a>
                 </div>
               </div>
@@ -282,7 +271,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             ← BACK TO HOME
           </button>
           <p className="text-stone-700 text-xs mt-8">
-            &copy; 2024 Takamasa Ito / ITOPAN
+            &copy; 2025 Takamasa Ito / ITOPAN
           </p>
         </motion.div>
       </section>
