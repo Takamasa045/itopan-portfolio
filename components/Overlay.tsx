@@ -316,24 +316,24 @@ export const Overlay: React.FC = () => {
           className="flex flex-row-reverse md:flex-row justify-between w-full h-full items-center"
         >
           {/* Vertical Japanese Text */}
-          <div className="h-3/4 flex flex-row-reverse gap-8 select-none">
-            <motion.h1 variants={fadeUp} className="text-5xl md:text-8xl font-bold vertical-text border-l border-white/10 pl-4 text-stone-100">
+          <div className="h-[50vh] md:h-3/4 flex flex-row-reverse gap-4 md:gap-8 select-none">
+            <motion.h1 variants={fadeUp} className="text-4xl md:text-8xl font-bold vertical-text border-l border-white/10 pl-2 md:pl-4 text-stone-100">
               伊藤貴將
             </motion.h1>
-            <motion.h2 variants={fadeUp} className="text-2xl md:text-3xl text-stone-400 vertical-text mt-20">
+            <motion.h2 variants={fadeUp} className="text-xl md:text-3xl text-stone-400 vertical-text mt-10 md:mt-20">
               イトパン
             </motion.h2>
-            <motion.div variants={fadeUp} className="text-sm md:text-base text-emerald-500/60 vertical-text mt-40 font-light tracking-widest">
+            <motion.div variants={fadeUp} className="text-xs md:text-base text-emerald-500/60 vertical-text mt-20 md:mt-40 font-light tracking-widest hidden sm:block">
               開発ト創造ノ間
             </motion.div>
           </div>
 
           {/* English/Modern Text */}
-          <div className="absolute bottom-20 left-8 md:left-20">
-            <motion.p variants={fadeUp} className="text-xs md:text-sm font-mono tracking-widest text-emerald-400 mb-2">
+          <div className="absolute bottom-8 md:bottom-20 left-4 md:left-20 right-4 md:right-auto">
+            <motion.p variants={fadeUp} className="text-[10px] md:text-sm font-mono tracking-widest text-emerald-400 mb-1 md:mb-2">
               // DEVELOPER & CREATOR
             </motion.p>
-            <motion.div variants={fadeUp} className="text-lg md:text-xl font-light max-w-md leading-relaxed text-stone-300">
+            <motion.div variants={fadeUp} className="text-sm md:text-xl font-light max-w-md leading-relaxed text-stone-300">
               Exploring the boundaries between<br />
               Nature, Spirit, and Generative AI.
             </motion.div>

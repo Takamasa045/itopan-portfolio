@@ -32,7 +32,7 @@ export const Experience: React.FC = () => {
       <fog attach="fog" args={['#020403', 5, 20]} />
 
       {/* Pages for content sections */}
-      <ScrollControls pages={6} damping={0.3}>
+      <ScrollControls pages={6} damping={0.3} touch={1}>
         {/* 3D Content Layer - Moves with Scroll */}
         <MountainWorld />
         
