@@ -4,7 +4,7 @@ import { useScroll } from '@react-three/drei';
 import { AboutDetail } from './AboutDetail';
 
 // Types for Project Data
-type MediaType = 'video' | 'music' | 'web' | 'image';
+type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
 
 // Individual Content Item (Child)
 interface ContentItem {
@@ -15,6 +15,7 @@ interface ContentItem {
   link: string;
   date?: string;
   videoUrl?: string; // Local video URL for embedded playback
+  imageUrl?: string; // Local image URL for thumbnail
   technologies?: string[]; // Technologies used for this specific item
 }
 
@@ -93,19 +94,39 @@ const projects: ProjectCollection[] = [
     id: 'p2',
     title: 'MV Collection',
     category: 'AI Music Video',
-    mainType: 'music',
+    mainType: 'mv',
     description: 'Suno AIで生成した楽曲に、動画生成AIで映像を組み合わせたミュージックビデオコレクション。',
     longDescription: 'Suno AIで生成した楽曲をベースに、Hailuo・Veo・Soraなどの動画生成AIで映像を制作。音と映像の両方をAIで生成し、編集・合成することで完成させたMV作品集です。',
     technologies: ['Suno AI', 'Hailuo', 'Veo', 'Sora', 'Premiere Pro'],
     year: '2024',
     items: [
       {
+        id: 'm000',
+        title: 'MVマルチショットジェネレーター',
+        type: 'music',
+        description: '自作アプリ「MVマルチショットジェネレーター」で実際にMVを制作🎬✨\nマルチカット画像をkamui codeのwan-v2で動画生成、リップシンクはSync、カット割り・編集はすべてRemotion。\nさらにThree.jsで3Dの星柄アニメーションを重ね、新しい領域に踏み込んだ一作🔥🌌',
+        link: 'https://x.com/takamasa045/status/1971568628773658907',
+        date: '2025.09.26',
+        videoUrl: '/videos/mv-multishot-generator.mp4',
+        technologies: ['kamui code', 'wan-v2', 'Sync', 'Remotion', 'Three.js']
+      },
+      {
+        id: 'm00',
+        title: 'ボス猿ハラスメント2',
+        type: 'music',
+        description: '動画編集ソフトを一切使わずにRemotionだけで作り上げたMV。\n画像はMidjourneyで生成→i2vで動かし、音楽はSunoで友人のビート音源から曲化。\nリリックは現場の愚痴をGPTでテキスト化→再構成。\n編集はRemotion × Claude Code × codexでタイムライン制御、同期、演出を完結。\n"理不尽さ"を愚痴からリリックに変えて、音楽と映像で叩き返した一作🦫',
+        link: 'https://x.com/takamasa045/status/1960300333240062196',
+        date: '2025.08',
+        videoUrl: '/videos/boss-monkey-harassment2.mp4',
+        technologies: ['Midjourney', 'i2v', 'Suno', 'Remotion', 'Claude Code', 'codex']
+      },
+      {
         id: 'm0',
         title: '松本生成AIハッカソン MV',
         type: 'music',
         description: 'ClaudeCode sonnet 4.5 × Remotion × Three.js で3DアニメーションMVを試作🎥✨\nsonnet 4.5、動作がサクサクでめちゃ快適だし頭も良い。探り探りでも1時間足らずで形にできちゃった🎬\n題材は、先日松本で大盛況だった生成AIハッカソンのイベントリリック😆🎤\n長野から世界へ🌏',
         link: 'https://x.com/takamasa045/status/1972791745080623556',
-        date: '2025.09',
+        date: '2025.09.30',
         videoUrl: '/videos/matsumoto-genai-mv.mp4',
         technologies: ['Claude Code', 'Remotion', 'Three.js', 'Suno AI']
       },
@@ -128,22 +149,6 @@ const projects: ProjectCollection[] = [
         date: '2024.11',
         videoUrl: '/videos/playlist-cover-mv.mp4',
         technologies: ['Midjourney', 'NanobananaPro', 'Hailuo', 'Sync']
-      },
-      {
-        id: 'm1',
-        title: 'Izumo / 出雲',
-        type: 'music',
-        description: '528Hz。深い森の中で神楽鈴が鳴り響くような、浄化のサウンドスケープ。',
-        link: 'https://note.com/azumimusuhi',
-        date: '2024.05'
-      },
-      {
-        id: 'm2',
-        title: 'Nagare / 流れ',
-        type: 'music',
-        description: '清流のせせらぎとピアノ生成AIのセッション。作業用BGM。',
-        link: 'https://note.com/azumimusuhi',
-        date: '2024.03'
       }
     ]
   },
@@ -151,12 +156,32 @@ const projects: ProjectCollection[] = [
     id: 'p3',
     title: 'Musuhi Labs',
     category: 'Web & SaaS Prototypes',
-    mainType: 'web',
+    mainType: 'saas',
     description: 'アニミズム思想をUI/UXに落とし込んだ、実験的アプリケーション開発の記録。',
-    longDescription: '「道具には魂が宿る」というアニミズムの思想をシステムデザインに落とし込んだ実験室。LLMエージェントから業務効率化ツールまで、実際に動作するプロトタイプを公開しています。',
+    longDescription: '「道具には魂が宿る」というアニミズムの思想をベースに、SaaS・MCPサーバー・Webアプリ・Webサイトなどのプロトタイプを次々と生み出す実験室。LLMエージェントから業務効率化ツール、データベース連携型のニッチなWebサービスまで、"実際に動かしながら考える"プロダクトを公開しています。',
     technologies: ['React', 'LangChain', 'Gemini Pro', 'Three.js'],
     year: '2023-2024',
     items: [
+      {
+        id: 'w00',
+        title: 'Remotion Studio Monorepo',
+        type: 'web',
+        description: 'Remotionで映像制作を加速させるモノレポを公開。\nテンプレをコピーするだけで新規プロジェクトを即スタート。Three.jsベースの3Dテンプレも同梱し、3DアニメーションMVや演出を即構築可能。\nアニメーション・デザイン・音声処理などを共通パッケージ化し、複数案件でも一貫した品質を担保。pnpmワークスペース&Gitサブモジュールで環境もすっきり。',
+        link: 'https://x.com/takamasa045/status/1973148052916699287',
+        date: '2025.10.01',
+        videoUrl: '/videos/remotion-studio-monorepo.mp4',
+        technologies: ['Remotion', 'Three.js', 'pnpm', 'Monorepo', 'CI/CD']
+      },
+      {
+        id: 'w0',
+        title: 'MV Multi-Shot Generator',
+        type: 'web',
+        description: 'MV制作でマルチカットに困った経験を解決するアプリ。\n写真アップロード＆アスペクト比選択 → リリック分析で楽曲の歌詞から最適なマルチカットを自動提案 → AIプロンプトを確認・編集して調整可能。\nnanobananapro連携でMV用マルチカット画像を高速生成。制作のスピードもクオリティも一気に上がります。',
+        link: 'https://x.com/takamasa045/status/1971144667258589337',
+        date: '2025.09.25',
+        imageUrl: '/images/mv-multishot-generator-app.png',
+        technologies: ['You Ware', 'nanobananapro', 'AI駆動分析', 'リリック解析']
+      },
       {
         id: 'w1',
         title: 'Musuhi Agent v1',
@@ -182,34 +207,33 @@ const projects: ProjectCollection[] = [
   },
   {
     id: 'p4',
-    title: 'Kami-no-Mori',
-    category: 'GenAI Art Series',
-    mainType: 'image',
-    description: 'Midjourney V6で描く、日本神話とサイバーパンクが交差する架空の風景画集。',
-    longDescription: '古事記に登場する「神々の住まう森」が、もし遠未来のネオン街と融合していたら？という思考実験から生まれたビジュアルシリーズ。Midjourneyのパラメータ調整（--s, --w）を駆使しています。',
-    technologies: ['Midjourney V6', 'Photoshop', 'Magnific AI'],
-    year: '2024',
+    title: 'Events & Community',
+    category: 'イベント・コミュニティ',
+    mainType: 'event',
+    description: '生成AIハッカソンやワークショップなど、地域で開催するイベント活動の記録。',
+    longDescription: '「つかう」から「つくる」へ。生成AIを活用したプロトタイピングを、松本を中心に地域で体験できるイベントを企画・運営しています。プログラミング不要で、誰でも"創る側"になれる場づくりを目指しています。',
+    technologies: ['Manus', 'Claude', 'Remotion', 'ハッカソン'],
+    year: '2025',
     items: [
       {
-        id: 'i1',
-        title: 'Neon Torii / ネオン鳥居',
-        type: 'image',
-        description: '雨のサイバーパンク都市に佇む、巨大な朱色の鳥居。',
-        link: '#'
+        id: 'e1',
+        title: 'まつもと生成AIハッカソン with Manus',
+        type: 'event',
+        description: '「またやりたい」第1回の参加者ほぼ全員がそう答えた、まつもと生成AIハッカソン。\nAIを"使う"から"つくる"へ。たった3時間で、アイデアがプロトタイプになる。\nコードが書けなくてもOK。Manus Proを使えば、誰でも"創る側"に。\n仲間と笑いながら、試しながら、ひらめきが形になっていく体験を。\n\n🗓11/30(日) 13:00–16:00\n📍SWEET WORK（松本）\n🎁 Manus Pro当日使い放題＋2,000クレジット',
+        link: 'https://x.com/takamasa045/status/1986742405391942026',
+        date: '2025.11.07',
+        imageUrl: '/images/matsumoto-ai-hackathon-manus.png',
+        technologies: ['Manus Pro', 'ハッカソン', '松本', 'SWEET WORK']
       },
       {
-        id: 'i2',
-        title: 'Cyber Miko / 電脳巫女',
-        type: 'image',
-        description: '回路基板の文様が入った白衣を纏う巫女のポートレート。',
-        link: '#'
-      },
-      {
-        id: 'i3',
-        title: 'Sacred Beast / 神獣',
-        type: 'image',
-        description: '機械部品と有機的な毛並みが融合した狛犬のコンセプトアート。',
-        link: '#'
+        id: 'e2',
+        title: 'まつもと生成AIハッカソン Plus',
+        type: 'event',
+        description: '🚀 まつもと生成AIハッカソン Plus 開催します！\n11/9(日) 11:00〜 @サザンガク（松本）\n\nCodex / Claude Code / MCPで、アイデアを"その日"に形に！\n\n1日でMVPをつくる実践型イベント⚡\n\n参加無料・先着12名👇',
+        link: 'https://x.com/takamasa045/status/1985174469053428146',
+        date: '2025.11.03',
+        imageUrl: '/images/matsumoto-ai-hackathon-plus.jpeg',
+        technologies: ['Codex', 'Claude Code', 'MCP', 'ハッカソン', '松本', 'サザンガク']
       }
     ]
   }
@@ -394,58 +418,24 @@ export const Overlay: React.FC = () => {
         </AnimatePresence>
       </Section>
 
-      {/* ARTICLES SECTION */}
-      <Section className="justify-start pt-20">
+      {/* DIVIDER SECTION */}
+      <section className="w-full py-20 px-8 md:px-20">
         <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={staggerContainer}
-          className="w-full max-w-4xl mx-auto"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 1, ease: "easeOut" }}
+          className="max-w-4xl mx-auto flex items-center justify-center gap-6"
         >
-          <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl font-serif mb-6 text-stone-200 border-b border-emerald-500/30 pb-4 inline-block">
-            Articles <span className="text-lg md:text-xl ml-4 opacity-70">noteマガジン</span>
-          </motion.h3>
-          
-          <motion.p variants={fadeUp} className="text-stone-400 mb-12 font-light">
-            生成AIとアニミズム、技術と思想、創造と実践。<br className="hidden md:block" />様々な視点から綴る5つのマガジン。
-          </motion.p>
-
-          <div className="space-y-6">
-            <MagazineItem 
-              title="技術修行の記録帖" 
-              desc="生成AI × 開発的アプローチの世界に飛び込み、ワークフロー構築や自動化の実践を通して得た気づきや学びを記録。"
-            />
-            <MagazineItem 
-              title="むすひ言挙げ帖" 
-              desc="X（旧Twitter）での投稿やスレッドをもとに、その背景や補足、関連する思想や資料などを深掘り。"
-            />
-            <MagazineItem 
-              title="むすひ絵巻" 
-              desc="日本の美意識を、生成AIで編むビジュアル記録帖。神話や自然霊といったスピリチュアルな世界観を表現。"
-            />
-            <MagazineItem 
-              title="むすひ創造ノ術" 
-              desc="プロンプト技法と制作の裏側を詰め込んだ実践マガジン。MidjourneyやSuno、Kamuiなどの活用術を解説。"
-            />
-            <MagazineItem 
-              title="むすひの杜" 
-              desc="アニミズムと生成AI、そのはざまで芽吹く思索たち。日本古来の感性と新たな創造の力を見つめ直す。"
-            />
+          <div className="flex-1 h-[1px] bg-gradient-to-r from-transparent via-emerald-900/50 to-emerald-500/30"></div>
+          <div className="flex items-center gap-3">
+            <span className="w-1.5 h-1.5 bg-emerald-500/40 rounded-full"></span>
+            <span className="w-2 h-2 bg-emerald-500/60 rounded-full animate-pulse"></span>
+            <span className="w-1.5 h-1.5 bg-emerald-500/40 rounded-full"></span>
           </div>
-
-          <motion.div variants={fadeUp} className="mt-12 text-center md:text-left">
-            <a 
-              href="https://note.com/azumimusuhi" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-block px-8 py-3 border border-emerald-500/50 text-emerald-400 hover:bg-emerald-900/30 hover:text-emerald-200 transition-all duration-300 rounded-sm font-mono text-sm"
-            >
-              noteで全ての記事を見る &rarr;
-            </a>
-          </motion.div>
+          <div className="flex-1 h-[1px] bg-gradient-to-l from-transparent via-emerald-900/50 to-emerald-500/30"></div>
         </motion.div>
-      </Section>
+      </section>
 
       {/* CONTACT SECTION - Simplified */}
       <Section className="items-center justify-center text-center relative z-10 pb-20">
@@ -529,9 +519,38 @@ export const Overlay: React.FC = () => {
 };
 
 // --- COMPONENT: LIST CARD (Collection Entry) ---
+interface MediaItem {
+  type: 'video' | 'image';
+  url: string;
+}
+
 const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }> = ({ data, onClick }) => {
-  // Get the latest item's video URL if available
-  const latestVideoUrl = data.items[0]?.videoUrl;
+  // Get all media (videos and images) from items, sorted by date (newest first)
+  const mediaItems: MediaItem[] = [...data.items]
+    .filter(item => item.videoUrl || item.imageUrl)
+    .sort((a, b) => {
+      const dateA = a.date || '0000.00';
+      const dateB = b.date || '0000.00';
+      return dateB.localeCompare(dateA);
+    })
+    .map(item => ({
+      type: item.videoUrl ? 'video' : 'image' as 'video' | 'image',
+      url: (item.videoUrl || item.imageUrl)!
+    }));
+  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
+
+  // Cycle through media every 8 seconds
+  useEffect(() => {
+    if (mediaItems.length <= 1) return;
+
+    const interval = setInterval(() => {
+      setCurrentMediaIndex(prev => (prev + 1) % mediaItems.length);
+    }, 8000);
+
+    return () => clearInterval(interval);
+  }, [mediaItems.length]);
+
+  const currentMedia = mediaItems[currentMediaIndex];
 
   return (
     <motion.div
@@ -545,6 +564,19 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
           <div className="bg-black/40 backdrop-blur-sm px-3 py-1 border border-white/10 text-emerald-400 text-xs font-mono tracking-wider uppercase rounded-sm">
             {data.mainType}
           </div>
+          {/* Media indicator dots */}
+          {mediaItems.length > 1 && (
+            <div className="flex gap-1.5">
+              {mediaItems.map((_, i) => (
+                <div
+                  key={i}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                    i === currentMediaIndex ? 'bg-emerald-400' : 'bg-white/20'
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="transform group-hover:translate-y-[-8px] transition-transform duration-500">
@@ -562,17 +594,27 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
         </div>
       </div>
 
-      {/* Media Preview Background - Show video if available */}
-      {latestVideoUrl ? (
+      {/* Media Preview Background - Show video or image if available */}
+      {currentMedia ? (
         <div className="absolute inset-0 z-0">
-          <video
-            src={latestVideoUrl}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
-          />
+          {currentMedia.type === 'video' ? (
+            <video
+              key={currentMedia.url}
+              src={currentMedia.url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+            />
+          ) : (
+            <img
+              key={currentMedia.url}
+              src={currentMedia.url}
+              alt=""
+              className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+            />
+          )}
         </div>
       ) : (
         <MediaBackground type={data.mainType} />
@@ -641,9 +683,16 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-             {project.items.map((item) => (
-               <ContentItemCard key={item.id} item={item} />
-             ))}
+             {[...project.items]
+               .sort((a, b) => {
+                 // Sort by date descending (newest first)
+                 const dateA = a.date || '0000.00';
+                 const dateB = b.date || '0000.00';
+                 return dateB.localeCompare(dateA);
+               })
+               .map((item) => (
+                 <ContentItemCard key={item.id} item={item} />
+               ))}
           </div>
        </motion.div>
     </motion.div>
@@ -658,7 +707,7 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
       className="bg-stone-950/40 border border-emerald-900/30 hover:border-emerald-500/50 rounded-sm overflow-hidden group transition-all duration-300 flex flex-col"
     >
       {/* Visual Thumbnail Area */}
-      <div className={`${item.videoUrl ? 'aspect-video' : 'h-48'} w-full relative overflow-hidden bg-black`}>
+      <div className={`${item.videoUrl || item.imageUrl ? 'aspect-video' : 'h-48'} w-full relative overflow-hidden bg-black`}>
         {item.videoUrl ? (
           <video
             src={item.videoUrl}
@@ -667,6 +716,12 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
             playsInline
             className="w-full h-full object-cover"
             poster=""
+          />
+        ) : item.imageUrl ? (
+          <img
+            src={item.imageUrl}
+            alt={item.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <MediaBackground type={item.type} />
@@ -739,6 +794,19 @@ const MediaBackground: React.FC<{ type: MediaType }> = ({ type }) => {
              ))}
           </div>
         )}
+
+        {type === 'mv' && (
+          <div className="w-full h-full bg-gradient-to-br from-stone-900 via-emerald-950 to-stone-900 flex items-end justify-center gap-1 pb-8 relative">
+             {[...Array(12)].map((_, i) => (
+               <div key={i} className="w-1.5 bg-emerald-500/40 animate-[pulse_1.5s_ease-in-out_infinite]" style={{ height: `${Math.random() * 60 + 20}%`, animationDelay: `${i * 0.1}s` }}></div>
+             ))}
+             <div className="absolute inset-0 flex items-center justify-center">
+               <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center bg-black/30 backdrop-blur-sm">
+                 <div className="ml-0.5 w-0 h-0 border-t-[5px] border-t-transparent border-l-[8px] border-l-emerald-400/80 border-b-[5px] border-b-transparent"></div>
+               </div>
+             </div>
+          </div>
+        )}
         
         {type === 'web' && (
           <div className="w-full h-full bg-stone-900 flex items-center justify-center">
@@ -759,18 +827,39 @@ const MediaBackground: React.FC<{ type: MediaType }> = ({ type }) => {
              <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20"></div>
           </div>
         )}
+
+        {type === 'saas' && (
+          <div className="w-full h-full bg-gradient-to-br from-stone-900 via-emerald-950/50 to-stone-900 flex items-center justify-center">
+             <div className="w-3/4 h-3/4 border border-emerald-500/20 bg-black/30 rounded-sm relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-4 bg-emerald-900/20 flex gap-1.5 items-center px-3">
+                   <div className="w-2 h-2 bg-emerald-500/40 rounded-full"></div>
+                   <div className="w-2 h-2 bg-emerald-400/30 rounded-full"></div>
+                   <div className="w-2 h-2 bg-emerald-300/20 rounded-full"></div>
+                </div>
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-emerald-500/20 font-mono text-3xl tracking-widest">
+                   SaaS
+                </div>
+             </div>
+          </div>
+        )}
+
+        {type === 'event' && (
+          <div className="w-full h-full bg-gradient-to-br from-emerald-950 via-stone-900 to-emerald-950 relative overflow-hidden">
+             <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 border-2 border-emerald-500/30 rounded-full flex items-center justify-center animate-pulse">
+                   <div className="w-10 h-10 border border-emerald-400/40 rounded-full flex items-center justify-center">
+                      <div className="w-4 h-4 bg-emerald-500/50 rounded-full"></div>
+                   </div>
+                </div>
+             </div>
+             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+                {[...Array(5)].map((_, i) => (
+                   <div key={i} className="w-1 h-1 bg-emerald-500/40 rounded-full"></div>
+                ))}
+             </div>
+          </div>
+        )}
     </div>
   );
 };
 
-const MagazineItem: React.FC<{ title: string; desc: string }> = ({ title, desc }) => {
-  return (
-    <motion.div 
-      variants={fadeUp}
-      className="border-l-2 border-stone-800 hover:border-emerald-500 pl-6 py-2 transition-colors duration-300 group cursor-pointer"
-    >
-      <h4 className="text-xl text-stone-200 font-serif mb-2 group-hover:text-emerald-300 transition-colors">{title}</h4>
-      <p className="text-stone-500 text-sm leading-relaxed group-hover:text-stone-400 transition-colors">{desc}</p>
-    </motion.div>
-  );
-};
