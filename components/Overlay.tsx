@@ -515,28 +515,28 @@ export const Overlay: React.FC = () => {
             </div>
 
             {/* Social Links */}
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-5">
               <a
                 href="https://x.com/takamasa045"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-6 py-3 bg-stone-900/80 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
+                className="group flex items-center gap-4 px-8 py-4 bg-stone-900/80 border-2 border-stone-600 hover:border-emerald-500 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
               >
-                <svg className="w-5 h-5 text-stone-300 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-7 h-7 text-stone-200 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                 </svg>
-                <span className="text-sm text-stone-300 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X / Twitter</span>
+                <span className="text-base text-stone-200 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X / Twitter</span>
               </a>
               <a
                 href="https://note.com/azumimusuhi"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex items-center gap-3 px-6 py-3 bg-stone-900/80 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
+                className="group flex items-center gap-4 px-8 py-4 bg-stone-900/80 border-2 border-stone-600 hover:border-emerald-500 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
               >
-                <svg className="w-5 h-5 text-stone-300 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <svg className="w-7 h-7 text-stone-200 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
                 </svg>
-                <span className="text-sm text-stone-300 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
+                <span className="text-base text-stone-200 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
               </a>
             </div>
 
