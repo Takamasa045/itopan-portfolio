@@ -507,13 +507,39 @@ export const Overlay: React.FC = () => {
             </div>
           </motion.div>
 
-          {/* Location & About Link */}
-          <motion.div variants={fadeUp} className="flex flex-col md:flex-row items-center justify-center gap-8 mb-12">
+          {/* Location & Social Links */}
+          <motion.div variants={fadeUp} className="flex flex-col items-center gap-6 mb-12">
             <div className="flex items-center gap-3 text-stone-500">
               <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
               <span className="text-sm">長野県北安曇郡・松本市を拠点に活動中</span>
             </div>
-            <span className="hidden md:block text-stone-700">|</span>
+
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              <a
+                href="https://x.com/takamasa045"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 px-4 py-2.5 bg-stone-950/60 border border-stone-800 hover:border-emerald-500/50 rounded-sm transition-all duration-300"
+              >
+                <svg className="w-4 h-4 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                </svg>
+                <span className="text-xs text-stone-400 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X</span>
+              </a>
+              <a
+                href="https://note.com/azumimusuhi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center gap-2 px-4 py-2.5 bg-stone-950/60 border border-stone-800 hover:border-emerald-500/50 rounded-sm transition-all duration-300"
+              >
+                <svg className="w-4 h-4 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M15.602 4.075c-2.27 0-4.946 1.345-5.19 4.779-.024.343.263.621.607.621h1.6c.294 0 .543-.209.586-.5.194-1.298 1.06-2.225 2.397-2.225 1.476 0 2.392.927 2.392 2.392 0 1.355-1.026 2.116-2.336 2.945-1.476.927-3.342 1.965-3.342 4.724v.564c0 .345.28.625.625.625h1.75a.625.625 0 00.625-.625v-.398c0-1.686 1.136-2.392 2.556-3.263 1.476-.906 3.122-1.91 3.122-4.352 0-3.122-2.336-5.287-5.392-5.287zM14.25 18.5a1.75 1.75 0 100 3.5 1.75 1.75 0 000-3.5z"/>
+                </svg>
+                <span className="text-xs text-stone-400 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
+              </a>
+            </div>
+
             <button
               onClick={handleShowAbout}
               className="text-emerald-500 hover:text-emerald-300 text-sm font-mono tracking-wide transition-colors"
