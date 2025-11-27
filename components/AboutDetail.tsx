@@ -74,28 +74,28 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
           </div>
 
           {/* Social Links */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-4">
             <a
               href="https://x.com/takamasa045"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-4 py-2.5 bg-stone-950/60 border border-stone-800 hover:border-emerald-500/50 rounded-sm transition-all duration-300"
+              className="group flex items-center gap-3 px-6 py-3 bg-stone-900/80 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
             >
-              <svg className="w-4 h-4 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+              <svg className="w-5 h-5 text-stone-300 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
               </svg>
-              <span className="text-xs text-stone-400 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X</span>
+              <span className="text-sm text-stone-300 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X / Twitter</span>
             </a>
             <a
               href="https://note.com/azumimusuhi"
               target="_blank"
               rel="noopener noreferrer"
-              className="group flex items-center gap-2 px-4 py-2.5 bg-stone-950/60 border border-stone-800 hover:border-emerald-500/50 rounded-sm transition-all duration-300"
+              className="group flex items-center gap-3 px-6 py-3 bg-stone-900/80 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
             >
-              <svg className="w-4 h-4 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M15.602 4.075c-2.27 0-4.946 1.345-5.19 4.779-.024.343.263.621.607.621h1.6c.294 0 .543-.209.586-.5.194-1.298 1.06-2.225 2.397-2.225 1.476 0 2.392.927 2.392 2.392 0 1.355-1.026 2.116-2.336 2.945-1.476.927-3.342 1.965-3.342 4.724v.564c0 .345.28.625.625.625h1.75a.625.625 0 00.625-.625v-.398c0-1.686 1.136-2.392 2.556-3.263 1.476-.906 3.122-1.91 3.122-4.352 0-3.122-2.336-5.287-5.392-5.287zM14.25 18.5a1.75 1.75 0 100 3.5 1.75 1.75 0 000-3.5z"/>
+              <svg className="w-5 h-5 text-stone-300 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
               </svg>
-              <span className="text-xs text-stone-400 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
+              <span className="text-sm text-stone-300 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
             </a>
           </div>
         </motion.div>
@@ -267,7 +267,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               </div>
 
               <div className="flex flex-col justify-center">
-                <p className="text-stone-300 font-light mb-8 text-center lg:text-left">
+                <p className="text-stone-300 font-light mb-6 text-center lg:text-left">
                   お気軽にご連絡ください
                 </p>
                 <div className="space-y-4">
@@ -280,6 +280,32 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
                     <span className="text-emerald-400 group-hover:text-white transition-colors">お問い合わせフォーム</span>
                     <span className="text-stone-500 text-sm">&rarr;</span>
                   </a>
+
+                  {/* Social Links */}
+                  <div className="flex gap-3 pt-2">
+                    <a
+                      href="https://x.com/takamasa045"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-stone-900/60 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
+                    >
+                      <svg className="w-5 h-5 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                      </svg>
+                      <span className="text-sm text-stone-400 group-hover:text-emerald-400 font-mono transition-colors">X</span>
+                    </a>
+                    <a
+                      href="https://note.com/azumimusuhi"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-stone-900/60 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
+                    >
+                      <svg className="w-5 h-5 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                      </svg>
+                      <span className="text-sm text-stone-400 group-hover:text-emerald-400 font-mono transition-colors">note</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
