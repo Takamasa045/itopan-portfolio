@@ -64,30 +64,6 @@ const projects: ProjectCollection[] = [
         videoUrl: `${import.meta.env.BASE_URL}videos/shiba-doggy-dance.mp4`,
         technologies: ['Midjourney', 'nanobananapro', 'Hailuo 2.3', 'Suno']
       },
-      {
-        id: 'v1',
-        title: 'Spring Haze / 春霞',
-        type: 'video',
-        description: '桜色の粒子が霧のように舞う、春の訪れを表現したアンビエントループ。',
-        link: 'https://twitter.com/takamasa045',
-        date: '2024.04'
-      },
-      {
-        id: 'v2',
-        title: 'Frozen Time / 氷結',
-        type: 'video',
-        description: '時間が止まったかのような氷の世界。クリスタルの屈折表現の実験。',
-        link: 'https://twitter.com/takamasa045',
-        date: '2024.01'
-      },
-      {
-        id: 'v3',
-        title: 'Urban Flow',
-        type: 'video',
-        description: '東京の夜景を流体として再解釈した、サイバーパンク・テイストの短編。',
-        link: 'https://twitter.com/takamasa045',
-        date: '2023.12'
-      }
     ]
   },
   {
