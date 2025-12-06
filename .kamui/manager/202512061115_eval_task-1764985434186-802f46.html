@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>評価レポート - カレー屋みろく 369 CURRY（ブラッシュアップ版）</title>
+    <style>
+      body {
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        margin: 24px;
+        background: #e9f0f2;
+        color: #1f2a30;
+        line-height: 1.6;
+      }
+      .eval-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+        padding: 32px;
+      }
+      h1 {
+        font-size: 26px;
+        margin: 0 0 8px;
+      }
+      .intro {
+        font-size: 14px;
+        color: #2f3b42;
+        margin-bottom: 16px;
+      }
+      .legend {
+        font-size: 12px;
+        color: #3c4a52;
+        margin-bottom: 20px;
+      }
+      .legend span {
+        display: inline-block;
+        margin-right: 12px;
+      }
+      .totals {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .total-card {
+        border: 1px solid #c4d3d7;
+        padding: 12px 14px;
+        background: #f2f6f7;
+      }
+      .total-card strong {
+        font-size: 15px;
+      }
+      .score {
+        font-size: 18px;
+        font-weight: 700;
+        margin-right: 8px;
+      }
+      .medal {
+        font-size: 18px;
+        margin-right: 6px;
+      }
+      .agent-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .agent-card {
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        background: #ffffff;
+      }
+      .agent-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .agent-title {
+        font-weight: 700;
+        font-size: 15px;
+      }
+      .chart-row {
+        display: grid;
+        grid-template-columns: 180px 1fr;
+        gap: 12px;
+        align-items: start;
+        margin-bottom: 12px;
+      }
+      svg.radar {
+        width: 180px;
+        height: 180px;
+        border: 1px solid #d8e6e9;
+        background: #f7fafb;
+      }
+      .metric-list,
+      .reason-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        font-size: 13px;
+        color: #2f3b42;
+      }
+      .metric-list li {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid #e2ecef;
+        padding: 4px 0;
+      }
+      .reason-list li {
+        margin-bottom: 6px;
+      }
+      .tag {
+        display: inline-block;
+        padding: 2px 6px;
+        background: #d8e6e9;
+        border: 1px solid #b8c9cd;
+        font-size: 11px;
+        margin-left: 6px;
+      }
+      .section-title {
+        font-weight: 700;
+        margin: 8px 0 4px;
+      }
+      a {
+        color: #1f5f83;
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+      }
+      .findings {
+        font-size: 13px;
+        color: #2f3b42;
+      }
+      .note {
+        font-size: 12px;
+        color: #3c4a52;
+        margin-top: 8px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="eval-wrapper">
+      <h1>カレー屋みろく 369 CURRY - 要件定義タスク 評価レポート（ブラッシュアップ）</h1>
+      <p class="intro">
+        最新コミットを反映し再評価しました。指標は情報網羅性、UI/導線明瞭さ、来店動機付け、正確性・リスク管理、実現性・運用性、デザイン指針の6軸（各100点、合計600点）。
+      </p>
+      <div class="legend">
+        <span>🏆 540点以上 / 🥇 500-539点 / 🥈 440-499点 / 🥉 380-439点 / ⚪️ 379点以下</span>
+        <span>メダルは平均点（合計÷6）のランクを示します。</span>
+      </div>
+      <div class="totals">
+        <div class="total-card"><span class="medal">🏆</span><span class="score">546 / 600</span><strong>task-1764985422271-d55016</strong> 平均91.0/100</div>
+        <div class="total-card"><span class="medal">🥇</span><span class="score">508 / 600</span><strong>task-1764985425545-25d592</strong> 平均84.7/100</div>
+        <div class="total-card"><span class="medal">🏆</span><span class="score">564 / 600</span><strong>task-1764985428478-ec57cc</strong> 平均94.0/100</div>
+        <div class="total-card"><span class="medal">🥇</span><span class="score">538 / 600</span><strong>task-1764985431381-9721fb</strong> 平均89.7/100</div>
+      </div>
+      <div class="agent-grid">
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1764985422271-d55016 <span class="tag">docs/requirements-369-curry.md</span></div>
+            <div>🏆 546/600</div>
+          </div>
+          <div class="chart-row">
+            <svg class="radar" data-scores="94,92,88,92,90,90"></svg>
+            <ul class="metric-list">
+              <li><span>情報網羅性</span><span>94</span></li>
+              <li><span>UI/導線明瞭さ</span><span>92</span></li>
+              <li><span>来店動機付け</span><span>88</span></li>
+              <li><span>正確性・リスク管理</span><span>92</span></li>
+              <li><span>実現性・運用性</span><span>90</span></li>
+              <li><span>デザイン指針</span><span>90</span></li>
+            </ul>
+          </div>
+          <div class="findings">
+            <div class="section-title">指標の根拠</div>
+            <ul class="reason-list">
+              <li>情報網羅性: KPIや運用フロー、未確定事項の優先度まで整理し、機能/非機能を具体化。</li>
+              <li>UI/導線明瞭さ: SP優先の導線とスティッキーボタン案を提示、営業ステータス表示も明記。</li>
+              <li>来店動機付け: 体験価値とコピー案を追加したが、価格未定のため訴求の実効性は一部保留。</li>
+              <li>正確性・リスク管理: 告知更新/構造化データ/計測を含め、未確定情報を明示してリスク低減。</li>
+              <li>実現性・運用性: 更新担当と頻度を定義し、更新手段の選択肢を示して運用負荷を想定。</li>
+              <li>デザイン指針: 色/タイポ/テクスチャ/ボタンスタイルを数値指定で提示し、写真の撮り方も補足。</li>
+            </ul>
+            <div class="section-title">強み</div>
+            <p>UX・デザイン・運用の三面を具体数値で揃え、実装前チェックリストとして使える粒度に向上。</p>
+            <div class="section-title">改善点</div>
+            <p>価格・住所・支払い手段など必須情報が未確定。コピーと写真の最終選定が完了すれば訴求力がさらに上がる。</p>
+            <div class="section-title">コミット/成果物</div>
+            <p><a href="../../.worktrees/task-1764985422271-d55016/docs/requirements-369-curry.md">requirements-369-curry.md</a> （commit <code>7f057fd</code>）</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1764985425545-25d592 <span class="tag">docs/requirements-369-curry.md</span></div>
+            <div>🥇 508/600</div>
+          </div>
+          <div class="chart-row">
+            <svg class="radar" data-scores="88,86,80,86,84,84"></svg>
+            <ul class="metric-list">
+              <li><span>情報網羅性</span><span>88</span></li>
+              <li><span>UI/導線明瞭さ</span><span>86</span></li>
+              <li><span>来店動機付け</span><span>80</span></li>
+              <li><span>正確性・リスク管理</span><span>86</span></li>
+              <li><span>実現性・運用性</span><span>84</span></li>
+              <li><span>デザイン指針</span><span>84</span></li>
+            </ul>
+          </div>
+          <div class="findings">
+            <div class="section-title">指標の根拠</div>
+            <ul class="reason-list">
+              <li>情報網羅性: 初版から更新なし。メニュー/営業時間/お知らせ欄/スケジュールを記載するもKPIや運用詳細は薄い。</li>
+              <li>UI/導線明瞭さ: 画面構成を列挙し、ヒーローや営業案内の配置意図は明快。</li>
+              <li>来店動機付け: 営業中バッジや限定告知を提案するが、コピー・写真・体験価値の深掘りは未着手。</li>
+              <li>正確性・リスク管理: 価格・住所未確定を明示し、売切れ表示や臨時休業枠に触れる。</li>
+              <li>実現性・運用性: 更新頻度を示すが具体的手段や担当は不明。今回ブラッシュアップは未反映。</li>
+              <li>デザイン指針: 暖色系とタイポの方向性を示すが、具体色・サイズ指定はなし。</li>
+            </ul>
+            <div class="section-title">強み</div>
+            <p>短い要件で全体像を掴める。更新頻度とスケジュールを提示し、実務の進め方を早期に示唆。</p>
+            <div class="section-title">改善点</div>
+            <p>最新ブラッシュアップ未反映。写真/ロゴ/テイクアウト可否など来店判断の核心が欠落。運用手段（CMS/JSON）と担当を具体化すると良い。</p>
+            <div class="section-title">コミット/成果物</div>
+            <p><a href="../../.worktrees/task-1764985425545-25d592/docs/requirements-369-curry.md">requirements-369-curry.md</a> （commit <code>7c40e77</code>）</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1764985428478-ec57cc <span class="tag">docs/369-curry/requirements.md</span></div>
+            <div>🏆 564/600</div>
+          </div>
+          <div class="chart-row">
+            <svg class="radar" data-scores="96,93,92,94,93,96"></svg>
+            <ul class="metric-list">
+              <li><span>情報網羅性</span><span>96</span></li>
+              <li><span>UI/導線明瞭さ</span><span>93</span></li>
+              <li><span>来店動機付け</span><span>92</span></li>
+              <li><span>正確性・リスク管理</span><span>94</span></li>
+              <li><span>実現性・運用性</span><span>93</span></li>
+              <li><span>デザイン指針</span><span>96</span></li>
+            </ul>
+          </div>
+          <div class="findings">
+            <div class="section-title">指標の根拠</div>
+            <ul class="reason-list">
+              <li>情報網羅性: ゴール/KPI、表形式メニュー、FAQ、確認事項の優先度まで詳細。運用や計測も明文化。</li>
+              <li>UI/導線明瞭さ: セクション順と営業中バッジ、お知らせバナーなど導線が具体的。</li>
+              <li>来店動機付け: 複数のキャッチコピー案と説明文、写真要件で訴求設計を補強。</li>
+              <li>正確性・リスク管理: 住所/価格等の未確定を表形式で整理し、必須/高/中優先でリスク管理。</li>
+              <li>実現性・運用性: 更新担当・方法をフェーズ分けし、Analytics運用やMaps更新ルールも含めた。</li>
+              <li>デザイン指針: 配色・タイポ・写真サイズを具体指定し、夜営業を意識したトーンに言及。</li>
+            </ul>
+            <div class="section-title">強み</div>
+            <p>要件を表形式で整理し、計測・運用・SEO・パフォーマンスまで一貫性のある深さで提示。実装準備に直結する粒度。</p>
+            <div class="section-title">改善点</div>
+            <p>価格と住所が未確定のため実運用までのラストワンマイルが残る。写真素材やロゴの確定時期を明記するとさらに実務的。</p>
+            <div class="section-title">コミット/成果物</div>
+            <p><a href="../../.worktrees/task-1764985428478-ec57cc/docs/369-curry/requirements.md">docs/369-curry/requirements.md</a> （commit <code>5795f28</code>）</p>
+          </div>
+        </div>
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1764985431381-9721fb <span class="tag">369-curry-requirements.md</span></div>
+            <div>🥇 538/600</div>
+          </div>
+          <div class="chart-row">
+            <svg class="radar" data-scores="92,90,88,90,88,90"></svg>
+            <ul class="metric-list">
+              <li><span>情報網羅性</span><span>92</span></li>
+              <li><span>UI/導線明瞭さ</span><span>90</span></li>
+              <li><span>来店動機付け</span><span>88</span></li>
+              <li><span>正確性・リスク管理</span><span>90</span></li>
+              <li><span>実現性・運用性</span><span>88</span></li>
+              <li><span>デザイン指針</span><span>90</span></li>
+            </ul>
+          </div>
+          <div class="findings">
+            <div class="section-title">指標の根拠</div>
+            <ul class="reason-list">
+              <li>情報網羅性: KPI/FAQ/確認事項優先度などを追加し、アクセス情報や導線フローも補強。</li>
+              <li>UI/導線明瞭さ: SPA構成を優先度付きで表にし、営業中バッジやアクセス動線を定義。</li>
+              <li>来店動機付け: キャッチコピー案とメニュー説明で訴求を強化したが、価格・写真未確定で一部保留。</li>
+              <li>正確性・リスク管理: 価格/住所/SNS等の確認事項を優先度別に整理し、構造化データやL.O.も考慮。</li>
+              <li>実現性・運用性: 更新コンテンツ・頻度・担当・方法を表で提示し、JSON/CMS/静的の選択肢を示した。</li>
+              <li>デザイン指針: カラーパレットとタイポを具体化し、ブレークポイントも明記。</li>
+            </ul>
+            <div class="section-title">強み</div>
+            <p>来店導線のフロー図とKPIを追加し、運用やSEO・構造化データまで一通りカバーする実務的な厚み。</p>
+            <div class="section-title">改善点</div>
+            <p>価格・住所・写真・ロゴの確定が未了。アクセス目印やFAQ回答の確定、マップ埋め込み手順を具体化すると更に良い。</p>
+            <div class="section-title">コミット/成果物</div>
+            <p><a href="../../.worktrees/task-1764985431381-9721fb/369-curry-requirements.md">369-curry-requirements.md</a> （commit <code>e878abe</code>）</p>
+          </div>
+        </div>
+      </div>
+      <p class="note">成果物はいずれも別worktree上に存在します。リンクはローカルパス参照です。</p>
+    </div>
+    <script>
+      (function () {
+        const metrics = 6;
+        const size = 180;
+        const center = size / 2;
+        const radius = size * 0.4;
+        const toRad = (deg) => (deg * Math.PI) / 180;
+        function polygonPoints(r) {
+          const pts = [];
+          for (let i = 0; i < metrics; i++) {
+            const angle = -90 + i * (360 / metrics);
+            const rad = toRad(angle);
+            const x = center + r * Math.cos(rad);
+            const y = center + r * Math.sin(rad);
+            pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+          }
+          return pts.join(" ");
+        }
+        document.querySelectorAll("svg.radar").forEach((svg) => {
+          const scores = (svg.dataset.scores || "")
+            .split(",")
+            .map((s) => parseFloat(s.trim()) || 0);
+          // grid levels
+          [1, 0.66, 0.33].forEach((ratio) => {
+            const poly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+            poly.setAttribute("points", polygonPoints(radius * ratio));
+            poly.setAttribute("fill", "none");
+            poly.setAttribute("stroke", "#d8e6e9");
+            poly.setAttribute("stroke-width", "1");
+            svg.appendChild(poly);
+          });
+          // axes
+          for (let i = 0; i < metrics; i++) {
+            const angle = -90 + i * (360 / metrics);
+            const rad = toRad(angle);
+            const x = center + radius * Math.cos(rad);
+            const y = center + radius * Math.sin(rad);
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", center);
+            line.setAttribute("y1", center);
+            line.setAttribute("x2", x.toFixed(1));
+            line.setAttribute("y2", y.toFixed(1));
+            line.setAttribute("stroke", "#c4d3d7");
+            line.setAttribute("stroke-width", "1");
+            svg.appendChild(line);
+          }
+          // data polygon
+          const dataPoly = document.createElementNS("http://www.w3.org/2000/svg", "polygon");
+          const pts = scores.map((score, i) => {
+            const angle = -90 + i * (360 / metrics);
+            const rad = toRad(angle);
+            const r = (Math.max(0, Math.min(100, score)) / 100) * radius;
+            const x = center + r * Math.cos(rad);
+            const y = center + r * Math.sin(rad);
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+          });
+          dataPoly.setAttribute("points", pts.join(" "));
+          dataPoly.setAttribute("fill", "rgba(45, 110, 129, 0.20)");
+          dataPoly.setAttribute("stroke", "#2d6e81");
+          dataPoly.setAttribute("stroke-width", "2");
+          svg.appendChild(dataPoly);
+        });
+      })();
+    </script>
+  </body>
+</html>
