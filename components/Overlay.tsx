@@ -158,27 +158,7 @@ const projects: ProjectCollection[] = [
         imageUrl: `${import.meta.env.BASE_URL}images/mv-multishot-generator-app.png`,
         technologies: ['You Ware', 'nanobananapro', 'AI駆動分析', 'リリック解析']
       },
-      {
-        id: 'w1',
-        title: 'Musuhi Agent v1',
-        type: 'web',
-        description: '対話を通じて創造的インスピレーションを与える、人格を持ったAIパートナー。',
-        link: '#'
-      },
-      {
-        id: 'w2',
-        title: 'Kotodama Editor',
-        type: 'web',
-        description: '入力した言葉の感情分析を行い、背景色やフォントがリアルタイムに変化する執筆ツール。',
-        link: '#'
-      },
-      {
-        id: 'w3',
-        title: 'Zen ToDo',
-        type: 'web',
-        description: '完了したタスクが「枯山水」の石として配置されていく、達成感を可視化する管理アプリ。',
-        link: '#'
-      }
+
     ]
   },
   {
