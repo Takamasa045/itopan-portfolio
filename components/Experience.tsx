@@ -23,7 +23,8 @@ export const Experience: React.FC = () => {
     const handleResize = () => {
       // Mobile needs more scroll space due to stacked layout
       const isMobile = window.innerWidth < 768;
-      setPages(isMobile ? 8 : 6); // Increase pages for mobile
+      // Increase pages significantly for mobile (8 was insufficient, trying 12)
+      setPages(isMobile ? 12 : 6);
     };
 
     // Initial check
