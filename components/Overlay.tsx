@@ -279,10 +279,10 @@ export const Overlay: React.FC = () => {
 
   return (
     <div className="w-full text-[#e4e7e5]">
-      
+
       {/* HERO SECTION */}
       <Section className="items-start relative">
-        <motion.div 
+        <motion.div
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -325,7 +325,7 @@ export const Overlay: React.FC = () => {
           className="max-w-3xl bg-emerald-950/20 backdrop-blur-sm p-8 md:p-12 rounded-sm border border-emerald-900/30"
         >
           <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl mb-12 font-serif tracking-wide text-stone-200">
-            開発とクリエイティブの境界を、<br/>生成AIでなめらかに溶かす。
+            開発とクリエイティブの境界を、<br />生成AIでなめらかに溶かす。
           </motion.h3>
 
           <motion.div variants={fadeUp} className="text-sm md:text-lg leading-loose text-stone-300 font-light space-y-6 text-justify">
@@ -354,13 +354,13 @@ export const Overlay: React.FC = () => {
           {!selectedProjectId ? (
             /* LIST VIEW */
             <motion.div
-               key="list"
-               initial="hidden"
-               whileInView="visible"
-               exit="exit"
-               viewport={{ once: true }}
-               variants={staggerContainer}
-               className="w-full"
+              key="list"
+              initial="hidden"
+              whileInView="visible"
+              exit="exit"
+              viewport={{ once: true }}
+              variants={staggerContainer}
+              className="w-full"
             >
               <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 border-b border-emerald-500/30 pb-4">
                 <motion.h3 variants={fadeUp} className="text-4xl font-serif text-stone-200">
@@ -373,20 +373,20 @@ export const Overlay: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
                 {projects.map((project) => (
-                  <RichProjectCard 
-                    key={project.id} 
-                    data={project} 
-                    onClick={() => setSelectedProjectId(project.id)} 
+                  <RichProjectCard
+                    key={project.id}
+                    data={project}
+                    onClick={() => setSelectedProjectId(project.id)}
                   />
                 ))}
               </div>
             </motion.div>
           ) : (
             /* DETAIL VIEW */
-            <ProjectDetail 
-              key="detail" 
-              project={selectedProject!} 
-              onBack={() => setSelectedProjectId(null)} 
+            <ProjectDetail
+              key="detail"
+              project={selectedProject!}
+              onBack={() => setSelectedProjectId(null)}
             />
           )}
         </AnimatePresence>
@@ -503,7 +503,7 @@ export const Overlay: React.FC = () => {
                 className="group flex items-center gap-4 px-8 py-4 bg-stone-900/80 border-2 border-stone-600 hover:border-emerald-500 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
               >
                 <svg className="w-7 h-7 text-stone-200 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                 </svg>
                 <span className="text-base text-stone-200 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X / Twitter</span>
               </a>
@@ -514,7 +514,7 @@ export const Overlay: React.FC = () => {
                 className="group flex items-center gap-4 px-8 py-4 bg-stone-900/80 border-2 border-stone-600 hover:border-emerald-500 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
               >
                 <svg className="w-7 h-7 text-stone-200 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                  <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
                 </svg>
                 <span className="text-base text-stone-200 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
               </a>
@@ -529,7 +529,7 @@ export const Overlay: React.FC = () => {
           </motion.div>
 
           {/* Footer */}
-          <motion.div variants={fadeUp} className="text-center pt-8 border-t border-emerald-900/20">
+          <motion.div variants={fadeUp} className="text-center pt-8 border-t border-emerald-900/20 pb-8 md:pb-0">
             <p className="text-xs text-stone-700">
               &copy; 2025 Takamasa Ito. All rights reserved.
             </p>
@@ -594,9 +594,8 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
               {mediaItems.map((_, i) => (
                 <div
                   key={i}
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                    i === currentMediaIndex ? 'bg-emerald-400' : 'bg-white/20'
-                  }`}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === currentMediaIndex ? 'bg-emerald-400' : 'bg-white/20'
+                    }`}
                 />
               ))}
             </div>
@@ -657,68 +656,68 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
       variants={staggerContainer}
       className="w-full flex flex-col gap-12"
     >
-       {/* Navigation Header */}
-       <div className="flex justify-between items-center border-b border-emerald-900/50 pb-6">
-         <motion.button 
-           variants={fadeUp}
-           onClick={onBack} 
-           className="text-emerald-500 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest"
-         >
-            ← BACK TO ALL PROJECTS
-         </motion.button>
-         <motion.div variants={fadeUp} className="text-xs font-mono text-stone-600 hidden md:block">
-           COLLECTION ID: {project.id.toUpperCase()}
-         </motion.div>
-       </div>
+      {/* Navigation Header */}
+      <div className="flex justify-between items-center border-b border-emerald-900/50 pb-6">
+        <motion.button
+          variants={fadeUp}
+          onClick={onBack}
+          className="text-emerald-500 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest"
+        >
+          ← BACK TO ALL PROJECTS
+        </motion.button>
+        <motion.div variants={fadeUp} className="text-xs font-mono text-stone-600 hidden md:block">
+          COLLECTION ID: {project.id.toUpperCase()}
+        </motion.div>
+      </div>
 
-       {/* Collection Info Section */}
-       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-          <motion.div variants={fadeUp} className="w-full lg:w-2/3">
-             <div className="flex items-center gap-4 mb-6">
-                <span className="text-emerald-500 font-mono text-xs tracking-wider border border-emerald-500/30 px-2 py-1 rounded-sm uppercase">{project.category}</span>
-                <span className="text-stone-500 font-mono text-xs">{project.year}</span>
-             </div>
-             
-             <h2 className="text-4xl md:text-6xl font-serif text-stone-100 mb-8 leading-tight">{project.title}</h2>
-             
-             <p className="text-stone-300 leading-loose font-light text-justify text-lg mb-8">
-                {project.longDescription}
-             </p>
-          </motion.div>
-
-          <motion.div variants={fadeUp} className="w-full lg:w-1/3 flex flex-col justify-end pb-4">
-             <h5 className="text-emerald-600 text-xs font-mono tracking-widest mb-4">TECHNOLOGIES</h5>
-             <div className="flex flex-wrap gap-2">
-                {project.technologies.map(tech => (
-                   <span key={tech} className="bg-stone-900/80 text-stone-400 px-3 py-2 text-xs rounded-sm border border-emerald-900/20">
-                      {tech}
-                   </span>
-                ))}
-             </div>
-          </motion.div>
-       </div>
-
-       {/* Content Grid Section */}
-       <motion.div variants={fadeUp} className="mt-8">
-          <div className="flex items-center gap-4 mb-8">
-             <div className="h-[1px] w-12 bg-emerald-500/50"></div>
-             <h3 className="text-stone-200 font-serif text-xl">Collection Items / 収録コンテンツ</h3>
-             <div className="h-[1px] flex-grow bg-emerald-900/30"></div>
+      {/* Collection Info Section */}
+      <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
+        <motion.div variants={fadeUp} className="w-full lg:w-2/3">
+          <div className="flex items-center gap-4 mb-6">
+            <span className="text-emerald-500 font-mono text-xs tracking-wider border border-emerald-500/30 px-2 py-1 rounded-sm uppercase">{project.category}</span>
+            <span className="text-stone-500 font-mono text-xs">{project.year}</span>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-             {[...project.items]
-               .sort((a, b) => {
-                 // Sort by date descending (newest first)
-                 const dateA = a.date || '0000.00';
-                 const dateB = b.date || '0000.00';
-                 return dateB.localeCompare(dateA);
-               })
-               .map((item) => (
-                 <ContentItemCard key={item.id} item={item} />
-               ))}
+          <h2 className="text-4xl md:text-6xl font-serif text-stone-100 mb-8 leading-tight">{project.title}</h2>
+
+          <p className="text-stone-300 leading-loose font-light text-justify text-lg mb-8">
+            {project.longDescription}
+          </p>
+        </motion.div>
+
+        <motion.div variants={fadeUp} className="w-full lg:w-1/3 flex flex-col justify-end pb-4">
+          <h5 className="text-emerald-600 text-xs font-mono tracking-widest mb-4">TECHNOLOGIES</h5>
+          <div className="flex flex-wrap gap-2">
+            {project.technologies.map(tech => (
+              <span key={tech} className="bg-stone-900/80 text-stone-400 px-3 py-2 text-xs rounded-sm border border-emerald-900/20">
+                {tech}
+              </span>
+            ))}
           </div>
-       </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Content Grid Section */}
+      <motion.div variants={fadeUp} className="mt-8">
+        <div className="flex items-center gap-4 mb-8">
+          <div className="h-[1px] w-12 bg-emerald-500/50"></div>
+          <h3 className="text-stone-200 font-serif text-xl">Collection Items / 収録コンテンツ</h3>
+          <div className="h-[1px] flex-grow bg-emerald-900/30"></div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[...project.items]
+            .sort((a, b) => {
+              // Sort by date descending (newest first)
+              const dateA = a.date || '0000.00';
+              const dateB = b.date || '0000.00';
+              return dateB.localeCompare(dateA);
+            })
+            .map((item) => (
+              <ContentItemCard key={item.id} item={item} />
+            ))}
+        </div>
+      </motion.div>
     </motion.div>
   );
 };
@@ -760,8 +759,8 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
       <div className="p-6 flex-grow flex flex-col justify-between">
         <div>
           <div className="flex justify-between items-start mb-2">
-             <h4 className="text-lg font-serif text-stone-200 group-hover:text-white transition-colors">{item.title}</h4>
-             {item.date && <span className="text-[10px] text-stone-600 font-mono mt-1 whitespace-nowrap ml-2">{item.date}</span>}
+            <h4 className="text-lg font-serif text-stone-200 group-hover:text-white transition-colors">{item.title}</h4>
+            {item.date && <span className="text-[10px] text-stone-600 font-mono mt-1 whitespace-nowrap ml-2">{item.date}</span>}
           </div>
           <p className="text-sm text-stone-500 leading-relaxed mb-4 font-light whitespace-pre-line">{item.description}</p>
 
@@ -786,7 +785,7 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center w-full py-3 text-xs font-mono tracking-widest text-emerald-500 border border-emerald-900/50 hover:bg-emerald-900/20 hover:border-emerald-500 rounded-sm transition-all"
         >
-           VIEW CONTENT ↗
+          VIEW CONTENT ↗
         </a>
       </div>
     </motion.div>
@@ -797,92 +796,92 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
 const MediaBackground: React.FC<{ type: MediaType }> = ({ type }) => {
   return (
     <div className="absolute inset-0 z-0 opacity-50 hover:opacity-70 transition-opacity duration-700">
-        {type === 'video' && (
-          <div className="w-full h-full bg-gradient-to-br from-emerald-950 via-stone-900 to-black">
-            <div className="absolute inset-0 flex items-center justify-center opacity-30">
-              <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-900/40 via-transparent to-transparent animate-pulse"></div>
+      {type === 'video' && (
+        <div className="w-full h-full bg-gradient-to-br from-emerald-950 via-stone-900 to-black">
+          <div className="absolute inset-0 flex items-center justify-center opacity-30">
+            <div className="w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-emerald-900/40 via-transparent to-transparent animate-pulse"></div>
+          </div>
+          {/* Abstract play icon feel */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-8 h-8 border border-white/10 rounded-full flex items-center justify-center">
+              <div className="ml-0.5 w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-emerald-500/80 border-b-[3px] border-b-transparent"></div>
             </div>
-             {/* Abstract play icon feel */}
-            <div className="absolute inset-0 flex items-center justify-center">
-               <div className="w-8 h-8 border border-white/10 rounded-full flex items-center justify-center">
-                 <div className="ml-0.5 w-0 h-0 border-t-[3px] border-t-transparent border-l-[6px] border-l-emerald-500/80 border-b-[3px] border-b-transparent"></div>
-               </div>
+          </div>
+        </div>
+      )}
+
+      {type === 'music' && (
+        <div className="w-full h-full bg-stone-900 flex items-end justify-center gap-1 pb-8">
+          {[...Array(12)].map((_, i) => (
+            <div key={i} className="w-1.5 bg-emerald-600/30 animate-[pulse_1.5s_ease-in-out_infinite]" style={{ height: `${Math.random() * 60 + 20}%`, animationDelay: `${i * 0.1}s` }}></div>
+          ))}
+        </div>
+      )}
+
+      {type === 'mv' && (
+        <div className="w-full h-full bg-gradient-to-br from-stone-900 via-emerald-950 to-stone-900 flex items-end justify-center gap-1 pb-8 relative">
+          {[...Array(12)].map((_, i) => (
+            <div key={i} className="w-1.5 bg-emerald-500/40 animate-[pulse_1.5s_ease-in-out_infinite]" style={{ height: `${Math.random() * 60 + 20}%`, animationDelay: `${i * 0.1}s` }}></div>
+          ))}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center bg-black/30 backdrop-blur-sm">
+              <div className="ml-0.5 w-0 h-0 border-t-[5px] border-t-transparent border-l-[8px] border-l-emerald-400/80 border-b-[5px] border-b-transparent"></div>
             </div>
           </div>
-        )}
-        
-        {type === 'music' && (
-          <div className="w-full h-full bg-stone-900 flex items-end justify-center gap-1 pb-8">
-             {[...Array(12)].map((_, i) => (
-               <div key={i} className="w-1.5 bg-emerald-600/30 animate-[pulse_1.5s_ease-in-out_infinite]" style={{ height: `${Math.random() * 60 + 20}%`, animationDelay: `${i * 0.1}s` }}></div>
-             ))}
-          </div>
-        )}
+        </div>
+      )}
 
-        {type === 'mv' && (
-          <div className="w-full h-full bg-gradient-to-br from-stone-900 via-emerald-950 to-stone-900 flex items-end justify-center gap-1 pb-8 relative">
-             {[...Array(12)].map((_, i) => (
-               <div key={i} className="w-1.5 bg-emerald-500/40 animate-[pulse_1.5s_ease-in-out_infinite]" style={{ height: `${Math.random() * 60 + 20}%`, animationDelay: `${i * 0.1}s` }}></div>
-             ))}
-             <div className="absolute inset-0 flex items-center justify-center">
-               <div className="w-10 h-10 border border-white/20 rounded-full flex items-center justify-center bg-black/30 backdrop-blur-sm">
-                 <div className="ml-0.5 w-0 h-0 border-t-[5px] border-t-transparent border-l-[8px] border-l-emerald-400/80 border-b-[5px] border-b-transparent"></div>
-               </div>
-             </div>
+      {type === 'web' && (
+        <div className="w-full h-full bg-stone-900 flex items-center justify-center">
+          <div className="w-3/4 h-3/4 border border-emerald-500/10 bg-black/20 rounded-sm relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-3 bg-white/5 flex gap-1 items-center px-2">
+              <div className="w-0.5 h-0.5 bg-white/20 rounded-full"></div>
+              <div className="w-0.5 h-0.5 bg-white/20 rounded-full"></div>
+            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-emerald-900/30 font-mono text-4xl">
+              &lt;/&gt;
+            </div>
           </div>
-        )}
-        
-        {type === 'web' && (
-          <div className="w-full h-full bg-stone-900 flex items-center justify-center">
-             <div className="w-3/4 h-3/4 border border-emerald-500/10 bg-black/20 rounded-sm relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-3 bg-white/5 flex gap-1 items-center px-2">
-                   <div className="w-0.5 h-0.5 bg-white/20 rounded-full"></div>
-                   <div className="w-0.5 h-0.5 bg-white/20 rounded-full"></div>
-                </div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-emerald-900/30 font-mono text-4xl">
-                   &lt;/&gt;
-                </div>
-             </div>
-          </div>
-        )}
-        
-        {type === 'image' && (
-          <div className="w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-stone-800 via-emerald-950 to-black">
-             <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20"></div>
-          </div>
-        )}
+        </div>
+      )}
 
-        {type === 'saas' && (
-          <div className="w-full h-full bg-gradient-to-br from-stone-900 via-emerald-950/50 to-stone-900 flex items-center justify-center">
-             <div className="w-3/4 h-3/4 border border-emerald-500/20 bg-black/30 rounded-sm relative overflow-hidden">
-                <div className="absolute top-0 left-0 w-full h-4 bg-emerald-900/20 flex gap-1.5 items-center px-3">
-                   <div className="w-2 h-2 bg-emerald-500/40 rounded-full"></div>
-                   <div className="w-2 h-2 bg-emerald-400/30 rounded-full"></div>
-                   <div className="w-2 h-2 bg-emerald-300/20 rounded-full"></div>
-                </div>
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-emerald-500/20 font-mono text-3xl tracking-widest">
-                   SaaS
-                </div>
-             </div>
-          </div>
-        )}
+      {type === 'image' && (
+        <div className="w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-stone-800 via-emerald-950 to-black">
+          <div className="absolute top-0 right-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+')] opacity-20"></div>
+        </div>
+      )}
 
-        {type === 'event' && (
-          <div className="w-full h-full bg-gradient-to-br from-emerald-950 via-stone-900 to-emerald-950 relative overflow-hidden">
-             <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 border-2 border-emerald-500/30 rounded-full flex items-center justify-center animate-pulse">
-                   <div className="w-10 h-10 border border-emerald-400/40 rounded-full flex items-center justify-center">
-                      <div className="w-4 h-4 bg-emerald-500/50 rounded-full"></div>
-                   </div>
-                </div>
-             </div>
-             <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
-                {[...Array(5)].map((_, i) => (
-                   <div key={i} className="w-1 h-1 bg-emerald-500/40 rounded-full"></div>
-                ))}
-             </div>
+      {type === 'saas' && (
+        <div className="w-full h-full bg-gradient-to-br from-stone-900 via-emerald-950/50 to-stone-900 flex items-center justify-center">
+          <div className="w-3/4 h-3/4 border border-emerald-500/20 bg-black/30 rounded-sm relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-4 bg-emerald-900/20 flex gap-1.5 items-center px-3">
+              <div className="w-2 h-2 bg-emerald-500/40 rounded-full"></div>
+              <div className="w-2 h-2 bg-emerald-400/30 rounded-full"></div>
+              <div className="w-2 h-2 bg-emerald-300/20 rounded-full"></div>
+            </div>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-emerald-500/20 font-mono text-3xl tracking-widest">
+              SaaS
+            </div>
           </div>
-        )}
+        </div>
+      )}
+
+      {type === 'event' && (
+        <div className="w-full h-full bg-gradient-to-br from-emerald-950 via-stone-900 to-emerald-950 relative overflow-hidden">
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-16 h-16 border-2 border-emerald-500/30 rounded-full flex items-center justify-center animate-pulse">
+              <div className="w-10 h-10 border border-emerald-400/40 rounded-full flex items-center justify-center">
+                <div className="w-4 h-4 bg-emerald-500/50 rounded-full"></div>
+              </div>
+            </div>
+          </div>
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
+            {[...Array(5)].map((_, i) => (
+              <div key={i} className="w-1 h-1 bg-emerald-500/40 rounded-full"></div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

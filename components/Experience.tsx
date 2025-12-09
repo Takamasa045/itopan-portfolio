@@ -16,6 +16,23 @@ export const Experience: React.FC = () => {
     }
   });
 
+  // Dynamic page count based on screen width
+  const [pages, setPages] = React.useState(6);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      // Mobile needs more scroll space due to stacked layout
+      const isMobile = window.innerWidth < 768;
+      setPages(isMobile ? 8 : 6); // Increase pages for mobile
+    };
+
+    // Initial check
+    handleResize();
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
   return (
     <>
       {/* Ambient light slightly greenish/blue for nature feel */}
@@ -32,22 +49,22 @@ export const Experience: React.FC = () => {
       <fog attach="fog" args={['#020403', 5, 20]} />
 
       {/* Pages for content sections */}
-      <ScrollControls pages={6} damping={0.3} touch={1}>
+      <ScrollControls pages={pages} damping={0.3}>
         {/* 3D Content Layer - Moves with Scroll */}
         <MountainWorld />
-        
+
         {/* Atmospheric Particles - Green/Gold spirits */}
-        <Sparkles 
-          count={80} 
-          scale={12} 
-          size={2} 
-          speed={0.4} 
-          opacity={0.4} 
-          color="#6ee7b7" 
+        <Sparkles
+          count={80}
+          scale={12}
+          size={2}
+          speed={0.4}
+          opacity={0.4}
+          color="#6ee7b7"
         />
-        
+
         <group position={[0, 5, -10]}>
-          <Cloud opacity={0.2} speed={0.1} width={10} depth={1.5} segments={20} color="#d1fae5" />
+          <Cloud opacity={0.2} speed={0.1} segments={20} color="#d1fae5" />
         </group>
 
         {/* HTML Content Layer - Syncs with Scroll */}
@@ -55,7 +72,7 @@ export const Experience: React.FC = () => {
           <Overlay />
         </Scroll>
       </ScrollControls>
-      
+
       <Environment preset="park" environmentIntensity={0.3} />
     </>
   );
