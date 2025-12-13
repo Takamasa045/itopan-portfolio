@@ -12,10 +12,6 @@ const AppContent: React.FC = () => {
     <>
       <div
         className="w-full h-screen bg-[#020403]"
-        style={{
-          visibility: isDetailOpen ? 'hidden' : 'visible',
-          position: isDetailOpen ? 'absolute' : 'relative'
-        }}
       >
         <Canvas
           shadows
