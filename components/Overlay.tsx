@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@react-three/drei';
 import { AboutDetail } from './AboutDetail';
+import { useDetailView } from '../contexts/DetailViewContext';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
@@ -226,6 +227,13 @@ export const Overlay: React.FC = () => {
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const selectedProject = projects.find(p => p.id === selectedProjectId);
   const scroll = useScroll();
+  const { setIsDetailOpen } = useDetailView();
+
+  // Sync detail view state with context (controls 3D scene visibility)
+  useEffect(() => {
+    const isDetailActive = selectedProjectId !== null || showAboutDetail;
+    setIsDetailOpen(isDetailActive);
+  }, [selectedProjectId, showAboutDetail, setIsDetailOpen]);
 
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
