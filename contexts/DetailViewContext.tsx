@@ -5,6 +5,9 @@ interface DetailViewContextType {
   setIsDetailOpen: (open: boolean) => void;
 }
 
+const noop = () => {};
+const defaultValue: DetailViewContextType = { isDetailOpen: false, setIsDetailOpen: noop };
+
 export const DetailViewContext = createContext<DetailViewContextType | null>(null);
 
 export const DetailViewProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
@@ -20,7 +23,7 @@ export const DetailViewProvider: React.FC<{ children: ReactNode }> = ({ children
 export const useDetailView = () => {
   const context = useContext(DetailViewContext);
   if (!context) {
-    throw new Error('useDetailView must be used within a DetailViewProvider');
+    return defaultValue;
   }
   return context;
 };
