@@ -3,6 +3,7 @@ import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@react-three/drei';
 import { AboutDetail } from './AboutDetail';
 import { useDetailView } from '../contexts/DetailViewContext';
+import { LazyVideo, LazyImage } from './LazyVideo';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
@@ -625,25 +626,25 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
         </div>
       </div>
 
-      {/* Media Preview Background - Show video or image if available */}
+      {/* Media Preview Background - Show video or image if available (Lazy loaded) */}
       {currentMedia ? (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500">
           {currentMedia.type === 'video' ? (
-            <video
+            <LazyVideo
               key={currentMedia.url}
               src={currentMedia.url}
               autoPlay
               muted
               loop
               playsInline
-              className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+              className="w-full h-full"
             />
           ) : (
-            <img
+            <LazyImage
               key={currentMedia.url}
               src={currentMedia.url}
               alt=""
-              className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+              className="w-full h-full"
             />
           )}
         </div>
@@ -737,22 +738,21 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
       variants={fadeUp}
       className="bg-stone-950/40 border border-emerald-900/30 hover:border-emerald-500/50 rounded-sm overflow-hidden group transition-all duration-300 flex flex-col"
     >
-      {/* Visual Thumbnail Area */}
+      {/* Visual Thumbnail Area (Lazy loaded) */}
       <div className={`${item.videoUrl || item.imageUrl ? 'aspect-video' : 'h-48'} w-full relative overflow-hidden bg-black`}>
         {item.videoUrl ? (
-          <video
+          <LazyVideo
             src={item.videoUrl}
             controls
             loop
             playsInline
-            className="w-full h-full object-cover"
-            poster=""
+            className="w-full h-full"
           />
         ) : item.imageUrl ? (
-          <img
+          <LazyImage
             src={item.imageUrl}
             alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <MediaBackground type={item.type} />
