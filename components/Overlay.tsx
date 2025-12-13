@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@react-three/drei';
 import { AboutDetail } from './AboutDetail';
+import { useDetailView } from '../contexts/DetailViewContext';
+import { LazyVideo, LazyImage } from './LazyVideo';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
@@ -221,11 +223,37 @@ const staggerContainer: Variants = {
   exit: { opacity: 0, transition: { duration: 0.3 } }
 };
 
+// Lightweight animations for detail pages (snappy & fast)
+const quickFade: Variants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25, ease: "easeOut" } },
+  exit: { opacity: 0, transition: { duration: 0.15 } }
+};
+
+const quickStagger: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.03,
+      delayChildren: 0.05
+    }
+  },
+  exit: { opacity: 0, transition: { duration: 0.15 } }
+};
+
 export const Overlay: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const selectedProject = projects.find(p => p.id === selectedProjectId);
   const scroll = useScroll();
+  const { setIsDetailOpen } = useDetailView();
+
+  // Sync detail view state with context (controls 3D scene visibility)
+  useEffect(() => {
+    const isDetailActive = selectedProjectId !== null || showAboutDetail;
+    setIsDetailOpen(isDetailActive);
+  }, [selectedProjectId, showAboutDetail, setIsDetailOpen]);
 
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
@@ -617,25 +645,25 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
         </div>
       </div>
 
-      {/* Media Preview Background - Show video or image if available */}
+      {/* Media Preview Background - Show video or image if available (Lazy loaded) */}
       {currentMedia ? (
-        <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 z-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500">
           {currentMedia.type === 'video' ? (
-            <video
+            <LazyVideo
               key={currentMedia.url}
               src={currentMedia.url}
               autoPlay
               muted
               loop
               playsInline
-              className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+              className="w-full h-full"
             />
           ) : (
-            <img
+            <LazyImage
               key={currentMedia.url}
               src={currentMedia.url}
               alt=""
-              className="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-500"
+              className="w-full h-full"
             />
           )}
         </div>
@@ -647,32 +675,33 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
 };
 
 // --- COMPONENT: DETAIL VIEW (Collection & Items) ---
+// Uses quickFade/quickStagger for snappy page transitions
 const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }> = ({ project, onBack }) => {
   return (
     <motion.div
       initial="hidden"
       animate="visible"
       exit="exit"
-      variants={staggerContainer}
+      variants={quickStagger}
       className="w-full flex flex-col gap-12"
     >
       {/* Navigation Header */}
       <div className="flex justify-between items-center border-b border-emerald-900/50 pb-6">
         <motion.button
-          variants={fadeUp}
+          variants={quickFade}
           onClick={onBack}
           className="text-emerald-500 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest"
         >
           ← BACK TO ALL PROJECTS
         </motion.button>
-        <motion.div variants={fadeUp} className="text-xs font-mono text-stone-600 hidden md:block">
+        <motion.div variants={quickFade} className="text-xs font-mono text-stone-600 hidden md:block">
           COLLECTION ID: {project.id.toUpperCase()}
         </motion.div>
       </div>
 
       {/* Collection Info Section */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
-        <motion.div variants={fadeUp} className="w-full lg:w-2/3">
+        <motion.div variants={quickFade} className="w-full lg:w-2/3">
           <div className="flex items-center gap-4 mb-6">
             <span className="text-emerald-500 font-mono text-xs tracking-wider border border-emerald-500/30 px-2 py-1 rounded-sm uppercase">{project.category}</span>
             <span className="text-stone-500 font-mono text-xs">{project.year}</span>
@@ -685,7 +714,7 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
           </p>
         </motion.div>
 
-        <motion.div variants={fadeUp} className="w-full lg:w-1/3 flex flex-col justify-end pb-4">
+        <motion.div variants={quickFade} className="w-full lg:w-1/3 flex flex-col justify-end pb-4">
           <h5 className="text-emerald-600 text-xs font-mono tracking-widest mb-4">TECHNOLOGIES</h5>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map(tech => (
@@ -698,7 +727,7 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
       </div>
 
       {/* Content Grid Section */}
-      <motion.div variants={fadeUp} className="mt-8">
+      <motion.div variants={quickFade} className="mt-8">
         <div className="flex items-center gap-4 mb-8">
           <div className="h-[1px] w-12 bg-emerald-500/50"></div>
           <h3 className="text-stone-200 font-serif text-xl">Collection Items / 収録コンテンツ</h3>
@@ -723,28 +752,28 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
 };
 
 // --- COMPONENT: INDIVIDUAL CONTENT ITEM CARD ---
+// Uses quickFade for snappy animations
 const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
   return (
     <motion.div
-      variants={fadeUp}
+      variants={quickFade}
       className="bg-stone-950/40 border border-emerald-900/30 hover:border-emerald-500/50 rounded-sm overflow-hidden group transition-all duration-300 flex flex-col"
     >
-      {/* Visual Thumbnail Area */}
+      {/* Visual Thumbnail Area (Lazy loaded) */}
       <div className={`${item.videoUrl || item.imageUrl ? 'aspect-video' : 'h-48'} w-full relative overflow-hidden bg-black`}>
         {item.videoUrl ? (
-          <video
+          <LazyVideo
             src={item.videoUrl}
             controls
             loop
             playsInline
-            className="w-full h-full object-cover"
-            poster=""
+            className="w-full h-full"
           />
         ) : item.imageUrl ? (
-          <img
+          <LazyImage
             src={item.imageUrl}
             alt={item.title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            className="w-full h-full group-hover:scale-105 transition-transform duration-500"
           />
         ) : (
           <MediaBackground type={item.type} />
