@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>評価レポート</title>
+    <style>
+      body {
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        margin: 24px;
+        background-color: #e9f0f2;
+        color: #1f2a30;
+      }
+      .monitor-wrapper {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      .monitor-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .monitor-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #1f2a30;
+      }
+      .monitor-description {
+        font-size: 14px;
+        color: #3a4b53;
+      }
+      .summary {
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        margin-bottom: 20px;
+        font-size: 13px;
+      }
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+      .score-card {
+        background: #eef3f4;
+        border: 1px solid #c4d3d7;
+        padding: 12px;
+        border-radius: 6px;
+      }
+      .score-card h3 {
+        margin: 0 0 6px;
+        font-size: 15px;
+      }
+      .score-card .score {
+        font-size: 22px;
+        font-weight: 700;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      table.monitor-report {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      col.timestamp-column {
+        width: 180px;
+      }
+      col.agent-column {
+        width: calc((100% - 180px) / 5);
+      }
+      th,
+      td {
+        border: 1px solid #c4d3d7;
+        padding: 12px;
+        vertical-align: top;
+        background-color: #ffffff;
+      }
+      th {
+        background: #d8e6e9;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #2c3a40;
+      }
+      tbody tr:nth-child(even) td {
+        background-color: #eef3f4;
+      }
+      details {
+        display: block;
+        margin: 0;
+      }
+      details summary {
+        list-style: none;
+        cursor: pointer;
+      }
+      details[open] summary {
+        margin-bottom: 8px;
+      }
+      .details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 13px;
+        color: #1f2a30;
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      .details-toggle::before {
+        content: "▶";
+        font-size: 10px;
+        transition: transform 160ms ease;
+        display: inline-block;
+      }
+      details[open] .details-toggle::before {
+        transform: rotate(90deg);
+      }
+      .timestamp {
+        font-weight: 600;
+        color: #2c3a40;
+        overflow-wrap: anywhere;
+      }
+      .snapshot-summary {
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: #2c3a40;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #1f2a30;
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 12px;
+      }
+      .status-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding: 1px 6px;
+        background: #d8e6e9;
+        border: 1px solid #b8c9cd;
+        color: #1f2a30;
+        white-space: nowrap;
+        line-height: 1.3;
+        vertical-align: top;
+      }
+      .status-badge--error { background: #f8d7da; border-color: #f1aeb5; }
+      .status-badge--pending { background: #e3edf0; border-color: #cdd9dd; }
+      .status-badge--in-progress { background: #fef3cd; border-color: #f0e5a5; }
+      .status-badge--completed { background: #c3d4d8; border-color: #aabfc5; }
+      .agent-meta { display: block; margin-bottom: 8px; line-height: 1.5; }
+      .agent-meta .status-badge { margin-right: 6px; }
+      .agent-meta .agent-label { display: inline; font-size: 13px; color: #3a4b53; }
+      .hex-chart { width: 160px; height: 160px; margin-bottom: 8px; }
+      .metrics-list { list-style: none; padding: 0; margin: 6px 0 8px; font-size: 12px; }
+      .metrics-list li { margin: 2px 0; }
+      .badge-reason { font-size: 12px; color: #b00020; margin-top: 4px; }
+      .link-list { margin: 4px 0; font-size: 12px; }
+      .link-list a { color: #1f3d7a; }
+    </style>
+  </head>
+  <body>
+    <div class="monitor-wrapper">
+      <header class="monitor-header">
+        <h1 class="monitor-title">評価レポート</h1>
+        <p class="monitor-description">タスク: 「現状デザインは良いが動きが重い。トップはこのまま、各項目クリック時はもっとサクッと表示したい」への対応状況を評価。</p>
+      </header>
+      <div class="summary">
+        <strong>仕事の概要</strong><br />
+        監視対象5ブランチ（task/task-1765591537452-80117b, task/task-1765591538252-f7eef4, task/task-1765591537651-10841c, task/task-1765591537852-220d63, task/task-1765591538052-db7477）を再確認。<br />
+        220d63がLazyロード＋3D停止で最も高速化、80117bはプリフェッチと遅延読み込みで次点。10841c/8052はアニメーション短縮やプレビュー再生制御のみ。f7eef4はグローバルオーバーレイ導入途中で未コミット多数。
+      </div>
+      <div id="scoreboard" class="scoreboard"></div>
+      <table class="monitor-report">
+        <colgroup>
+          <col class="timestamp-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Agent task-1765591537452-80117b</th>
+            <th>Agent task-1765591538252-f7eef4</th>
+            <th>Agent task-1765591537651-10841c</th>
+            <th>Agent task-1765591537852-220d63</th>
+            <th>Agent task-1765591538052-db7477</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="timestamp" id="eval-timestamp">2025-12-13 11:37:34 JST</td>
+            <td data-branch="task-1765591537452-80117b"></td>
+            <td data-branch="task-1765591538252-f7eef4"></td>
+            <td data-branch="task-1765591537651-10841c"></td>
+            <td data-branch="task-1765591537852-220d63"></td>
+            <td data-branch="task-1765591538052-db7477"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      const metricDefs = [
+        { key: 'ui', label: 'UI/UX' },
+        { key: 'clarity', label: '情報のわかりやすさ' },
+        { key: 'speed', label: '応答速度' },
+        { key: 'quality', label: '実装品質' },
+        { key: 'fit', label: '要件適合' },
+        { key: 'complete', label: '完成度' },
+      ];
+
+      const evaluations = [
+        {
+          id: 'task-1765591537452-80117b',
+          ai: 'task/task-1765591537452-80117b',
+          status: '実装あり',
+          scores: { ui: 80, clarity: 80, speed: 88, quality: 85, fit: 90, complete: 85 },
+          findings: [
+            'AboutDetail/ProjectDetailをReact.lazy＋Suspenseで分割し、DetailFallback Skeletonを追加して初期表示を軽量化。',
+            'prefetchMediaでIntersectionObserver＋hoverプレフェッチを実装し、カード周辺の動画/画像を事前ウォームアップ。',
+            'Canvas dprを1〜1.5に抑制し、ProjectDetailやメディア背景を分離してGPU負荷を軽減。'
+          ],
+          logs: [
+            '1aa22e9 Improve detail load time with lazy splits and prefetch',
+            'd590a77 fix: increase mobile scroll pages to 12',
+            '29a8fa7 fix: mobile scroll issue by increasing pages dynamically and adding footer padding',
+            'a1bef45 Build: Update docs with latest changes',
+            'b8934e8 Fix: Remove accidental worktree submodules and ignore .worktrees'
+          ],
+          diffs: [
+            'Overlay: React.lazyで詳細/アバウトを遅延読込、Suspense fallbackにSkeletonを追加。',
+            'RichProjectCard: hover/IntersectionObserverで動画・画像のプレフェッチ、先頭メディア3件のウォームアップ。',
+            'utils/prefetchMedia.tsを新設し画像と動画を事前フェッチ。Canvas dprを下げて描画を軽量化。'
+          ],
+          links: ['../.worktrees/task-1765591537452-80117b/index.html'],
+          reason: '遅延読込＋プレフェッチで詳細ページ表示を明確に高速化し、GPU負荷も抑制。'
+        },
+        {
+          id: 'task-1765591538252-f7eef4',
+          ai: 'task/task-1765591538252-f7eef4',
+          status: '未完了 (未コミット有り)',
+          scores: { ui: 60, clarity: 55, speed: 35, quality: 40, fit: 40, complete: 35 },
+          findings: [
+            'ViewProvider＋GlobalDetailOverlayで詳細をCanvas外に切り出す設計を開始。',
+            'ContentItemCard/ProjectDetail/MediaBackground/data/projectsが未コミットのまま存在し、ビルド確定していない。',
+            'Lazyロードやプレフェッチは未実装で、遷移高速化の確証なし。'
+          ],
+          logs: [
+            'd590a77 fix: increase mobile scroll pages to 12',
+            '29a8fa7 fix: mobile scroll issue by increasing pages dynamically and adding footer padding',
+            'a1bef45 Build: Update docs with latest changes',
+            'b8934e8 Fix: Remove accidental worktree submodules and ignore .worktrees',
+            '47af411 Remove Musuhi Labs items: Zen ToDo, Kotodama Editor, Musuhi Agent v1'
+          ],
+          diffs: [
+            'App.tsx: ViewProviderとGlobalDetailOverlayを追加し、詳細をグローバルレイヤー表示に。',
+            'Overlay.tsx: コンテキスト経由で選択状態/アバウトを制御。',
+            '未コミット: components/ContentItemCard.tsx, GlobalDetailOverlay.tsx, MediaBackground.tsx, ProjectDetail.tsx, context/ViewContext.tsx, data/projects.ts。'
+          ],
+          links: ['../.worktrees/task-1765591538252-f7eef4/index.html'],
+          reason: '設計途中で未コミットが多く、速度改善が未確認。'
+        },
+        {
+          id: 'task-1765591537651-10841c',
+          ai: 'task/task-1765591537651-10841c',
+          status: '実装あり',
+          scores: { ui: 70, clarity: 70, speed: 70, quality: 65, fit: 70, complete: 60 },
+          findings: [
+            'RichProjectCardでvideoをhover時のみ再生・離脱時にpause/resetし、アイドル時の再生負荷を抑制。',
+            'アニメーションを0.24s/0.14sへ短縮し、レスポンスを体感で向上。',
+            'Canvas dprを1.5上限＋powerPreference=high-performanceで描画を軽めに調整。Lazyロードやプレフェッチは未対応。'
+          ],
+          logs: [
+            'f67aeac perf: snappier transitions and lighter media playback',
+            'd590a77 fix: increase mobile scroll pages to 12',
+            '29a8fa7 fix: mobile scroll issue by increasing pages dynamically and adding footer padding',
+            'a1bef45 Build: Update docs with latest changes',
+            'b8934e8 Fix: Remove accidental worktree submodules and ignore .worktrees'
+          ],
+          diffs: [
+            'Overlay: 動画プレビューのhover再生/leave停止、アニメーション時間を短縮。',
+            'App.tsx: dpr上限を1.5に下げ、powerPreference high-performanceを指定。',
+            'ビルド出力(JS)更新のみでデータ構造は既存のまま。'
+          ],
+          links: ['../.worktrees/task-1765591537651-10841c/index.html'],
+          reason: '体感速度は向上するが、Lazyロード/プリフェッチがなく効果は限定的。'
+        },
+        {
+          id: 'task-1765591537852-220d63',
+          ai: 'task/task-1765591537852-220d63',
+          status: '実装あり',
+          scores: { ui: 85, clarity: 85, speed: 95, quality: 90, fit: 95, complete: 90 },
+          findings: [
+            'DetailViewContextで詳細表示中はCanvasを非表示＆frameloop="never"にして3D描画を停止、UI表示を優先。',
+            'LazyVideo/LazyImageを新設しIntersectionObserverで手前100pxから動画・画像を遅延読込、サムネ/詳細とも軽量化。',
+            'アニメーションをクイックバリアント(0.12〜0.15s)に変更し、スクロールトップリセットも多重で即時。'
+          ],
+          logs: [
+            '8f2b347 perf: use snappy animations for detail pages',
+            '16e795d feat: add lazy loading for videos and images',
+            'b9dc1d6 feat: freeze 3D scene when detail page is open',
+            'd590a77 fix: increase mobile scroll pages to 12',
+            '29a8fa7 fix: mobile scroll issue by increasing pages dynamically and adding footer padding'
+          ],
+          diffs: [
+            'App.tsx: DetailViewContextで詳細時にCanvasを隠しframeloopを停止。',
+            'Overlay: setIsDetailOpenで3D停止制御、Quickアニメ、LazyVideo/LazyImageをカードと詳細に適用。',
+            'components/LazyVideo.tsx, contexts/DetailViewContext.tsxを追加しIntersectionObserverで遅延読込。'
+          ],
+          links: ['../.worktrees/task-1765591537852-220d63/index.html'],
+          reason: 'Lazyロード＋3D停止の両輪で遷移体感が大幅改善。要件に最も適合。'
+        },
+        {
+          id: 'task-1765591538052-db7477',
+          ai: 'task/task-1765591538052-db7477',
+          status: '実装あり',
+          scores: { ui: 65, clarity: 60, speed: 60, quality: 60, fit: 55, complete: 55 },
+          findings: [
+            '詳細ページ用の高速アニメーション(fadeUpFast/staggerFast)を追加し遷移時間を短縮。',
+            'それ以外の構造やメディア読み込みは従来のままで、Lazy/PFは未実装。',
+            '3D停止やプリフェッチが無いため重いメディアでは改善幅が限定的。'
+          ],
+          logs: [
+            'eaa7081 perf: 詳細ページ遷移のアニメーションを高速化',
+            'd590a77 fix: increase mobile scroll pages to 12',
+            '29a8fa7 fix: mobile scroll issue by increasing pages dynamically and adding footer padding',
+            'a1bef45 Build: Update docs with latest changes',
+            'b8934e8 Fix: Remove accidental worktree submodules and ignore .worktrees'
+          ],
+          diffs: [
+            'Overlay: fadeUpFast/staggerContainerFastを導入し詳細遷移を0.25s程度に短縮。',
+            'ビルド済みindex-CZkx5F-v.js更新のみでメディアの読み込み方式は従来通り。'
+          ],
+          links: ['../.worktrees/task-1765591538052-db7477/index.html'],
+          reason: '演出スピードは向上したが、ロード負荷への対策が不足。'
+        },
+      ];
+
+      const maxTotal = 600;
+
+      function calcTotal(scores) {
+        return metricDefs.reduce((sum, m) => sum + (scores[m.key] || 0), 0);
+      }
+
+      function trophy(total) {
+        if (total >= 540) return '🏆';
+        if (total >= 420) return '🥇';
+        if (total >= 300) return '🥈';
+        if (total >= 180) return '🥉';
+        return '❌';
+      }
+
+      function renderHexChart(container, scores) {
+        const size = 160;
+        const center = size / 2;
+        const radius = 68;
+        const levels = [20, 40, 60, 80, 100];
+        const pointsFor = (levelValues) => {
+          return metricDefs
+            .map((m, i) => {
+              const angle = (-90 + i * 60) * (Math.PI / 180);
+              const r = (radius * levelValues[i]) / 100;
+              const x = center + r * Math.cos(angle);
+              const y = center + r * Math.sin(angle);
+              return `${x.toFixed(1)},${y.toFixed(1)}`;
+            })
+            .join(' ');
+        };
+
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+
+        levels.forEach((lvl) => {
+          const bg = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+          const vals = Array(metricDefs.length).fill(lvl);
+          bg.setAttribute('points', pointsFor(vals));
+          bg.setAttribute('fill', 'none');
+          bg.setAttribute('stroke', '#c4d3d7');
+          bg.setAttribute('stroke-width', '1');
+          svg.appendChild(bg);
+        });
+
+        const axisColor = '#d8e6e9';
+        metricDefs.forEach((m, i) => {
+          const angle = (-90 + i * 60) * (Math.PI / 180);
+          const x = center + radius * Math.cos(angle);
+          const y = center + radius * Math.sin(angle);
+          const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+          line.setAttribute('x1', center);
+          line.setAttribute('y1', center);
+          line.setAttribute('x2', x);
+          line.setAttribute('y2', y);
+          line.setAttribute('stroke', axisColor);
+          line.setAttribute('stroke-width', '1');
+          svg.appendChild(line);
+        });
+
+        const valuePolygon = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+        const scoreValues = metricDefs.map((m) => scores[m.key] || 0);
+        valuePolygon.setAttribute('points', pointsFor(scoreValues));
+        valuePolygon.setAttribute('fill', 'rgba(67, 149, 181, 0.28)');
+        valuePolygon.setAttribute('stroke', '#4395b5');
+        valuePolygon.setAttribute('stroke-width', '2');
+        svg.appendChild(valuePolygon);
+
+        container.innerHTML = '';
+        container.appendChild(svg);
+      }
+
+      function createMetricsList(scores) {
+        const ul = document.createElement('ul');
+        ul.className = 'metrics-list';
+        metricDefs.forEach((m) => {
+          const li = document.createElement('li');
+          li.textContent = `${m.label}: ${scores[m.key] || 0}点`;
+          ul.appendChild(li);
+        });
+        return ul;
+      }
+
+      function createDetails(title, lines) {
+        const details = document.createElement('details');
+        const summary = document.createElement('summary');
+        summary.className = 'details-toggle';
+        summary.textContent = title;
+        details.appendChild(summary);
+        const pre = document.createElement('pre');
+        pre.textContent = lines.join('\n');
+        details.appendChild(pre);
+        return details;
+      }
+
+      function fillScoreboard() {
+        const sb = document.getElementById('scoreboard');
+        evaluations.forEach((ev) => {
+          const total = calcTotal(ev.scores);
+          const card = document.createElement('div');
+          card.className = 'score-card';
+          const h3 = document.createElement('h3');
+          h3.textContent = `${ev.ai}`;
+          const scoreRow = document.createElement('div');
+          scoreRow.className = 'score';
+          const icon = trophy(total);
+          const scoreText = `${total}/${maxTotal}`;
+          scoreRow.textContent = `${icon} ${scoreText}`;
+          const reason = document.createElement('div');
+          reason.className = 'badge-reason';
+          reason.textContent = ev.reason;
+          card.appendChild(h3);
+          card.appendChild(scoreRow);
+          card.appendChild(reason);
+          sb.appendChild(card);
+        });
+      }
+
+      function fillTable() {
+        evaluations.forEach((ev) => {
+          const cell = document.querySelector(`td[data-branch="${ev.id}"]`);
+          if (!cell) return;
+          const total = calcTotal(ev.scores);
+
+          const meta = document.createElement('div');
+          meta.className = 'agent-meta';
+          const badge = document.createElement('span');
+          badge.className = 'status-badge status-badge--pending';
+          badge.textContent = ev.status;
+          const label = document.createElement('span');
+          label.className = 'agent-label';
+          label.textContent = `${ev.ai}`;
+          meta.appendChild(badge);
+          meta.appendChild(label);
+
+          const chart = document.createElement('div');
+          chart.className = 'hex-chart';
+          renderHexChart(chart, ev.scores);
+
+          const metricsList = createMetricsList(ev.scores);
+
+          const summary = document.createElement('div');
+          summary.className = 'snapshot-summary';
+          summary.textContent = `合計: ${total}/${maxTotal} (${trophy(total)})`;
+
+          const findings = document.createElement('ul');
+          findings.style.paddingLeft = '16px';
+          findings.style.margin = '6px 0 10px';
+          findings.style.fontSize = '12px';
+          ev.findings.forEach((f) => {
+            const li = document.createElement('li');
+            li.textContent = f;
+            findings.appendChild(li);
+          });
+
+          const links = document.createElement('div');
+          links.className = 'link-list';
+          links.innerHTML = '<strong>成果物</strong><br />' + ev.links.map((l) => `<a href="${l}">${l}</a>`).join('<br />');
+
+          cell.appendChild(meta);
+          cell.appendChild(chart);
+          cell.appendChild(metricsList);
+          cell.appendChild(summary);
+          cell.appendChild(findings);
+          cell.appendChild(createDetails('コミットログ', ev.logs));
+          cell.appendChild(createDetails('差分サマリ', ev.diffs));
+          cell.appendChild(links);
+        });
+      }
+
+      fillScoreboard();
+      fillTable();
+    </script>
+  </body>
+</html>

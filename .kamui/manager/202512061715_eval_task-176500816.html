@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>評価レポート</title>
+    <style>
+      body {
+        margin: 24px;
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, sans-serif;
+        background: #f2f6f7;
+        color: #1f2a30;
+      }
+      .eval-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+        padding: 32px;
+      }
+      .eval-header {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 24px;
+      }
+      .eval-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+        color: #1f2a30;
+      }
+      .summary {
+        font-size: 15px;
+        line-height: 1.7;
+        color: #2f3a42;
+      }
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 12px;
+        margin: 20px 0 28px;
+      }
+      .score-card {
+        border: 1px solid #c4d3d7;
+        background: #eef3f4;
+        padding: 16px;
+      }
+      .score-card h3 {
+        margin: 0 0 8px;
+        font-size: 15px;
+        letter-spacing: 0.02em;
+      }
+      .score-value {
+        font-size: 26px;
+        font-weight: 700;
+        color: #1f2a30;
+      }
+      .score-meta {
+        font-size: 12px;
+        color: #3a4b53;
+      }
+      .comparison-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 16px;
+      }
+      .agent-card {
+        border: 1px solid #c4d3d7;
+        padding: 18px;
+        background: #ffffff;
+      }
+      .agent-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .agent-title {
+        font-size: 16px;
+        font-weight: 700;
+      }
+      .badge {
+        display: inline-block;
+        font-size: 12px;
+        padding: 4px 8px;
+        border: 1px solid #b8c9cd;
+        background: #d8e6e9;
+      }
+      .medal-gold { background: #f8f3d4; border-color: #e7d47a; }
+      .medal-silver { background: #ecf0f3; border-color: #c4cbd3; }
+      .medal-bronze { background: #f2e4d6; border-color: #d6b58c; }
+      .chart-wrapper { display: grid; grid-template-columns: 160px 1fr; gap: 12px; align-items: center; }
+      .radar {
+        width: 160px;
+        height: 160px;
+        border: 1px solid #c4d3d7;
+        background: #f7fafa;
+      }
+      .metrics-list { margin: 0; padding-left: 16px; color: #2f3a42; font-size: 13px; line-height: 1.6; }
+      .section {
+        margin-top: 12px;
+      }
+      .section h4 { margin: 0 0 6px; font-size: 14px; }
+      .section ul { margin: 0; padding-left: 18px; line-height: 1.6; color: #2f3a42; }
+      .section p { margin: 0 0 6px; line-height: 1.6; color: #2f3a42; }
+      code { background: #eef3f4; padding: 2px 5px; font-size: 12px; }
+    </style>
+    <script>
+      function renderRadar(el) {
+        const scores = (el.dataset.scores || '').split(',').map((v) => parseInt(v.trim(), 10) || 0);
+        const labels = (el.dataset.labels || '').split(',');
+        const size = 160;
+        const cx = size / 2;
+        const cy = size / 2;
+        const radius = 65;
+        const step = (Math.PI * 2) / scores.length;
+        const maxPoints = [];
+        const valuePoints = [];
+        scores.forEach((score, i) => {
+          const angle = -Math.PI / 2 + step * i;
+          const rFull = radius;
+          const rVal = radius * (Math.min(Math.max(score, 0), 100) / 100);
+          maxPoints.push(`${cx + Math.cos(angle) * rFull},${cy + Math.sin(angle) * rFull}`);
+          valuePoints.push(`${cx + Math.cos(angle) * rVal},${cy + Math.sin(angle) * rVal}`);
+        });
+        const ns = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', `0 0 ${size} ${size}`);
+        svg.classList.add('radar');
+
+        const grid = document.createElementNS(ns, 'polygon');
+        grid.setAttribute('points', maxPoints.join(' '));
+        grid.setAttribute('fill', '#d8e6e9');
+        grid.setAttribute('stroke', '#b8c9cd');
+        grid.setAttribute('stroke-width', '1');
+        svg.appendChild(grid);
+
+        const poly = document.createElementNS(ns, 'polygon');
+        poly.setAttribute('points', valuePoints.join(' '));
+        poly.setAttribute('fill', '#f4b05755');
+        poly.setAttribute('stroke', '#f4b057');
+        poly.setAttribute('stroke-width', '2');
+        svg.appendChild(poly);
+
+        el.innerHTML = '';
+        el.appendChild(svg);
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('[data-radar="true"]').forEach((el) => renderRadar(el));
+      });
+    </script>
+  </head>
+  <body>
+    <div class="eval-wrapper">
+      <header class="eval-header">
+        <h1 class="eval-title">評価レポート</h1>
+        <p class="summary">
+          タスク: カレー屋みろく (369 CURRY) のLPを4名のエージェントが実装。ヒーロー、メニュー（骨付きチキン / チキンキーマ / チャイ / 大盛り / チャイセット）、営業時間（日〜水 19:30〜22:00）、所在地（白馬五竜 ペンションくるみ / 〒399-9211 長野県北安曇郡白馬村神城22385-3）を正確に伝え、来店意欲を高めるUI/コピー/導線を競った。
+        </p>
+      </header>
+
+      <section class="scoreboard">
+        <div class="score-card">
+          <h3>task-1765008164145-63238f 🏆</h3>
+          <div class="score-value">554 / 600</div>
+          <div class="score-meta">評価軸: UI・情報整理・訴求力・レスポンシブ・正確性・実装品質</div>
+        </div>
+        <div class="score-card">
+          <h3>task-1765008163943-948d56 🥇</h3>
+          <div class="score-value">530 / 600</div>
+          <div class="score-meta">ダークトーンLPに再構成、ビルド済み</div>
+        </div>
+        <div class="score-card">
+          <h3>task-1765008164344-ea0af2 🥈</h3>
+          <div class="score-value">499 / 600</div>
+          <div class="score-meta">3D依存を排除しシンプルLP化、2コミット</div>
+        </div>
+        <div class="score-card">
+          <h3>task-1765008164543-67d811 🥉</h3>
+          <div class="score-value">447 / 600</div>
+          <div class="score-meta">静的HTML/CSSでLP構築、Map埋め込み座標が仮置き</div>
+        </div>
+      </section>
+
+      <section class="comparison-grid">
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1765008164145-63238f</div>
+            <span class="badge medal-gold">Gold</span>
+          </div>
+          <div class="chart-wrapper">
+            <div data-radar="true" data-scores="94,91,92,90,95,92" data-labels="UI,情報,訴求,レスポンシブ,正確性,実装"></div>
+            <ul class="metrics-list">
+              <li>UI/ビジュアル 94点</li>
+              <li>情報整理 91点</li>
+              <li>来店訴求 92点</li>
+              <li>レスポンシブ 90点</li>
+              <li>正確性 95点</li>
+              <li>実装品質 92点</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>所見</h4>
+            <ul>
+              <li>ヒーローに営業時間/住所/CTAを明示し、メニュー＋セット、大きめカードでブランドの温度感を表現。</li>
+              <li>Hours & Access セクションに地図埋め込みと外部リンクを配置し、実用導線が明快。</li>
+              <li>アニメーション控えめで読みやすく、余白・背景オーナメントも抑制的。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>改善余地</h4>
+            <ul>
+              <li>スマホ幅での余白をもう少しタイトにし、CTAの並びを縦積みにすると視認性がさらに向上。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <p>コミット: <code>e8c1ceb</code>（LP実装）, <code>d742a8d</code>（ビルド更新）</p>
+            <p>主要ファイル: <code>.worktrees/task-1765008164145-63238f/App.tsx</code>, <code>.worktrees/task-1765008164145-63238f/docs/index.html</code></p>
+            <p>成果物: <code>.worktrees/task-1765008164145-63238f/docs/index.html</code></p>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1765008163943-948d56</div>
+            <span class="badge medal-gold">Gold</span>
+          </div>
+          <div class="chart-wrapper">
+            <div data-radar="true" data-scores="90,86,88,88,90,88" data-labels="UI,情報,訴求,レスポンシブ,正確性,実装"></div>
+            <ul class="metrics-list">
+              <li>UI/ビジュアル 90点</li>
+              <li>情報整理 86点</li>
+              <li>来店訴求 88点</li>
+              <li>レスポンシブ 88点</li>
+              <li>正確性 90点</li>
+              <li>実装品質 88点</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>所見</h4>
+            <ul>
+              <li>ダーク＋ゴールド基調で統一感が高く、メニュー・住所・営業時間を要素カードで整理。</li>
+              <li>ヒーローとストーリーカードのコピーが情緒的で、来店シーンを想起させる。</li>
+              <li>アクセスにランドマーク説明はあるが、地図埋め込みがなく実用導線が弱い。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>改善余地</h4>
+            <ul>
+              <li>Google Map埋め込み or ルートボタンを追加すると即時性が上がる。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <p>コミット: <code>68834e7</code>（LP化+ビルド）</p>
+            <p>主要ファイル: <code>.worktrees/task-1765008163943-948d56/App.tsx</code>, <code>.worktrees/task-1765008163943-948d56/index.html</code></p>
+            <p>成果物: <code>.worktrees/task-1765008163943-948d56/docs/index.html</code></p>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1765008164344-ea0af2</div>
+            <span class="badge medal-silver">Silver</span>
+          </div>
+          <div class="chart-wrapper">
+            <div data-radar="true" data-scores="84,80,82,86,83,84" data-labels="UI,情報,訴求,レスポンシブ,正確性,実装"></div>
+            <ul class="metrics-list">
+              <li>UI/ビジュアル 84点</li>
+              <li>情報整理 80点</li>
+              <li>来店訴求 82点</li>
+              <li>レスポンシブ 86点</li>
+              <li>正確性 83点</li>
+              <li>実装品質 84点</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>所見</h4>
+            <ul>
+              <li>3D依存を除去し、フレームワークを軽量化してLPを実装。メニュー/営業時間/住所を明確に表示。</li>
+              <li>アニメーションはframer-motionで滑らか、情報はカードで整理され読みやすい。</li>
+              <li>アクセス導線（地図リンク/埋め込み）がなく、来店直結の動線が弱め。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>改善余地</h4>
+            <ul>
+              <li>Google Map埋め込みや「道順を見る」ボタンを追加して実用性を補強。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <p>コミット: <code>dbc4a5f</code>（LP実装）, <code>d56b109</code>（不要ファイル削除）</p>
+            <p>主要ファイル: <code>.worktrees/task-1765008164344-ea0af2/App.tsx</code>, <code>.worktrees/task-1765008164344-ea0af2/index.html</code></p>
+            <p>成果物: <code>.worktrees/task-1765008164344-ea0af2/docs/index.html</code></p>
+          </div>
+        </div>
+
+        <div class="agent-card">
+          <div class="agent-header">
+            <div class="agent-title">task-1765008164543-67d811</div>
+            <span class="badge medal-bronze">Bronze</span>
+          </div>
+          <div class="chart-wrapper">
+            <div data-radar="true" data-scores="78,72,74,80,68,75" data-labels="UI,情報,訴求,レスポンシブ,正確性,実装"></div>
+            <ul class="metrics-list">
+              <li>UI/ビジュアル 78点</li>
+              <li>情報整理 72点</li>
+              <li>来店訴求 74点</li>
+              <li>レスポンシブ 80点</li>
+              <li>正確性 68点</li>
+              <li>実装品質 75点</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>所見</h4>
+            <ul>
+              <li>静的HTML/CSSのみで構成し、縦書きナビやフェードインなど演出を追加。</li>
+              <li>メニュー・営業時間・住所・地図iframeを掲載し基本情報は網羅。</li>
+              <li>Map埋め込みがダミー座標で正確性に課題。コピーも簡潔だが訴求は控えめ。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <h4>改善余地</h4>
+            <ul>
+              <li>地図を正しい座標に差し替え、CTAボタンを追加して来店動機を強化。</li>
+            </ul>
+          </div>
+          <div class="section">
+            <p>コミット: <code>f463e8f</code>（LP追加）</p>
+            <p>主要ファイル: <code>.worktrees/task-1765008164543-67d811/miroku-curry/index.html</code>, <code>.worktrees/task-1765008164543-67d811/miroku-curry/style.css</code></p>
+            <p>成果物: <code>.worktrees/task-1765008164543-67d811/miroku-curry/index.html</code></p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
