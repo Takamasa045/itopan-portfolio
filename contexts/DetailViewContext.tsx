@@ -5,7 +5,7 @@ interface DetailViewContextType {
   setIsDetailOpen: (open: boolean) => void;
 }
 
-const DetailViewContext = createContext<DetailViewContextType | null>(null);
+export const DetailViewContext = createContext<DetailViewContextType | null>(null);
 
 export const DetailViewProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [isDetailOpen, setIsDetailOpen] = useState(false);

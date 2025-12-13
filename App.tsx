@@ -1,12 +1,13 @@
 import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
-import { Loader } from '@react-three/drei';
+import { Loader, useContextBridge } from '@react-three/drei';
 import { Experience } from './components/Experience';
-import { DetailViewProvider, useDetailView } from './contexts/DetailViewContext';
+import { DetailViewContext, DetailViewProvider, useDetailView } from './contexts/DetailViewContext';
 
 // Inner component that uses the context
 const AppContent: React.FC = () => {
   const { isDetailOpen } = useDetailView();
+  const ContextBridge = useContextBridge(DetailViewContext);
 
   return (
     <>
@@ -20,10 +21,12 @@ const AppContent: React.FC = () => {
           gl={{ antialias: true, alpha: false }}
           frameloop={isDetailOpen ? 'never' : 'always'}
         >
-          <color attach="background" args={['#020403']} />
-          <Suspense fallback={null}>
-            <Experience />
-          </Suspense>
+          <ContextBridge>
+            <color attach="background" args={['#020403']} />
+            <Suspense fallback={null}>
+              <Experience />
+            </Suspense>
+          </ContextBridge>
         </Canvas>
         <Loader
           containerStyles={{ background: '#020403' }}
