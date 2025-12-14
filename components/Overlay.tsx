@@ -363,20 +363,21 @@ export const Overlay: React.FC = () => {
             <p>
               関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」。北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。そうした断片を生成AIで整理・再編集し、物語、デザイン、映像、体験へと翻訳し直すことで、現代に通用するコンテンツとして立ち上げていく。
             </p>
-            <motion.div variants={fadeUp} className="mt-6 pt-4 border-t border-emerald-900/30 text-center">
-              <p className="text-emerald-400 text-sm font-mono tracking-wide hover:text-emerald-300 transition-colors">
-                → 詳しくはAboutページへ
-              </p>
-            </motion.div>
           </motion.div>
 
-          <motion.div variants={fadeUp} className="mt-10">
+          <motion.div variants={fadeUp} className="mt-10 flex flex-col items-center gap-4">
             <button
               onClick={handleShowAbout}
-              className="inline-block px-8 py-3 border border-emerald-500/50 text-emerald-400 hover:bg-emerald-900/30 hover:text-emerald-200 transition-all duration-300 rounded-sm font-mono text-sm"
+              className="group inline-flex items-center gap-3 px-8 py-4 bg-emerald-950/40 hover:bg-emerald-900/60 border-2 border-emerald-700/50 hover:border-emerald-500 text-emerald-400 hover:text-emerald-300 transition-all duration-300 rounded-md font-mono text-sm shadow-lg hover:shadow-emerald-500/20"
             >
-              About / イトパンについて &rarr;
+              <span>About / イトパンについて</span>
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
+            <p className="text-stone-500 text-xs font-mono">
+              より詳しい情報はこちら
+            </p>
           </motion.div>
         </motion.div>
       </Section>
@@ -555,9 +556,12 @@ export const Overlay: React.FC = () => {
 
             <button
               onClick={handleShowAbout}
-              className="text-emerald-500 hover:text-emerald-300 text-sm font-mono tracking-wide transition-colors"
+              className="group inline-flex items-center gap-2 px-6 py-3 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-700/50 hover:border-emerald-500 text-emerald-400 hover:text-emerald-300 transition-all duration-300 rounded-md font-mono text-sm"
             >
-              About / イトパンについて &rarr;
+              <span>About / イトパンについて</span>
+              <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           </motion.div>
 
