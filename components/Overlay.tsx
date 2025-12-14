@@ -361,11 +361,13 @@ export const Overlay: React.FC = () => {
               長野・北アルプス山麓を拠点に、コード／デザイン／映像／文章／体験設計を行き来しながら、生成AIを前提にしたものづくりとワークフローの設計に取り組んでいます。
             </p>
             <p>
-              関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」。北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。
+              関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」。北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。そうした断片を生成AIで整理・再編集し、物語、デザイン、映像、体験へと翻訳し直すことで、現代に通用するコンテンツとして立ち上げていく。
             </p>
-            <p>
-              そうした断片を生成AIで整理・再編集し、物語、デザイン、映像、体験といった形へ翻訳し直すことで、現代に通用するコンテンツとして立ち上げていく。そのプロセスや「編集のしかた」そのものも含めて、日本のソフトパワーを未来へつなぐ実践として発信しています。
-            </p>
+            <motion.div variants={fadeUp} className="mt-6 pt-4 border-t border-emerald-900/30 text-center">
+              <p className="text-emerald-400 text-sm font-mono tracking-wide hover:text-emerald-300 transition-colors">
+                → 詳しくはAboutページへ
+              </p>
+            </motion.div>
           </motion.div>
 
           <motion.div variants={fadeUp} className="mt-10">
@@ -693,14 +695,33 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
         <motion.button
           variants={quickFade}
           onClick={onBack}
-          className="text-emerald-500 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest"
+          className="group text-emerald-400 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest bg-emerald-950/40 hover:bg-emerald-900/60 px-4 py-2 rounded-md border border-emerald-700/50 hover:border-emerald-500 transition-all duration-300"
         >
-          ← BACK TO ALL PROJECTS
+          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>BACK TO ALL PROJECTS</span>
         </motion.button>
         <motion.div variants={quickFade} className="text-xs font-mono text-stone-600 hidden md:block">
           COLLECTION ID: {project.id.toUpperCase()}
         </motion.div>
       </div>
+
+      {/* Fixed Back Button - Bottom Right (for scroll visibility) */}
+      <motion.div
+        variants={quickFade}
+        className="fixed bottom-6 right-6 z-50"
+      >
+        <button
+          onClick={onBack}
+          className="group text-emerald-400 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest bg-emerald-950/60 hover:bg-emerald-900/60 backdrop-blur-md px-5 py-3 rounded-md border-2 border-emerald-700/50 hover:border-emerald-500 transition-all duration-300 shadow-lg hover:shadow-emerald-500/20"
+        >
+          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>BACK</span>
+        </button>
+      </motion.div>
 
       {/* Collection Info Section */}
       <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">

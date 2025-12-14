@@ -35,16 +35,35 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
       variants={quickStagger}
       className="w-full min-h-screen"
     >
-      {/* Fixed Back Button */}
+      {/* Fixed Back Button - Top Left */}
       <motion.div
         variants={quickFade}
         className="fixed top-6 left-6 z-50"
       >
         <button
           onClick={onBack}
-          className="text-emerald-500 hover:text-emerald-300 flex items-center gap-2 text-xs font-mono tracking-widest bg-black/40 backdrop-blur-sm px-4 py-2 rounded-sm border border-emerald-900/30 hover:border-emerald-500/50 transition-all"
+          className="group text-emerald-400 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest bg-emerald-950/60 hover:bg-emerald-900/60 backdrop-blur-md px-5 py-3 rounded-md border-2 border-emerald-700/50 hover:border-emerald-500 transition-all duration-300 shadow-lg hover:shadow-emerald-500/20"
         >
-          ← BACK
+          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>BACK</span>
+        </button>
+      </motion.div>
+
+      {/* Fixed Back Button - Bottom Right (for scroll visibility) */}
+      <motion.div
+        variants={quickFade}
+        className="fixed bottom-6 right-6 z-50"
+      >
+        <button
+          onClick={onBack}
+          className="group text-emerald-400 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest bg-emerald-950/60 hover:bg-emerald-900/60 backdrop-blur-md px-5 py-3 rounded-md border-2 border-emerald-700/50 hover:border-emerald-500 transition-all duration-300 shadow-lg hover:shadow-emerald-500/20"
+        >
+          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>BACK</span>
         </button>
       </motion.div>
 
@@ -351,9 +370,12 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
         <motion.div variants={quickFade} className="max-w-6xl mx-auto text-center">
           <button
             onClick={onBack}
-            className="inline-flex items-center gap-2 px-8 py-4 border border-emerald-500/30 text-emerald-400 hover:bg-emerald-900/20 hover:border-emerald-500/50 transition-all duration-300 rounded-sm font-mono text-sm"
+            className="group inline-flex items-center gap-3 px-8 py-4 bg-emerald-950/40 hover:bg-emerald-900/60 border-2 border-emerald-700/50 hover:border-emerald-500 text-emerald-400 hover:text-emerald-300 transition-all duration-300 rounded-md font-mono text-sm shadow-lg hover:shadow-emerald-500/20"
           >
-            ← BACK TO HOME
+            <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>BACK TO HOME</span>
           </button>
           <p className="text-stone-700 text-xs mt-8">
             &copy; 2025 Takamasa Ito / ITOPAN
