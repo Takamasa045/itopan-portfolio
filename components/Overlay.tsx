@@ -375,8 +375,8 @@ export const Overlay: React.FC = () => {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
-            <p className="text-stone-500 text-xs font-mono">
-              より詳しい情報はこちら
+            <p className="text-stone-400 text-xs font-mono italic">
+              日本のソフトパワーと「編集のしかた」について →
             </p>
           </motion.div>
         </motion.div>
