@@ -353,15 +353,18 @@ export const Overlay: React.FC = () => {
           className="max-w-3xl bg-emerald-950/20 backdrop-blur-sm p-8 md:p-12 rounded-sm border border-emerald-900/30"
         >
           <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl mb-12 font-serif tracking-wide text-stone-200">
-            開発とクリエイティブの境界を、<br />生成AIでなめらかに溶かす。
+            開発 × クリエイティブ × 生成AIで、<br />「こうなったら面白い」を形にしていく。
           </motion.h3>
 
           <motion.div variants={fadeUp} className="text-sm md:text-lg leading-loose text-stone-300 font-light space-y-6 text-justify">
             <p>
-              コード・デザイン・映像・体験── 領域を横断しながら、新しいモデルやツール、ワークフローを実際に手で確かめ、"欲しい世界観"をプロトタイプとして形にしていく。
+              長野・北アルプス山麓を拠点に、コード／デザイン／映像／文章／体験設計を行き来しながら、生成AIを前提にしたものづくりとワークフローの設計に取り組んでいます。
             </p>
             <p>
-              そうした"生成AI時代のものづくり"に向き合う姿勢と、自分が本当に使いたい技術・見てみたい世界観を選び抜いて試したアウトプットを静かにまとめた場所です。
+              関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」。北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。
+            </p>
+            <p>
+              そうした断片を生成AIで整理・再編集し、物語、デザイン、映像、体験といった形へ翻訳し直すことで、現代に通用するコンテンツとして立ち上げていく。そのプロセスや「編集のしかた」そのものも含めて、日本のソフトパワーを未来へつなぐ実践として発信しています。
             </p>
           </motion.div>
 
