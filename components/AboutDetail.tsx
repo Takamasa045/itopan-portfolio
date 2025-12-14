@@ -63,9 +63,17 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             「こうなったら面白い」を形にしていく<br />
             <span className="text-emerald-400 font-normal">イトパン（伊藤貴將）</span>です。
           </p>
-          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">
+          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light mb-6">
             長野・北アルプス山麓を拠点に、コード／デザイン／映像／文章／体験設計を行き来しながら、
             生成AIを前提にしたものづくりとワークフローづくりをしています。
+          </p>
+          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light mb-6">
+            また、北アルプス山麓の土地の情報や歴史にも関心があります。
+            地名の由来、史料、暮らしの中に残る習慣。さらに、縄文から積み重なる土地の層や、安曇族の系譜のような断片も含めて、少しずつ資料をあたり、現地を歩きながら手触りのある情報を集めているところです。
+          </p>
+          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">
+            集めた断片を、生成AIで整理し直し、物語やデザイン、映像、体験の形に翻訳していく。
+            その"編集のしかた"自体を、これから育てていきたいと思っています。🗻📚🤖
           </p>
         </motion.div>
 
@@ -122,23 +130,22 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               </div>
               <div className="lg:col-span-8 text-stone-400 leading-loose font-light space-y-6">
                 <p>
-                  22.9〜画像生成AI、24年は動画生成、25年はAIエージェント／MCP・ワークフローにフルベット。
-                  新しいモデルやツールが出るたびに、自腹でクレジットを溶かし続け、
-                  仕事以外のほとんどの時間を、AIの検証と実験に注いできました。
+                  2022年から画像生成AI、2024年は動画生成、2025年はAIエージェント／MCP・ワークフローに注力してきました。
+                  新しいモデルやツールが出るたびに自腹で試し続け、仕事以外の多くの時間をAIの検証と実験に注いできました。
                 </p>
                 <div className="bg-stone-900/30 border-l-2 border-emerald-500/50 p-6">
                   <ul className="space-y-2 text-stone-300">
                     <li>このモデルはどこまで使えるか</li>
-                    <li>どこがまだツラいのか</li>
+                    <li>どこがまだ厳しいのか</li>
                     <li>現場で気持ちよく回る組み合わせは何か</li>
                   </ul>
                 </div>
                 <p>
-                  を、自分の手で確かめ続けてきた結果、AIそのものが仕事になる案件が少しずつ増えてきています。
+                  それを自分の手で確かめ続けてきた結果、お仕事になる案件が少しずつ増えてきています。
                 </p>
                 <p className="text-stone-200 text-lg bg-emerald-950/30 p-6 rounded-sm border border-emerald-900/30">
-                  その人・そのチームにとって、どんなAIの使い方がしっくりくるのか？<br />
-                  <span className="text-emerald-400">それぞれの「自分なりのAI活用スタイル」</span>を一緒に見つけていく伴走役でありたい。
+                  その人・そのチームにとって、どんなAIの使い方がしっくりくるのか。<br />
+                  <span className="text-emerald-400">それぞれの「自分なりのAI活用スタイル」</span>を一緒に見つけていく伴走役でありたいと思っています。
                 </p>
               </div>
             </motion.div>
@@ -154,8 +161,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               <div className="lg:col-span-8 text-stone-400 leading-loose font-light space-y-6">
                 <p>
                   エンジニアだけ、デザイナーだけ、ではなく、
-                  コードも、デザインも、映像も、テキストも、
-                  ゆるくまたいで触っていける状態をつくることに関心があります。
+                  コードも、デザインも、映像も、テキストも、ゆるくまたいで触っていける状態をつくることに関心があります。
                 </p>
                 <div className="bg-stone-900/30 border-l-2 border-emerald-500/50 p-6">
                   <ul className="space-y-2 text-stone-300">
@@ -164,7 +170,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
                   </ul>
                 </div>
                 <p>
-                  そんな人たちが、生成AIを入り口に両側へ踏み出せるような橋渡しをしていきたい。
+                  そんな人たちが、生成AIを入口に両側へ踏み出せるような橋渡しをしていきたい。
                 </p>
                 <p className="text-stone-200">
                   プロのエンジニア／クリエイターだけのものにせず、<br />
@@ -184,13 +190,11 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               <div className="lg:col-span-8 text-stone-400 leading-loose font-light space-y-6">
                 <p>
                   AIを「効率化ツール」として線を引いてしまうのではなく、
-                </p>
-                <p className="text-stone-200 text-lg bg-emerald-950/30 p-6 rounded-sm border border-emerald-900/30">
-                  これから自分たちは、AIとどう付き合っていくのか？<br />
-                  どんな仕事の仕方・表現の仕方があり得るのか？
+                  これから自分たちは、AIとどう付き合っていくのか。
+                  どんな仕事の仕方・表現の仕方があり得るのか。
                 </p>
                 <p>
-                  を一緒に考え、言語化し、具体的な形に落としていく相棒だと捉えています。
+                  それを一緒に考え、言語化し、具体的な形に落としていく相棒だと捉えています。
                 </p>
                 <div className="bg-stone-900/30 border-l-2 border-emerald-500/50 p-6">
                   <p className="text-stone-300 mb-4">ヒアリングと対話を通して：</p>
@@ -225,7 +229,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             <ServiceCard
               icon="01"
               title="生成AI × 映像・Web・体験のプロトタイプ"
-              description="画像／動画／音楽モデルを組み合わせた制作"
+              description="Webサイト／画像／動画／音楽モデルを組み合わせた制作"
             />
             <ServiceCard
               icon="02"
@@ -265,6 +269,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
                 </ul>
                 <p className="text-stone-500 text-sm font-light">
                   「まだぼんやりしているアイデア」や「そもそも何から始めればいいかわからない」といった段階からでも大丈夫です。
+                  お気軽にご連絡ください。📩
                 </p>
               </div>
 
