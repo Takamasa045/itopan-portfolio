@@ -63,28 +63,10 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             「こうなったら面白い」を形にしていく<br />
             <span className="text-emerald-400 font-normal">イトパン（伊藤貴將）</span>です。
           </p>
-          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light mb-6">
+          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">
             長野・北アルプス山麓を拠点に、<br />
             コード／デザイン／映像／文章／体験設計を行き来しながら、<br />
             生成AIを前提にしたものづくりとワークフローの設計に取り組んでいます。
-          </p>
-          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light mb-6">
-            関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」です。<br />
-            北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。<br />
-            さらに、縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、<br />
-            資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。
-          </p>
-          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light mb-6">
-            そうした断片は、単なる過去の記録ではなく、<br />
-            物語性・思想・美意識を内包した、日本独自の文化資源だと捉えています。<br />
-            集めた情報を生成AIで整理・再編集し、<br />
-            物語、デザイン、映像、体験といった形へ翻訳し直すことで、<br />
-            現代に通用するコンテンツとして立ち上げていきます。
-          </p>
-          <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">
-            また、その過程で生まれる<br />
-            「どう編集し、どう接続し、どう発信するか」という方法論そのものも含めて、<br />
-            日本のソフトパワーを未来へつなぐ実践として発信していきます。
           </p>
         </motion.div>
 
@@ -120,6 +102,39 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             </a>
           </div>
         </motion.div>
+      </section>
+
+      {/* Vision Section */}
+      <section className="py-32 px-8 md:px-20 bg-gradient-to-b from-transparent via-emerald-950/10 to-transparent">
+        <div className="max-w-6xl mx-auto">
+          <motion.div variants={quickFade} className="mb-20 text-center">
+            <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">VISION</p>
+            <h2 className="text-3xl md:text-5xl font-serif text-stone-200">日本のソフトパワーを未来へ</h2>
+          </motion.div>
+
+          <motion.div variants={quickFade} className="max-w-4xl mx-auto space-y-8">
+            <p className="text-lg md:text-xl text-stone-300 leading-relaxed font-light">
+              関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」です。
+            </p>
+            <p className="text-base md:text-lg text-stone-400 leading-relaxed font-light">
+              北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。
+              さらに、縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、
+              資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。
+            </p>
+            <p className="text-base md:text-lg text-stone-400 leading-relaxed font-light">
+              そうした断片は、単なる過去の記録ではなく、
+              物語性・思想・美意識を内包した、日本独自の文化資源だと捉えています。
+              集めた情報を生成AIで整理・再編集し、
+              物語、デザイン、映像、体験といった形へ翻訳し直すことで、
+              現代に通用するコンテンツとして立ち上げていきます。
+            </p>
+            <p className="text-base md:text-lg text-stone-300 leading-relaxed font-light bg-emerald-950/30 p-8 rounded-sm border border-emerald-900/30">
+              また、その過程で生まれる<br />
+              「どう編集し、どう接続し、どう発信するか」という方法論そのものも含めて、<br />
+              日本のソフトパワーを未来へつなぐ実践として発信しています。
+            </p>
+          </motion.div>
+        </div>
       </section>
 
       {/* Philosophy Section */}
