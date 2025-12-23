@@ -78,10 +78,13 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
 
         <motion.div variants={quickFade} className="max-w-3xl">
           <p className="text-xl md:text-2xl text-stone-300 leading-relaxed font-light mb-8">
-            <span className="block">生成AI時代の制作を、</span>
-            <span className="block">設計して実装する。</span>
-            <span className="block">コード/デザイン/映像を横断して、</span>
-            <span className="block">仕組みまでつくる。</span>
+            <span className="inline-block">生成AI時代の制作を、</span>
+            <br className="hidden md:block" />
+            <span className="inline-block">設計して実装する。</span>
+            <br className="hidden md:block" />
+            <span className="inline-block">コード/デザイン/映像を横断して、</span>
+            <br className="hidden md:block" />
+            <span className="inline-block">仕組みまでつくる。</span>
             <span className="text-emerald-400 font-normal">伊藤貴將（いとうたかまさ）／イトパン</span>です。
           </p>
           <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">

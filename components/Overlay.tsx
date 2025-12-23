@@ -352,11 +352,14 @@ export const Overlay: React.FC = () => {
           variants={staggerContainer}
           className="max-w-3xl bg-emerald-950/20 backdrop-blur-sm p-8 md:p-12 rounded-sm border border-emerald-900/30"
         >
-          <motion.h3 variants={fadeUp} className="text-3xl md:text-4xl mb-12 font-serif tracking-wide text-stone-200">
-            <span className="block">生成AI時代の制作を、</span>
-            <span className="block">設計して実装する。</span>
-            <span className="block">コード/デザイン/映像を横断して、</span>
-            <span className="block">仕組みまでつくる。</span>
+          <motion.h3 variants={fadeUp} className="text-2xl md:text-4xl mb-12 font-serif tracking-wide text-stone-200">
+            <span className="inline-block">生成AI時代の制作を、</span>
+            <br className="hidden md:block" />
+            <span className="inline-block">設計して実装する。</span>
+            <br className="hidden md:block" />
+            <span className="inline-block">コード/デザイン/映像を横断して、</span>
+            <br className="hidden md:block" />
+            <span className="inline-block">仕組みまでつくる。</span>
           </motion.h3>
 
           <motion.div variants={fadeUp} className="text-sm md:text-lg leading-loose text-stone-300 font-light space-y-6 text-justify">
