@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>評価レポート</title>
+    <style>
+      body {
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        margin: 24px;
+        background-color: #e9f0f2;
+        color: #1f2a30;
+      }
+      .monitor-wrapper {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      .monitor-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .monitor-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #1f2a30;
+      }
+      .monitor-description {
+        font-size: 14px;
+        color: #3a4b53;
+      }
+      .summary-box {
+        background: #eef3f4;
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        margin-bottom: 20px;
+      }
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+      .score-card {
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        background: #f9fbfc;
+      }
+      .score-card h3 {
+        margin: 0 0 8px;
+        font-size: 16px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .score-card .total {
+        font-size: 24px;
+        font-weight: 700;
+      }
+      table.monitor-report {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      col.timestamp-column {
+        width: 180px;
+      }
+      col.agent-column {
+        width: calc((100% - 180px) / 3);
+      }
+      th,
+      td {
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        vertical-align: top;
+        background-color: #ffffff;
+      }
+      th {
+        background: #d8e6e9;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #2c3a40;
+      }
+      tbody tr:nth-child(even) td {
+        background-color: #eef3f4;
+      }
+      details {
+        display: block;
+        margin: 0;
+      }
+      details summary {
+        list-style: none;
+      }
+      details[open] summary {
+        margin-bottom: 12px;
+      }
+      .details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 13px;
+        color: #1f2a30;
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      .details-toggle::before {
+        content: "▶";
+        font-size: 10px;
+        transition: transform 160ms ease;
+        display: inline-block;
+      }
+      details[open] .details-toggle::before {
+        transform: rotate(90deg);
+      }
+      .timestamp {
+        font-weight: 600;
+        color: #2c3a40;
+        overflow-wrap: anywhere;
+      }
+      .snapshot-summary {
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: #2c3a40;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #1f2a30;
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+      }
+      .status-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding: 1px 6px;
+        background: #d8e6e9;
+        border: 1px solid #b8c9cd;
+        color: #1f2a30;
+        white-space: nowrap;
+        line-height: 1.3;
+        vertical-align: top;
+      }
+      .status-badge--completed {
+        background: #c3d4d8;
+        border-color: #aabfc5;
+      }
+      .status-badge--error {
+        background: #f8d7da;
+        border-color: #f1aeb5;
+      }
+      .agent-meta {
+        display: block;
+        margin-bottom: 12px;
+        line-height: 1.5;
+      }
+      .agent-meta .status-badge {
+        margin-right: 6px;
+      }
+      .agent-meta .agent-label {
+        display: inline;
+        font-size: 13px;
+        color: #3a4b53;
+      }
+      .hex-grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(90px, 1fr));
+        gap: 8px;
+        margin-bottom: 12px;
+      }
+      .hex {
+        position: relative;
+        padding: 12px 8px;
+        background: linear-gradient(135deg, #d8e6e9, #eef3f4);
+        clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0 50%);
+        border: 1px solid #c4d3d7;
+        text-align: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: #1f2a30;
+      }
+      .hex .score {
+        display: block;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      .link-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .link-list li {
+        margin-bottom: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="monitor-wrapper">
+      <header class="monitor-header">
+        <h1 class="monitor-title">評価レポート</h1>
+        <p class="monitor-description">タスク「task-1765591537852-220d63」で発生した空白画面を解消する3候補（監視対象ブランチ）の実装を比較評価しました。</p>
+      </header>
+      <div class="summary-box">
+        <strong>タスク概要:</strong> 詳細ビューを開くと全画面が非表示になる回帰を修正し、UIの見やすさと情報提示を保つ。
+      </div>
+      <div class="scoreboard">
+        <div class="score-card">
+          <h3>🏆 task/task-1765600157692-8c90ef</h3>
+          <div class="total">489 / 600</div>
+          <div>メダル: 🥇 / 総合スコア (平均): 82</div>
+        </div>
+        <div class="score-card">
+          <h3>🥈 task/task-1765600157492-043055</h3>
+          <div class="total">417 / 600</div>
+          <div>メダル: 🥈 / 総合スコア (平均): 70</div>
+        </div>
+        <div class="score-card">
+          <h3>❌ task/task-1765600157290-0811ce</h3>
+          <div class="total">215 / 600</div>
+          <div>メダル: ⚪️ / 総合スコア (平均): 36 — 詳細ビューで依然として非表示</div>
+        </div>
+      </div>
+      <table class="monitor-report">
+        <colgroup>
+          <col class="timestamp-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Agent task-1765600157692-8c90ef</th>
+            <th>Agent task-1765600157492-043055</th>
+            <th>Agent task-1765600157290-0811ce</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="timestamp">2025-12-13 13:50</td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価済</span>
+                <span class="agent-label">空白化の直接原因を除去し、型エラーも解消。</span>
+              </div>
+              <div class="hex-grid">
+                <div class="hex">UI/UX<span class="score">90</span></div>
+                <div class="hex">情報の明瞭さ<span class="score">85</span></div>
+                <div class="hex">安定性<span class="score">88</span></div>
+                <div class="hex">コード品質<span class="score">86</span></div>
+                <div class="hex">パフォーマンス<span class="score">80</span></div>
+                <div class="hex">検証/テスト<span class="score">60</span></div>
+              </div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">評価コメント</summary>
+                <pre>- App.tsx: 詳細ビューで visibility/position を強制する処理を撤去し、フレーム停止のみ維持して空白を解消。
+- tsconfig.json: vite/client 型を追加しビルドエラーを予防。
+- Overlay.tsx: 既存のコンテキスト連携を保ちつつ UI は常時表示されるため情報が途切れない。
+- 懸念: 自動テスト・手動検証の記録なし。</pre>
+              </details>
+              <div class="snapshot-summary">成果物パス: ../task-1765600157692-8c90ef/docs/index.html</div>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価済</span>
+                <span class="agent-label">コンテキストを撤去して単純化し、空白は解消。</span>
+              </div>
+              <div class="hex-grid">
+                <div class="hex">UI/UX<span class="score">82</span></div>
+                <div class="hex">情報の明瞭さ<span class="score">78</span></div>
+                <div class="hex">安定性<span class="score">70</span></div>
+                <div class="hex">コード品質<span class="score">72</span></div>
+                <div class="hex">パフォーマンス<span class="score">65</span></div>
+                <div class="hex">検証/テスト<span class="score">50</span></div>
+              </div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">評価コメント</summary>
+                <pre>- App.tsx: DetailViewContext を削除し表示は回復したが、3Dフレーム停止制御も消え常時レンダリング。
+- Overlay.tsx: コンテキスト依存を排除し状態管理をシンプル化。
+- 未コミット: package.json / package-lock.json が変更状態のまま。CI の再現性に影響する恐れ。
+- 懸念: パフォーマンス負荷増大の検証なし、テスト証跡なし。</pre>
+              </details>
+              <div class="snapshot-summary">成果物パス: ../task-1765600157492-043055/docs/index.html</div>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--error">未解決</span>
+                <span class="agent-label">詳細ビューで依然 canvas を非表示にし、空白が残存。</span>
+              </div>
+              <div class="hex-grid">
+                <div class="hex">UI/UX<span class="score">30</span></div>
+                <div class="hex">情報の明瞭さ<span class="score">40</span></div>
+                <div class="hex">安定性<span class="score">35</span></div>
+                <div class="hex">コード品質<span class="score">40</span></div>
+                <div class="hex">パフォーマンス<span class="score">40</span></div>
+                <div class="hex">検証/テスト<span class="score">30</span></div>
+              </div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">評価コメント</summary>
+                <pre>- App.tsx: isDetailOpen 時に visibility: hidden を継続し、詳細コンテンツも含め DOM が非表示になるため空白画面が再発。
+- Overlay.tsx: setIsDetailOpen を useEffect で true にするロジックは維持され、根本原因は未解消。
+- index.tsx: createRoot 再利用でクラッシュ回避策を追加したが、UI 問題には未対応。
+- docs/assets にビルド成果物の大規模差分を同梱しており、レビュー負荷が高い。</pre>
+              </details>
+              <div class="snapshot-summary">成果物パス: ../task-1765600157290-0811ce/docs/index.html</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>

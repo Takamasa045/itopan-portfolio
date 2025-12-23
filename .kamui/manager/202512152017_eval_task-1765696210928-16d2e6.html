@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>評価レポート</title>
+    <style>
+      body {
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        margin: 24px;
+        background-color: #e9f0f2;
+        color: #1f2a30;
+      }
+      .monitor-wrapper {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      .monitor-header {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin-bottom: 20px;
+      }
+      .monitor-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #1f2a30;
+        margin: 0;
+      }
+      .monitor-description {
+        font-size: 14px;
+        color: #3a4b53;
+        margin: 0;
+      }
+      .overview {
+        border: 1px solid #c4d3d7;
+        background: #f8fbfc;
+        padding: 16px;
+        margin-bottom: 18px;
+      }
+      .overview h2 {
+        font-size: 14px;
+        margin: 0 0 8px;
+        letter-spacing: 0.04em;
+        color: #2c3a40;
+      }
+      .overview p {
+        margin: 6px 0;
+        font-size: 13px;
+        color: #3a4b53;
+      }
+      .overview ul {
+        margin: 8px 0 0;
+        padding-left: 18px;
+        color: #2c3a40;
+        font-size: 13px;
+      }
+      table.monitor-report {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      col.timestamp-column {
+        width: 180px;
+      }
+      col.agent-column {
+        width: calc((100% - 180px) / 5);
+      }
+      th,
+      td {
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        vertical-align: top;
+        background-color: #ffffff;
+      }
+      th {
+        background: #d8e6e9;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #2c3a40;
+      }
+      tbody tr:nth-child(even) td {
+        background-color: #eef3f4;
+      }
+      details {
+        display: block;
+        margin: 0;
+      }
+      details summary {
+        list-style: none;
+      }
+      details[open] summary {
+        margin-bottom: 12px;
+      }
+      .details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 13px;
+        color: #1f2a30;
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      .details-toggle::before {
+        content: "▶";
+        font-size: 10px;
+        transition: transform 160ms ease;
+        display: inline-block;
+      }
+      details[open] .details-toggle::before {
+        transform: rotate(90deg);
+      }
+      .details-inner {
+        margin-top: 10px;
+      }
+      .details-kv {
+        font-size: 12px;
+        color: #2c3a40;
+        margin: 12px 0 6px;
+        font-weight: 600;
+      }
+      .kv-k {
+        display: inline-block;
+        padding: 2px 6px;
+        border: 1px solid #cdd9dd;
+        background: #eef3f4;
+        margin-right: 6px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.03em;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #1f2a30;
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 14px;
+      }
+      .status-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 800;
+        letter-spacing: 0.02em;
+        padding: 1px 6px;
+        background: #d8e6e9;
+        border: 1px solid #b8c9cd;
+        color: #1f2a30;
+        white-space: nowrap;
+        line-height: 1.3;
+        vertical-align: top;
+      }
+      .status-badge--investigating {
+        background: #fef3cd;
+        border-color: #f0e5a5;
+      }
+      .status-badge--completed {
+        background: #c3d4d8;
+        border-color: #aabfc5;
+      }
+      .status-badge--error {
+        background: #f8d7da;
+        border-color: #f1aeb5;
+      }
+      .agent-meta {
+        display: block;
+        margin-bottom: 10px;
+        line-height: 1.5;
+      }
+      .agent-meta .status-badge {
+        margin-right: 6px;
+      }
+      .agent-meta .agent-label {
+        display: inline;
+        font-size: 12px;
+        color: #3a4b53;
+        overflow-wrap: anywhere;
+      }
+      .timestamp {
+        font-weight: 700;
+        color: #2c3a40;
+        overflow-wrap: anywhere;
+      }
+
+      .score-block {
+        border: 1px solid #c4d3d7;
+        background: #f8fbfc;
+        padding: 12px;
+        margin-bottom: 12px;
+      }
+      .score-total {
+        font-size: 22px;
+        font-weight: 900;
+        letter-spacing: 0.02em;
+        color: #1f2a30;
+      }
+      .score-sub {
+        margin-top: 6px;
+        font-size: 12px;
+        color: #3a4b53;
+      }
+      .dq-reason {
+        margin-top: 8px;
+        font-size: 12px;
+        color: #7a1b1b;
+        font-weight: 700;
+      }
+
+      .radar-wrap {
+        display: flex;
+        justify-content: center;
+        margin: 10px 0 12px;
+      }
+      .radar-svg {
+        width: 170px;
+        height: 170px;
+        border: 1px solid #c4d3d7;
+      }
+
+      .section-title {
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #2c3a40;
+        margin: 14px 0 8px;
+      }
+      .metric-grid {
+        display: grid;
+        gap: 8px;
+      }
+      .metric-item {
+        border: 1px solid #c4d3d7;
+        background: #ffffff;
+        padding: 10px;
+      }
+      .metric-title {
+        font-size: 12px;
+        font-weight: 800;
+        color: #1f2a30;
+      }
+      .metric-reason {
+        font-size: 12px;
+        color: #3a4b53;
+        margin-top: 6px;
+      }
+
+      .highlights {
+        margin: 0;
+        padding-left: 18px;
+        color: #2c3a40;
+        font-size: 13px;
+      }
+
+      .link-list {
+        font-size: 12px;
+        color: #3a4b53;
+      }
+      .link-k {
+        font-weight: 800;
+        color: #2c3a40;
+      }
+      .link-list a {
+        color: #0b7285;
+        text-decoration: none;
+        border-bottom: 1px dotted #0b7285;
+      }
+      .link-list a:hover {
+        color: #0f766e;
+        border-bottom-color: #0f766e;
+      }
+      code {
+        background: #eef3f4;
+        border: 1px solid #cdd9dd;
+        padding: 1px 4px;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="monitor-wrapper">
+      <header class="monitor-header">
+        <h1 class="monitor-title">評価レポート（Webアプリをポートフォリオで魅せるUI提案）</h1>
+        <p class="monitor-description">評価観点: UI/UXの質・世界観の一貫性。対象ブランチのコミットログ/差分/未コミット状態を参照して採点。</p>
+      </header>
+
+      <section class="overview">
+        <h2>タスク概要</h2>
+        <p>「瞑想アプリ・温泉ガイドアプリなど、制作したWebアプリをポートフォリオ上で“増えても探せて、触りたくなる”形で見せる」ためのUI改善案を実装した5ブランチを比較。</p>
+        <p><strong>主な実現パターン</strong>: Featured棚（デバイスフレーム/ショーケース）、検索/フィルタ、アプリ詳細モーダル、ステータス（LIVE/BETA/DEV）可視化、データ分離（拡張性）。</p>
+        <p><strong>Timestamp</strong>: 2025-12-15 20:17 / レポートID: task-1765696210928-16d2e6</p>
+        <ul>
+          <li>総合点は各AI 600点満点（6指標×100）</li>
+          <li>メダル（🥇🥈🥉⚪️）は順位ベース</li>
+        </ul>
+        <h2 style="margin-top:14px;">総合ランキング</h2>
+        <ul>
+          <li><strong>1位</strong> 🏆 task-1765696204875-010fa2 — 528/600（88/100） 🥇 gold</li>
+<li><strong>2位</strong> 🥇 task-1765696204674-131092 — 512/600（85/100） 🥈 silver</li>
+<li><strong>3位</strong> 🥈 task-1765696205075-d60214 — 455/600（76/100） 🥉 bronze</li>
+<li><strong>4位</strong> 🥉 task-1765696205475-c6adc9 — 358/600（60/100） ⚪️ none</li>
+          <li><strong>失格</strong> ❌ task-1765696205274-cdd7de — mainとの差分なし（実装コミット検出不可）</li>
+        </ul>
+      </section>
+
+      <table class="monitor-report">
+        <colgroup>
+          <col class="timestamp-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Agent task-1765696205274-cdd7de</th>
+            <th>Agent task-1765696204875-010fa2</th>
+            <th>Agent task-1765696205475-c6adc9</th>
+            <th>Agent task-1765696204674-131092</th>
+            <th>Agent task-1765696205075-d60214</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="timestamp">2025-12-15 20:17</td>
+            <td><div class="agent-meta">
+      <span class="status-badge status-badge--error">失格</span>
+      <span class="agent-label">task/task-1765696205274-cdd7de</span>
+    </div>
+
+    <div class="score-block">
+      <div class="score-total">❌ 0/600</div>
+      <div class="score-sub">総合: <strong>0</strong>/100 ／ メダル: ⚪️ (none)</div>
+      <div class="dq-reason">理由: mainとの差分なし（実装コミット検出不可）</div>
+    </div>
+
+    <div class="radar-wrap"><svg class="radar-svg" viewBox="0 0 200 200" role="img" aria-label="6-axis score chart">
+  <rect x="0" y="0" width="200" height="200" fill="#f8fbfc" />
+  <polygon points="100.00,84.40 113.51,92.20 113.51,107.80 100.00,115.60 86.49,107.80 86.49,92.20" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,68.80 127.02,84.40 127.02,115.60 100.00,131.20 72.98,115.60 72.98,84.40" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,53.20 140.53,76.60 140.53,123.40 100.00,146.80 59.47,123.40 59.47,76.60" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,37.60 154.04,68.80 154.04,131.20 100.00,162.40 45.96,131.20 45.96,68.80" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,22.00 167.55,61.00 167.55,139.00 100.00,178.00 32.45,139.00 32.45,61.00" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.9" />
+  <line x1="100" y1="100" x2="100.00" y2="22.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="100.00" y2="178.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+  <polygon points="100.00,100.00 100.00,100.00 100.00,100.00 100.00,100.00 100.00,100.00 100.00,100.00" fill="#2dd4bf" fill-opacity="0.18" stroke="#0f766e" stroke-width="2" />
+  <circle cx="100.00" cy="100.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="100.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="100.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="100.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="100.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="100.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+</svg></div>
+
+    <div class="section-title">指標と根拠</div>
+    <div class="metric-grid"><div class="metric-item">
+        <div class="metric-title">世界観・ビジュアル 0点</div>
+        <div class="metric-reason">差分なし。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">UX・導線 0点</div>
+        <div class="metric-reason">差分なし。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">アプリの見せ方 0点</div>
+        <div class="metric-reason">差分なし。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">検索・拡張性 0点</div>
+        <div class="metric-reason">差分なし。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">コード品質 0点</div>
+        <div class="metric-reason">差分なし。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">完成度 0点</div>
+        <div class="metric-reason">差分なし。</div>
+      </div></div>
+
+    <div class="section-title">実装ハイライト</div>
+    <ul class="highlights"><li>差分なし（mainと同一コミット）</li></ul>
+
+    <div class="section-title">成果物リンク</div>
+    <div class="link-list">
+      <div><span class="link-k">Worktree</span>: <a href="../../.worktrees/task-1765696205274-cdd7de">../../.worktrees/task-1765696205274-cdd7de</a></div>
+      <div><span class="link-k">Preview</span>: <a href="../../.worktrees/task-1765696205274-cdd7de/docs/index.html">../../.worktrees/task-1765696205274-cdd7de/docs/index.html</a></div>
+    </div>
+
+    <details class="snapshot-details">
+      <summary class="details-toggle">コミットログ / 差分</summary>
+      <div class="details-inner">
+        <div class="details-kv"><span class="kv-k">HEAD</span> <code>cbd162a</code> / <span class="kv-k">merge-base</span> <code>cbd162a</code></div>
+        <div class="details-kv"><span class="kv-k">git status --porcelain</span></div>
+        <pre>(clean)</pre>
+        <div class="details-kv"><span class="kv-k">git log main..branch</span></div>
+        <pre>(no commits vs main)</pre>
+        <div class="details-kv"><span class="kv-k">git diff --name-status main...branch</span></div>
+        <pre>(no diff vs main)</pre>
+        <div class="details-kv"><span class="kv-k">git diff --stat main...branch</span></div>
+        <pre>(no diff vs main)</pre>
+      </div>
+    </details></td>
+            <td><div class="agent-meta">
+      <span class="status-badge status-badge--completed">完了</span>
+      <span class="agent-label">task/task-1765696204875-010fa2</span>
+    </div>
+
+    <div class="score-block">
+      <div class="score-total">🏆 528/600</div>
+      <div class="score-sub">総合: <strong>88</strong>/100 ／ メダル: 🥇 (gold)</div>
+      
+    </div>
+
+    <div class="radar-wrap"><svg class="radar-svg" viewBox="0 0 200 200" role="img" aria-label="6-axis score chart">
+  <rect x="0" y="0" width="200" height="200" fill="#f8fbfc" />
+  <polygon points="100.00,84.40 113.51,92.20 113.51,107.80 100.00,115.60 86.49,107.80 86.49,92.20" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,68.80 127.02,84.40 127.02,115.60 100.00,131.20 72.98,115.60 72.98,84.40" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,53.20 140.53,76.60 140.53,123.40 100.00,146.80 59.47,123.40 59.47,76.60" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,37.60 154.04,68.80 154.04,131.20 100.00,162.40 45.96,131.20 45.96,68.80" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,22.00 167.55,61.00 167.55,139.00 100.00,178.00 32.45,139.00 32.45,61.00" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.9" />
+  <line x1="100" y1="100" x2="100.00" y2="22.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="100.00" y2="178.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+  <polygon points="100.00,31.36 162.82,63.73 159.44,134.32 100.00,170.98 43.93,132.37 42.58,66.85" fill="#2dd4bf" fill-opacity="0.18" stroke="#0f766e" stroke-width="2" />
+  <circle cx="100.00" cy="31.36" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="162.82" cy="63.73" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="159.44" cy="134.32" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="170.98" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="43.93" cy="132.37" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="42.58" cy="66.85" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+</svg></div>
+
+    <div class="section-title">指標と根拠</div>
+    <div class="metric-grid"><div class="metric-item">
+        <div class="metric-title">世界観・ビジュアル 88点</div>
+        <div class="metric-reason">既存のエメラルド/ストーン配色・タイポを保ちつつ、Apps専用UIとモーダルを馴染ませている。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">UX・導線 93点</div>
+        <div class="metric-reason">「COLLECTIONS / WEB APPS」切替、検索/タグ/タイプフィルタ、ESCで閉じる・スクロールロックに加え、Portal化でモーダルの重なりも安定。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">アプリの見せ方 88点</div>
+        <div class="metric-reason">タグ/ハイライト/プレビュー種別/CTA（OPEN APP/VIEW POST/VIEW CODE）で、アプリの“体験”を短時間で伝えられる。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">検索・拡張性 91点</div>
+        <div class="metric-reason">クエリ検索＋Type＋Tagで“数が増えても探せる”状態。Featured棚も用意。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">コード品質 83点</div>
+        <div class="metric-reason">型を`types.ts`へ分離し、計算は`useMemo`で整理。とはいえ`Overlay.tsx`の肥大化は継続課題。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">完成度 85点</div>
+        <div class="metric-reason">docs出力まで複数回更新され、UIの不具合修正コミットも積まれている。実URL（liveUrl）を埋めるとさらに強い。</div>
+      </div></div>
+
+    <div class="section-title">実装ハイライト</div>
+    <ul class="highlights"><li>Appsビュー（検索/フィルタ/タグ）＋カード強化</li>
+<li>アプリ詳細モーダル（Portal/ESC/スクロールロック/複数CTA）</li>
+<li>Featured棚で“推しアプリ”を先に見せる</li></ul>
+
+    <div class="section-title">成果物リンク</div>
+    <div class="link-list">
+      <div><span class="link-k">Worktree</span>: <a href="../../.worktrees/task-1765696204875-010fa2">../../.worktrees/task-1765696204875-010fa2</a></div>
+      <div><span class="link-k">Preview</span>: <a href="../../.worktrees/task-1765696204875-010fa2/docs/index.html">../../.worktrees/task-1765696204875-010fa2/docs/index.html</a></div>
+    </div>
+
+    <details class="snapshot-details">
+      <summary class="details-toggle">コミットログ / 差分</summary>
+      <div class="details-inner">
+        <div class="details-kv"><span class="kv-k">HEAD</span> <code>585562c</code> / <span class="kv-k">merge-base</span> <code>cbd162a</code></div>
+        <div class="details-kv"><span class="kv-k">git status --porcelain</span></div>
+        <pre>(clean)</pre>
+        <div class="details-kv"><span class="kv-k">git log main..branch</span></div>
+        <pre>585562c (task/task-1765696204875-010fa2) build: update docs output
+4fb9008 copy: refine Musuhi Labs description
+b30fabd build: update docs output
+2243126 ui: add featured apps for showcase
+4ac28d7 build: update docs output
+a67995e fix: render app modal via portal
+2825d0a build: update docs output
+598e891 fix: ensure app cards render after toggles
+7dc0c62 build: update docs output
+d275388 ui: add app detail modal
+6b5016f ui: add app filters and richer cards
+940eba6 ui: add web apps showcase in Works section
+8738b6a data: add meditation and onsen app entries
+eb2f1cf chore: export works/project types</pre>
+        <div class="details-kv"><span class="kv-k">git diff --name-status main...branch</span></div>
+        <pre>M	components/Overlay.tsx
+D	docs/assets/index-C0209CLX.js
+A	docs/assets/index-CyJ759mL.js
+A	docs/images/meditation-app.svg
+A	docs/images/onsen-guide.svg
+M	docs/index.html
+A	public/images/meditation-app.svg
+A	public/images/onsen-guide.svg
+M	types.ts</pre>
+        <div class="details-kv"><span class="kv-k">git diff --stat main...branch</span></div>
+        <pre> components/Overlay.tsx           |  684 +++++-
+ docs/assets/index-C0209CLX.js    | 4266 --------------------------------------
+ docs/assets/index-CyJ759mL.js    | 4266 ++++++++++++++++++++++++++++++++++++++
+ docs/images/meditation-app.svg   |   74 +
+ docs/images/onsen-guide.svg      |  119 ++
+ docs/index.html                  |    2 +-
+ public/images/meditation-app.svg |   74 +
+ public/images/onsen-guide.svg    |  119 ++
+ types.ts                         |   35 +-
+ 9 files changed, 5318 insertions(+), 4321 deletions(-)</pre>
+      </div>
+    </details></td>
+            <td><div class="agent-meta">
+      <span class="status-badge status-badge--investigating">要確認</span>
+      <span class="agent-label">task/task-1765696205475-c6adc9</span>
+    </div>
+
+    <div class="score-block">
+      <div class="score-total">🥉 358/600</div>
+      <div class="score-sub">総合: <strong>60</strong>/100 ／ メダル: ⚪️ (none)</div>
+      
+    </div>
+
+    <div class="radar-wrap"><svg class="radar-svg" viewBox="0 0 200 200" role="img" aria-label="6-axis score chart">
+  <rect x="0" y="0" width="200" height="200" fill="#f8fbfc" />
+  <polygon points="100.00,84.40 113.51,92.20 113.51,107.80 100.00,115.60 86.49,107.80 86.49,92.20" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,68.80 127.02,84.40 127.02,115.60 100.00,131.20 72.98,115.60 72.98,84.40" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,53.20 140.53,76.60 140.53,123.40 100.00,146.80 59.47,123.40 59.47,76.60" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,37.60 154.04,68.80 154.04,131.20 100.00,162.40 45.96,131.20 45.96,68.80" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,22.00 167.55,61.00 167.55,139.00 100.00,178.00 32.45,139.00 32.45,61.00" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.9" />
+  <line x1="100" y1="100" x2="100.00" y2="22.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="100.00" y2="178.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+  <polygon points="100.00,39.16 137.15,78.55 140.53,123.40 100.00,139.00 52.72,127.30 69.60,82.45" fill="#2dd4bf" fill-opacity="0.18" stroke="#0f766e" stroke-width="2" />
+  <circle cx="100.00" cy="39.16" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="137.15" cy="78.55" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="140.53" cy="123.40" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="139.00" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="52.72" cy="127.30" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="69.60" cy="82.45" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+</svg></div>
+
+    <div class="section-title">指標と根拠</div>
+    <div class="metric-grid"><div class="metric-item">
+        <div class="metric-title">世界観・ビジュアル 78点</div>
+        <div class="metric-reason">アプリ用プレースホルダー背景を追加し、既存トーンに合わせている。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">UX・導線 55点</div>
+        <div class="metric-reason">コレクション追加が中心で、アプリ探索体験（検索/導線）の強化は限定的。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">アプリの見せ方 60点</div>
+        <div class="metric-reason">コピーは良いが、CTA/リンク（#）や具体的な機能訴求が薄い。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">検索・拡張性 50点</div>
+        <div class="metric-reason">フィルタ/検索が無く、アプリが増える前提の設計が不足。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">コード品質 70点</div>
+        <div class="metric-reason">変更は小さく安全だが、データ/表示が`Overlay.tsx`内で増え続ける構造。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">完成度 45点</div>
+        <div class="metric-reason">未コミットのdocs差分が残っており、成果物反映の再現性に不安。</div>
+      </div></div>
+
+    <div class="section-title">実装ハイライト</div>
+    <ul class="highlights"><li>Personal Appsコレクションを追加</li>
+<li>app用MediaBackground（端末プレースホルダー）</li></ul>
+
+    <div class="section-title">成果物リンク</div>
+    <div class="link-list">
+      <div><span class="link-k">Worktree</span>: <a href="../../.worktrees/task-1765696205475-c6adc9">../../.worktrees/task-1765696205475-c6adc9</a></div>
+      <div><span class="link-k">Preview</span>: <a href="../../.worktrees/task-1765696205475-c6adc9/docs/index.html">../../.worktrees/task-1765696205475-c6adc9/docs/index.html</a></div>
+    </div>
+
+    <details class="snapshot-details">
+      <summary class="details-toggle">コミットログ / 差分</summary>
+      <div class="details-inner">
+        <div class="details-kv"><span class="kv-k">HEAD</span> <code>909a58f</code> / <span class="kv-k">merge-base</span> <code>cbd162a</code></div>
+        <div class="details-kv"><span class="kv-k">git status --porcelain</span></div>
+        <pre> D docs/assets/index-C0209CLX.js
+ M docs/index.html
+?? docs/assets/index-BPkqgwU3.js</pre>
+        <div class="details-kv"><span class="kv-k">git log main..branch</span></div>
+        <pre>909a58f (task/task-1765696205475-c6adc9) feat(content): add &#39;Personal Apps&#39; collection with Meditation and Hot Spring apps
+31b0fe7 feat(ui): add &#39;app&#39; media type and visual support for mobile applications</pre>
+        <div class="details-kv"><span class="kv-k">git diff --name-status main...branch</span></div>
+        <pre>M	components/Overlay.tsx</pre>
+        <div class="details-kv"><span class="kv-k">git diff --stat main...branch</span></div>
+        <pre> components/Overlay.tsx | 50 +++++++++++++++++++++++++++++++++++++++++++++++++-
+ 1 file changed, 49 insertions(+), 1 deletion(-)</pre>
+      </div>
+    </details></td>
+            <td><div class="agent-meta">
+      <span class="status-badge status-badge--completed">完了</span>
+      <span class="agent-label">task/task-1765696204674-131092</span>
+    </div>
+
+    <div class="score-block">
+      <div class="score-total">🥇 512/600</div>
+      <div class="score-sub">総合: <strong>85</strong>/100 ／ メダル: 🥈 (silver)</div>
+      
+    </div>
+
+    <div class="radar-wrap"><svg class="radar-svg" viewBox="0 0 200 200" role="img" aria-label="6-axis score chart">
+  <rect x="0" y="0" width="200" height="200" fill="#f8fbfc" />
+  <polygon points="100.00,84.40 113.51,92.20 113.51,107.80 100.00,115.60 86.49,107.80 86.49,92.20" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,68.80 127.02,84.40 127.02,115.60 100.00,131.20 72.98,115.60 72.98,84.40" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,53.20 140.53,76.60 140.53,123.40 100.00,146.80 59.47,123.40 59.47,76.60" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,37.60 154.04,68.80 154.04,131.20 100.00,162.40 45.96,131.20 45.96,68.80" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,22.00 167.55,61.00 167.55,139.00 100.00,178.00 32.45,139.00 32.45,61.00" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.9" />
+  <line x1="100" y1="100" x2="100.00" y2="22.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="100.00" y2="178.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+  <polygon points="100.00,29.80 156.74,67.24 155.39,131.98 100.00,168.64 40.56,134.32 45.96,68.80" fill="#2dd4bf" fill-opacity="0.18" stroke="#0f766e" stroke-width="2" />
+  <circle cx="100.00" cy="29.80" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="156.74" cy="67.24" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="155.39" cy="131.98" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="168.64" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="40.56" cy="134.32" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="45.96" cy="68.80" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+</svg></div>
+
+    <div class="section-title">指標と根拠</div>
+    <div class="metric-grid"><div class="metric-item">
+        <div class="metric-title">世界観・ビジュアル 90点</div>
+        <div class="metric-reason">DeviceFrame＋Featured shelfがポートフォリオの世界観を損なわず“触りたさ”を演出。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">UX・導線 84点</div>
+        <div class="metric-reason">Works全体に検索/タイプフィルタを追加し、探しやすさが向上。アプリ専用の一覧UIは無い。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">アプリの見せ方 82点</div>
+        <div class="metric-reason">featured/links/highlightsで“価値→詳細”の流れを作る。スクリーンはプレースホルダで伸び代。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">検索・拡張性 88点</div>
+        <div class="metric-reason">全文検索＋件数＋タイプチップでスケールに強い。データ分離も◎。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">コード品質 88点</div>
+        <div class="metric-reason">データを`data/projects.ts`へ分離、型も整理。小さな部品（DeviceFrame）追加で拡張しやすい。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">完成度 80点</div>
+        <div class="metric-reason">docsビルド反映まで到達。ただしlockfile更新などノイズが残る。</div>
+      </div></div>
+
+    <div class="section-title">実装ハイライト</div>
+    <ul class="highlights"><li>Featured Web Apps棚＋DeviceFrameでアプリを先頭露出</li>
+<li>Worksに検索/フィルタ（件数付き）</li>
+<li>データを`data/projects.ts`へ分離し拡張性を確保</li></ul>
+
+    <div class="section-title">成果物リンク</div>
+    <div class="link-list">
+      <div><span class="link-k">Worktree</span>: <a href="../../.worktrees/task-1765696204674-131092">../../.worktrees/task-1765696204674-131092</a></div>
+      <div><span class="link-k">Preview</span>: <a href="../../.worktrees/task-1765696204674-131092/docs/index.html">../../.worktrees/task-1765696204674-131092/docs/index.html</a></div>
+    </div>
+
+    <details class="snapshot-details">
+      <summary class="details-toggle">コミットログ / 差分</summary>
+      <div class="details-inner">
+        <div class="details-kv"><span class="kv-k">HEAD</span> <code>72aa51d</code> / <span class="kv-k">merge-base</span> <code>cbd162a</code></div>
+        <div class="details-kv"><span class="kv-k">git status --porcelain</span></div>
+        <pre>(clean)</pre>
+        <div class="details-kv"><span class="kv-k">git log main..branch</span></div>
+        <pre>72aa51d (task/task-1765696204674-131092) chore: rebuild docs output
+e82ba26 chore: update lockfile
+3d98efe chore: use shared project types and drop legacy dataset
+bd673a8 feat: spotlight featured web apps
+93929d1 feat: add works filter and search
+368ee64 refactor: move projects data to data module
+03a14f0 docs: add web app showcase UI ideas</pre>
+        <div class="details-kv"><span class="kv-k">git diff --name-status main...branch</span></div>
+        <pre>A	PORTFOLIO_UI_IDEAS.md
+A	components/DeviceFrame.tsx
+M	components/Overlay.tsx
+A	data/projects.ts
+D	docs/assets/index-C0209CLX.js
+A	docs/assets/index-DKMqbbdk.js
+A	docs/images/app-meditation.svg
+A	docs/images/app-onsen.svg
+M	docs/index.html
+M	package-lock.json
+A	public/images/app-meditation.svg
+A	public/images/app-onsen.svg</pre>
+        <div class="details-kv"><span class="kv-k">git diff --stat main...branch</span></div>
+        <pre> PORTFOLIO_UI_IDEAS.md            |   37 +
+ components/DeviceFrame.tsx       |   48 +
+ components/Overlay.tsx           |  465 ++++-
+ data/projects.ts                 |  269 +++
+ docs/assets/index-C0209CLX.js    | 4266 -------------------------------------
+ docs/assets/index-DKMqbbdk.js    | 4267 ++++++++++++++++++++++++++++++++++++++
+ docs/images/app-meditation.svg   |   70 +
+ docs/images/app-onsen.svg        |   92 +
+ docs/index.html                  |    2 +-
+ package-lock.json                |   15 +-
+ public/images/app-meditation.svg |   70 +
+ public/images/app-onsen.svg      |   92 +
+ 12 files changed, 5352 insertions(+), 4341 deletions(-)</pre>
+      </div>
+    </details></td>
+            <td><div class="agent-meta">
+      <span class="status-badge status-badge--completed">完了</span>
+      <span class="agent-label">task/task-1765696205075-d60214</span>
+    </div>
+
+    <div class="score-block">
+      <div class="score-total">🥈 455/600</div>
+      <div class="score-sub">総合: <strong>76</strong>/100 ／ メダル: 🥉 (bronze)</div>
+      
+    </div>
+
+    <div class="radar-wrap"><svg class="radar-svg" viewBox="0 0 200 200" role="img" aria-label="6-axis score chart">
+  <rect x="0" y="0" width="200" height="200" fill="#f8fbfc" />
+  <polygon points="100.00,84.40 113.51,92.20 113.51,107.80 100.00,115.60 86.49,107.80 86.49,92.20" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,68.80 127.02,84.40 127.02,115.60 100.00,131.20 72.98,115.60 72.98,84.40" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,53.20 140.53,76.60 140.53,123.40 100.00,146.80 59.47,123.40 59.47,76.60" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,37.60 154.04,68.80 154.04,131.20 100.00,162.40 45.96,131.20 45.96,68.80" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.55" />
+<polygon points="100.00,22.00 167.55,61.00 167.55,139.00 100.00,178.00 32.45,139.00 32.45,61.00" fill="none" stroke="#cdd9dd" stroke-width="1" opacity="0.9" />
+  <line x1="100" y1="100" x2="100.00" y2="22.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="167.55" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="100.00" y2="178.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="139.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+<line x1="100" y1="100" x2="32.45" y2="61.00" stroke="#b8c9cd" stroke-width="1" opacity="0.7" />
+  <polygon points="100.00,32.92 150.66,70.75 152.69,130.42 100.00,154.60 51.36,128.08 50.01,71.14" fill="#2dd4bf" fill-opacity="0.18" stroke="#0f766e" stroke-width="2" />
+  <circle cx="100.00" cy="32.92" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="150.66" cy="70.75" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="152.69" cy="130.42" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="100.00" cy="154.60" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="51.36" cy="128.08" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+<circle cx="50.01" cy="71.14" r="2.6" fill="#0f766e" stroke="#0b7285" stroke-width="1" />
+</svg></div>
+
+    <div class="section-title">指標と根拠</div>
+    <div class="metric-grid"><div class="metric-item">
+        <div class="metric-title">世界観・ビジュアル 86点</div>
+        <div class="metric-reason">ステータス色分け・カード/パネルのトーンが既存デザインに整合。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">UX・導線 75点</div>
+        <div class="metric-reason">ステータス概要・ボタン増設で情報は増えたが、一覧の探索（検索/絞り込み）は未対応。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">アプリの見せ方 78点</div>
+        <div class="metric-reason">FEATURES/DEMO/CODE/STATUSの軸で理解しやすい。ただしURLがプレースホルダ寄り。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">検索・拡張性 70点</div>
+        <div class="metric-reason">1コレクション追加に留まり、アプリ増加時の発見性は弱い。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">コード品質 72点</div>
+        <div class="metric-reason">実装は素直だが`Overlay.tsx`集約のまま。型/データ分離がない。</div>
+      </div>
+<div class="metric-item">
+        <div class="metric-title">完成度 74点</div>
+        <div class="metric-reason">docs更新まで実施。デモ/GitHub URLが仮なのがマイナス。</div>
+      </div></div>
+
+    <div class="section-title">実装ハイライト</div>
+    <ul class="highlights"><li>アプリ状態（LIVE/BETA/DEV）をカードと詳細に可視化</li>
+<li>FEATURES表示＋DEMO/CODE導線</li>
+<li>app用MediaBackground（端末モック）</li></ul>
+
+    <div class="section-title">成果物リンク</div>
+    <div class="link-list">
+      <div><span class="link-k">Worktree</span>: <a href="../../.worktrees/task-1765696205075-d60214">../../.worktrees/task-1765696205075-d60214</a></div>
+      <div><span class="link-k">Preview</span>: <a href="../../.worktrees/task-1765696205075-d60214/docs/index.html">../../.worktrees/task-1765696205075-d60214/docs/index.html</a></div>
+    </div>
+
+    <details class="snapshot-details">
+      <summary class="details-toggle">コミットログ / 差分</summary>
+      <div class="details-inner">
+        <div class="details-kv"><span class="kv-k">HEAD</span> <code>3ae6a09</code> / <span class="kv-k">merge-base</span> <code>cbd162a</code></div>
+        <div class="details-kv"><span class="kv-k">git status --porcelain</span></div>
+        <pre>(clean)</pre>
+        <div class="details-kv"><span class="kv-k">git log main..branch</span></div>
+        <pre>3ae6a09 (task/task-1765696205075-d60214) Build and deploy: add web app showcase features
+3fda813 Add app status overview panel to ProjectDetail
+fd78826 Add app status indicators to RichProjectCard
+ad990b8 Add web app showcase features to portfolio UI</pre>
+        <div class="details-kv"><span class="kv-k">git diff --name-status main...branch</span></div>
+        <pre>M	components/Overlay.tsx
+R076	docs/assets/index-C0209CLX.js	docs/assets/index-TAEqrgO9.js
+M	docs/index.html</pre>
+        <div class="details-kv"><span class="kv-k">git diff --stat main...branch</span></div>
+        <pre> components/Overlay.tsx                             | 282 ++++++++++++++++++++-
+ .../{index-C0209CLX.js =&gt; index-TAEqrgO9.js}       | 107 ++++----
+ docs/index.html                                    |   2 +-
+ 3 files changed, 325 insertions(+), 66 deletions(-)</pre>
+      </div>
+    </details></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
