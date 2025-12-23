@@ -78,8 +78,8 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
 
         <motion.div variants={quickFade} className="max-w-3xl">
           <p className="text-xl md:text-2xl text-stone-300 leading-relaxed font-light mb-8">
-            開発 × クリエイティブ × 生成AIで、<br />
-            「こうなったら面白い」を形にしていく<br />
+            生成AI時代の制作を、設計して実装する。<br />
+            コード/デザイン/映像を横断して、仕組みまでつくる。<br />
             <span className="text-emerald-400 font-normal">イトパン（伊藤貴將）</span>です。
           </p>
           <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">
@@ -104,7 +104,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               className="group flex items-center gap-3 px-6 py-3 bg-stone-900/80 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
             >
               <svg className="w-5 h-5 text-stone-300 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
               </svg>
               <span className="text-sm text-stone-300 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">X / Twitter</span>
             </a>
@@ -115,7 +115,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               className="group flex items-center gap-3 px-6 py-3 bg-stone-900/80 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
             >
               <svg className="w-5 h-5 text-stone-300 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
               </svg>
               <span className="text-sm text-stone-300 group-hover:text-emerald-400 font-mono tracking-wide transition-colors">note</span>
             </a>
@@ -133,19 +133,16 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
 
           <motion.div variants={quickFade} className="max-w-4xl mx-auto space-y-8">
             <p className="text-lg md:text-xl text-stone-300 leading-relaxed font-light">
-              関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」です。
+              関心の中心にあるのは、日本の土地や文化が内包してきた「ソフトパワー」。
             </p>
             <p className="text-base md:text-lg text-stone-400 leading-relaxed font-light">
               北アルプス山麓に残る地名の由来、史料、暮らしの中に息づく習慣。
-              さらに、縄文から積み重なってきた土地の層や、安曇族の系譜のような断片にも目を向け、
-              資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。
             </p>
             <p className="text-base md:text-lg text-stone-400 leading-relaxed font-light">
-              そうした断片は、単なる過去の記録ではなく、
-              物語性・思想・美意識を内包した、日本独自の文化資源だと捉えています。
-              集めた情報を生成AIで整理・再編集し、
-              物語、デザイン、映像、体験といった形へ翻訳し直すことで、
-              現代に通用するコンテンツとして立ち上げていきます。
+              縄文から積み重なってきた土地の層や、安曇氏の系譜のような断片にも目を向け、資料にあたり、現地を歩きながら、手触りのある情報を少しずつ集めています。
+            </p>
+            <p className="text-base md:text-lg text-stone-400 leading-relaxed font-light">
+              そうした断片を生成AIで整理・再編集し、物語、デザイン、映像、体験へと翻訳し直すことで、現代に通用するコンテンツとして立ち上げていきます。
             </p>
             <p className="text-base md:text-lg text-stone-300 leading-relaxed font-light bg-emerald-950/30 p-8 rounded-sm border border-emerald-900/30">
               また、その過程で生まれる<br />
@@ -342,7 +339,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
                       className="group flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-stone-900/60 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
                     >
                       <svg className="w-5 h-5 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
                       </svg>
                       <span className="text-sm text-stone-400 group-hover:text-emerald-400 font-mono transition-colors">X</span>
                     </a>
@@ -353,7 +350,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
                       className="group flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-stone-900/60 border border-stone-700 hover:border-emerald-500/70 hover:bg-emerald-950/50 rounded-sm transition-all duration-300"
                     >
                       <svg className="w-5 h-5 text-stone-400 group-hover:text-white transition-colors" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                        <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z" />
                       </svg>
                       <span className="text-sm text-stone-400 group-hover:text-emerald-400 font-mono transition-colors">note</span>
                     </a>
