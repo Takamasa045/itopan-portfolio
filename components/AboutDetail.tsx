@@ -80,7 +80,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
           <p className="text-xl md:text-2xl text-stone-300 leading-relaxed font-light mb-8">
             生成AI時代の制作を、設計して実装する。<br />
             コード/デザイン/映像を横断して、仕組みまでつくる。<br />
-            <span className="text-emerald-400 font-normal">イトパン（伊藤貴將）</span>です。
+            <span className="text-emerald-400 font-normal">伊藤貴將（いとうたかまさ）／イトパン</span>です。
           </p>
           <p className="text-base md:text-lg text-stone-500 leading-relaxed font-light">
             長野・北アルプス山麓を拠点に、<br />
