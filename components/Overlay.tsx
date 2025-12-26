@@ -306,7 +306,7 @@ export const Overlay: React.FC = () => {
   }
 
   return (
-    <div className="w-full text-[#e4e7e5]">
+    <main className="w-full text-[#e4e7e5]">
 
       {/* HERO SECTION */}
       <Section className="items-start relative">
@@ -585,7 +585,7 @@ export const Overlay: React.FC = () => {
         </motion.div>
       </Section>
 
-    </div>
+    </main>
   );
 };
 
@@ -624,7 +624,7 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
   const currentMedia = mediaItems[currentMediaIndex];
 
   return (
-    <motion.div
+    <motion.article
       variants={fadeUp}
       onClick={onClick}
       className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/50 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
@@ -689,7 +689,7 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
       ) : (
         <MediaBackground type={data.mainType} />
       )}
-    </motion.div>
+    </motion.article>
   );
 };
 
@@ -793,7 +793,7 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
 // Uses quickFade for snappy animations
 const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
   return (
-    <motion.div
+    <motion.article
       variants={quickFade}
       className="bg-stone-950/40 border border-emerald-900/30 hover:border-emerald-500/50 rounded-sm overflow-hidden group transition-all duration-300 flex flex-col"
     >
@@ -855,7 +855,7 @@ const ContentItemCard: React.FC<{ item: ContentItem }> = ({ item }) => {
           VIEW CONTENT ↗
         </a>
       </div>
-    </motion.div>
+    </motion.article>
   );
 };
 

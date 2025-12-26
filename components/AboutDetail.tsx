@@ -28,7 +28,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
   // Scroll is handled by parent component using drei's useScroll
 
   return (
-    <motion.div
+    <motion.main
       initial="hidden"
       animate="visible"
       exit="exit"
@@ -368,7 +368,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
       </section>
 
       {/* Footer - Back to Home */}
-      <section className="py-20 px-8 md:px-20">
+      <footer className="py-20 px-8 md:px-20">
         <motion.div variants={quickFade} className="max-w-6xl mx-auto text-center">
           <button
             onClick={onBack}
@@ -383,8 +383,8 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             &copy; 2025 Takamasa Ito / ITOPAN
           </p>
         </motion.div>
-      </section>
-    </motion.div>
+      </footer>
+    </motion.main>
   );
 };
 
