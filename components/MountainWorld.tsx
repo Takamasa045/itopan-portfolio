@@ -22,31 +22,31 @@ const relicConfigs: RelicConfig[] = [
 ];
 
 const relicPalette = {
-  obsidian: '#0d110f',
-  moss: '#131a16',
-  mossLight: '#1b241f',
-  emerald: '#2c5a4d',
-  emeraldSoft: '#3c6c5d',
-  gold: '#7f6f48',
-  rope: '#6f6552',
-  paper: '#d6d3cf',
-  deepSea: '#132a25',
-  sea: '#1c3a33',
+  obsidian: '#0f1311',
+  moss: '#18211d',
+  mossLight: '#202a25',
+  emerald: '#1f3a32',
+  emeraldSoft: '#27443a',
+  gold: '#3a3323',
+  rope: '#2a312d',
+  paper: '#3a423d',
+  deepSea: '#141d1a',
+  sea: '#1a2622',
 };
 
 const ToriiRelic: React.FC = () => (
   <group>
     <mesh position={[-1.1, -0.15, 0]}>
       <boxGeometry args={[0.35, 2.3, 0.35]} />
-      <meshStandardMaterial color={relicPalette.moss} roughness={0.9} metalness={0.05} emissive={relicPalette.obsidian} emissiveIntensity={0.12} />
+      <meshStandardMaterial color={relicPalette.moss} roughness={0.95} metalness={0} flatShading />
     </mesh>
     <mesh position={[1.1, -0.15, 0]}>
       <boxGeometry args={[0.35, 2.3, 0.35]} />
-      <meshStandardMaterial color={relicPalette.moss} roughness={0.9} metalness={0.05} emissive={relicPalette.obsidian} emissiveIntensity={0.12} />
+      <meshStandardMaterial color={relicPalette.moss} roughness={0.95} metalness={0} flatShading />
     </mesh>
     <mesh position={[0, 0.95, 0]}>
       <boxGeometry args={[3.1, 0.22, 0.45]} />
-      <meshStandardMaterial color={relicPalette.mossLight} roughness={0.85} metalness={0.06} emissive={relicPalette.obsidian} emissiveIntensity={0.12} />
+      <meshStandardMaterial color={relicPalette.mossLight} roughness={0.9} metalness={0} flatShading />
     </mesh>
   </group>
 );
@@ -57,15 +57,14 @@ const WatatsumiRelic: React.FC = () => (
       <sphereGeometry args={[0.55, 24, 24]} />
       <meshStandardMaterial
         color={relicPalette.emeraldSoft}
-        roughness={0.6}
-        metalness={0.08}
-        emissive={relicPalette.emerald}
-        emissiveIntensity={0.08}
+        roughness={0.8}
+        metalness={0}
+        flatShading
       />
     </mesh>
     <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
       <torusGeometry args={[0.9, 0.07, 12, 60]} />
-      <meshStandardMaterial color={relicPalette.sea} roughness={0.85} metalness={0.05} emissive={relicPalette.deepSea} emissiveIntensity={0.12} />
+      <meshStandardMaterial color={relicPalette.sea} roughness={0.9} metalness={0} flatShading />
     </mesh>
   </group>
 );
@@ -74,15 +73,15 @@ const ShimenawaRelic: React.FC = () => (
   <group>
     <mesh rotation={[Math.PI / 2, 0, 0]}>
       <torusGeometry args={[0.9, 0.12, 12, 60]} />
-      <meshStandardMaterial color={relicPalette.rope} roughness={0.95} metalness={0.05} emissive="#241e16" emissiveIntensity={0.1} />
+      <meshStandardMaterial color={relicPalette.rope} roughness={0.98} metalness={0} flatShading />
     </mesh>
     <mesh position={[-0.35, -0.65, 0.2]} rotation={[0, 0, 0.16]}>
       <boxGeometry args={[0.08, 0.5, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.7} />
+      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} flatShading />
     </mesh>
     <mesh position={[0.35, -0.65, 0.2]} rotation={[0, 0, -0.16]}>
       <boxGeometry args={[0.08, 0.5, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.7} />
+      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} flatShading />
     </mesh>
   </group>
 );
@@ -200,7 +199,7 @@ export const MountainWorld: React.FC = () => {
       </group>
 
       {/* Mythic Relics - Torii / Watatsumi / Shimenawa */}
-      <group ref={relicsGroupRef} position={[10, 0, -5]}>
+      <group ref={relicsGroupRef} position={[10, 0, -6.5]} scale={0.85}>
         {relicConfigs.map((relic, index) => (
           <Float
             key={relic.type}
