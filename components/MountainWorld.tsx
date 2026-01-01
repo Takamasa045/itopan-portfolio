@@ -22,49 +22,58 @@ const relicConfigs: RelicConfig[] = [
 ];
 
 const relicPalette = {
-  obsidian: '#0f1311',
+  obsidian: '#111614',
   moss: '#18211d',
-  mossLight: '#202a25',
-  emerald: '#1f3a32',
-  emeraldSoft: '#27443a',
-  gold: '#3a3323',
-  rope: '#2a312d',
-  paper: '#3a423d',
-  deepSea: '#141d1a',
-  sea: '#1a2622',
+  mossLight: '#232d28',
+  emeraldSoft: '#263830',
+  sea: '#1e2d26',
+  rope: '#202824',
+  paper: '#2a332f',
+};
+
+const relicMaterialProps = {
+  roughness: 0.95,
+  metalness: 0,
+  flatShading: true,
 };
 
 const ToriiRelic: React.FC = () => (
   <group>
-    <mesh position={[-1.1, -0.15, 0]}>
-      <boxGeometry args={[0.35, 2.3, 0.35]} />
-      <meshStandardMaterial color={relicPalette.moss} roughness={0.95} metalness={0} flatShading />
+    <mesh position={[-0.7, -0.05, 0]}>
+      <boxGeometry args={[0.18, 1.6, 0.18]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.moss} />
     </mesh>
-    <mesh position={[1.1, -0.15, 0]}>
-      <boxGeometry args={[0.35, 2.3, 0.35]} />
-      <meshStandardMaterial color={relicPalette.moss} roughness={0.95} metalness={0} flatShading />
+    <mesh position={[0.7, -0.05, 0]}>
+      <boxGeometry args={[0.18, 1.6, 0.18]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.moss} />
     </mesh>
-    <mesh position={[0, 0.95, 0]}>
-      <boxGeometry args={[3.1, 0.22, 0.45]} />
-      <meshStandardMaterial color={relicPalette.mossLight} roughness={0.9} metalness={0} flatShading />
+    <mesh position={[0, 0.75, 0]}>
+      <boxGeometry args={[1.7, 0.14, 0.2]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.mossLight} />
+    </mesh>
+    <mesh position={[0, 0.52, 0]}>
+      <boxGeometry args={[1.1, 0.08, 0.16]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.obsidian} />
     </mesh>
   </group>
 );
 
 const WatatsumiRelic: React.FC = () => (
   <group>
-    <mesh position={[0, 0.2, 0]}>
-      <sphereGeometry args={[0.55, 24, 24]} />
+    <mesh position={[0, 0.25, 0]}>
+      <sphereGeometry args={[0.42, 16, 16]} />
       <meshStandardMaterial
+        {...relicMaterialProps}
         color={relicPalette.emeraldSoft}
-        roughness={0.8}
-        metalness={0}
-        flatShading
       />
     </mesh>
-    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
-      <torusGeometry args={[0.9, 0.07, 12, 60]} />
-      <meshStandardMaterial color={relicPalette.sea} roughness={0.9} metalness={0} flatShading />
+    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.25, 0]}>
+      <torusGeometry args={[0.7, 0.05, 10, 50]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.sea} />
+    </mesh>
+    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.4, 0]}>
+      <torusGeometry args={[0.45, 0.04, 10, 50]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.obsidian} />
     </mesh>
   </group>
 );
@@ -72,16 +81,20 @@ const WatatsumiRelic: React.FC = () => (
 const ShimenawaRelic: React.FC = () => (
   <group>
     <mesh rotation={[Math.PI / 2, 0, 0]}>
-      <torusGeometry args={[0.9, 0.12, 12, 60]} />
-      <meshStandardMaterial color={relicPalette.rope} roughness={0.98} metalness={0} flatShading />
+      <torusGeometry args={[0.65, 0.1, 10, 50]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.rope} />
     </mesh>
-    <mesh position={[-0.35, -0.65, 0.2]} rotation={[0, 0, 0.16]}>
-      <boxGeometry args={[0.08, 0.5, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} flatShading />
+    <mesh position={[-0.25, -0.45, 0.16]} rotation={[0, 0, 0.16]}>
+      <boxGeometry args={[0.07, 0.4, 0.02]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.paper} />
     </mesh>
-    <mesh position={[0.35, -0.65, 0.2]} rotation={[0, 0, -0.16]}>
-      <boxGeometry args={[0.08, 0.5, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} flatShading />
+    <mesh position={[0.25, -0.45, 0.16]} rotation={[0, 0, -0.16]}>
+      <boxGeometry args={[0.07, 0.4, 0.02]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.paper} />
+    </mesh>
+    <mesh position={[0, -0.52, 0.16]}>
+      <boxGeometry args={[0.07, 0.45, 0.02]} />
+      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.paper} />
     </mesh>
   </group>
 );
