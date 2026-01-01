@@ -1,0 +1,21 @@
+{
+    "name": "ITOPAN | 伊藤貴將 Portfolio",
+    "short_name": "ITOPAN",
+    "description": "伊藤貴將（イトパン）のポートフォリオサイト。",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020403",
+    "theme_color": "#020403",
+    "icons": [
+        {
+            "src": "/favicon.jpg",
+            "sizes": "192x192",
+            "type": "image/jpeg"
+        },
+        {
+            "src": "/favicon.jpg",
+            "sizes": "512x512",
+            "type": "image/jpeg"
+        }
+    ]
+}
