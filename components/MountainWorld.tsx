@@ -171,7 +171,7 @@ export const MountainWorld: React.FC = () => {
       relic.rotation.y = Math.sin(time * 0.35 + index) * 0.5;
       const pulse = 1 + Math.sin(time * 0.7 + index) * 0.04;
       relic.scale.setScalar(pulse);
-    }
+    });
   });
 
   return (
