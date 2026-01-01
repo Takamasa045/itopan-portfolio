@@ -5,6 +5,7 @@ import { AboutDetail } from './AboutDetail';
 import { useDetailView } from '../contexts/DetailViewContext';
 import { LazyVideo, LazyImage } from './LazyVideo';
 import { ServiceDetail } from './ServiceDetail';
+import { VibeBootcamp } from './VibeBootcamp';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
@@ -243,19 +244,24 @@ const quickStagger: Variants = {
   exit: { opacity: 0, transition: { duration: 0.15 } }
 };
 
-export const Overlay: React.FC = () => {
+interface OverlayProps {
+  onDetailPagesChange?: (pages: number) => void;
+}
+
+export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showServiceDetail, setShowServiceDetail] = useState(false);
+  const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
   const selectedProject = projects.find(p => p.id === selectedProjectId);
   const scroll = useScroll();
   const { setIsDetailOpen } = useDetailView();
 
   // Sync detail view state with context (controls 3D scene visibility)
   useEffect(() => {
-    const isDetailActive = selectedProjectId !== null || showAboutDetail || showServiceDetail;
+    const isDetailActive = selectedProjectId !== null || showAboutDetail || showServiceDetail || showVibeBootcamp;
     setIsDetailOpen(isDetailActive);
-  }, [selectedProjectId, showAboutDetail, showServiceDetail, setIsDetailOpen]);
+  }, [selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp, setIsDetailOpen]);
 
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
@@ -274,9 +280,20 @@ export const Overlay: React.FC = () => {
     setShowServiceDetail(true);
   };
 
+  const handleShowBootcamp = () => {
+    if (scroll.el) {
+      scroll.el.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    setShowVibeBootcamp(true);
+  };
+
+  const handleBackFromBootcamp = () => {
+    setShowVibeBootcamp(false);
+  };
+
   // Also ensure scroll is at top when Detail is shown
   useEffect(() => {
-    if ((showAboutDetail || showServiceDetail) && scroll.el) {
+    if ((showAboutDetail || showServiceDetail || showVibeBootcamp) && scroll.el) {
       // Force scroll to top with requestAnimationFrame for next frame
       requestAnimationFrame(() => {
         if (scroll.el) {
@@ -284,7 +301,7 @@ export const Overlay: React.FC = () => {
         }
       });
     }
-  }, [showAboutDetail, showServiceDetail, scroll.el]);
+  }, [showAboutDetail, showServiceDetail, showVibeBootcamp, scroll.el]);
 
   const resetScroll = () => {
     // Use multiple attempts to reset scroll position
@@ -323,6 +340,18 @@ export const Overlay: React.FC = () => {
       </div>
     );
   }
+
+  if (showVibeBootcamp) {
+    return (
+      <div className="w-full text-[#e4e7e5]">
+        <AnimatePresence mode="wait">
+          <VibeBootcamp key="vibe-bootcamp" onBack={handleBackFromBootcamp} onPagesChange={onDetailPagesChange} />
+        </AnimatePresence>
+      </div>
+    );
+  }
+
+
 
   // Show About Detail page
   if (showAboutDetail) {
@@ -547,7 +576,7 @@ export const Overlay: React.FC = () => {
             <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">04</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">伴走支援</h4>
-              <p className="text-stone-500 text-xs leading-relaxed">AI活用の壁打ち・導入サポート</p>
+              <p className="text-stone-500 text-xs leading-relaxed">安曇むすひ Vibe Bootcamp</p>
               {/* Overlay */}
               <div className="absolute inset-0 bg-stone-950/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <span className="text-emerald-400 text-xs font-mono tracking-wider">詳細はお問い合わせへ</span>
@@ -1015,4 +1044,3 @@ const MediaBackground: React.FC<{ type: MediaType }> = ({ type }) => {
     </div>
   );
 };
-

@@ -7,6 +7,7 @@ import * as THREE from 'three';
 
 export const Experience: React.FC = () => {
   const lightRef = useRef<THREE.DirectionalLight>(null);
+  const [detailPages, setDetailPages] = React.useState(0);
 
   useFrame(({ clock }) => {
     if (lightRef.current) {
@@ -20,19 +21,23 @@ export const Experience: React.FC = () => {
   const [pages, setPages] = React.useState(6);
 
   React.useEffect(() => {
-    const handleResize = () => {
-      // Mobile needs more scroll space due to stacked layout
+    const updatePages = () => {
       const isMobile = window.innerWidth < 768;
-      // Increase pages significantly for mobile (8 was insufficient, trying 12)
-      setPages(isMobile ? 12 : 6);
+      const basePages = isMobile ? 12 : 6;
+      const detailFallback = isMobile ? 26 : 18;
+
+      // Mobile needs more scroll space due to stacked layout
+      if (detailPages > 0) {
+        setPages(Math.max(detailFallback, detailPages));
+      } else {
+        setPages(basePages);
+      }
     };
 
-    // Initial check
-    handleResize();
-
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    updatePages();
+    window.addEventListener('resize', updatePages);
+    return () => window.removeEventListener('resize', updatePages);
+  }, [detailPages]);
 
   return (
     <>
@@ -70,7 +75,7 @@ export const Experience: React.FC = () => {
 
         {/* HTML Content Layer - Syncs with Scroll */}
         <Scroll html style={{ width: '100%', height: '100%' }}>
-          <Overlay />
+          <Overlay onDetailPagesChange={setDetailPages} />
         </Scroll>
       </ScrollControls>
 
