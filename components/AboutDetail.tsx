@@ -177,22 +177,23 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
               </div>
               <div className="lg:col-span-8 text-stone-400 leading-loose font-light space-y-6">
                 <p>
-                  2022年から画像生成AI、2024年は動画生成、2025年はAIエージェント／MCP・ワークフローに注力してきました。
-                  新しいモデルやツールが出るたびに自腹で試し続け、仕事以外の多くの時間をAIの検証と実験に注いできました。
+                  2022年から画像生成AI、2024年は動画生成、そして2025年はAIエージェント/MCP・ワークフローに注力してきました。<br />
+                  新しいモデルやツールが出るたびに身銭を切って試し、仕事以外の時間もAIの検証と実験に注いできました。
                 </p>
                 <div className="bg-stone-900/30 border-l-2 border-emerald-500/50 p-6">
                   <ul className="space-y-2 text-stone-300">
-                    <li>このモデルはどこまで使えるか</li>
-                    <li>どこがまだ厳しいのか</li>
-                    <li>現場で気持ちよく回る組み合わせは何か</li>
+                    <li>「このモデルはどこまで使えるのか」</li>
+                    <li>「どこがまだ厳しいのか」</li>
+                    <li>「現場で気持ちよく回る組み合わせは何か」</li>
                   </ul>
                 </div>
                 <p>
-                  それを自分の手で確かめ続けてきた結果、お仕事になる案件が少しずつ増えてきています。
+                  それを自分の手で確かめ続けてきた結果、仕事としての相談や案件も増えてきました。
                 </p>
                 <p className="text-stone-200 text-lg bg-emerald-950/30 p-6 rounded-sm border border-emerald-900/30">
-                  その人・そのチームにとって、どんなAIの使い方がしっくりくるのか。<br />
-                  <span className="text-emerald-400">それぞれの「自分なりのAI活用スタイル」</span>を一緒に見つけていく伴走役でありたいと思っています。
+                  大事にしたいのは、“正解のAI活用”を押しつけることではなく、<br />
+                  その人・そのチームにとってしっくりくる使い方を一緒に見つけること。<br />
+                  <span className="text-emerald-400">それぞれの「自分なりのAI活用スタイル」</span>を育てていく伴走役でありたいと思っています。
                 </p>
               </div>
             </motion.div>
