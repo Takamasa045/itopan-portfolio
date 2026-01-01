@@ -16,9 +16,9 @@ type RelicConfig = {
 };
 
 const relicConfigs: RelicConfig[] = [
-  { type: 'torii', float: { speed: 1.7, rotationIntensity: 0.35, floatIntensity: 0.4 } },
-  { type: 'watatsumi', float: { speed: 2.2, rotationIntensity: 0.5, floatIntensity: 0.55 } },
-  { type: 'shimenawa', float: { speed: 1.5, rotationIntensity: 0.28, floatIntensity: 0.35 } },
+  { type: 'torii', float: { speed: 1.4, rotationIntensity: 0.2, floatIntensity: 0.25 } },
+  { type: 'watatsumi', float: { speed: 1.6, rotationIntensity: 0.25, floatIntensity: 0.3 } },
+  { type: 'shimenawa', float: { speed: 1.3, rotationIntensity: 0.18, floatIntensity: 0.2 } },
 ];
 
 const relicPalette = {
@@ -44,56 +44,28 @@ const ToriiRelic: React.FC = () => (
       <boxGeometry args={[0.35, 2.3, 0.35]} />
       <meshStandardMaterial color={relicPalette.moss} roughness={0.9} metalness={0.05} emissive={relicPalette.obsidian} emissiveIntensity={0.12} />
     </mesh>
-    <mesh position={[0, 1.05, 0]}>
-      <boxGeometry args={[3.2, 0.22, 0.5]} />
-      <meshStandardMaterial color={relicPalette.mossLight} roughness={0.8} metalness={0.08} emissive={relicPalette.obsidian} emissiveIntensity={0.16} />
-    </mesh>
-    <mesh position={[0, 0.55, 0]}>
-      <boxGeometry args={[2.7, 0.18, 0.4]} />
-      <meshStandardMaterial color={relicPalette.obsidian} roughness={0.9} metalness={0.03} emissive="#0a0f0d" emissiveIntensity={0.12} />
-    </mesh>
-    <mesh position={[0, 0.65, 0.28]}>
-      <boxGeometry args={[0.45, 0.3, 0.12]} />
-      <meshStandardMaterial color={relicPalette.gold} roughness={0.55} metalness={0.25} emissive="#2a2213" emissiveIntensity={0.18} />
-    </mesh>
-    <mesh position={[0, -1.25, 0]}>
-      <boxGeometry args={[2.4, 0.12, 0.6]} />
-      <meshStandardMaterial color={relicPalette.obsidian} roughness={0.95} metalness={0.02} />
+    <mesh position={[0, 0.95, 0]}>
+      <boxGeometry args={[3.1, 0.22, 0.45]} />
+      <meshStandardMaterial color={relicPalette.mossLight} roughness={0.85} metalness={0.06} emissive={relicPalette.obsidian} emissiveIntensity={0.12} />
     </mesh>
   </group>
 );
 
 const WatatsumiRelic: React.FC = () => (
   <group>
-    <mesh position={[0, 0.1, 0]}>
-      <icosahedronGeometry args={[0.6, 0]} />
-      <MeshDistortMaterial
+    <mesh position={[0, 0.2, 0]}>
+      <sphereGeometry args={[0.55, 24, 24]} />
+      <meshStandardMaterial
         color={relicPalette.emeraldSoft}
-        roughness={0.5}
-        metalness={0.12}
-        clearcoat={0.7}
-        clearcoatRoughness={0.4}
+        roughness={0.6}
+        metalness={0.08}
         emissive={relicPalette.emerald}
-        emissiveIntensity={0.1}
-        distort={0.25}
-        speed={1.6}
+        emissiveIntensity={0.08}
       />
     </mesh>
-    <mesh rotation={[0, Math.PI / 2, 0]} position={[0, -0.1, 0]}>
-      <torusGeometry args={[1.15, 0.08, 16, 100, Math.PI * 1.2]} />
-      <meshStandardMaterial color={relicPalette.sea} roughness={0.75} metalness={0.08} emissive={relicPalette.deepSea} emissiveIntensity={0.18} />
-    </mesh>
-    <mesh rotation={[0, -Math.PI / 4, 0]} position={[0, -0.25, 0]}>
-      <torusGeometry args={[0.9, 0.06, 16, 100, Math.PI * 1.1]} />
-      <meshStandardMaterial color={relicPalette.deepSea} roughness={0.8} metalness={0.12} emissive="#0a1f1a" emissiveIntensity={0.16} />
-    </mesh>
-    <mesh position={[0, -0.95, 0]}>
-      <coneGeometry args={[0.22, 0.4, 12]} />
-      <meshStandardMaterial color={relicPalette.obsidian} roughness={0.85} metalness={0.12} />
-    </mesh>
-    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -1.05, 0]}>
-      <torusGeometry args={[0.5, 0.02, 12, 60]} />
-      <meshStandardMaterial color={relicPalette.emerald} roughness={0.8} metalness={0.05} emissive="#0c1f1a" emissiveIntensity={0.2} transparent opacity={0.35} />
+    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.5, 0]}>
+      <torusGeometry args={[0.9, 0.07, 12, 60]} />
+      <meshStandardMaterial color={relicPalette.sea} roughness={0.85} metalness={0.05} emissive={relicPalette.deepSea} emissiveIntensity={0.12} />
     </mesh>
   </group>
 );
@@ -104,25 +76,13 @@ const ShimenawaRelic: React.FC = () => (
       <torusGeometry args={[0.9, 0.12, 12, 60]} />
       <meshStandardMaterial color={relicPalette.rope} roughness={0.95} metalness={0.05} emissive="#241e16" emissiveIntensity={0.1} />
     </mesh>
-    <mesh position={[0, -0.85, 0]}>
-      <cylinderGeometry args={[0.12, 0.18, 0.7, 10]} />
-      <meshStandardMaterial color="#6e6253" roughness={0.95} metalness={0.05} />
-    </mesh>
-    <mesh position={[0, -1.25, 0]}>
-      <sphereGeometry args={[0.14, 12, 12]} />
-      <meshStandardMaterial color="#61574a" roughness={0.8} metalness={0.1} />
-    </mesh>
-    <mesh position={[-0.45, -0.95, 0.18]} rotation={[0, 0, 0.18]}>
-      <boxGeometry args={[0.08, 0.6, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.75} />
-    </mesh>
-    <mesh position={[0.45, -0.95, 0.18]} rotation={[0, 0, -0.18]}>
-      <boxGeometry args={[0.08, 0.6, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.75} />
-    </mesh>
-    <mesh position={[0, -1.0, 0.22]}>
+    <mesh position={[-0.35, -0.65, 0.2]} rotation={[0, 0, 0.16]}>
       <boxGeometry args={[0.08, 0.5, 0.02]} />
-      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.75} />
+      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.7} />
+    </mesh>
+    <mesh position={[0.35, -0.65, 0.2]} rotation={[0, 0, -0.16]}>
+      <boxGeometry args={[0.08, 0.5, 0.02]} />
+      <meshStandardMaterial color={relicPalette.paper} roughness={0.98} metalness={0} transparent opacity={0.7} />
     </mesh>
   </group>
 );
