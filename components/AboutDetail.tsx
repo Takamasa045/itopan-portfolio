@@ -47,7 +47,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
           <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          <span>BACK</span>
+          <span>戻る</span>
         </button>
       </motion.div>
 
@@ -63,14 +63,14 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
           <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          <span>BACK</span>
+          <span>戻る</span>
         </button>
       </motion.div>
 
       {/* Hero Section - Full viewport */}
       <section className="min-h-screen flex flex-col justify-center px-8 md:px-20 max-w-6xl mx-auto">
         <motion.div variants={quickFade}>
-          <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">ABOUT</p>
+          <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">ABOUT / イトパンについて</p>
           <h1 className="text-5xl md:text-7xl font-serif text-stone-100 mb-6 leading-tight">
             イトパンについて
           </h1>
@@ -378,7 +378,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
             <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
             </svg>
-            <span>BACK TO HOME</span>
+            <span>ホームに戻る</span>
           </button>
           <p className="text-stone-700 text-xs mt-8">
             &copy; 2025 Takamasa Ito / ITOPAN

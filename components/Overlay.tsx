@@ -4,6 +4,7 @@ import { useScroll } from '@react-three/drei';
 import { AboutDetail } from './AboutDetail';
 import { useDetailView } from '../contexts/DetailViewContext';
 import { LazyVideo, LazyImage } from './LazyVideo';
+import { ServiceDetail } from './ServiceDetail';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
@@ -245,15 +246,16 @@ const quickStagger: Variants = {
 export const Overlay: React.FC = () => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAboutDetail, setShowAboutDetail] = useState(false);
+  const [showServiceDetail, setShowServiceDetail] = useState(false);
   const selectedProject = projects.find(p => p.id === selectedProjectId);
   const scroll = useScroll();
   const { setIsDetailOpen } = useDetailView();
 
   // Sync detail view state with context (controls 3D scene visibility)
   useEffect(() => {
-    const isDetailActive = selectedProjectId !== null || showAboutDetail;
+    const isDetailActive = selectedProjectId !== null || showAboutDetail || showServiceDetail;
     setIsDetailOpen(isDetailActive);
-  }, [selectedProjectId, showAboutDetail, setIsDetailOpen]);
+  }, [selectedProjectId, showAboutDetail, showServiceDetail, setIsDetailOpen]);
 
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
@@ -264,9 +266,17 @@ export const Overlay: React.FC = () => {
     setShowAboutDetail(true);
   };
 
-  // Also ensure scroll is at top when AboutDetail is shown
+  // Handler for showing Service detail with scroll to top
+  const handleShowService = () => {
+    if (scroll.el) {
+      scroll.el.scrollTo({ top: 0, behavior: 'instant' });
+    }
+    setShowServiceDetail(true);
+  };
+
+  // Also ensure scroll is at top when Detail is shown
   useEffect(() => {
-    if (showAboutDetail && scroll.el) {
+    if ((showAboutDetail || showServiceDetail) && scroll.el) {
       // Force scroll to top with requestAnimationFrame for next frame
       requestAnimationFrame(() => {
         if (scroll.el) {
@@ -274,25 +284,45 @@ export const Overlay: React.FC = () => {
         }
       });
     }
-  }, [showAboutDetail, scroll.el]);
+  }, [showAboutDetail, showServiceDetail, scroll.el]);
 
-  // Handler for going back from About detail with scroll to top
-  const handleBackFromAbout = () => {
-    setShowAboutDetail(false);
+  const resetScroll = () => {
     // Use multiple attempts to reset scroll position
-    const resetScroll = () => {
+    const _reset = () => {
       if (scroll.el) {
         scroll.el.scrollTop = 0;
         scroll.el.scrollTo({ top: 0, behavior: 'instant' });
       }
     };
     // Immediate reset
-    resetScroll();
+    _reset();
     // Delayed resets to catch after render
-    setTimeout(resetScroll, 0);
-    setTimeout(resetScroll, 100);
-    setTimeout(resetScroll, 200);
+    setTimeout(_reset, 0);
+    setTimeout(_reset, 100);
+    setTimeout(_reset, 200);
   };
+
+  // Handler for going back from About detail with scroll to top
+  const handleBackFromAbout = () => {
+    setShowAboutDetail(false);
+    resetScroll();
+  };
+
+  const handleBackFromService = () => {
+    setShowServiceDetail(false);
+    resetScroll();
+  };
+
+  // Show Service Detail page
+  if (showServiceDetail) {
+    return (
+      <div className="w-full text-[#e4e7e5]">
+        <AnimatePresence mode="wait">
+          <ServiceDetail key="service-detail" onBack={handleBackFromService} />
+        </AnimatePresence>
+      </div>
+    );
+  }
 
   // Show About Detail page
   if (showAboutDetail) {
@@ -336,8 +366,8 @@ export const Overlay: React.FC = () => {
               // DEVELOPER & CREATOR
             </motion.p>
             <motion.div variants={fadeUp} className="text-sm md:text-xl font-light max-w-md leading-relaxed text-stone-300">
-              Exploring the boundaries between<br />
-              Nature, Spirit, and Generative AI.
+              自然、精神、そして生成AIの<br />
+              境界を探求する。
             </motion.div>
           </div>
         </motion.div>
@@ -466,37 +496,62 @@ export const Overlay: React.FC = () => {
         >
           {/* Header */}
           <motion.div variants={fadeUp} className="mb-16">
-            <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">CONTACT</p>
+            <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">SERVICES / サービス・プラン</p>
             <h3 className="text-3xl md:text-5xl font-serif text-stone-200 mb-6">
-              お仕事のご相談
+              お手伝いできること
             </h3>
             <p className="text-stone-400 font-light max-w-2xl mx-auto leading-relaxed">
-              生成AIを活用したクリエイティブ制作、開発プロジェクト、イベント登壇など、<br className="hidden md:block" />
-              お気軽にご相談ください。
+              名刺代わりのWebサイト制作「クラウド名刺」を中心に、<br className="hidden md:block" />
+              生成AIを活用した制作・開発支援を行っています。
             </p>
           </motion.div>
 
-          {/* Service Cards */}
+          {/* Service Cards (Clickable) */}
           <motion.div variants={fadeUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
-            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300">
+            {/* 01: Cloud Meishi (Clickable) */}
+            <button onClick={handleShowService} className="text-left group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 hover:bg-emerald-950/20 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">01</span>
-              <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">映像制作</h4>
-              <p className="text-stone-500 text-xs leading-relaxed">AI動画生成を活用したMV・プロモーション映像</p>
-            </div>
-            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300">
+              <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">クラウド名刺</h4>
+              <p className="text-stone-500 text-xs leading-relaxed">
+                Webサイト＋名刺セット<br />
+                渡した瞬間、あなたが伝わる“入口”を
+              </p>
+              <div className="absolute top-4 right-4 text-emerald-500/20 group-hover:text-emerald-500/60 transition-colors">
+                <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </div>
+            </button>
+
+            {/* 02: Dev Support (Hover only) */}
+            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">02</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">開発支援</h4>
               <p className="text-stone-500 text-xs leading-relaxed">AIエージェント・MCP・ワークフロー構築</p>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-stone-950/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-emerald-400 text-xs font-mono tracking-wider">詳細はお問い合わせへ</span>
+              </div>
             </div>
-            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300">
+
+            {/* 03: Event (Hover only) */}
+            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">03</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">イベント登壇</h4>
               <p className="text-stone-500 text-xs leading-relaxed">生成AI活用の事例紹介・ハンズオン</p>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-stone-950/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-emerald-400 text-xs font-mono tracking-wider">詳細はお問い合わせへ</span>
+              </div>
             </div>
-            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300">
+
+            {/* 04: Support (Hover only) */}
+            <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">04</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">伴走支援</h4>
               <p className="text-stone-500 text-xs leading-relaxed">AI活用の壁打ち・導入サポート</p>
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-stone-950/90 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <span className="text-emerald-400 text-xs font-mono tracking-wider">詳細はお問い合わせへ</span>
+              </div>
             </div>
           </motion.div>
 
@@ -509,7 +564,7 @@ export const Overlay: React.FC = () => {
             <div className="relative z-10">
               <div className="flex items-center justify-center gap-2 mb-6">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></span>
-                <span className="text-emerald-400 font-mono text-xs tracking-widest">AVAILABLE FOR WORK</span>
+                <span className="text-emerald-400 font-mono text-xs tracking-widest">AVAILABLE FOR WORK / お仕事募集中</span>
               </div>
 
               <h4 className="text-2xl md:text-3xl font-serif text-stone-100 mb-4">
@@ -519,15 +574,23 @@ export const Overlay: React.FC = () => {
                 「まだぼんやりしているアイデア」や「そもそも何から始めればいいかわからない」といった段階からでも大丈夫です。
               </p>
 
-              <a
-                href="https://forms.gle/BBfLfsDWmWbPiTLb8"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-3 px-10 py-5 bg-emerald-600/80 hover:bg-emerald-500 border border-emerald-500/50 text-white transition-all duration-300 rounded-sm font-mono text-sm group"
-              >
-                <span>お問い合わせフォーム</span>
-                <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
-              </a>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button
+                  onClick={handleShowService}
+                  className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent hover:bg-emerald-950/30 border border-emerald-700/50 hover:border-emerald-500 text-emerald-400 transition-all duration-300 rounded-sm font-mono text-sm"
+                >
+                  <span>プラン・料金を見る</span>
+                </button>
+                <a
+                  href="https://forms.gle/BBfLfsDWmWbPiTLb8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-3 px-10 py-4 bg-emerald-600/80 hover:bg-emerald-500 border border-emerald-500/50 text-white transition-all duration-300 rounded-sm font-mono text-sm group"
+                >
+                  <span>お問い合わせフォーム</span>
+                  <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
+                </a>
+              </div>
             </div>
           </motion.div>
 
@@ -659,7 +722,7 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
           </p>
 
           <div className="mt-4 flex items-center gap-2 text-emerald-400 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            VIEW COLLECTION <span className="text-lg">→</span>
+            コレクションを見る <span className="text-lg">→</span>
           </div>
         </div>
       </div>
@@ -714,7 +777,7 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
           <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          <span>BACK TO ALL PROJECTS</span>
+          <span>一覧に戻る</span>
         </motion.button>
         <motion.div variants={quickFade} className="text-xs font-mono text-stone-600 hidden md:block">
           COLLECTION ID: {project.id.toUpperCase()}
@@ -733,7 +796,7 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
           <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
           </svg>
-          <span>BACK</span>
+          <span>戻る</span>
         </button>
       </motion.div>
 
@@ -753,7 +816,7 @@ const ProjectDetail: React.FC<{ project: ProjectCollection; onBack: () => void }
         </motion.div>
 
         <motion.div variants={quickFade} className="w-full lg:w-1/3 flex flex-col justify-end pb-4">
-          <h5 className="text-emerald-600 text-xs font-mono tracking-widest mb-4">TECHNOLOGIES</h5>
+          <h5 className="text-emerald-600 text-xs font-mono tracking-widest mb-4">使用技術 / TECHNOLOGIES</h5>
           <div className="flex flex-wrap gap-2">
             {project.technologies.map(tech => (
               <span key={tech} className="bg-stone-900/80 text-stone-400 px-3 py-2 text-xs rounded-sm border border-emerald-900/20">
