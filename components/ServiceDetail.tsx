@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
+import { useLanguage } from '../contexts/LanguageContext';
 
 // Animations
 const quickFade: Variants = {
@@ -25,6 +26,9 @@ interface ServiceDetailProps {
 }
 
 export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
+    const { language } = useLanguage();
+    const isEnglish = language === 'en';
+    const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
     return (
         <motion.main
             initial="hidden"
@@ -45,20 +49,30 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                     <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                     </svg>
-                    <span>戻る</span>
+                    <span>{getText('戻る', 'Back')}</span>
                 </button>
             </motion.div>
 
             {/* Hero Section */}
             <section className="pt-32 pb-20 px-8 md:px-20 max-w-7xl mx-auto">
                 <motion.div variants={quickFade}>
-                    <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">SERVICES / サービス・料金</p>
+                    <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-4">
+                        {getText('SERVICES / サービス・料金', 'SERVICES / PRICING')}
+                    </p>
                     <h1 className="text-4xl md:text-6xl font-serif text-stone-100 mb-6 leading-tight">
-                        Webサイト+名刺制作プラン
+                        {getText('Webサイト+名刺制作プラン', 'Website + Business Card Plan')}
                     </h1>
                     <p className="text-stone-400 font-light max-w-2xl text-lg leading-relaxed">
-                        名刺代わりのポートフォリオから、事業の成長に合わせた本格的なWebサイトまで。<br />
-                        「公開方法」と「制作内容」を組み合わせて、あなたに最適な形をご提案します。
+                        {getText(
+                            <>
+                                名刺代わりのポートフォリオから、事業の成長に合わせた本格的なWebサイトまで。<br />
+                                「公開方法」と「制作内容」を組み合わせて、あなたに最適な形をご提案します。
+                            </>,
+                            <>
+                                From a portfolio that works as your business card to a full website that grows with your business.<br />
+                                We combine “release method” and “production scope” to suggest the best fit for you.
+                            </>
+                        )}
                     </p>
                 </motion.div>
             </section>
@@ -69,10 +83,13 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                     <motion.div variants={quickFade} className="mb-12">
                         <h2 className="text-2xl md:text-3xl font-serif text-stone-200 mb-4 flex items-center gap-4">
                             <span className="text-emerald-500/50 font-mono text-4xl">01</span>
-                            公開方法を選ぶ
+                            {getText('公開方法を選ぶ', 'Choose a Release Method')}
                         </h2>
                         <p className="text-stone-400 font-light">
-                            公開方法を分けることで、「ドメイン更新どうする？」の悩みを必要な人だけの話にできます。
+                            {getText(
+                                '公開方法を分けることで、「ドメイン更新どうする？」の悩みを必要な人だけの話にできます。',
+                                'By separating release methods, “How do we handle domain renewals?” becomes a concern only for those who need it.'
+                            )}
                         </p>
                     </motion.div>
 
@@ -80,33 +97,63 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         {/* Plan A */}
                         <div className="bg-stone-950/40 border border-emerald-900/30 rounded-sm p-8 relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300">
                             <div className="absolute top-0 right-0 p-4 opacity-10 font-serif text-6xl text-emerald-500">A</div>
-                            <h3 className="text-xl text-emerald-400 font-bold mb-2">ホスト付きURL</h3>
-                            <p className="text-stone-500 text-xs mb-6">おすすめ / まずはここから</p>
+                            <h3 className="text-xl text-emerald-400 font-bold mb-2">
+                                {getText('ホスト付きURL', 'Hosted URL')}
+                            </h3>
+                            <p className="text-stone-500 text-xs mb-6">
+                                {getText('おすすめ / まずはここから', 'Recommended / Start here')}
+                            </p>
                             <p className="text-stone-300 text-sm mb-6 leading-relaxed">
-                                ドメイン不要で最も手軽に公開できます。<br />
-                                <span className="text-emerald-500/80">早い／低コスト／更新が楽</span>
+                                {getText(
+                                    <>
+                                        ドメイン不要で最も手軽に公開できます。<br />
+                                        <span className="text-emerald-500/80">早い／低コスト／更新が楽</span>
+                                    </>,
+                                    <>
+                                        The easiest way to publish with no domain required.<br />
+                                        <span className="text-emerald-500/80">Fast / Low cost / Easy updates</span>
+                                    </>
+                                )}
                             </p>
                             <div className="border-t border-emerald-900/30 pt-4 mt-auto">
-                                <p className="text-stone-400 text-sm font-bold">追加費用なし</p>
-                                <p className="text-stone-600 text-xs mt-2">※サービス仕様変更の影響を受ける可能性があります<br />※公開先の有料プランが必要な場合は実費</p>
+                                <p className="text-stone-400 text-sm font-bold">
+                                    {getText('追加費用なし', 'No additional fee')}
+                                </p>
+                                <p className="text-stone-600 text-xs mt-2">
+                                    {getText(
+                                        <>
+                                            ※サービス仕様変更の影響を受ける可能性があります<br />※公開先の有料プランが必要な場合は実費
+                                        </>,
+                                        <>
+                                            *Service changes may affect availability<br />*If the hosting requires a paid plan, actual costs apply
+                                        </>
+                                    )}
+                                </p>
                             </div>
                         </div>
 
                         {/* Plan B */}
                         <div className="bg-stone-950/40 border border-emerald-900/30 rounded-sm p-8 relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300">
                             <div className="absolute top-0 right-0 p-4 opacity-10 font-serif text-6xl text-emerald-500">B</div>
-                            <h3 className="text-xl text-emerald-400 font-bold mb-2">独自ドメイン資産化</h3>
-                            <p className="text-stone-500 text-xs mb-6">事業として信頼を積むなら</p>
+                            <h3 className="text-xl text-emerald-400 font-bold mb-2">
+                                {getText('独自ドメイン資産化', 'Own Domain Asset')}
+                            </h3>
+                            <p className="text-stone-500 text-xs mb-6">
+                                {getText('事業として信頼を積むなら', 'For building business credibility')}
+                            </p>
                             <p className="text-stone-300 text-sm mb-6 leading-relaxed">
-                                「あなた.com」など、住所として残る独自ドメインで運用します。
+                                {getText('「あなた.com」など、住所として残る独自ドメインで運用します。', 'Run it on your own domain—your permanent address like “you.com”.')}
                             </p>
                             <div className="border-t border-emerald-900/30 pt-4">
-                                <p className="text-stone-400 text-sm font-bold">独自ドメイン資産化パック <br /><span className="text-lg text-emerald-400">+19,800円</span></p>
+                                <p className="text-stone-400 text-sm font-bold">
+                                    {getText('独自ドメイン資産化パック', 'Own Domain Asset Pack')} <br />
+                                    <span className="text-lg text-emerald-400">{getText('+19,800円', '+¥19,800')}</span>
+                                </p>
                                 <ul className="text-stone-500 text-xs mt-3 space-y-1 list-disc list-inside">
-                                    <li>ドメイン取得サポート</li>
-                                    <li>DNS設定・接続作業</li>
-                                    <li>差し替え可能QR設計</li>
-                                    <li>更新見守り（月3,300円〜）</li>
+                                    <li>{getText('ドメイン取得サポート', 'Domain registration support')}</li>
+                                    <li>{getText('DNS設定・接続作業', 'DNS setup & connection')}</li>
+                                    <li>{getText('差し替え可能QR設計', 'Replaceable QR design')}</li>
+                                    <li>{getText('更新見守り（月3,300円〜）', 'Renewal monitoring (from ¥3,300/mo)')}</li>
                                 </ul>
                             </div>
                         </div>
@@ -114,14 +161,26 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         {/* Plan C */}
                         <div className="bg-stone-950/40 border border-emerald-900/30 rounded-sm p-8 relative overflow-hidden group hover:border-emerald-500/40 transition-all duration-300">
                             <div className="absolute top-0 right-0 p-4 opacity-10 font-serif text-6xl text-emerald-500">C</div>
-                            <h3 className="text-xl text-emerald-400 font-bold mb-2">書き出し・移設設計</h3>
-                            <p className="text-stone-500 text-xs mb-6">長期運用・拡張性重視</p>
+                            <h3 className="text-xl text-emerald-400 font-bold mb-2">
+                                {getText('書き出し・移設設計', 'Export & Migration Design')}
+                            </h3>
+                            <p className="text-stone-500 text-xs mb-6">
+                                {getText('長期運用・拡張性重視', 'For long-term ops & scalability')}
+                            </p>
                             <p className="text-stone-300 text-sm mb-6 leading-relaxed">
-                                将来のロックインを避けたい方向け。可能な範囲で書き出しと移設を前提に設計します。
+                                {getText(
+                                    '将来のロックインを避けたい方向け。可能な範囲で書き出しと移設を前提に設計します。',
+                                    'For those who want to avoid future lock-in. Designed with export and migration in mind as much as possible.'
+                                )}
                             </p>
                             <div className="border-t border-emerald-900/30 pt-4">
-                                <p className="text-stone-400 text-sm font-bold">設計・構築費 <br /><span className="text-lg text-emerald-400">+49,800円〜</span></p>
-                                <p className="text-stone-600 text-xs mt-2">※動的機能の制限や保守コードの制約あり</p>
+                                <p className="text-stone-400 text-sm font-bold">
+                                    {getText('設計・構築費', 'Design & build fee')} <br />
+                                    <span className="text-lg text-emerald-400">{getText('+49,800円〜', '+¥49,800~')}</span>
+                                </p>
+                                <p className="text-stone-600 text-xs mt-2">
+                                    {getText('※動的機能の制限や保守コードの制約あり', '*Some limits on dynamic features and maintenance code')}
+                                </p>
                             </div>
                         </div>
                     </motion.div>
@@ -134,7 +193,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                     <motion.div variants={quickFade} className="mb-12">
                         <h2 className="text-2xl md:text-3xl font-serif text-stone-200 mb-4 flex items-center gap-4">
                             <span className="text-emerald-500/50 font-mono text-4xl">02</span>
-                            制作プラン
+                            {getText('制作プラン', 'Production Plans')}
                         </h2>
                     </motion.div>
 
@@ -143,34 +202,43 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         <div className="bg-stone-900/40 border border-stone-800 rounded-sm flex flex-col hover:border-emerald-500/30 transition-all duration-300">
                             <div className="p-8 border-b border-stone-800">
                                 <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI LITE</h3>
-                                <h4 className="text-2xl font-serif text-stone-100">クラウド名刺 Lite</h4>
+                                <h4 className="text-2xl font-serif text-stone-100">
+                                    {getText('クラウド名刺 Lite', 'Cloud Business Card Lite')}
+                                </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">49,800</span>
-                                    <span className="text-stone-500 text-sm">円 (税込)</span>
+                                    <span className="text-stone-500 text-sm">{getText('円 (税込)', 'JPY (tax included)')}</span>
                                 </div>
                                 <p className="mt-4 text-stone-500 text-sm leading-relaxed">
-                                    まずは名刺から整えたい。<br />活動準備中で入口だけ作りたい方に。
+                                    {getText(
+                                        <>
+                                            まずは名刺から整えたい。<br />活動準備中で入口だけ作りたい方に。
+                                        </>,
+                                        <>
+                                            Start by refining your business card.<br />For those preparing to launch who just need an entry point.
+                                        </>
+                                    )}
                                 </p>
                             </div>
                             <div className="p-8 flex-grow">
                                 <ul className="space-y-4 text-sm text-stone-300">
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 1ページ制作
+                                        <span className="text-emerald-500">✓</span> {getText('1ページ制作', 'One-page site')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 世界観ヒアリング 30分
+                                        <span className="text-emerald-500">✓</span> {getText('世界観ヒアリング 30分', '30-min vision interview')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 自己紹介文の整形
+                                        <span className="text-emerald-500">✓</span> {getText('自己紹介文の整形', 'Profile text refinement')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 差し替え可能QR導線設計
+                                        <span className="text-emerald-500">✓</span> {getText('差し替え可能QR導線設計', 'Replaceable QR routing design')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 名刺デザイン + 印刷100部
+                                        <span className="text-emerald-500">✓</span> {getText('名刺デザイン + 印刷100部', 'Business card design + 100 prints')}
                                     </li>
                                     <li className="flex items-start gap-3 pt-4 border-t border-stone-800 text-stone-400">
-                                        <span className="text-emerald-500/50">✦</span> 公開方法：A (Host)
+                                        <span className="text-emerald-500/50">✦</span> {getText('公開方法：A (Host)', 'Release method: A (Host)')}
                                     </li>
                                 </ul>
                             </div>
@@ -178,35 +246,46 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
 
                         {/* STANDARD PLAN (Featured) */}
                         <div className="bg-emerald-950/20 border-2 border-emerald-500/40 result-card-shadow rounded-sm flex flex-col relative transform lg:-translate-y-4">
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider">おすすめ / RECOMMENDED</div>
+                            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-emerald-500 text-white text-xs px-3 py-1 rounded-full font-bold tracking-wider">
+                                {getText('おすすめ', 'RECOMMENDED')}
+                            </div>
                             <div className="p-8 border-b border-emerald-900/30">
                                 <h3 className="text-emerald-500 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI STANDARD</h3>
-                                <h4 className="text-2xl font-serif text-white">クラウド名刺 Standard</h4>
+                                <h4 className="text-2xl font-serif text-white">
+                                    {getText('クラウド名刺 Standard', 'Cloud Business Card Standard')}
+                                </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-xl text-stone-500 line-through decoration-stone-500/50 mr-2">99,800</span>
                                     <span className="text-4xl font-bold text-emerald-400">69,800</span>
-                                    <span className="text-stone-500 text-sm">円〜 (税込)</span>
+                                    <span className="text-stone-500 text-sm">{getText('円〜 (税込)', 'JPY from (tax included)')}</span>
                                 </div>
                                 <p className="mt-4 text-stone-400 text-sm leading-relaxed">
-                                    「何屋さんか」を一瞬で伝える。<br />SNS運用まで見据えた標準プラン。
+                                    {getText(
+                                        <>
+                                            「何屋さんか」を一瞬で伝える。<br />SNS運用まで見据えた標準プラン。
+                                        </>,
+                                        <>
+                                            Communicate “what you do” in an instant.<br />A standard plan built with social presence in mind.
+                                        </>
+                                    )}
                                 </p>
                             </div>
                             <div className="p-8 flex-grow bg-emerald-950/10">
                                 <ul className="space-y-4 text-sm text-stone-200">
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-400">✦</span> Liteの内容すべて
+                                        <span className="text-emerald-400">✦</span> {getText('Liteの内容すべて', 'Everything in Lite')}
                                     </li>
                                     <li className="flex items-start gap-3 font-bold text-emerald-200">
-                                        <span className="text-emerald-400">✦</span> 肩書き／提供価値の整理
+                                        <span className="text-emerald-400">✦</span> {getText('肩書き／提供価値の整理', 'Clarify title & value proposition')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-400">✦</span> SNS固定文 (自己紹介テンプレ)
+                                        <span className="text-emerald-400">✦</span> {getText('SNS固定文 (自己紹介テンプレ)', 'Pinned SNS bio template')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-400">✦</span> 名刺印刷 200部へ増量 (希望者)
+                                        <span className="text-emerald-400">✦</span> {getText('名刺印刷 200部へ増量 (希望者)', 'Increase to 200 business card prints (optional)')}
                                     </li>
                                     <li className="flex items-start gap-3 pt-4 border-t border-emerald-900/30 text-emerald-100/70">
-                                        <span className="text-emerald-500/50">✦</span> 公開方法：A / B(+2万) / C(+5万〜)
+                                        <span className="text-emerald-500/50">✦</span> {getText('公開方法：A / B(+2万) / C(+5万〜)', 'Release method: A / B(+¥20k) / C(+¥50k~)')}
                                     </li>
                                 </ul>
                             </div>
@@ -216,37 +295,46 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         <div className="bg-stone-900/40 border border-stone-800 rounded-sm flex flex-col hover:border-emerald-500/30 transition-all duration-300">
                             <div className="p-8 border-b border-stone-800">
                                 <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">BUSINESS PORTAL</h3>
-                                <h4 className="text-2xl font-serif text-stone-100">事業ポータル</h4>
+                                <h4 className="text-2xl font-serif text-stone-100">
+                                    {getText('事業ポータル', 'Business Portal')}
+                                </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">198,000</span>
-                                    <span className="text-stone-500 text-sm">円 (税込)</span>
+                                    <span className="text-stone-500 text-sm">{getText('円 (税込)', 'JPY (tax included)')}</span>
                                 </div>
                                 <p className="mt-4 text-stone-500 text-sm leading-relaxed">
-                                    実績・サービス・FAQまで網羅。<br />事業の信頼性を高める本格Web。
+                                    {getText(
+                                        <>
+                                            実績・サービス・FAQまで網羅。<br />事業の信頼性を高める本格Web。
+                                        </>,
+                                        <>
+                                            Covers achievements, services, and FAQ.<br />A full website that builds business credibility.
+                                        </>
+                                    )}
                                 </p>
                             </div>
                             <div className="p-8 flex-grow">
                                 <ul className="space-y-4 text-sm text-stone-300">
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 3〜5ページ制作
+                                        <span className="text-emerald-500">✓</span> {getText('3〜5ページ制作', '3–5 pages')}
                                     </li>
                                     <li className="flex items-start gap-3 text-xs text-stone-500 pl-6 -mt-2">
-                                        プロフィール/実績/サービス/FAQ等
+                                        {getText('プロフィール/実績/サービス/FAQ等', 'Profile / Achievements / Services / FAQ')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> ミニ世界観設計
+                                        <span className="text-emerald-500">✓</span> {getText('ミニ世界観設計', 'Mini brand world design')}
                                     </li>
                                     <li className="flex items-start gap-3 text-xs text-stone-500 pl-6 -mt-2">
-                                        タグライン/色/言葉の辞書
+                                        {getText('タグライン/色/言葉の辞書', 'Tagline / color / word dictionary')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 名刺デザイン + 印刷200部
+                                        <span className="text-emerald-500">✓</span> {getText('名刺デザイン + 印刷200部', 'Business card design + 200 prints')}
                                     </li>
                                     <li className="flex items-start gap-3">
-                                        <span className="text-emerald-500">✓</span> 公開後2週間の微調整
+                                        <span className="text-emerald-500">✓</span> {getText('公開後2週間の微調整', 'Two weeks of post-launch tweaks')}
                                     </li>
                                     <li className="flex items-start gap-3 pt-4 border-t border-stone-800 text-stone-400">
-                                        <span className="text-emerald-500/50">✦</span> 公開方法：A or B (セット設計可)
+                                        <span className="text-emerald-500/50">✦</span> {getText('公開方法：A or B (セット設計可)', 'Release method: A or B (bundled design available)')}
                                     </li>
                                 </ul>
                             </div>
@@ -263,30 +351,42 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         {/* Steps */}
                         <div>
                             <h3 className="text-xl text-stone-200 font-serif mb-8 border-b border-emerald-900/30 pb-4">
-                                ステップアップの考え方
+                                {getText('ステップアップの考え方', 'How to Step Up')}
                             </h3>
                             <div className="space-y-8">
                                 <div className="flex gap-4">
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-serif border border-emerald-500/30">1</div>
                                     <div>
-                                        <h4 className="text-stone-200 font-bold mb-1">まずは公開して名刺を回す</h4>
-                                        <p className="text-stone-400 text-sm font-light">LiteまたはStandardで、まずはホスト付きURLで公開。</p>
+                                        <h4 className="text-stone-200 font-bold mb-1">
+                                            {getText('まずは公開して名刺を回す', 'Publish first and circulate your card')}
+                                        </h4>
+                                        <p className="text-stone-400 text-sm font-light">
+                                            {getText('LiteまたはStandardで、まずはホスト付きURLで公開。', 'Start with Lite or Standard, publish via hosted URL.')}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="w-[2px] h-8 bg-stone-800 ml-4 -mt-4 -mb-4"></div>
                                 <div className="flex gap-4">
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-serif border border-emerald-500/30">2</div>
                                     <div>
-                                        <h4 className="text-stone-200 font-bold mb-1">信用と資産を積む</h4>
-                                        <p className="text-stone-400 text-sm font-light">活動が育ったら、独自ドメイン資産化で住所を固定。</p>
+                                        <h4 className="text-stone-200 font-bold mb-1">
+                                            {getText('信用と資産を積む', 'Build trust and assets')}
+                                        </h4>
+                                        <p className="text-stone-400 text-sm font-light">
+                                            {getText('活動が育ったら、独自ドメイン資産化で住所を固定。', 'As your activity grows, lock in your address with your own domain.')}
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="w-[2px] h-8 bg-stone-800 ml-4 -mt-4 -mb-4"></div>
                                 <div className="flex gap-4">
                                     <div className="flex-shrink-0 w-8 h-8 rounded-full bg-emerald-900/50 text-emerald-400 flex items-center justify-center font-serif border border-emerald-500/30">3</div>
                                     <div>
-                                        <h4 className="text-stone-200 font-bold mb-1">事業用途に耐える形へ</h4>
-                                        <p className="text-stone-400 text-sm font-light">長期運用や拡張が必要になったら、書き出し・移設設計へ。</p>
+                                        <h4 className="text-stone-200 font-bold mb-1">
+                                            {getText('事業用途に耐える形へ', 'Ready for business use')}
+                                        </h4>
+                                        <p className="text-stone-400 text-sm font-light">
+                                            {getText('長期運用や拡張が必要になったら、書き出し・移設設計へ。', 'If you need long-term ops or scalability, move to export/migration design.')}
+                                        </p>
                                     </div>
                                 </div>
                             </div>
@@ -295,23 +395,31 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         {/* Delivery & Operations */}
                         <div>
                             <h3 className="text-xl text-stone-200 font-serif mb-8 border-b border-emerald-900/30 pb-4">
-                                納品・運用について
+                                {getText('納品・運用について', 'Delivery & Operations')}
                             </h3>
                             <div className="bg-stone-900/40 p-6 rounded-sm border border-stone-800 mb-6">
-                                <h4 className="text-emerald-400 font-bold mb-3 text-sm">納品方法：アカウントの所在を明確化</h4>
+                                <h4 className="text-emerald-400 font-bold mb-3 text-sm">
+                                    {getText('納品方法：アカウントの所在を明確化', 'Delivery method: clarify account ownership')}
+                                </h4>
                                 <ul className="space-y-2 text-stone-300 text-sm list-disc list-inside">
-                                    <li>原則お客様アカウントで制作・公開</li>
-                                    <li>納品物は「URL」と「管理権限」</li>
-                                    <li>制作側は納品後に権限を外します</li>
+                                    <li>{getText('原則お客様アカウントで制作・公開', 'Build and publish in the client’s account by default')}</li>
+                                    <li>{getText('納品物は「URL」と「管理権限」', 'Deliverables are the URL and admin access')}</li>
+                                    <li>{getText('制作側は納品後に権限を外します', 'We remove our access after delivery')}</li>
                                 </ul>
                             </div>
                             <div className="bg-stone-900/40 p-6 rounded-sm border border-stone-800">
-                                <h4 className="text-emerald-400 font-bold mb-3 text-sm">運用代行オプション</h4>
+                                <h4 className="text-emerald-400 font-bold mb-3 text-sm">
+                                    {getText('運用代行オプション', 'Operations support option')}
+                                </h4>
                                 <div className="flex justify-between items-baseline mb-2">
-                                    <span className="text-stone-200 text-sm">制作側で代理運用・見守り</span>
-                                    <span className="text-emerald-400 font-bold">月額 3,300円〜</span>
+                                    <span className="text-stone-200 text-sm">
+                                        {getText('制作側で代理運用・見守り', 'We can operate and monitor on your behalf')}
+                                    </span>
+                                    <span className="text-emerald-400 font-bold">{getText('月額 3,300円〜', 'From ¥3,300/mo')}</span>
                                 </div>
-                                <p className="text-stone-500 text-xs">※解約時の移管は契約範囲に準じて対応します</p>
+                                <p className="text-stone-500 text-xs">
+                                    {getText('※解約時の移管は契約範囲に準じて対応します', 'On cancellation, transfer is handled within contract scope')}
+                                </p>
                             </div>
                         </div>
 
@@ -323,11 +431,31 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
             <section className="py-20 px-8 md:px-20">
                 <div className="max-w-4xl mx-auto">
                     <motion.div variants={quickFade}>
-                        <h2 className="text-2xl font-serif text-stone-200 mb-10 text-center">よくある質問</h2>
+                        <h2 className="text-2xl font-serif text-stone-200 mb-10 text-center">
+                            {getText('よくある質問', 'FAQ')}
+                        </h2>
                         <div className="space-y-6">
-                            <FaqItem q="ドメインは最初から必要ですか？" a="必要ありません。まずはホスト付きURLで公開し、必要になったタイミングで独自ドメインへ移行できます。" />
-                            <FaqItem q="名刺のQRは後から変更できますか？" a="できます。最初から「差し替え可能な導線」として設計するため、印刷した名刺を無駄にせずリンク先を変更可能です。" />
-                            <FaqItem q="ドメインは誰の名義になりますか？" a="原則、お客様名義です。「Web上の資産」はお客様の手元に残るように手配します。" />
+                            <FaqItem
+                                q={getText('ドメインは最初から必要ですか？', 'Do I need a domain from the start?')}
+                                a={getText(
+                                    '必要ありません。まずはホスト付きURLで公開し、必要になったタイミングで独自ドメインへ移行できます。',
+                                    'No. You can start with a hosted URL and move to your own domain when needed.'
+                                )}
+                            />
+                            <FaqItem
+                                q={getText('名刺のQRは後から変更できますか？', 'Can I change the business card QR later?')}
+                                a={getText(
+                                    'できます。最初から「差し替え可能な導線」として設計するため、印刷した名刺を無駄にせずリンク先を変更可能です。',
+                                    'Yes. It’s designed as a replaceable route from the start, so you can change the destination without wasting printed cards.'
+                                )}
+                            />
+                            <FaqItem
+                                q={getText('ドメインは誰の名義になりますか？', 'Whose name will the domain be under?')}
+                                a={getText(
+                                    '原則、お客様名義です。「Web上の資産」はお客様の手元に残るように手配します。',
+                                    'By default, it’s in the client’s name. We ensure your web asset stays under your control.'
+                                )}
+                            />
                         </div>
                     </motion.div>
                 </div>
@@ -337,12 +465,28 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
             <section className="py-20 px-8 md:px-20 bg-gradient-to-t from-emerald-950/30 to-transparent">
                 <motion.div variants={quickFade} className="max-w-3xl mx-auto text-center">
                     <h2 className="text-3xl md:text-5xl font-serif text-stone-100 mb-6">
-                        まずは<span className="text-emerald-400">Liteで入口だけ</span><br />
-                        でも問題ありません。
+                        {getText(
+                            <>
+                                まずは<span className="text-emerald-400">Liteで入口だけ</span><br />
+                                でも問題ありません。
+                            </>,
+                            <>
+                                Starting with <span className="text-emerald-400">Lite for just the entry</span><br />
+                                is perfectly fine.
+                            </>
+                        )}
                     </h2>
                     <p className="text-stone-400 font-light mb-12">
-                        名刺のQRから、あなたの活動が迷わず届く状態を作ります。<br />
-                        相談内容は短くてOK。「目的」と「現状」が分かれば、最短ルートをご提案します。
+                        {getText(
+                            <>
+                                名刺のQRから、あなたの活動が迷わず届く状態を作ります。<br />
+                                相談内容は短くてOK。「目的」と「現状」が分かれば、最短ルートをご提案します。
+                            </>,
+                            <>
+                                We make sure people reach your activity without getting lost from your business card QR.<br />
+                                Short messages are fine—if we know your goal and current state, we’ll suggest the shortest route.
+                            </>
+                        )}
                     </p>
 
                     <a
@@ -351,7 +495,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-3 px-12 py-5 bg-emerald-600/90 hover:bg-emerald-500 border border-emerald-500/50 text-white text-lg transition-all duration-300 rounded-sm font-mono shadow-lg hover:shadow-emerald-500/30 group"
                     >
-                        <span>お申し込み・ご相談</span>
+                        <span>{getText('お申し込み・ご相談', 'Apply / Consult')}</span>
                         <span className="group-hover:translate-x-1 transition-transform">&rarr;</span>
                     </a>
                 </motion.div>
@@ -361,7 +505,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
     );
 };
 
-const FaqItem: React.FC<{ q: string; a: string }> = ({ q, a }) => {
+const FaqItem: React.FC<{ q: React.ReactNode; a: React.ReactNode }> = ({ q, a }) => {
     return (
         <div className="bg-stone-900/30 border border-emerald-900/20 rounded-sm p-6 hover:border-emerald-500/30 transition-colors">
             <h4 className="text-emerald-400 font-bold mb-2 flex gap-3 text-lg">

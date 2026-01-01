@@ -2,12 +2,14 @@ import React, { Suspense } from 'react';
 import { Canvas } from '@react-three/fiber';
 import { Loader, useContextBridge } from '@react-three/drei';
 import { Experience } from './components/Experience';
+import { LanguageToggle } from './components/LanguageToggle';
 import { DetailViewContext, DetailViewProvider, useDetailView } from './contexts/DetailViewContext';
+import { LanguageContext, LanguageProvider } from './contexts/LanguageContext';
 
 // Inner component that uses the context
 const AppContent: React.FC = () => {
   const { isDetailOpen } = useDetailView();
-  const ContextBridge = useContextBridge(DetailViewContext);
+  const ContextBridge = useContextBridge(DetailViewContext, LanguageContext);
 
   return (
     <>
@@ -19,7 +21,7 @@ const AppContent: React.FC = () => {
           camera={{ position: [0, 0, 5], fov: 35 }}
           dpr={[1, 2]}
           gl={{ antialias: true, alpha: false }}
-          frameloop={isDetailOpen ? 'never' : 'always'}
+          frameloop={isDetailOpen ? 'demand' : 'always'}
         >
           <ContextBridge>
             <color attach="background" args={['#020403']} />
@@ -40,8 +42,11 @@ const AppContent: React.FC = () => {
       <div className="fixed top-6 left-6 z-40 pointer-events-none mix-blend-difference text-white/40 text-xs tracking-widest">
         ITOPAN / イトパン
       </div>
-      <div className="fixed top-6 right-6 z-40 pointer-events-none mix-blend-difference text-white/40 text-xs tracking-widest">
+      <div className="fixed top-6 right-24 z-40 pointer-events-none mix-blend-difference text-white/40 text-xs tracking-widest">
         PORTFOLIO
+      </div>
+      <div className="fixed top-6 right-6 z-50 pointer-events-auto">
+        <LanguageToggle />
       </div>
     </>
   );
@@ -70,9 +75,11 @@ declare global {
 
 const App: React.FC = () => {
   return (
-    <DetailViewProvider>
-      <AppContent />
-    </DetailViewProvider>
+    <LanguageProvider>
+      <DetailViewProvider>
+        <AppContent />
+      </DetailViewProvider>
+    </LanguageProvider>
   );
 };
 

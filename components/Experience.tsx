@@ -4,10 +4,14 @@ import { Overlay } from './Overlay';
 import { MountainWorld } from './MountainWorld';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
+import { DetailViewContext, useDetailView } from '../contexts/DetailViewContext';
+import { LanguageContext, useLanguage } from '../contexts/LanguageContext';
 
 export const Experience: React.FC = () => {
   const lightRef = useRef<THREE.DirectionalLight>(null);
   const [detailPages, setDetailPages] = React.useState(0);
+  const detailViewContextValue = useDetailView();
+  const languageContextValue = useLanguage();
 
   useFrame(({ clock }) => {
     if (lightRef.current) {
@@ -75,7 +79,11 @@ export const Experience: React.FC = () => {
 
         {/* HTML Content Layer - Syncs with Scroll */}
         <Scroll html style={{ width: '100%', height: '100%' }}>
-          <Overlay onDetailPagesChange={setDetailPages} />
+          <DetailViewContext.Provider value={detailViewContextValue}>
+            <LanguageContext.Provider value={languageContextValue}>
+              <Overlay onDetailPagesChange={setDetailPages} />
+            </LanguageContext.Provider>
+          </DetailViewContext.Provider>
         </Scroll>
       </ScrollControls>
 

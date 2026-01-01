@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { useLanguage } from '../contexts/LanguageContext';
 
 interface VibeBootcampProps {
   onBack: () => void;
@@ -7,135 +8,270 @@ interface VibeBootcampProps {
 
 const CONSULT_LINK = 'https://forms.gle/BBfLfsDWmWbPiTLb8';
 
-const conceptAxes = [
-  {
-    label: '一、言葉',
-    title: 'テキストは「入口の空気」を決める',
-    body: 'AI時代だからこそ、いちばん“自分らしさ”が滲むのは言葉。どんなテンションで話す人なのか。何にモヤっとして、何にワクっとするのか。そこが言語化されていないと、AIは「それっぽいけど、自分じゃない」文章を返し続けます。まずは、あなたの声がちゃんと聞こえる言葉に整えます。'
-  },
-  {
-    label: '二、文脈',
-    title: 'コンテクストが、カードの強さを決める',
-    body: '誰に向けて、何を伝えて、どこへ誘導したいのか。実績やリンクを並べるだけだと、入口は弱いまま。あなたの今のフェーズに合わせて構成と導線を整理し、AIに渡せる「自己紹介の設計図」としてドキュメント化していきます。'
-  },
-  {
-    label: '三、世界観',
-    title: '一枚に、世界を宿す',
-    body: '色・余白・質感・言葉づかい。小さな選択の積み重ねが“あなたっぽさ”になります。世界観のキーワード／色／モチーフ／NGラインを整理して、見る人が迷わず「この人だ」と感じる、カードの佇まいをつくります。'
-  },
-  {
-    label: '四、運用',
-    title: '公開 → 反応 → 更新 → また公開',
-    body: 'クラウド名刺は、作って終わりじゃない。出して、反応を見て、少し直して、また出す。そのループが回り始めたとき、カードは資産になります。更新の手順とテンプレまで整えて、「育てられる状態」にしていきます。'
-  }
-];
+const conceptAxes = {
+  ja: [
+    {
+      label: '一、言葉',
+      title: 'テキストは「入口の空気」を決める',
+      body: 'AI時代だからこそ、いちばん“自分らしさ”が滲むのは言葉。どんなテンションで話す人なのか。何にモヤっとして、何にワクっとするのか。そこが言語化されていないと、AIは「それっぽいけど、自分じゃない」文章を返し続けます。まずは、あなたの声がちゃんと聞こえる言葉に整えます。'
+    },
+    {
+      label: '二、文脈',
+      title: 'コンテクストが、カードの強さを決める',
+      body: '誰に向けて、何を伝えて、どこへ誘導したいのか。実績やリンクを並べるだけだと、入口は弱いまま。あなたの今のフェーズに合わせて構成と導線を整理し、AIに渡せる「自己紹介の設計図」としてドキュメント化していきます。'
+    },
+    {
+      label: '三、世界観',
+      title: '一枚に、世界を宿す',
+      body: '色・余白・質感・言葉づかい。小さな選択の積み重ねが“あなたっぽさ”になります。世界観のキーワード／色／モチーフ／NGラインを整理して、見る人が迷わず「この人だ」と感じる、カードの佇まいをつくります。'
+    },
+    {
+      label: '四、運用',
+      title: '公開 → 反応 → 更新 → また公開',
+      body: 'クラウド名刺は、作って終わりじゃない。出して、反応を見て、少し直して、また出す。そのループが回り始めたとき、カードは資産になります。更新の手順とテンプレまで整えて、「育てられる状態」にしていきます。'
+    }
+  ],
+  en: [
+    {
+      label: 'I. Words',
+      title: 'Text sets the air at the entrance',
+      body: 'In the AI era, what leaks through most is your words. Your tone, what bothers you, what excites you. If that isn’t articulated, AI will keep producing “sounds right but isn’t me” copy. We start by shaping words where your voice is clearly heard.'
+    },
+    {
+      label: 'II. Context',
+      title: 'Context defines the strength of the card',
+      body: 'Who is it for, what should it communicate, and where should it lead? Just listing achievements and links keeps the entry weak. We organize structure and flow for your current phase and document it as a “self-intro blueprint” you can hand to AI.'
+    },
+    {
+      label: 'III. Worldview',
+      title: 'Hold a world in a single card',
+      body: 'Color, spacing, texture, wording. Small choices add up to “you.” We organize keywords, colors, motifs, and no-go lines so viewers feel, “Yes, this is them,” at a glance.'
+    },
+    {
+      label: 'IV. Operations',
+      title: 'Publish → respond → update → publish again',
+      body: 'A cloud card isn’t finished when you make it. You put it out, see reactions, tweak it, and publish again. When that loop starts, the card becomes an asset. We prepare the update steps and templates so it’s a “growable” state.'
+    }
+  ]
+} as const;
 
-const audienceList = [
-  'Webサイトほど大げさじゃない入口がほしい',
-  '名刺QRの先で、ちゃんとした自己紹介に繋げたい',
-  'AIに書かせるほど、文章が自分から離れる感じがする',
-  '発信やプロフィールが毎回ブレる',
-  'やりたいことはあるのに、入口が整っていない',
-  '一人で作り続けるのに少し疲れてきた',
-  'ゆるいテンションだけど、中身は本気で整えたい'
-];
+const audienceList = {
+  ja: [
+    'Webサイトほど大げさじゃない入口がほしい',
+    '名刺QRの先で、ちゃんとした自己紹介に繋げたい',
+    'AIに書かせるほど、文章が自分から離れる感じがする',
+    '発信やプロフィールが毎回ブレる',
+    'やりたいことはあるのに、入口が整っていない',
+    '一人で作り続けるのに少し疲れてきた',
+    'ゆるいテンションだけど、中身は本気で整えたい'
+  ],
+  en: [
+    'Want an entry that isn’t as heavy as a full website',
+    'Want the business-card QR to lead to a proper introduction',
+    'AI-written text feels like it drifts away from you',
+    'Your messaging or profile keeps shifting',
+    'You know what you want to do, but the entry isn’t set',
+    'You’re getting a bit tired of building alone',
+    'Your vibe is chill, but you want the substance to be solid'
+  ]
+} as const;
 
-const steps = [
-  {
-    number: '一',
-    name: 'Card Planning',
-    title: '入口と導線の設計',
-    items: [
-      '「好き」「違和感」「大事にしたいもの」の棚卸し',
-      '誰に何を伝えるカードにするかを言語化',
-      '構成（見出し・順序・リンク・CTA）を設計',
-      '今のフェーズに合った“小さめのゴール”を決める'
-    ]
-  },
-  {
-    number: '二',
-    name: 'Card Writing',
-    title: '自己紹介と言葉のテンプレ',
-    items: [
-      '一行キャッチ／プロフィール／実績文をAIとペアで作成',
-      'トーン＆ボイス（話し方・書き方）の基準を決める',
-      'SNSやnoteにも転用できる「自分用テンプレ」をつくる',
-      'AIに推敲させるためのプロンプト設計'
-    ]
-  },
-  {
-    number: '三',
-    name: 'World Direction',
-    title: '世界観ガイドの作成',
-    items: [
-      '色／質感／モチーフ／余白の方向性を整理',
-      '写真やビジュアルのトーンを揃えるルールづくり',
-      '載せる要素の“足す／引く”の基準を決める',
-      '今後の発信にも横展開できる土台にする'
-    ]
-  },
-  {
-    number: '四',
-    name: 'Launch & Update',
-    title: '公開して、育てる準備',
-    items: [
-      'クラウド名刺ページへ落とし込み（Notion / Webなど）',
-      '名刺用QRの導線を整える',
-      '更新しやすい運用形（項目・手順・頻度）を設計',
-      '公開後の次の一手まで一緒に決める'
-    ]
-  }
-];
+const steps = {
+  ja: [
+    {
+      number: '一',
+      name: 'Card Planning',
+      title: '入口と導線の設計',
+      items: [
+        '「好き」「違和感」「大事にしたいもの」の棚卸し',
+        '誰に何を伝えるカードにするかを言語化',
+        '構成（見出し・順序・リンク・CTA）を設計',
+        '今のフェーズに合った“小さめのゴール”を決める'
+      ]
+    },
+    {
+      number: '二',
+      name: 'Card Writing',
+      title: '自己紹介と言葉のテンプレ',
+      items: [
+        '一行キャッチ／プロフィール／実績文をAIとペアで作成',
+        'トーン＆ボイス（話し方・書き方）の基準を決める',
+        'SNSやnoteにも転用できる「自分用テンプレ」をつくる',
+        'AIに推敲させるためのプロンプト設計'
+      ]
+    },
+    {
+      number: '三',
+      name: 'World Direction',
+      title: '世界観ガイドの作成',
+      items: [
+        '色／質感／モチーフ／余白の方向性を整理',
+        '写真やビジュアルのトーンを揃えるルールづくり',
+        '載せる要素の“足す／引く”の基準を決める',
+        '今後の発信にも横展開できる土台にする'
+      ]
+    },
+    {
+      number: '四',
+      name: 'Launch & Update',
+      title: '公開して、育てる準備',
+      items: [
+        'クラウド名刺ページへ落とし込み（Notion / Webなど）',
+        '名刺用QRの導線を整える',
+        '更新しやすい運用形（項目・手順・頻度）を設計',
+        '公開後の次の一手まで一緒に決める'
+      ]
+    }
+  ],
+  en: [
+    {
+      number: 'I',
+      name: 'Card Planning',
+      title: 'Design the entry and flow',
+      items: [
+        'Inventory your likes, frictions, and what you value',
+        'Define who it’s for and what it should communicate',
+        'Design structure (headings, order, links, CTA)',
+        'Set a small goal that fits your current phase'
+      ]
+    },
+    {
+      number: 'II',
+      name: 'Card Writing',
+      title: 'Self-intro & wording templates',
+      items: [
+        'Create one-line catch, profile, and achievements with AI',
+        'Define tone & voice (speaking/writing)',
+        'Build personal templates reusable for SNS or note',
+        'Design prompts for AI polishing'
+      ]
+    },
+    {
+      number: 'III',
+      name: 'World Direction',
+      title: 'Create a worldview guide',
+      items: [
+        'Define direction for color/texture/motif/spacing',
+        'Rules to align photo and visual tone',
+        'Decide add/remove criteria for elements',
+        'Build a base that scales to future publishing'
+      ]
+    },
+    {
+      number: 'IV',
+      name: 'Launch & Update',
+      title: 'Prepare to publish and grow',
+      items: [
+        'Implement into the cloud card page (Notion/Web, etc.)',
+        'Set up the business card QR flow',
+        'Design an update-friendly operation (items, steps, cadence)',
+        'Decide the next move after launch together'
+      ]
+    }
+  ]
+} as const;
 
-const outputs = [
-  '世界観が伝わるクラウド名刺ページ（URL）',
-  '名刺用QR導線（貼るだけで使える状態）',
-  '自己紹介テンプレ（短文／長文／用途別）',
-  '更新マニュアル（迷わない手順）',
-  '世界観ミニガイド（色・言葉・NGライン）'
-];
+const outputs = {
+  ja: [
+    '世界観が伝わるクラウド名刺ページ（URL）',
+    '名刺用QR導線（貼るだけで使える状態）',
+    '自己紹介テンプレ（短文／長文／用途別）',
+    '更新マニュアル（迷わない手順）',
+    '世界観ミニガイド（色・言葉・NGライン）'
+  ],
+  en: [
+    'A cloud business card page (URL) that conveys your worldview',
+    'Business card QR flow (ready to use)',
+    'Self-intro templates (short/long/by use)',
+    'Update manual (clear steps)',
+    'Mini worldview guide (colors, wording, no-go lines)'
+  ]
+} as const;
 
-const plans = [
-  {
-    label: '壱ノ型',
-    title: '単発セッション（お試し）',
-    price: '¥22,000（税別）',
-    subprices: [],
-    items: [
-      'オンライン 90分',
-      '入口の棚卸し＋その場でAIと1〜2アウトプット',
-      'セッション後：要点メモ（簡易）共有'
-    ]
-  },
-  {
-    label: '弐ノ型',
-    title: '1ヶ月ミニ伴走（おすすめ）',
-    price: '',
-    subprices: [
-      '月2回（ライト）：¥72,000（税別）',
-      '月3回（標準・おすすめ）：¥98,000（税別）',
-      '月4回（集中）：¥128,000（税別）'
-    ],
-    items: [
-      '軽めチャット伴走（返信目安あり）',
-      'クラウド名刺（またはプロフィール）を「1つ公開」まで伴走',
-      '世界観ガイド v1（Notion/Docの叩き台）を一緒に完成'
-    ]
-  },
-  {
-    label: '参ノ型',
-    title: '法人・チーム向け Brand Card 導入（3ヶ月〜）',
-    price: '¥480,000〜（税別・要見積）',
-    subprices: [
-      '（標準パッケージ例：¥780,000〜）'
-    ],
-    items: [
-      '会社／事業の“名刺QRの着地点”を統一（営業・採用・広報でブレない）',
-      'トーン＆コピーのガイドライン化（社内共有用）',
-      '更新フロー（誰が／何を／いつ）まで設計'
-    ]
-  }
-];
+const plans = {
+  ja: [
+    {
+      label: '壱ノ型',
+      title: '単発セッション（お試し）',
+      price: '¥22,000（税別）',
+      subprices: [],
+      items: [
+        'オンライン 90分',
+        '入口の棚卸し＋その場でAIと1〜2アウトプット',
+        'セッション後：要点メモ（簡易）共有'
+      ]
+    },
+    {
+      label: '弐ノ型',
+      title: '1ヶ月ミニ伴走（おすすめ）',
+      price: '',
+      subprices: [
+        '月2回（ライト）：¥72,000（税別）',
+        '月3回（標準・おすすめ）：¥98,000（税別）',
+        '月4回（集中）：¥128,000（税別）'
+      ],
+      items: [
+        '軽めチャット伴走（返信目安あり）',
+        'クラウド名刺（またはプロフィール）を「1つ公開」まで伴走',
+        '世界観ガイド v1（Notion/Docの叩き台）を一緒に完成'
+      ]
+    },
+    {
+      label: '参ノ型',
+      title: '法人・チーム向け Brand Card 導入（3ヶ月〜）',
+      price: '¥480,000〜（税別・要見積）',
+      subprices: [
+        '（標準パッケージ例：¥780,000〜）'
+      ],
+      items: [
+        '会社／事業の“名刺QRの着地点”を統一（営業・採用・広報でブレない）',
+        'トーン＆コピーのガイドライン化（社内共有用）',
+        '更新フロー（誰が／何を／いつ）まで設計'
+      ]
+    }
+  ],
+  en: [
+    {
+      label: 'Type I',
+      title: 'Single Session (Trial)',
+      price: '¥22,000 (excl. tax)',
+      subprices: [],
+      items: [
+        'Online 90 minutes',
+        'Entry inventory + 1–2 outputs with AI on the spot',
+        'After session: share a brief summary memo'
+      ]
+    },
+    {
+      label: 'Type II',
+      title: '1-Month Mini Support (Recommended)',
+      price: '',
+      subprices: [
+        '2 sessions/month (Light): ¥72,000 (excl. tax)',
+        '3 sessions/month (Standard/Recommended): ¥98,000 (excl. tax)',
+        '4 sessions/month (Intensive): ¥128,000 (excl. tax)'
+      ],
+      items: [
+        'Light chat support (response guidelines)',
+        'Support until you publish one cloud card (or profile)',
+        'Complete Worldview Guide v1 together (Notion/Doc draft)'
+      ]
+    },
+    {
+      label: 'Type III',
+      title: 'Brand Card for Teams (3+ months)',
+      price: 'From ¥480,000 (excl. tax, quote required)',
+      subprices: [
+        '(Typical package from ¥780,000)'
+      ],
+      items: [
+        'Unify the business-card QR destination across sales/recruiting/PR',
+        'Create tone & copy guidelines for internal sharing',
+        'Design update workflow (who/what/when)'
+      ]
+    }
+  ]
+} as const;
 
 const bootcampStyles = `
 @import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@300;400;500;700&family=Shippori+Mincho:wght@400;500;600;700;800&family=Zen+Old+Mincho&display=swap');
@@ -863,6 +999,10 @@ const bootcampStyles = `
   letter-spacing: 0.2em;
 }
 
+html[lang="en"] .vibe-bootcamp-page .plan-card.featured::before {
+  content: 'RECOMMENDED';
+}
+
 .vibe-bootcamp-page .plan-label {
   font-family: var(--font-jp-mincho);
   font-size: 0.7rem;
@@ -1281,10 +1421,22 @@ const conceptIcons = [
 
 export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChange }) => {
   const contentRef = useRef<HTMLElement | null>(null);
+  const { language } = useLanguage();
+  const isEnglish = language === 'en';
+  const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+  const locale = isEnglish ? 'en' : 'ja';
+  const localizedConceptAxes = conceptAxes[locale];
+  const localizedAudienceList = audienceList[locale];
+  const localizedSteps = steps[locale];
+  const localizedOutputs = outputs[locale];
+  const localizedPlans = plans[locale];
+  const profileAltText = isEnglish
+    ? 'Azumi Musuhi Vibe Card Studio profile'
+    : '安曇むすひ Vibe Card Studio プロフィール';
 
   useEffect(() => {
     const scrollable = document.querySelector('[scrollable="true"]') || window;
-    scrollable.scrollTo({ top: 0, behavior: 'instant' });
+    scrollable.scrollTo({ top: 0, behavior: 'auto' });
   }, []);
 
   useEffect(() => {
@@ -1314,7 +1466,7 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
       resizeObserver?.disconnect();
       onPagesChange?.(0);
     };
-  }, [onPagesChange]);
+  }, [language, onPagesChange]);
 
   const scrollToSection = (id: string) => {
     const target = document.getElementById(id);
@@ -1328,7 +1480,7 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
       <style>{bootcampStyles}</style>
       <div className="washi-overlay" />
       <button className="bootcamp-back" onClick={onBack}>
-        戻る
+        {getText('戻る', 'Back')}
       </button>
 
       <div className="main-content">
@@ -1348,42 +1500,58 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
 
           <div className="hero-content">
             <div className="hero-keywords">
-              <span>言葉</span>
-              <span>文脈</span>
-              <span>世界観</span>
-              <span>運用</span>
+              <span>{getText('言葉', 'Words')}</span>
+              <span>{getText('文脈', 'Context')}</span>
+              <span>{getText('世界観', 'Worldview')}</span>
+              <span>{getText('運用', 'Operations')}</span>
             </div>
 
             <p className="hero-tagline">
-              「好き」と「違和感」を、<br />
-              ちゃんと入口のカードとして<span className="highlight">かたち</span>にする。
+              {getText(
+                <>
+                  「好き」と「違和感」を、<br />
+                  ちゃんと入口のカードとして<span className="highlight">かたち</span>にする。
+                </>,
+                <>
+                  Turn your “likes” and “frictions”<br />
+                  into a real entry card with <span className="highlight">shape</span>.
+                </>
+              )}
             </p>
 
             <div className="hero-title-wrapper">
-              <h1 className="hero-title">安曇むすひ</h1>
+              <h1 className="hero-title">{getText('安曇むすひ', 'Azumi Musuhi')}</h1>
             </div>
 
             <p className="hero-subtitle">Vibe Card Studio ｜ AI × Writing × Direction</p>
 
             <div className="hero-description">
               <p>
-                ただ作れる人から、<br />
-                “自分の入口を、更新して育てられる人”へ。
+                {getText(
+                  <>
+                    ただ作れる人から、<br />
+                    “自分の入口を、更新して育てられる人”へ。
+                  </>,
+                  <>
+                    From someone who can just make,<br />
+                    to someone who can update and grow their own entry.
+                  </>
+                )}
               </p>
             </div>
 
             <div className="hero-cta">
               <a href={CONSULT_LINK} className="btn" target="_blank" rel="noopener noreferrer">
-                まずはゆるく相談してみる
+                {getText('まずはゆるく相談してみる', 'Start with a casual consult')}
               </a>
               <button type="button" className="btn btn-secondary" onClick={() => scrollToSection('about')}>
-                Vibe Card Studioについて知る
+                {getText('Vibe Card Studioについて知る', 'Learn about Vibe Card Studio')}
               </button>
             </div>
           </div>
 
           <div className="scroll-indicator">
-            <span>巻物</span>
+            <span>{getText('巻物', 'Scroll')}</span>
             <div className="scroll-line" />
           </div>
         </section>
@@ -1391,25 +1559,33 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section id="about" className="about-section">
           <div className="section-inner">
             <div className="section-header">
-              <span className="section-number">壱</span>
-              <h2 className="section-title">これは、どんなサービス？</h2>
+              <span className="section-number">{getText('壱', 'I')}</span>
+              <h2 className="section-title">
+                {getText('これは、どんなサービス？', 'What is this service?')}
+              </h2>
             </div>
 
             <div className="about-content">
               <div className="about-text">
                 <p>
-                  安曇むすひ Vibe Card Studio は、ガチガチの制作代行でも、テンプレ量産でもなく、あなたのペースと世界観に合わせて、AI × 文章 × ディレクションで「名刺QRの着地点」になる一枚を一緒に整える、伴走型の場です。
+                  {getText(
+                    '安曇むすひ Vibe Card Studio は、ガチガチの制作代行でも、テンプレ量産でもなく、あなたのペースと世界観に合わせて、AI × 文章 × ディレクションで「名刺QRの着地点」になる一枚を一緒に整える、伴走型の場です。',
+                    'Azumi Musuhi Vibe Card Studio is not rigid outsourcing or template mass production. It’s a companion-style place to shape a “business card QR landing page” together with AI × writing × direction, aligned with your pace and worldview.'
+                  )}
                 </p>
                 <p>
-                  名刺を渡したあとに残るのは、紙じゃなくて“入口”。その入口が、ちゃんと伝わって、ちゃんと更新できる。そこまでを、いっしょに作ります。
+                  {getText(
+                    '名刺を渡したあとに残るのは、紙じゃなくて“入口”。その入口が、ちゃんと伝わって、ちゃんと更新できる。そこまでを、いっしょに作ります。',
+                    'After handing out a card, what remains is not paper but the “entry.” We build it so it communicates clearly and can be updated properly—together.'
+                  )}
                 </p>
               </div>
 
               <ul className="about-list">
-                <li>名刺を配っても「結局なにしてる人？」で終わらせたくない人</li>
-                <li>SNSやリンクが散らかっていて、入口が弱いと感じている人</li>
-                <li>自分の言葉とトーンで、ちゃんと紹介できる場所がほしい人</li>
-                <li>最終的に「自分で更新できる」状態にしたい人</li>
+                <li>{getText('名刺を配っても「結局なにしてる人？」で終わらせたくない人', 'Don’t want handing out cards to end with “So… what do you do?”')}</li>
+                <li>{getText('SNSやリンクが散らかっていて、入口が弱いと感じている人', 'Feel your entry is weak because SNS and links are scattered')}</li>
+                <li>{getText('自分の言葉とトーンで、ちゃんと紹介できる場所がほしい人', 'Want a place to introduce yourself in your own words and tone')}</li>
+                <li>{getText('最終的に「自分で更新できる」状態にしたい人', 'Want to end up able to update it yourself')}</li>
               </ul>
             </div>
 
@@ -1423,12 +1599,12 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
           <div className="branch-decoration" />
           <div className="section-inner">
             <div className="section-header">
-              <span className="section-number">弐</span>
-              <h2 className="section-title">四つの軸</h2>
+              <span className="section-number">{getText('弐', 'II')}</span>
+              <h2 className="section-title">{getText('四つの軸', 'Four Axes')}</h2>
             </div>
 
             <div className="concept-grid">
-              {conceptAxes.map((axis, index) => (
+              {localizedConceptAxes.map((axis, index) => (
                 <div className="concept-card" key={axis.title}>
                   {conceptIcons[index]}
                   <div className="concept-number">{axis.label}</div>
@@ -1443,13 +1619,15 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section className="target-section">
           <div className="section-inner">
             <div className="section-header">
-              <span className="section-number">参</span>
-              <h2 className="section-title">こんな人に向いています</h2>
-              <p className="target-header-label">For Creators / For Small Teams</p>
+              <span className="section-number">{getText('参', 'III')}</span>
+              <h2 className="section-title">{getText('こんな人に向いています', 'This is for people who…')}</h2>
+              <p className="target-header-label">
+                {getText('クリエイター向け / 少人数チーム向け', 'For Creators / For Small Teams')}
+              </p>
             </div>
 
             <div className="target-list">
-              {audienceList.map((item) => (
+              {localizedAudienceList.map((item) => (
                 <div className="target-item" key={item}>
                   <div className="target-icon" />
                   <span className="target-text">{item}</span>
@@ -1462,12 +1640,12 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section className="program-section">
           <div className="section-inner">
             <div className="section-header">
-              <span className="section-number">肆</span>
-              <h2 className="section-title">ここで一緒にやること</h2>
+              <span className="section-number">{getText('肆', 'IV')}</span>
+              <h2 className="section-title">{getText('ここで一緒にやること', 'What We Do Together')}</h2>
             </div>
 
             <div className="program-list">
-              {steps.map((step) => (
+              {localizedSteps.map((step) => (
                 <div className="program-item" key={step.name}>
                   <div className="program-number-wrapper">
                     <div className="program-number">{step.number}</div>
@@ -1490,12 +1668,12 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section className="output-section">
           <div className="section-inner">
             <div className="section-header">
-              <span className="section-number">伍</span>
-              <h2 className="section-title">アウトプットのイメージ</h2>
+              <span className="section-number">{getText('伍', 'V')}</span>
+              <h2 className="section-title">{getText('アウトプットのイメージ', 'Outputs You’ll Get')}</h2>
             </div>
 
             <div className="output-grid">
-              {outputs.map((item) => (
+              {localizedOutputs.map((item) => (
                 <div className="output-item" key={item}>{item}</div>
               ))}
             </div>
@@ -1505,14 +1683,21 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section className="plan-section">
           <div className="section-inner">
             <div className="section-header">
-              <span className="section-number">陸</span>
-              <h2 className="section-title">プラン</h2>
-              <p className="section-subtitle">あなたのペースと目的に合わせて選べます</p>
-              <p className="plan-note">迷ったら弐ノ型。公開して、更新できる状態まで整う“いちばん効く1ヶ月”。</p>
+              <span className="section-number">{getText('陸', 'VI')}</span>
+              <h2 className="section-title">{getText('プラン', 'Plans')}</h2>
+              <p className="section-subtitle">
+                {getText('あなたのペースと目的に合わせて選べます', 'Choose based on your pace and goals')}
+              </p>
+              <p className="plan-note">
+                {getText(
+                  '迷ったら弐ノ型。公開して、更新できる状態まで整う“いちばん効く1ヶ月”。',
+                  'If you’re unsure, choose Type II. The most effective one month to publish and reach an updatable state.'
+                )}
+              </p>
             </div>
 
             <div className="plan-grid">
-              {plans.map((plan, index) => (
+              {localizedPlans.map((plan, index) => (
                 <div className={`plan-card ${index === 1 ? 'featured' : ''}`} key={plan.title}>
                   <div className="plan-label">{plan.label}</div>
                   <h3 className="plan-name">{plan.title}</h3>
@@ -1538,13 +1723,32 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section className="boundary-section">
           <div className="section-inner">
             <div className="boundary-card">
-              <span className="boundary-label">（ご案内）</span>
-              <h2 className="boundary-title">スムーズに進めるための進行ルール</h2>
-              <p className="boundary-subtitle">お互いに気持ちよく進めるために、あらかじめ共有しておきたい内容です。</p>
+              <span className="boundary-label">{getText('（ご案内）', '(Note)')}</span>
+              <h2 className="boundary-title">
+                {getText('スムーズに進めるための進行ルール', 'Process guidelines for smooth progress')}
+              </h2>
+              <p className="boundary-subtitle">
+                {getText(
+                  'お互いに気持ちよく進めるために、あらかじめ共有しておきたい内容です。',
+                  'To move forward comfortably together, here’s what we share in advance.'
+                )}
+              </p>
               <ul className="boundary-list">
-                <li>ヒアリングは「初回＋必要に応じて追加」ではなく、各月の回数内で完結します</li>
-                <li>アウトプットの修正は 2往復まで（以降はオプション対応）</li>
-                <li>チャットは「軽め」の伴走です。即レス保証ではなく、返信目安を明記します</li>
+                <li>
+                  {getText(
+                    'ヒアリングは「初回＋必要に応じて追加」ではなく、各月の回数内で完結します',
+                    'Hearings are completed within the monthly session count, not “first + as-needed extras.”'
+                  )}
+                </li>
+                <li>
+                  {getText('アウトプットの修正は 2往復まで（以降はオプション対応）', 'Revisions up to two rounds (additional rounds are optional)')}
+                </li>
+                <li>
+                  {getText(
+                    'チャットは「軽め」の伴走です。即レス保証ではなく、返信目安を明記します',
+                    'Chat support is light; no instant replies, with response guidelines.'
+                  )}
+                </li>
               </ul>
             </div>
           </div>
@@ -1553,7 +1757,7 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
         <section className="naming-section">
           <div className="section-inner">
             <div className="naming-content">
-              <h2 className="naming-title">安曇むすひ</h2>
+              <h2 className="naming-title">{getText('安曇むすひ', 'Azumi Musuhi')}</h2>
               <p className="naming-subtitle">Azumi Musubi</p>
 
               <div className="decorative-line">
@@ -1563,24 +1767,49 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
               <div className="naming-portrait">
                 <img
                   src={`${import.meta.env.BASE_URL}images/azumi-bootcamp-profile.png`}
-                  alt="安曇むすひ Vibe Card Studio プロフィール"
+                  alt={profileAltText}
                 />
               </div>
 
               <div className="naming-description">
                 <p>
-                  「安曇むすひ」という名前には、<br />
-                  まだ“あわい”にあるものを、静かに結び、形にしていく。<br />
-                  そんなイメージを込めています。
+                  {getText(
+                    <>
+                      「安曇むすひ」という名前には、<br />
+                      まだ“あわい”にあるものを、静かに結び、形にしていく。<br />
+                      そんなイメージを込めています。
+                    </>,
+                    <>
+                      The name “Azumi Musuhi” carries an image of quietly tying together<br />
+                      things still in-between and giving them form.<br />
+                    </>
+                  )}
                 </p>
                 <p>
-                  頭の中にあるだけのアイデアや、ノートの片隅のことばたちを、<br />
-                  AIという相棒と一緒に、入口の一枚へと、むすび直していく。
+                  {getText(
+                    <>
+                      頭の中にあるだけのアイデアや、ノートの片隅のことばたちを、<br />
+                      AIという相棒と一緒に、入口の一枚へと、むすび直していく。
+                    </>,
+                    <>
+                      Ideas only in your head or words in the corner of a notebook—<br />
+                      together with AI as a partner, we re-tie them into a single entry card.
+                    </>
+                  )}
                 </p>
                 <p className="naming-emphasis">
-                  名刺は小さい。<br />
-                  でも、入口が整うと、世界はちゃんと広がる。<br />
-                  名前も、世界観も、ここから一緒にアップデートしていけたらうれしい。
+                  {getText(
+                    <>
+                      名刺は小さい。<br />
+                      でも、入口が整うと、世界はちゃんと広がる。<br />
+                      名前も、世界観も、ここから一緒にアップデートしていけたらうれしい。
+                    </>,
+                    <>
+                      A business card is small.<br />
+                      But when the entry is aligned, the world opens up.<br />
+                      I’d be happy to update your name and worldview from here, together.
+                    </>
+                  )}
                 </p>
               </div>
             </div>
