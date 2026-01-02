@@ -92,15 +92,17 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                         {getText('SERVICES / サービス・料金', 'SERVICES / PRICING')}
                     </p>
                     <h1 className="text-4xl md:text-6xl font-serif text-stone-100 mb-6 leading-tight">
-                        {getText('Webサイト+名刺制作プラン', 'Website + Business Card Plan')}
+                        {getText('Webca（ウェブカ）', 'Webca')}
                     </h1>
                     <p className="text-stone-400 font-light max-w-2xl text-lg leading-relaxed">
                         {getText(
                             <>
+                                Webca（ウェブカ）は、Webサイト＋名刺をひとつの導線として設計するプランです。<br />
                                 名刺代わりのポートフォリオから、事業の成長に合わせた本格的なWebサイトまで。<br />
                                 「公開方法」と「制作内容」を組み合わせて、あなたに最適な形をご提案します。
                             </>,
                             <>
+                                Webca is a plan that designs your website and business card as one flow.<br />
                                 From a portfolio that works as your business card to a full website that grows with your business.<br />
                                 We combine “release method” and “production scope” to suggest the best fit for you.
                             </>
