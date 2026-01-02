@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
@@ -292,13 +292,15 @@ const quickStagger: Variants = {
 
 interface OverlayProps {
   onDetailPagesChange?: (pages: number) => void;
+  onPagesChange?: (pages: number) => void;
 }
 
-export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
+export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesChange }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showServiceDetail, setShowServiceDetail] = useState(false);
   const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
+  const contentRef = useRef<HTMLElement | null>(null);
   const { language } = useLanguage();
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
@@ -316,6 +318,47 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
   useEffect(() => {
     invalidate();
   }, [language, invalidate]);
+
+  useLayoutEffect(() => {
+    if (!onPagesChange) return;
+    if (showAboutDetail || showServiceDetail || showVibeBootcamp) return;
+
+    const node = contentRef.current;
+    if (!node) return;
+
+    let frame = 0;
+    const updatePages = () => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+      frame = requestAnimationFrame(() => {
+        const height = node.scrollHeight;
+        const viewport = window.innerHeight || 1;
+        const pages = Math.max(1, height / viewport);
+        onPagesChange(pages);
+      });
+    };
+
+    updatePages();
+    if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+      document.fonts.ready.then(() => updatePages());
+    }
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => updatePages());
+      resizeObserver.observe(node);
+    }
+
+    window.addEventListener('resize', updatePages);
+    return () => {
+      window.removeEventListener('resize', updatePages);
+      resizeObserver?.disconnect();
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+    };
+  }, [language, onPagesChange, selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp]);
 
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
@@ -389,7 +432,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
     return (
       <div className="w-full text-[#e4e7e5]">
         <AnimatePresence mode="wait">
-          <ServiceDetail key="service-detail" onBack={handleBackFromService} />
+          <ServiceDetail key="service-detail" onBack={handleBackFromService} onPagesChange={onDetailPagesChange} />
         </AnimatePresence>
       </div>
     );
@@ -412,14 +455,14 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
     return (
       <div className="w-full text-[#e4e7e5]">
         <AnimatePresence mode="wait">
-          <AboutDetail key="about-detail" onBack={handleBackFromAbout} />
+          <AboutDetail key="about-detail" onBack={handleBackFromAbout} onPagesChange={onDetailPagesChange} />
         </AnimatePresence>
       </div>
     );
   }
 
   return (
-    <main className="w-full text-[#e4e7e5]">
+    <main ref={contentRef} className="w-full text-[#e4e7e5]">
 
       {/* HERO SECTION */}
       <Section className="items-start relative">

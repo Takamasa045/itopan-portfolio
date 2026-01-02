@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -23,13 +23,45 @@ const quickStagger: Variants = {
 
 interface AboutDetailProps {
   onBack: () => void;
+  onPagesChange?: (pages: number) => void;
 }
 
-export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
+export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange }) => {
   // Scroll is handled by parent component using drei's useScroll
   const { language } = useLanguage();
+  const contentRef = useRef<HTMLElement | null>(null);
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+
+  useEffect(() => {
+    if (!onPagesChange) return;
+    const node = contentRef.current;
+    if (!node) return;
+
+    const updatePages = () => {
+      const height = node.scrollHeight;
+      const viewport = window.innerHeight || 1;
+      const pages = Math.max(1, height / viewport);
+      onPagesChange(pages);
+    };
+
+    updatePages();
+    if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+      document.fonts.ready.then(() => updatePages());
+    }
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => updatePages());
+      resizeObserver.observe(node);
+    }
+    window.addEventListener('resize', updatePages);
+    return () => {
+      window.removeEventListener('resize', updatePages);
+      resizeObserver?.disconnect();
+      onPagesChange(0);
+    };
+  }, [language, onPagesChange]);
 
   return (
     <motion.main
@@ -38,6 +70,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
       exit="exit"
       variants={quickStagger}
       className="w-full min-h-screen"
+      ref={contentRef}
     >
       {/* Fixed Back Button - Top Left */}
       <motion.div

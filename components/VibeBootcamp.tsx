@@ -1446,8 +1446,7 @@ export const VibeBootcamp: React.FC<VibeBootcampProps> = ({ onBack, onPagesChang
     const updatePages = () => {
       const height = node.scrollHeight;
       const viewport = window.innerHeight || 1;
-      const bufferPages = 2;
-      const pages = Math.max(1, Math.ceil(height / viewport) + bufferPages);
+      const pages = Math.max(1, height / viewport);
       onPagesChange?.(pages);
     };
 

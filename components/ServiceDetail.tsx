@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -23,12 +23,43 @@ const quickStagger: Variants = {
 
 interface ServiceDetailProps {
     onBack: () => void;
+    onPagesChange?: (pages: number) => void;
 }
 
-export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
+export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesChange }) => {
     const { language } = useLanguage();
     const isEnglish = language === 'en';
     const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+    const contentRef = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        if (!onPagesChange) return;
+        const node = contentRef.current;
+        if (!node) return;
+
+        const updatePages = () => {
+            const height = node.scrollHeight;
+            const viewport = window.innerHeight || 1;
+            const pages = Math.max(1, height / viewport);
+            onPagesChange(pages);
+        };
+
+        updatePages();
+        if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+            document.fonts.ready.then(() => updatePages());
+        }
+        let resizeObserver: ResizeObserver | null = null;
+        if (typeof ResizeObserver !== 'undefined') {
+            resizeObserver = new ResizeObserver(() => updatePages());
+            resizeObserver.observe(node);
+        }
+        window.addEventListener('resize', updatePages);
+        return () => {
+            window.removeEventListener('resize', updatePages);
+            resizeObserver?.disconnect();
+            onPagesChange(0);
+        };
+    }, [language, onPagesChange]);
     return (
         <motion.main
             initial="hidden"
@@ -36,6 +67,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
             exit="exit"
             variants={quickStagger}
             className="w-full min-h-screen pb-20"
+            ref={contentRef}
         >
             {/* Fixed Back Button - Top Left */}
             <motion.div
