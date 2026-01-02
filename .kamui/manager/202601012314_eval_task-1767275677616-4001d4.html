@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>評価レポート</title>
+    <style>
+      body {
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        margin: 24px;
+        background-color: #e9f0f2;
+        color: #1f2a30;
+      }
+      .monitor-wrapper {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      .monitor-header {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .monitor-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #1f2a30;
+      }
+      .monitor-description {
+        font-size: 14px;
+        color: #3a4b53;
+      }
+      .task-overview {
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        border-radius: 8px;
+      }
+      .task-overview h2 {
+        font-size: 16px;
+        margin: 0 0 8px;
+      }
+      .task-overview p {
+        margin: 0 0 6px;
+      }
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .score-card {
+        border: 1px solid #c4d3d7;
+        padding: 12px;
+        background: #f8fbfc;
+      }
+      .score-card-title {
+        font-size: 12px;
+        color: #3a4b53;
+        margin-bottom: 6px;
+      }
+      .score-card-score {
+        font-size: 22px;
+        font-weight: 700;
+        color: #1f2a30;
+      }
+      .score-card-total {
+        font-size: 12px;
+        font-weight: 500;
+        color: #3a4b53;
+      }
+      .score-card-sub {
+        font-size: 12px;
+        color: #3a4b53;
+      }
+      table.monitor-report {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      col.timestamp-column {
+        width: 180px;
+      }
+      col.agent-column {
+        width: calc((100% - 180px) / 2);
+      }
+      th,
+      td {
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        vertical-align: top;
+        background-color: #ffffff;
+      }
+      th {
+        background: #d8e6e9;
+        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #2c3a40;
+      }
+      tbody tr:nth-child(even) td {
+        background-color: #eef3f4;
+      }
+      details {
+        display: block;
+        margin: 12px 0 0;
+      }
+      details summary {
+        list-style: none;
+      }
+      details[open] summary {
+        margin-bottom: 12px;
+      }
+      .details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 13px;
+        color: #1f2a30;
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      .details-toggle::before {
+        content: "▶";
+        font-size: 10px;
+        transition: transform 160ms ease;
+        display: inline-block;
+      }
+      details[open] .details-toggle::before {
+        transform: rotate(90deg);
+      }
+      .timestamp {
+        font-weight: 600;
+        color: #2c3a40;
+        overflow-wrap: anywhere;
+      }
+      .snapshot-summary {
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: #2c3a40;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #1f2a30;
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+      }
+      .status-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding: 1px 6px;
+        background: #d8e6e9;
+        border: 1px solid #b8c9cd;
+        color: #1f2a30;
+        white-space: nowrap;
+        line-height: 1.3;
+        vertical-align: top;
+      }
+      .status-badge--completed {
+        background: #c3d4d8;
+        border-color: #aabfc5;
+      }
+      .agent-meta {
+        display: block;
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+      .agent-meta .status-badge {
+        margin-right: 6px;
+      }
+      .agent-meta .agent-label {
+        display: inline;
+        font-size: 13px;
+        color: #3a4b53;
+      }
+      .agent-score {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+      .agent-score-total {
+        font-size: 12px;
+        font-weight: 500;
+        color: #3a4b53;
+        margin-left: 6px;
+      }
+      .hex-block {
+        display: grid;
+        grid-template-columns: 120px 1fr;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .hex-chart {
+        width: 120px;
+        height: 120px;
+      }
+      .hex-outline {
+        fill: none;
+        stroke: #c4d3d7;
+        stroke-width: 1.5;
+      }
+      .hex-shape {
+        fill: rgba(52, 211, 153, 0.2);
+        stroke: #34d399;
+        stroke-width: 1.5;
+      }
+      .metric-list {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 6px 12px;
+        font-size: 12px;
+      }
+      .metric-item {
+        display: flex;
+        justify-content: space-between;
+        gap: 8px;
+      }
+      .metric-label {
+        color: #3a4b53;
+      }
+      .metric-score {
+        font-weight: 600;
+      }
+      .metric-notes p {
+        margin: 0 0 6px;
+        font-size: 13px;
+      }
+      .artifact-list {
+        margin: 12px 0;
+        font-size: 12px;
+      }
+      .artifact-title {
+        font-weight: 600;
+        margin-bottom: 4px;
+      }
+      .artifact-list ul {
+        margin: 0;
+        padding-left: 18px;
+      }
+      .artifact-list li {
+        margin-bottom: 2px;
+      }
+      .artifact-list a {
+        color: #1f2a30;
+        text-decoration: underline;
+      }
+      .status-note pre {
+        margin-top: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="monitor-wrapper">
+      <header class="monitor-header">
+        <h1 class="monitor-title">評価レポート</h1>
+        <p class="monitor-description">山岳背景のスクロールセクションで表示される3枚のオブジェクトを、日本神話・自然モチーフへ置換した6ブランチを比較評価しました。</p>
+        <div class="task-overview">
+          <h2>タスク概要</h2>
+          <p>課題: ギャラリーの四角形オブジェクトを三種の神器/鳥居/海などのモチーフへ刷新し、UI体験の物語性と没入感を高める。</p>
+          <p>実現した機能: 3D形状の差し替え、素材/発光の調整、浮遊モーションの再設計、一部ブランチでは鳥居や海面の環境演出を追加。</p>
+          <p>成果物は各worktree内に存在するため、リンクは worktree のパスを指しています。</p>
+        </div>
+      </header>
+
+      <section class="scoreboard">
+        <div class="score-card">
+  <div class="score-card-title">Agent / task-1767275661380-0fa52f</div>
+  <div class="score-card-score">🥇 521 <span class="score-card-total">/ 600</span></div>
+  <div class="score-card-sub">総合スコア 87点 | メダル 🥇</div>
+</div><div class="score-card">
+  <div class="score-card-title">Agent / task-1767275660380-c5bb88</div>
+  <div class="score-card-score">🥇 516 <span class="score-card-total">/ 600</span></div>
+  <div class="score-card-sub">総合スコア 86点 | メダル 🥈</div>
+</div><div class="score-card">
+  <div class="score-card-title">Agent / task-1767275660580-523486</div>
+  <div class="score-card-score">🥇 510 <span class="score-card-total">/ 600</span></div>
+  <div class="score-card-sub">総合スコア 85点 | メダル 🥉</div>
+</div><div class="score-card">
+  <div class="score-card-title">Agent / task-1767275660981-8a67ab</div>
+  <div class="score-card-score">🥈 487 <span class="score-card-total">/ 600</span></div>
+  <div class="score-card-sub">総合スコア 80点 | メダル ⚪️</div>
+</div><div class="score-card">
+  <div class="score-card-title">Agent / task-1767275660780-5cc747</div>
+  <div class="score-card-score">🥈 486 <span class="score-card-total">/ 600</span></div>
+  <div class="score-card-sub">総合スコア 79点 | メダル ⚪️</div>
+</div><div class="score-card">
+  <div class="score-card-title">Agent / task-1767275661180-1b1b61</div>
+  <div class="score-card-score">🥈 460 <span class="score-card-total">/ 600</span></div>
+  <div class="score-card-sub">総合スコア 77点 | メダル ⚪️</div>
+</div>
+      </section>
+
+      <table class="monitor-report">
+        <colgroup>
+          <col class="timestamp-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>Agent Column A</th>
+            <th>Agent Column B</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+  <td class="timestamp">2026-01-01 23:14</td>
+  <td>
+    <div class="agent-meta">
+      <span class="status-badge status-badge--completed">評価済み</span>
+      <span class="agent-label">Agent / task-1767275661380-0fa52f</span>
+    </div>
+    <div class="agent-score">🥇 87点 <span class="agent-score-total">合計 521 / 600</span></div>
+    <div class="hex-block">
+      <svg class="hex-chart" viewBox="0 0 120 120" data-values="95,90,82,86,88,80">
+        <polygon class="hex-outline" />
+        <polygon class="hex-shape" />
+      </svg>
+      <div class="metric-list"><div class="metric-item"><span class="metric-label">コンセプト適合</span><span class="metric-score">95点</span></div>
+<div class="metric-item"><span class="metric-label">視覚インパクト</span><span class="metric-score">90点</span></div>
+<div class="metric-item"><span class="metric-label">造形の説得力</span><span class="metric-score">82点</span></div>
+<div class="metric-item"><span class="metric-label">色/素材の調和</span><span class="metric-score">86点</span></div>
+<div class="metric-item"><span class="metric-label">モーション/演出</span><span class="metric-score">88点</span></div>
+<div class="metric-item"><span class="metric-label">実装品質</span><span class="metric-score">80点</span></div></div>
+    </div>
+    <div class="snapshot-summary">海面・鳥居・三種の神器を同時に配置し、山岳セクションに物語性と奥行きを追加。スクロールで鳥居が迫るため導入演出が強い。</div>
+    <div class="metric-notes">
+      <p><strong>評価根拠:</strong> 環境演出の追加で没入感が高く、3オブジェクトの置換意図も明確。</p>
+      <p><strong>留意点:</strong> 宝玉の造形が抽象寄りで、主題がやや分散する可能性。</p>
+    </div>
+    <div class="artifact-list"><div class="artifact-title">成果物 (各worktree内)</div><ul><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275661380-0fa52f/components/MountainWorld.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275661380-0fa52f/components/MountainWorld.tsx</a></li></ul></div>
+    
+    <details class="snapshot-details"><summary class="details-toggle">コミットログ</summary><pre>c900c97 (task/task-1767275661380-0fa52f) feat: add mystical sea surface, Torii gate landmark, and refine Magatama shape
+07eb1d8 feat: replace placeholder cubes with Three Sacred Treasures (Mirror, Sword, Jewel)</pre></details>
+    <details class="snapshot-details"><summary class="details-toggle">差分サマリ</summary><pre>components/MountainWorld.tsx | 119 ++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 107 insertions(+), 12 deletions(-)</pre></details>
+  </td>
+  <td>
+    <div class="agent-meta">
+      <span class="status-badge status-badge--completed">評価済み</span>
+      <span class="agent-label">Agent / task-1767275660380-c5bb88</span>
+    </div>
+    <div class="agent-score">🥈 86点 <span class="agent-score-total">合計 516 / 600</span></div>
+    <div class="hex-block">
+      <svg class="hex-chart" viewBox="0 0 120 120" data-values="92,86,80,88,82,88">
+        <polygon class="hex-outline" />
+        <polygon class="hex-shape" />
+      </svg>
+      <div class="metric-list"><div class="metric-item"><span class="metric-label">コンセプト適合</span><span class="metric-score">92点</span></div>
+<div class="metric-item"><span class="metric-label">視覚インパクト</span><span class="metric-score">86点</span></div>
+<div class="metric-item"><span class="metric-label">造形の説得力</span><span class="metric-score">80点</span></div>
+<div class="metric-item"><span class="metric-label">色/素材の調和</span><span class="metric-score">88点</span></div>
+<div class="metric-item"><span class="metric-label">モーション/演出</span><span class="metric-score">82点</span></div>
+<div class="metric-item"><span class="metric-label">実装品質</span><span class="metric-score">88点</span></div></div>
+    </div>
+    <div class="snapshot-summary">鳥居・鏡・潮流の3モチーフでギャラリーを再構成。色の対比が明快で、浮遊バランスも良い。</div>
+    <div class="metric-notes">
+      <p><strong>評価根拠:</strong> 3要素の差別化がはっきりしていて視認性が高い。型定義の補完も実施。</p>
+      <p><strong>留意点:</strong> 鳥居ディテールが簡素で平面的に見える可能性。</p>
+    </div>
+    <div class="artifact-list"><div class="artifact-title">成果物 (各worktree内)</div><ul><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660380-c5bb88/App.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660380-c5bb88/App.tsx</a></li><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660380-c5bb88/components/MountainWorld.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660380-c5bb88/components/MountainWorld.tsx</a></li></ul></div>
+    
+    <details class="snapshot-details"><summary class="details-toggle">コミットログ</summary><pre>89232ec (task/task-1767275660380-c5bb88) feat: swap gallery cubes for shrine relics</pre></details>
+    <details class="snapshot-details"><summary class="details-toggle">差分サマリ</summary><pre>App.tsx                      |  2 +
+ components/MountainWorld.tsx | 98 +++++++++++++++++++++++++++++++++++++++-----
+ 2 files changed, 90 insertions(+), 10 deletions(-)</pre></details>
+  </td>
+</tr>
+          <tr>
+            <th colspan="3" style="background:#d8e6e9; text-transform: uppercase; font-size: 12px;">Comparison 2</th>
+          </tr>
+          <tr>
+  <td class="timestamp">2026-01-01 23:14</td>
+  <td>
+    <div class="agent-meta">
+      <span class="status-badge status-badge--completed">評価済み</span>
+      <span class="agent-label">Agent / task-1767275660580-523486</span>
+    </div>
+    <div class="agent-score">🥉 85点 <span class="agent-score-total">合計 510 / 600</span></div>
+    <div class="hex-block">
+      <svg class="hex-chart" viewBox="0 0 120 120" data-values="85,87,86,90,80,82">
+        <polygon class="hex-outline" />
+        <polygon class="hex-shape" />
+      </svg>
+      <div class="metric-list"><div class="metric-item"><span class="metric-label">コンセプト適合</span><span class="metric-score">85点</span></div>
+<div class="metric-item"><span class="metric-label">視覚インパクト</span><span class="metric-score">87点</span></div>
+<div class="metric-item"><span class="metric-label">造形の説得力</span><span class="metric-score">86点</span></div>
+<div class="metric-item"><span class="metric-label">色/素材の調和</span><span class="metric-score">90点</span></div>
+<div class="metric-item"><span class="metric-label">モーション/演出</span><span class="metric-score">80点</span></div>
+<div class="metric-item"><span class="metric-label">実装品質</span><span class="metric-score">82点</span></div></div>
+    </div>
+    <div class="snapshot-summary">三種の神器をディテール重視で造形。エメラルド系の統一感が背景と調和。</div>
+    <div class="metric-notes">
+      <p><strong>評価根拠:</strong> 勾玉の立体感が高く、素材感の統一が良い。</p>
+      <p><strong>留意点:</strong> 鳥居・海モチーフは不採用。未コミットの変更が残存。</p>
+    </div>
+    <div class="artifact-list"><div class="artifact-title">成果物 (各worktree内)</div><ul><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660580-523486/components/MountainWorld.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660580-523486/components/MountainWorld.tsx</a></li></ul></div>
+    <div class="status-note">未コミット: <pre>M package-lock.json</pre></div>
+    <details class="snapshot-details"><summary class="details-toggle">コミットログ</summary><pre>c5362af (task/task-1767275660580-523486) Replace gallery cubes with sacred relics</pre></details>
+    <details class="snapshot-details"><summary class="details-toggle">差分サマリ</summary><pre>components/MountainWorld.tsx | 108 +++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 100 insertions(+), 8 deletions(-)</pre></details>
+  </td>
+  <td>
+    <div class="agent-meta">
+      <span class="status-badge status-badge--completed">評価済み</span>
+      <span class="agent-label">Agent / task-1767275660981-8a67ab</span>
+    </div>
+    <div class="agent-score">⚪️ 80点 <span class="agent-score-total">合計 487 / 600</span></div>
+    <div class="hex-block">
+      <svg class="hex-chart" viewBox="0 0 120 120" data-values="88,85,82,78,78,76">
+        <polygon class="hex-outline" />
+        <polygon class="hex-shape" />
+      </svg>
+      <div class="metric-list"><div class="metric-item"><span class="metric-label">コンセプト適合</span><span class="metric-score">88点</span></div>
+<div class="metric-item"><span class="metric-label">視覚インパクト</span><span class="metric-score">85点</span></div>
+<div class="metric-item"><span class="metric-label">造形の説得力</span><span class="metric-score">82点</span></div>
+<div class="metric-item"><span class="metric-label">色/素材の調和</span><span class="metric-score">78点</span></div>
+<div class="metric-item"><span class="metric-label">モーション/演出</span><span class="metric-score">78点</span></div>
+<div class="metric-item"><span class="metric-label">実装品質</span><span class="metric-score">76点</span></div></div>
+    </div>
+    <div class="snapshot-summary">発光ライトで神器を強調。視認性は高いが彩度が強く全体トーンから浮きやすい。</div>
+    <div class="metric-notes">
+      <p><strong>評価根拠:</strong> ライト演出でシルエットが分かりやすい。</p>
+      <p><strong>留意点:</strong> 高彩度と複数のポイントライトが環境の落ち着きを損なう懸念。</p>
+    </div>
+    <div class="artifact-list"><div class="artifact-title">成果物 (各worktree内)</div><ul><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660981-8a67ab/components/MountainWorld.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660981-8a67ab/components/MountainWorld.tsx</a></li></ul></div>
+    
+    <details class="snapshot-details"><summary class="details-toggle">コミットログ</summary><pre>091dace (task/task-1767275660981-8a67ab) feat: replace gallery cubes with Three Sacred Treasures (三種の神器)</pre></details>
+    <details class="snapshot-details"><summary class="details-toggle">差分サマリ</summary><pre>components/MountainWorld.tsx | 132 ++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 124 insertions(+), 8 deletions(-)</pre></details>
+  </td>
+</tr>
+          <tr>
+            <th colspan="3" style="background:#d8e6e9; text-transform: uppercase; font-size: 12px;">Comparison 3</th>
+          </tr>
+          <tr>
+  <td class="timestamp">2026-01-01 23:14</td>
+  <td>
+    <div class="agent-meta">
+      <span class="status-badge status-badge--completed">評価済み</span>
+      <span class="agent-label">Agent / task-1767275660780-5cc747</span>
+    </div>
+    <div class="agent-score">⚪️ 79点 <span class="agent-score-total">合計 486 / 600</span></div>
+    <div class="hex-block">
+      <svg class="hex-chart" viewBox="0 0 120 120" data-values="88,84,84,82,78,70">
+        <polygon class="hex-outline" />
+        <polygon class="hex-shape" />
+      </svg>
+      <div class="metric-list"><div class="metric-item"><span class="metric-label">コンセプト適合</span><span class="metric-score">88点</span></div>
+<div class="metric-item"><span class="metric-label">視覚インパクト</span><span class="metric-score">84点</span></div>
+<div class="metric-item"><span class="metric-label">造形の説得力</span><span class="metric-score">84点</span></div>
+<div class="metric-item"><span class="metric-label">色/素材の調和</span><span class="metric-score">82点</span></div>
+<div class="metric-item"><span class="metric-label">モーション/演出</span><span class="metric-score">78点</span></div>
+<div class="metric-item"><span class="metric-label">実装品質</span><span class="metric-score">70点</span></div></div>
+    </div>
+    <div class="snapshot-summary">神器造形は丁寧だが、docsビルド成果物が混在して運用上のノイズがある。</div>
+    <div class="metric-notes">
+      <p><strong>評価根拠:</strong> 勾玉の形状が比較的正確で素材感も良い。</p>
+      <p><strong>留意点:</strong> ビルド成果物の更新が差分に含まれ、レビュー/運用が重くなる。</p>
+    </div>
+    <div class="artifact-list"><div class="artifact-title">成果物 (各worktree内)</div><ul><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660780-5cc747/components/MountainWorld.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660780-5cc747/components/MountainWorld.tsx</a></li><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660780-5cc747/docs/assets/index-3naAcVUy.js	docs/assets/index-BL5GAMJ6.js">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660780-5cc747/docs/assets/index-3naAcVUy.js	docs/assets/index-BL5GAMJ6.js</a></li><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660780-5cc747/docs/index.html">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275660780-5cc747/docs/index.html</a></li></ul></div>
+    
+    <details class="snapshot-details"><summary class="details-toggle">コミットログ</summary><pre>1aefec0 (task/task-1767275660780-5cc747) build: Update production build with Imperial Regalia
+051d400 feat: Replace box geometry with Japanese Imperial Regalia (三種の神器)</pre></details>
+    <details class="snapshot-details"><summary class="details-toggle">差分サマリ</summary><pre>components/MountainWorld.tsx                       | 134 +++++++++++++++++++--
+ .../{index-3naAcVUy.js =&gt; index-BL5GAMJ6.js}       | 100 +++++++--------
+ docs/index.html                                    |   2 +-
+ 3 files changed, 177 insertions(+), 59 deletions(-)</pre></details>
+  </td>
+  <td>
+    <div class="agent-meta">
+      <span class="status-badge status-badge--completed">評価済み</span>
+      <span class="agent-label">Agent / task-1767275661180-1b1b61</span>
+    </div>
+    <div class="agent-score">⚪️ 77点 <span class="agent-score-total">合計 460 / 600</span></div>
+    <div class="hex-block">
+      <svg class="hex-chart" viewBox="0 0 120 120" data-values="78,74,70,76,78,84">
+        <polygon class="hex-outline" />
+        <polygon class="hex-shape" />
+      </svg>
+      <div class="metric-list"><div class="metric-item"><span class="metric-label">コンセプト適合</span><span class="metric-score">78点</span></div>
+<div class="metric-item"><span class="metric-label">視覚インパクト</span><span class="metric-score">74点</span></div>
+<div class="metric-item"><span class="metric-label">造形の説得力</span><span class="metric-score">70点</span></div>
+<div class="metric-item"><span class="metric-label">色/素材の調和</span><span class="metric-score">76点</span></div>
+<div class="metric-item"><span class="metric-label">モーション/演出</span><span class="metric-score">78点</span></div>
+<div class="metric-item"><span class="metric-label">実装品質</span><span class="metric-score">84点</span></div></div>
+    </div>
+    <div class="snapshot-summary">最小構成で置換。軽量だが勾玉がドデカhedronでモチーフ性が弱い。</div>
+    <div class="metric-notes">
+      <p><strong>評価根拠:</strong> シンプルでパフォーマンス負荷が軽い。</p>
+      <p><strong>留意点:</strong> 視覚的な説得力が不足し、体験価値が伸び切らない。</p>
+    </div>
+    <div class="artifact-list"><div class="artifact-title">成果物 (各worktree内)</div><ul><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275661180-1b1b61/App.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275661180-1b1b61/App.tsx</a></li><li><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275661180-1b1b61/components/MountainWorld.tsx">/Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767275661180-1b1b61/components/MountainWorld.tsx</a></li></ul></div>
+    
+    <details class="snapshot-details"><summary class="details-toggle">コミットログ</summary><pre>33f2eda (task/task-1767275661180-1b1b61) Replace gallery cubes with Three Sacred Treasures motifs (Mirror, Sword, Jewel)</pre></details>
+    <details class="snapshot-details"><summary class="details-toggle">差分サマリ</summary><pre>App.tsx                      |  2 ++
+ components/MountainWorld.tsx | 53 +++++++++++++++++++++++++++++++++++++-------
+ 2 files changed, 47 insertions(+), 8 deletions(-)</pre></details>
+  </td>
+</tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      const charts = document.querySelectorAll('.hex-chart');
+      charts.forEach((chart) => {
+        const raw = chart.getAttribute('data-values') || '';
+        const values = raw.split(',').map((v) => Number(v.trim()) / 100).filter((v) => !Number.isNaN(v));
+        const center = 60;
+        const radius = 42;
+        const points = [];
+        const outline = [];
+        for (let i = 0; i < 6; i += 1) {
+          const angle = (Math.PI / 3) * i - Math.PI / 2;
+          const vx = center + radius * Math.cos(angle);
+          const vy = center + radius * Math.sin(angle);
+          outline.push(vx + ',' + vy);
+          const scale = values[i] ?? 0;
+          const px = center + radius * scale * Math.cos(angle);
+          const py = center + radius * scale * Math.sin(angle);
+          points.push(px + ',' + py);
+        }
+        const outlineNode = chart.querySelector('.hex-outline');
+        const shapeNode = chart.querySelector('.hex-shape');
+        if (outlineNode) outlineNode.setAttribute('points', outline.join(' '));
+        if (shapeNode) shapeNode.setAttribute('points', points.join(' '));
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>UI/UX 評価レポート</title>
+    <style>
+      body {
+        font-family: "Hiragino Sans", "Noto Sans JP", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+        line-height: 1.6;
+        margin: 24px;
+        background-color: #e9f0f2;
+        color: #1f2a30;
+      }
+      .monitor-wrapper {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 32px;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      .monitor-header {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin-bottom: 24px;
+      }
+      .monitor-title {
+        font-size: 26px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        color: #1f2a30;
+      }
+      .monitor-description {
+        font-size: 14px;
+        color: #3a4b53;
+      }
+      .summary-block {
+        padding: 16px;
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        margin-bottom: 20px;
+      }
+      .scoreboard {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin-bottom: 24px;
+      }
+      .score-card {
+        border: 1px solid #c4d3d7;
+        padding: 12px;
+        background: #ffffff;
+      }
+      .score-card h3 {
+        margin: 0 0 6px 0;
+        font-size: 14px;
+      }
+      .score-value {
+        font-size: 26px;
+        font-weight: 700;
+      }
+      .score-meta {
+        font-size: 12px;
+        color: #3a4b53;
+      }
+      table.monitor-report {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+        background: #ffffff;
+        border: 1px solid #c4d3d7;
+      }
+      col.timestamp-column {
+        width: 170px;
+      }
+      col.agent-column {
+        width: calc((100% - 170px) / 6);
+      }
+      th,
+      td {
+        border: 1px solid #c4d3d7;
+        padding: 16px;
+        vertical-align: top;
+        background-color: #ffffff;
+      }
+      th {
+        background: #d8e6e9;
+        text-align: left;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: #2c3a40;
+      }
+      tbody tr:nth-child(even) td {
+        background-color: #eef3f4;
+      }
+      details {
+        display: block;
+        margin: 0;
+      }
+      details summary {
+        list-style: none;
+      }
+      details[open] summary {
+        margin-bottom: 12px;
+      }
+      .details-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        font-size: 12px;
+        color: #1f2a30;
+        padding: 0;
+        background: transparent;
+        border: none;
+      }
+      .details-toggle::before {
+        content: "▶";
+        font-size: 10px;
+        transition: transform 160ms ease;
+        display: inline-block;
+      }
+      details[open] .details-toggle::before {
+        transform: rotate(90deg);
+      }
+      .timestamp {
+        font-weight: 600;
+        color: #2c3a40;
+        overflow-wrap: anywhere;
+      }
+      .snapshot-summary {
+        margin-bottom: 12px;
+        font-weight: 500;
+        color: #2c3a40;
+      }
+      pre {
+        white-space: pre-wrap;
+        word-break: break-word;
+        margin: 0;
+        font-size: 12px;
+        line-height: 1.55;
+        color: #1f2a30;
+        background: #f2f6f7;
+        border: 1px solid #c4d3d7;
+        padding: 12px;
+      }
+      .status-badge {
+        display: inline-block;
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        padding: 1px 6px;
+        background: #d8e6e9;
+        border: 1px solid #b8c9cd;
+        color: #1f2a30;
+        white-space: nowrap;
+        line-height: 1.3;
+        vertical-align: top;
+      }
+      .status-badge--completed {
+        background: #c3d4d8;
+        border-color: #aabfc5;
+      }
+      .agent-meta {
+        display: block;
+        margin-bottom: 8px;
+        line-height: 1.5;
+      }
+      .agent-meta .status-badge {
+        margin-right: 6px;
+      }
+      .agent-meta .agent-label {
+        display: inline;
+        font-size: 12px;
+        color: #3a4b53;
+      }
+      .radar-block {
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+        margin-bottom: 10px;
+      }
+      .radar {
+        width: 140px;
+        height: 140px;
+      }
+      .radar-grid {
+        fill: none;
+        stroke: #c4d3d7;
+        stroke-width: 1;
+      }
+      .radar-axis {
+        stroke: #c4d3d7;
+        stroke-width: 1;
+        stroke-dasharray: 2 3;
+      }
+      .radar-area {
+        fill: rgba(14, 165, 233, 0.25);
+        stroke: #0ea5e9;
+        stroke-width: 1.5;
+      }
+      .metric-list {
+        font-size: 12px;
+        line-height: 1.4;
+      }
+      .metric-list div {
+        margin-bottom: 4px;
+      }
+      .metric-reasons {
+        font-size: 12px;
+        color: #2c3a40;
+        margin-bottom: 10px;
+      }
+      .metric-reasons p {
+        margin: 6px 0;
+      }
+      .deliverable-links {
+        font-size: 12px;
+        margin-bottom: 10px;
+      }
+      .deliverable-links a {
+        color: #0f5aa5;
+      }
+      .score-inline {
+        font-size: 12px;
+        margin-bottom: 8px;
+        color: #2c3a40;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="monitor-wrapper">
+      <header class="monitor-header">
+        <h1 class="monitor-title">UI/UX 評価レポート</h1>
+        <p class="monitor-description">背景スクロールで出現する3オブジェクトの置換案を、UI/UX観点で比較評価。</p>
+      </header>
+
+      <section class="summary-block">
+        <div><strong>タスク内容:</strong> 背景の山スクロール後に表示される3枚の四角オブジェクトを、鳥居・綿津見・灯籠など神域/神話モチーフへ置換する実装のUI/UX評価。</div>
+        <div><strong>仕事の概要:</strong> 3枚の矩形オブジェクトを神話/神社モチーフへ置換し、視覚体験の質と物語性を評価。</div>
+      </section>
+<section class="scoreboard">
+        <div class="score-card">
+          <h3>🏆 task-1767276502430-0f5634</h3>
+          <div class="score-value">544 / 600</div>
+          <div class="score-meta">総合スコア: 91点 / メダル: gold</div>
+        </div>
+        
+        <div class="score-card">
+          <h3>🥇 task-1767276502229-a255d0</h3>
+          <div class="score-value">519 / 600</div>
+          <div class="score-meta">総合スコア: 86点 / メダル: silver</div>
+        </div>
+        
+        <div class="score-card">
+          <h3>🥇 task-1767276502632-0f0e8f</h3>
+          <div class="score-value">512 / 600</div>
+          <div class="score-meta">総合スコア: 85点 / メダル: silver</div>
+        </div>
+        
+        <div class="score-card">
+          <h3>🥈 task-1767276502829-a0e6b3</h3>
+          <div class="score-value">472 / 600</div>
+          <div class="score-meta">総合スコア: 79点 / メダル: bronze</div>
+        </div>
+        
+        <div class="score-card">
+          <h3>🥉 task-1767276503230-dfb56b</h3>
+          <div class="score-value">414 / 600</div>
+          <div class="score-meta">総合スコア: 69点 / メダル: none</div>
+        </div>
+        
+        <div class="score-card">
+          <h3>🥉 task-1767276503029-ba61be</h3>
+          <div class="score-value">410 / 600</div>
+          <div class="score-meta">総合スコア: 68点 / メダル: none</div>
+        </div>
+        </section>
+      <table class="monitor-report">
+        <colgroup>
+          <col class="timestamp-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+          <col class="agent-column" />
+        </colgroup>
+        <thead>
+          <tr>
+            <th>Timestamp</th>
+            <th>task-1767276502430-0f5634</th>
+            <th>task-1767276502229-a255d0</th>
+            <th>task-1767276502632-0f0e8f</th>
+            <th>task-1767276502829-a0e6b3</th>
+            <th>task-1767276503230-dfb56b</th>
+            <th>task-1767276503029-ba61be</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="timestamp">2026-01-01 23:24</td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価完了</span>
+                <span class="agent-label">Agent / task-1767276502430-0f5634</span>
+              </div>
+              <div class="score-inline">メダル: gold / 総合 91点</div>
+              <div class="radar-block">
+                <svg class="radar" viewBox="0 0 120 120" data-scores="94,92,90,88,93,87">
+                  <polygon class="radar-grid" data-level="1" />
+                  <polygon class="radar-grid" data-level="0.66" />
+                  <polygon class="radar-grid" data-level="0.33" />
+                  <g class="radar-axes"></g>
+                  <polygon class="radar-area" />
+                </svg>
+                <div class="metric-list"><div>テーマ適合 94点</div><div>造形品質 92点</div><div>色/ライティング 90点</div><div>モーション/演出 88点</div><div>構成/多様性 93点</div><div>実装整合 87点</div></div>
+              </div>
+              <div class="metric-reasons"><p><strong>テーマ適合:</strong> 鳥居・綿津見・注連縄で要求の神話/神社文脈に直結。</p><p><strong>造形品質:</strong> 複数ジオメトリの積層でシルエットが明確。</p><p><strong>色/ライティング:</strong> 朱・青緑の対比と微エミッシブで奥行き。</p><p><strong>モーション/演出:</strong> Floatに加え揺れと脈動でリズムを付与。</p><p><strong>構成/多様性:</strong> 縦方向にバリエーションがあり視線誘導が良い。</p><p><strong>実装整合:</strong> config+refsで整理され、拡張しやすい。</p></div>
+              <div class="deliverable-links"><strong>成果物リンク:</strong><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502430-0f5634">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502430-0f5634</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502430-0f5634/components/MountainWorld.tsx">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502430-0f5634/components/MountainWorld.tsx</a></div></div>
+              <div class="snapshot-summary">コミット/差分</div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">ログ詳細</summary>
+                <pre>Branch: task/task-1767276502430-0f5634
+Status: clean
+
+Commit Log:
+2c03ed4 (HEAD -&gt; task/task-1767276502430-0f5634) feat: replace gallery cubes with mythic relics
+
+Diff (stat):
+components/MountainWorld.tsx | 170 +++++++++++++++++++++++++++++++++++++++----
+ 1 file changed, 154 insertions(+), 16 deletions(-)
+</pre>
+              </details>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価完了</span>
+                <span class="agent-label">Agent / task-1767276502229-a255d0</span>
+              </div>
+              <div class="score-inline">メダル: silver / 総合 86点</div>
+              <div class="radar-block">
+                <svg class="radar" viewBox="0 0 120 120" data-scores="92,88,86,78,90,85">
+                  <polygon class="radar-grid" data-level="1" />
+                  <polygon class="radar-grid" data-level="0.66" />
+                  <polygon class="radar-grid" data-level="0.33" />
+                  <g class="radar-axes"></g>
+                  <polygon class="radar-area" />
+                </svg>
+                <div class="metric-list"><div>テーマ適合 92点</div><div>造形品質 88点</div><div>色/ライティング 86点</div><div>モーション/演出 78点</div><div>構成/多様性 90点</div><div>実装整合 85点</div></div>
+              </div>
+              <div class="metric-reasons"><p><strong>テーマ適合:</strong> 鳥居と綿津見モチーフで要件に合致。</p><p><strong>造形品質:</strong> 槍/玉の造形が読み取りやすい。</p><p><strong>色/ライティング:</strong> 水系の発光と朱の対比が効いている。</p><p><strong>モーション/演出:</strong> Float中心で動きは控えめ。</p><p><strong>構成/多様性:</strong> 3体の形状差が明確で単調さが少ない。</p><p><strong>実装整合:</strong> データ配列で整理されているがworktreeに未コミット変更あり。</p></div>
+              <div class="deliverable-links"><strong>成果物リンク:</strong><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502229-a255d0">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502229-a255d0</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502229-a255d0/components/MountainWorld.tsx">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502229-a255d0/components/MountainWorld.tsx</a></div></div>
+              <div class="snapshot-summary">コミット/差分</div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">ログ詳細</summary>
+                <pre>Branch: task/task-1767276502229-a255d0
+Status: M package-lock.json
+
+Commit Log:
+a01cbf8 (HEAD -&gt; task/task-1767276502229-a255d0) Replace gallery cubes with mythic artifacts
+
+Diff (stat):
+components/MountainWorld.tsx | 163 ++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 153 insertions(+), 10 deletions(-)
+</pre>
+              </details>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価完了</span>
+                <span class="agent-label">Agent / task-1767276502632-0f0e8f</span>
+              </div>
+              <div class="score-inline">メダル: silver / 総合 85点</div>
+              <div class="radar-block">
+                <svg class="radar" viewBox="0 0 120 120" data-scores="90,88,86,75,89,84">
+                  <polygon class="radar-grid" data-level="1" />
+                  <polygon class="radar-grid" data-level="0.66" />
+                  <polygon class="radar-grid" data-level="0.33" />
+                  <g class="radar-axes"></g>
+                  <polygon class="radar-area" />
+                </svg>
+                <div class="metric-list"><div>テーマ適合 90点</div><div>造形品質 88点</div><div>色/ライティング 86点</div><div>モーション/演出 75点</div><div>構成/多様性 89点</div><div>実装整合 84点</div></div>
+              </div>
+              <div class="metric-reasons"><p><strong>テーマ適合:</strong> 鳥居・石灯籠・提灯で神社の文脈に忠実。</p><p><strong>造形品質:</strong> 灯籠の多層構成が良く、輪郭が安定。</p><p><strong>色/ライティング:</strong> 点灯エフェクトが空間に温度感を付与。</p><p><strong>モーション/演出:</strong> Floatのみで動きの差分は少なめ。</p><p><strong>構成/多様性:</strong> 3要素が役割分担できている。</p><p><strong>実装整合:</strong> コンポーネント分割で読みやすい。</p></div>
+              <div class="deliverable-links"><strong>成果物リンク:</strong><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502632-0f0e8f">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502632-0f0e8f</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502632-0f0e8f/components/MountainWorld.tsx">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502632-0f0e8f/components/MountainWorld.tsx</a></div></div>
+              <div class="snapshot-summary">コミット/差分</div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">ログ詳細</summary>
+                <pre>Branch: task/task-1767276502632-0f0e8f
+Status: clean
+
+Commit Log:
+201b340 (HEAD -&gt; task/task-1767276502632-0f0e8f) feat: 日本的な神社モチーフに変換（鳥居、石灯籠、提灯）
+
+Diff (stat):
+components/MountainWorld.tsx | 176 ++++++++++++++++++++++++++++++++++++++++---
+ 1 file changed, 167 insertions(+), 9 deletions(-)
+</pre>
+              </details>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価完了</span>
+                <span class="agent-label">Agent / task-1767276502829-a0e6b3</span>
+              </div>
+              <div class="score-inline">メダル: bronze / 総合 79点</div>
+              <div class="radar-block">
+                <svg class="radar" viewBox="0 0 120 120" data-scores="78,80,82,70,84,78">
+                  <polygon class="radar-grid" data-level="1" />
+                  <polygon class="radar-grid" data-level="0.66" />
+                  <polygon class="radar-grid" data-level="0.33" />
+                  <g class="radar-axes"></g>
+                  <polygon class="radar-area" />
+                </svg>
+                <div class="metric-list"><div>テーマ適合 78点</div><div>造形品質 80点</div><div>色/ライティング 82点</div><div>モーション/演出 70点</div><div>構成/多様性 84点</div><div>実装整合 78点</div></div>
+              </div>
+              <div class="metric-reasons"><p><strong>テーマ適合:</strong> 月は情緒的だが神社モチーフからやや逸れる。</p><p><strong>造形品質:</strong> 形状はシンプルで読み取りやすい。</p><p><strong>色/ライティング:</strong> 発光とグローが印象づけに有効。</p><p><strong>モーション/演出:</strong> Floatのみで変化が限定的。</p><p><strong>構成/多様性:</strong> 3要素の性質が分かれていて視覚的に豊か。</p><p><strong>実装整合:</strong> 直書きで管理しやすいが再利用性は低い。</p></div>
+              <div class="deliverable-links"><strong>成果物リンク:</strong><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502829-a0e6b3">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502829-a0e6b3</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502829-a0e6b3/components/MountainWorld.tsx">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276502829-a0e6b3/components/MountainWorld.tsx</a></div></div>
+              <div class="snapshot-summary">コミット/差分</div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">ログ詳細</summary>
+                <pre>Branch: task/task-1767276502829-a0e6b3
+Status: clean
+
+Commit Log:
+4081b76 (HEAD -&gt; task/task-1767276502829-a0e6b3) feat: Replace cube gallery with Japanese elements (Torii, Moon, Chochin)
+
+Diff (stat):
+components/MountainWorld.tsx | 88 +++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 79 insertions(+), 9 deletions(-)
+</pre>
+              </details>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価完了</span>
+                <span class="agent-label">Agent / task-1767276503230-dfb56b</span>
+              </div>
+              <div class="score-inline">メダル: none / 総合 69点</div>
+              <div class="radar-block">
+                <svg class="radar" viewBox="0 0 120 120" data-scores="78,70,66,65,55,80">
+                  <polygon class="radar-grid" data-level="1" />
+                  <polygon class="radar-grid" data-level="0.66" />
+                  <polygon class="radar-grid" data-level="0.33" />
+                  <g class="radar-axes"></g>
+                  <polygon class="radar-area" />
+                </svg>
+                <div class="metric-list"><div>テーマ適合 78点</div><div>造形品質 70点</div><div>色/ライティング 66点</div><div>モーション/演出 65点</div><div>構成/多様性 55点</div><div>実装整合 80点</div></div>
+              </div>
+              <div class="metric-reasons"><p><strong>テーマ適合:</strong> 鳥居単体で主題は伝わる。</p><p><strong>造形品質:</strong> 部材は揃うがディテールが少なめ。</p><p><strong>色/ライティング:</strong> 単色材質で光の表情が弱い。</p><p><strong>モーション/演出:</strong> Float以外の演出なし。</p><p><strong>構成/多様性:</strong> 3体が同一で視覚的な変化が不足。</p><p><strong>実装整合:</strong> 最小変更で簡潔。</p></div>
+              <div class="deliverable-links"><strong>成果物リンク:</strong><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503230-dfb56b">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503230-dfb56b</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503230-dfb56b/components/MountainWorld.tsx">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503230-dfb56b/components/MountainWorld.tsx</a></div></div>
+              <div class="snapshot-summary">コミット/差分</div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">ログ詳細</summary>
+                <pre>Branch: task/task-1767276503230-dfb56b
+Status: clean
+
+Commit Log:
+7fa1d54 (HEAD -&gt; task/task-1767276503230-dfb56b) feat: Replace project gallery cubes with 3D Torii gates in MountainWorld
+
+Diff (stat):
+components/MountainWorld.tsx | 55 +++++++++++++++++++++++++++++++++++++++-----
+ 1 file changed, 49 insertions(+), 6 deletions(-)
+</pre>
+              </details>
+            </td>
+            <td>
+              <div class="agent-meta">
+                <span class="status-badge status-badge--completed">評価完了</span>
+                <span class="agent-label">Agent / task-1767276503029-ba61be</span>
+              </div>
+              <div class="score-inline">メダル: none / 総合 68点</div>
+              <div class="radar-block">
+                <svg class="radar" viewBox="0 0 120 120" data-scores="76,74,68,65,55,72">
+                  <polygon class="radar-grid" data-level="1" />
+                  <polygon class="radar-grid" data-level="0.66" />
+                  <polygon class="radar-grid" data-level="0.33" />
+                  <g class="radar-axes"></g>
+                  <polygon class="radar-area" />
+                </svg>
+                <div class="metric-list"><div>テーマ適合 76点</div><div>造形品質 74点</div><div>色/ライティング 68点</div><div>モーション/演出 65点</div><div>構成/多様性 55点</div><div>実装整合 72点</div></div>
+              </div>
+              <div class="metric-reasons"><p><strong>テーマ適合:</strong> 鳥居で方向性は合うが単調。</p><p><strong>造形品質:</strong> 構造は分かるが造形差分が少ない。</p><p><strong>色/ライティング:</strong> 質感が平板で奥行きが弱い。</p><p><strong>モーション/演出:</strong> Floatのみで演出不足。</p><p><strong>構成/多様性:</strong> 3体同型でリズムが出ない。</p><p><strong>実装整合:</strong> 型追加は良いがdocsのビルド差分が混在。</p></div>
+              <div class="deliverable-links"><strong>成果物リンク:</strong><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503029-ba61be">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503029-ba61be</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503029-ba61be/components/MountainWorld.tsx">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503029-ba61be/components/MountainWorld.tsx</a></div><div><a href="file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503029-ba61be/docs/index.html">file:///Users/takamasa/apps/itopan-portfolio/.worktrees/task-1767276503029-ba61be/docs/index.html</a></div></div>
+              <div class="snapshot-summary">コミット/差分</div>
+              <details class="snapshot-details">
+                <summary class="details-toggle">ログ詳細</summary>
+                <pre>Branch: task/task-1767276503029-ba61be
+Status: clean
+
+Commit Log:
+b0d3856 (HEAD -&gt; task/task-1767276503029-ba61be) Update build artifacts in docs/ for deployment
+adc7d66 Transform 3 square objects to Torii gates in MountainWorld component
+
+Diff (stat):
+App.tsx                                            |  1 +
+ components/MountainWorld.tsx                       | 48 ++++++++++++--
+ .../{index-3naAcVUy.js =&gt; index-2A9eN-we.js}       | 74 +++++++++++-----------
+ docs/index.html                                    |  2 +-
+ 4 files changed, 81 insertions(+), 44 deletions(-)
+</pre>
+              </details>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <script>
+      const charts = document.querySelectorAll('.radar');
+      charts.forEach((svg) => {
+        const scores = (svg.dataset.scores || '').split(',').map((v) => parseFloat(v));
+        const center = 60;
+        const radius = 48;
+        const axisGroup = svg.querySelector('.radar-axes');
+        const gridPolys = svg.querySelectorAll('.radar-grid');
+        const area = svg.querySelector('.radar-area');
+        const pointsFor = (scale) => {
+          const pts = [];
+          for (let i = 0; i < 6; i++) {
+            const angle = (-90 + i * 60) * (Math.PI / 180);
+            const r = radius * scale;
+            const x = center + Math.cos(angle) * r;
+            const y = center + Math.sin(angle) * r;
+            pts.push(`${x.toFixed(1)},${y.toFixed(1)}`);
+          }
+          return pts.join(' ');
+        };
+        gridPolys.forEach((poly) => {
+          const level = parseFloat(poly.getAttribute('data-level') || '1');
+          poly.setAttribute('points', pointsFor(level));
+        });
+        if (axisGroup) {
+          axisGroup.innerHTML = '';
+          for (let i = 0; i < 6; i++) {
+            const angle = (-90 + i * 60) * (Math.PI / 180);
+            const x = center + Math.cos(angle) * radius;
+            const y = center + Math.sin(angle) * radius;
+            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+            line.setAttribute('x1', center.toString());
+            line.setAttribute('y1', center.toString());
+            line.setAttribute('x2', x.toFixed(1));
+            line.setAttribute('y2', y.toFixed(1));
+            line.setAttribute('class', 'radar-axis');
+            axisGroup.appendChild(line);
+          }
+        }
+        if (area && scores.length === 6) {
+          const scaledPoints = scores.map((score, i) => {
+            const angle = (-90 + i * 60) * (Math.PI / 180);
+            const r = radius * Math.max(0, Math.min(score, 100)) / 100;
+            const x = center + Math.cos(angle) * r;
+            const y = center + Math.sin(angle) * r;
+            return `${x.toFixed(1)},${y.toFixed(1)}`;
+          });
+          area.setAttribute('points', scaledPoints.join(' '));
+        }
+      });
+    </script>
+  </body>
+</html>
