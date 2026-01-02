@@ -377,6 +377,13 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     setShowServiceDetail(true);
   };
 
+  const handleShowServiceFromAbout = () => {
+    if (scroll.el) {
+      scroll.el.scrollTo({ top: 0, behavior: 'auto' });
+    }
+    setShowServiceDetail(true);
+  };
+
   const handleShowBootcamp = () => {
     if (scroll.el) {
       scroll.el.scrollTo({ top: 0, behavior: 'auto' });
@@ -455,7 +462,12 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     return (
       <div className="w-full text-[#e4e7e5]">
         <AnimatePresence mode="wait">
-          <AboutDetail key="about-detail" onBack={handleBackFromAbout} onPagesChange={onDetailPagesChange} />
+          <AboutDetail
+            key="about-detail"
+            onBack={handleBackFromAbout}
+            onPagesChange={onDetailPagesChange}
+            onShowService={handleShowServiceFromAbout}
+          />
         </AnimatePresence>
       </div>
     );

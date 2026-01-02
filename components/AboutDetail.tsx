@@ -24,14 +24,22 @@ const quickStagger: Variants = {
 interface AboutDetailProps {
   onBack: () => void;
   onPagesChange?: (pages: number) => void;
+  onShowService?: () => void;
 }
 
-export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange }) => {
+export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange, onShowService }) => {
   // Scroll is handled by parent component using drei's useScroll
   const { language } = useLanguage();
   const contentRef = useRef<HTMLElement | null>(null);
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+  const handleShowService = () => {
+    if (onShowService) {
+      onShowService();
+      return;
+    }
+    onBack();
+  };
 
   useEffect(() => {
     if (!onPagesChange) return;
@@ -528,6 +536,53 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange 
                     </a>
                   </div>
                 </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Cloud Business Card CTA */}
+          <motion.div variants={quickFade} className="mt-16 bg-stone-950/40 border border-emerald-900/30 rounded-sm p-8 md:p-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div>
+                <p className="text-emerald-500/60 font-mono text-sm tracking-widest mb-3">
+                  {getText('CLOUD BUSINESS CARD', 'CLOUD BUSINESS CARD')}
+                </p>
+                <h3 className="text-2xl md:text-3xl font-serif text-stone-200 mb-4">
+                  {getText('クラウド名刺', 'Cloud Business Card')}
+                </h3>
+                <p className="text-stone-400 font-light leading-relaxed">
+                  {getText(
+                    '名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容・連絡導線まで一枚に整理します。',
+                    'Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and contact flow into one page.'
+                  )}
+                </p>
+                <ul className="mt-6 space-y-2 text-sm text-stone-500">
+                  <li>{getText('・初期設計〜公開までの伴走', '• From planning to launch')}</li>
+                  <li>{getText('・名刺デザインやQR導線の整備', '• Business card design + QR flow')}</li>
+                  <li>{getText('・運用しながら育てる設計', '• Built to evolve with updates')}</li>
+                </ul>
+              </div>
+              <div className="flex flex-col gap-4">
+                <button
+                  onClick={handleShowService}
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-stone-200 transition-all duration-300 rounded-sm group"
+                >
+                  <span className="text-emerald-300 group-hover:text-white transition-colors">
+                    {getText('プラン・料金を見る', 'View plans & pricing')}
+                  </span>
+                  <span className="text-stone-500 text-sm">&rarr;</span>
+                </button>
+                <a
+                  href="https://forms.gle/BBfLfsDWmWbPiTLb8"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-stone-900/60 hover:bg-emerald-950/50 border border-stone-700 hover:border-emerald-500/70 text-stone-300 transition-all duration-300 rounded-sm group"
+                >
+                  <span className="text-stone-300 group-hover:text-emerald-300 transition-colors">
+                    {getText('クラウド名刺の相談をする', 'Ask about Cloud Business Card')}
+                  </span>
+                  <span className="text-stone-500 text-sm">&rarr;</span>
+                </a>
               </div>
             </div>
           </motion.div>
