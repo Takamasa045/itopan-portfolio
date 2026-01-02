@@ -229,6 +229,12 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             <span className="text-emerald-500/50 font-mono text-4xl">02</span>
                             {getText('制作プラン', 'Production Plans')}
                         </h2>
+                        <p className="text-xs md:text-sm text-stone-500 font-light">
+                            {getText(
+                                '※地元（長野・松本近郊）割引あり。詳細はご相談ください。',
+                                'Local discount (Nagano/Matsumoto area) available. Ask for details.'
+                            )}
+                        </p>
                     </motion.div>
 
                     <motion.div variants={quickFade} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
