@@ -4,110 +4,15 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import gsap from 'gsap';
 
-type RelicType = 'torii' | 'watatsumi' | 'shimenawa';
-
-type RelicConfig = {
-  type: RelicType;
-  float: {
-    speed: number;
-    rotationIntensity: number;
-    floatIntensity: number;
-  };
+const seaPalette = {
+  surface: '#0f1815',
+  mid: '#0c1512',
+  deep: '#080f0d',
+  band: '#131d19',
 };
 
-const relicConfigs: RelicConfig[] = [
-  { type: 'torii', float: { speed: 1.4, rotationIntensity: 0.2, floatIntensity: 0.25 } },
-  { type: 'watatsumi', float: { speed: 1.6, rotationIntensity: 0.25, floatIntensity: 0.3 } },
-  { type: 'shimenawa', float: { speed: 1.3, rotationIntensity: 0.18, floatIntensity: 0.2 } },
-];
-
-const relicPalette = {
-  obsidian: '#111614',
-  moss: '#18211d',
-  mossLight: '#232d28',
-  emeraldSoft: '#263830',
-  sea: '#1e2d26',
-  rope: '#202824',
-  paper: '#2a332f',
-};
-
-const relicMaterialProps = {
-  roughness: 0.95,
-  metalness: 0,
-  flatShading: true,
-};
-
-const ToriiRelic: React.FC = () => (
-  <group>
-    <mesh position={[-0.7, -0.05, 0]}>
-      <boxGeometry args={[0.18, 1.6, 0.18]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.moss} />
-    </mesh>
-    <mesh position={[0.7, -0.05, 0]}>
-      <boxGeometry args={[0.18, 1.6, 0.18]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.moss} />
-    </mesh>
-    <mesh position={[0, 0.75, 0]}>
-      <boxGeometry args={[1.7, 0.14, 0.2]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.mossLight} />
-    </mesh>
-    <mesh position={[0, 0.52, 0]}>
-      <boxGeometry args={[1.1, 0.08, 0.16]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.obsidian} />
-    </mesh>
-  </group>
-);
-
-const WatatsumiRelic: React.FC = () => (
-  <group>
-    <mesh position={[0, 0.25, 0]}>
-      <sphereGeometry args={[0.42, 16, 16]} />
-      <meshStandardMaterial
-        {...relicMaterialProps}
-        color={relicPalette.emeraldSoft}
-      />
-    </mesh>
-    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.25, 0]}>
-      <torusGeometry args={[0.7, 0.05, 10, 50]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.sea} />
-    </mesh>
-    <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, -0.4, 0]}>
-      <torusGeometry args={[0.45, 0.04, 10, 50]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.obsidian} />
-    </mesh>
-  </group>
-);
-
-const ShimenawaRelic: React.FC = () => (
-  <group>
-    <mesh rotation={[Math.PI / 2, 0, 0]}>
-      <torusGeometry args={[0.65, 0.1, 10, 50]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.rope} />
-    </mesh>
-    <mesh position={[-0.25, -0.45, 0.16]} rotation={[0, 0, 0.16]}>
-      <boxGeometry args={[0.07, 0.4, 0.02]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.paper} />
-    </mesh>
-    <mesh position={[0.25, -0.45, 0.16]} rotation={[0, 0, -0.16]}>
-      <boxGeometry args={[0.07, 0.4, 0.02]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.paper} />
-    </mesh>
-    <mesh position={[0, -0.52, 0.16]}>
-      <boxGeometry args={[0.07, 0.45, 0.02]} />
-      <meshStandardMaterial {...relicMaterialProps} color={relicPalette.paper} />
-    </mesh>
-  </group>
-);
-
-const Relic: React.FC<{ type: RelicType }> = ({ type }) => {
-  if (type === 'torii') {
-    return <ToriiRelic />;
-  }
-  if (type === 'watatsumi') {
-    return <WatatsumiRelic />;
-  }
-  return <ShimenawaRelic />;
-};
+const fogSurfaceColor = new THREE.Color('#020403');
+const fogDeepColor = new THREE.Color('#071412');
 
 export const MountainWorld: React.FC = () => {
   const scroll = useScroll();
@@ -117,20 +22,25 @@ export const MountainWorld: React.FC = () => {
   const mountainRef1 = useRef<THREE.Mesh>(null);
   const mountainRef2 = useRef<THREE.Mesh>(null);
   const textPortalRef = useRef<THREE.Group>(null);
-  const relicsGroupRef = useRef<THREE.Group>(null);
-  const relicRefs = useRef<Array<THREE.Group | null>>([]);
+  const seaGroupRef = useRef<THREE.Group>(null);
+  const seaSurfaceRef = useRef<THREE.Mesh>(null);
 
   useFrame((state, delta) => {
     // Adjusted ranges for 7 pages
     // Page 1: 0 - 0.14
     // Page 2: 0.14 - 0.28 (Philosophy / Monolith)
     // Page 3: 0.28 - 0.42 (Works / Gallery)
-    
-    const r1 = scroll.range(0, 0.2);
-    
-    // Camera slight sway
-    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, -state.pointer.x * 0.5, 1, delta);
-    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, state.pointer.y * 0.5, 1, delta);
+
+    const dive = scroll.range(0.2, 0.4);
+    const diveEase = THREE.MathUtils.smoothstep(dive, 0, 1);
+
+    // Camera sway + dive descent
+    const targetX = -state.pointer.x * 0.5;
+    const targetY = state.pointer.y * 0.5 - diveEase * 3.2;
+    const targetZ = 5 - diveEase * 1.2;
+    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, targetX, 1, delta);
+    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, targetY, 1, delta);
+    state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, targetZ, 1, delta);
 
     // Move mountains based on scroll to create parallax
     if (mountainRef1.current) {
@@ -142,23 +52,26 @@ export const MountainWorld: React.FC = () => {
       mountainRef2.current.position.z = -5 + scroll.offset * 10;
     }
 
-    // Rotate the relic gallery
-    if (relicsGroupRef.current) {
-      // Rotates the group based on scroll progress in the works section (approx 0.3)
-      const workScroll = scroll.range(0.25, 0.2); 
-      relicsGroupRef.current.rotation.y = THREE.MathUtils.lerp(0, -Math.PI / 2, workScroll);
-      relicsGroupRef.current.position.x = THREE.MathUtils.lerp(10, 0, workScroll);
+    if (seaGroupRef.current) {
+      seaGroupRef.current.position.y = THREE.MathUtils.lerp(2.2, -2.4, diveEase);
+      seaGroupRef.current.position.z = THREE.MathUtils.lerp(-4, -9, diveEase);
+      seaGroupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.15) * 0.03;
     }
 
-    const time = state.clock.getElapsedTime();
-    relicRefs.current.forEach((relic, index) => {
-      if (!relic) return;
-      const sway = Math.sin(time * 0.6 + index) * 0.04;
-      relic.rotation.z = sway;
-      relic.rotation.y = Math.sin(time * 0.35 + index) * 0.25;
-      const pulse = 1 + Math.sin(time * 0.7 + index) * 0.02;
-      relic.scale.setScalar(pulse);
-    });
+    if (seaSurfaceRef.current) {
+      seaSurfaceRef.current.position.y = 1.2 + Math.sin(state.clock.getElapsedTime() * 0.4) * 0.06;
+    }
+
+    if (state.scene.fog) {
+      state.scene.fog.near = THREE.MathUtils.lerp(5, 2.2, diveEase);
+      state.scene.fog.far = THREE.MathUtils.lerp(20, 9, diveEase);
+      state.scene.fog.color.lerpColors(fogSurfaceColor, fogDeepColor, diveEase);
+    }
+
+    const background = state.scene.background;
+    if (background && background instanceof THREE.Color) {
+      background.lerpColors(fogSurfaceColor, fogDeepColor, diveEase);
+    }
   });
 
   return (
@@ -211,25 +124,24 @@ export const MountainWorld: React.FC = () => {
          </mesh>
       </group>
 
-      {/* Mythic Relics - Torii / Watatsumi / Shimenawa */}
-      <group ref={relicsGroupRef} position={[10, 0, -6.5]} scale={0.85}>
-        {relicConfigs.map((relic, index) => (
-          <Float
-            key={relic.type}
-            speed={relic.float.speed}
-            rotationIntensity={relic.float.rotationIntensity}
-            floatIntensity={relic.float.floatIntensity}
-            position={[0, index * 2.5 - 2.5, 0]}
-          >
-            <group
-              ref={(node) => {
-                relicRefs.current[index] = node;
-              }}
-            >
-              <Relic type={relic.type} />
-            </group>
-          </Float>
-        ))}
+      {/* Sea layers - shift down as we scroll to simulate diving */}
+      <group ref={seaGroupRef} position={[0, 2.2, -4]}>
+        <mesh ref={seaSurfaceRef} position={[0, 1.2, 0]}>
+          <boxGeometry args={[30, 0.08, 30]} />
+          <meshStandardMaterial color={seaPalette.surface} roughness={0.98} metalness={0} transparent opacity={0.4} flatShading />
+        </mesh>
+        <mesh position={[0, 0.2, 0]}>
+          <boxGeometry args={[30, 0.06, 30]} />
+          <meshStandardMaterial color={seaPalette.mid} roughness={0.98} metalness={0} transparent opacity={0.3} flatShading />
+        </mesh>
+        <mesh position={[0, -0.7, 0]}>
+          <boxGeometry args={[30, 0.04, 30]} />
+          <meshStandardMaterial color={seaPalette.deep} roughness={0.98} metalness={0} transparent opacity={0.25} flatShading />
+        </mesh>
+        <mesh position={[0, -1.4, 0]}>
+          <boxGeometry args={[30, 0.02, 30]} />
+          <meshStandardMaterial color={seaPalette.band} roughness={0.98} metalness={0} transparent opacity={0.18} flatShading />
+        </mesh>
       </group>
 
     </group>
