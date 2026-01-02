@@ -4,6 +4,16 @@ import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import gsap from 'gsap';
 
+const seaPalette = {
+  surface: '#0f1815',
+  mid: '#0c1512',
+  deep: '#080f0d',
+  band: '#131d19',
+};
+
+const fogSurfaceColor = new THREE.Color('#020403');
+const fogDeepColor = new THREE.Color('#071412');
+
 export const MountainWorld: React.FC = () => {
   const scroll = useScroll();
   const groupRef = useRef<THREE.Group>(null);
@@ -12,19 +22,25 @@ export const MountainWorld: React.FC = () => {
   const mountainRef1 = useRef<THREE.Mesh>(null);
   const mountainRef2 = useRef<THREE.Mesh>(null);
   const textPortalRef = useRef<THREE.Group>(null);
-  const imagesGroupRef = useRef<THREE.Group>(null);
+  const seaGroupRef = useRef<THREE.Group>(null);
+  const seaSurfaceRef = useRef<THREE.Mesh>(null);
 
   useFrame((state, delta) => {
     // Adjusted ranges for 7 pages
     // Page 1: 0 - 0.14
     // Page 2: 0.14 - 0.28 (Philosophy / Monolith)
     // Page 3: 0.28 - 0.42 (Works / Gallery)
-    
-    const r1 = scroll.range(0, 0.2);
-    
-    // Camera slight sway
-    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, -state.pointer.x * 0.5, 1, delta);
-    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, state.pointer.y * 0.5, 1, delta);
+
+    const dive = scroll.range(0.2, 0.4);
+    const diveEase = THREE.MathUtils.smoothstep(dive, 0, 1);
+
+    // Camera sway + dive descent
+    const targetX = -state.pointer.x * 0.5;
+    const targetY = state.pointer.y * 0.5 - diveEase * 3.2;
+    const targetZ = 5 - diveEase * 1.2;
+    state.camera.position.x = THREE.MathUtils.damp(state.camera.position.x, targetX, 1, delta);
+    state.camera.position.y = THREE.MathUtils.damp(state.camera.position.y, targetY, 1, delta);
+    state.camera.position.z = THREE.MathUtils.damp(state.camera.position.z, targetZ, 1, delta);
 
     // Move mountains based on scroll to create parallax
     if (mountainRef1.current) {
@@ -36,12 +52,25 @@ export const MountainWorld: React.FC = () => {
       mountainRef2.current.position.z = -5 + scroll.offset * 10;
     }
 
-    // Rotate the project gallery
-    if (imagesGroupRef.current) {
-      // Rotates the group based on scroll progress in the works section (approx 0.3)
-      const workScroll = scroll.range(0.25, 0.2); 
-      imagesGroupRef.current.rotation.y = THREE.MathUtils.lerp(0, -Math.PI / 2, workScroll);
-      imagesGroupRef.current.position.x = THREE.MathUtils.lerp(10, 0, workScroll);
+    if (seaGroupRef.current) {
+      seaGroupRef.current.position.y = THREE.MathUtils.lerp(2.2, -2.4, diveEase);
+      seaGroupRef.current.position.z = THREE.MathUtils.lerp(-4, -9, diveEase);
+      seaGroupRef.current.rotation.z = Math.sin(state.clock.getElapsedTime() * 0.15) * 0.03;
+    }
+
+    if (seaSurfaceRef.current) {
+      seaSurfaceRef.current.position.y = 1.2 + Math.sin(state.clock.getElapsedTime() * 0.4) * 0.06;
+    }
+
+    if (state.scene.fog) {
+      state.scene.fog.near = THREE.MathUtils.lerp(5, 2.2, diveEase);
+      state.scene.fog.far = THREE.MathUtils.lerp(20, 9, diveEase);
+      state.scene.fog.color.lerpColors(fogSurfaceColor, fogDeepColor, diveEase);
+    }
+
+    const background = state.scene.background;
+    if (background && background instanceof THREE.Color) {
+      background.lerpColors(fogSurfaceColor, fogDeepColor, diveEase);
     }
   });
 
@@ -95,16 +124,24 @@ export const MountainWorld: React.FC = () => {
          </mesh>
       </group>
 
-      {/* Projects "Gallery" - Cubes that float by */}
-      <group ref={imagesGroupRef} position={[10, 0, -5]}>
-         {[0, 1, 2].map((i) => (
-            <Float key={i} speed={2} rotationIntensity={0.5} floatIntensity={0.5} position={[0, i * 2.5 - 2.5, 0]}>
-               <mesh castShadow receiveShadow rotation={[0, 0.5, 0]}>
-                  <boxGeometry args={[3, 2, 0.2]} />
-                  <meshStandardMaterial color="#292524" roughness={0.2} metalness={0.5} />
-               </mesh>
-            </Float>
-         ))}
+      {/* Sea layers - shift down as we scroll to simulate diving */}
+      <group ref={seaGroupRef} position={[0, 2.2, -4]}>
+        <mesh ref={seaSurfaceRef} position={[0, 1.2, 0]}>
+          <boxGeometry args={[30, 0.08, 30]} />
+          <meshStandardMaterial color={seaPalette.surface} roughness={0.98} metalness={0} transparent opacity={0.4} flatShading />
+        </mesh>
+        <mesh position={[0, 0.2, 0]}>
+          <boxGeometry args={[30, 0.06, 30]} />
+          <meshStandardMaterial color={seaPalette.mid} roughness={0.98} metalness={0} transparent opacity={0.3} flatShading />
+        </mesh>
+        <mesh position={[0, -0.7, 0]}>
+          <boxGeometry args={[30, 0.04, 30]} />
+          <meshStandardMaterial color={seaPalette.deep} roughness={0.98} metalness={0} transparent opacity={0.25} flatShading />
+        </mesh>
+        <mesh position={[0, -1.4, 0]}>
+          <boxGeometry args={[30, 0.02, 30]} />
+          <meshStandardMaterial color={seaPalette.band} roughness={0.98} metalness={0} transparent opacity={0.18} flatShading />
+        </mesh>
       </group>
 
     </group>

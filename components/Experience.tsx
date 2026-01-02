@@ -10,6 +10,7 @@ import { LanguageContext, useLanguage } from '../contexts/LanguageContext';
 export const Experience: React.FC = () => {
   const lightRef = useRef<THREE.DirectionalLight>(null);
   const [detailPages, setDetailPages] = React.useState(0);
+  const [contentPages, setContentPages] = React.useState(0);
   const detailViewContextValue = useDetailView();
   const languageContextValue = useLanguage();
 
@@ -27,21 +28,20 @@ export const Experience: React.FC = () => {
   React.useEffect(() => {
     const updatePages = () => {
       const isMobile = window.innerWidth < 768;
-      const basePages = isMobile ? 12 : 6;
-      const detailFallback = isMobile ? 26 : 18;
+      const basePages = contentPages > 0 ? contentPages : (isMobile ? 12 : 6);
 
       // Mobile needs more scroll space due to stacked layout
       if (detailPages > 0) {
-        setPages(Math.max(detailFallback, detailPages));
+        setPages(Math.max(1, detailPages));
       } else {
-        setPages(basePages);
+        setPages(Math.max(1, basePages));
       }
     };
 
     updatePages();
     window.addEventListener('resize', updatePages);
     return () => window.removeEventListener('resize', updatePages);
-  }, [detailPages]);
+  }, [detailPages, contentPages]);
 
   return (
     <>
@@ -81,7 +81,7 @@ export const Experience: React.FC = () => {
         <Scroll html style={{ width: '100%', height: '100%' }}>
           <DetailViewContext.Provider value={detailViewContextValue}>
             <LanguageContext.Provider value={languageContextValue}>
-              <Overlay onDetailPagesChange={setDetailPages} />
+              <Overlay onDetailPagesChange={setDetailPages} onPagesChange={setContentPages} />
             </LanguageContext.Provider>
           </DetailViewContext.Provider>
         </Scroll>

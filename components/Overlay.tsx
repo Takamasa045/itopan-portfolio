@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
@@ -292,13 +292,15 @@ const quickStagger: Variants = {
 
 interface OverlayProps {
   onDetailPagesChange?: (pages: number) => void;
+  onPagesChange?: (pages: number) => void;
 }
 
-export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
+export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesChange }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showServiceDetail, setShowServiceDetail] = useState(false);
   const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
+  const contentRef = useRef<HTMLElement | null>(null);
   const { language } = useLanguage();
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
@@ -317,6 +319,47 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
     invalidate();
   }, [language, invalidate]);
 
+  useLayoutEffect(() => {
+    if (!onPagesChange) return;
+    if (showAboutDetail || showServiceDetail || showVibeBootcamp) return;
+
+    const node = contentRef.current;
+    if (!node) return;
+
+    let frame = 0;
+    const updatePages = () => {
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+      frame = requestAnimationFrame(() => {
+        const height = node.scrollHeight;
+        const viewport = window.innerHeight || 1;
+        const pages = Math.max(1, height / viewport);
+        onPagesChange(pages);
+      });
+    };
+
+    updatePages();
+    if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+      document.fonts.ready.then(() => updatePages());
+    }
+
+    let resizeObserver: ResizeObserver | null = null;
+    if (typeof ResizeObserver !== 'undefined') {
+      resizeObserver = new ResizeObserver(() => updatePages());
+      resizeObserver.observe(node);
+    }
+
+    window.addEventListener('resize', updatePages);
+    return () => {
+      window.removeEventListener('resize', updatePages);
+      resizeObserver?.disconnect();
+      if (frame) {
+        cancelAnimationFrame(frame);
+      }
+    };
+  }, [language, onPagesChange, selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp]);
+
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
     // Scroll to top BEFORE state change for immediate effect
@@ -328,6 +371,13 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
 
   // Handler for showing Service detail with scroll to top
   const handleShowService = () => {
+    if (scroll.el) {
+      scroll.el.scrollTo({ top: 0, behavior: 'auto' });
+    }
+    setShowServiceDetail(true);
+  };
+
+  const handleShowServiceFromAbout = () => {
     if (scroll.el) {
       scroll.el.scrollTo({ top: 0, behavior: 'auto' });
     }
@@ -389,7 +439,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
     return (
       <div className="w-full text-[#e4e7e5]">
         <AnimatePresence mode="wait">
-          <ServiceDetail key="service-detail" onBack={handleBackFromService} />
+          <ServiceDetail key="service-detail" onBack={handleBackFromService} onPagesChange={onDetailPagesChange} />
         </AnimatePresence>
       </div>
     );
@@ -412,14 +462,19 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
     return (
       <div className="w-full text-[#e4e7e5]">
         <AnimatePresence mode="wait">
-          <AboutDetail key="about-detail" onBack={handleBackFromAbout} />
+          <AboutDetail
+            key="about-detail"
+            onBack={handleBackFromAbout}
+            onPagesChange={onDetailPagesChange}
+            onShowService={handleShowServiceFromAbout}
+          />
         </AnimatePresence>
       </div>
     );
   }
 
   return (
-    <main className="w-full text-[#e4e7e5]">
+    <main ref={contentRef} className="w-full text-[#e4e7e5]">
 
       {/* HERO SECTION */}
       <Section className="items-start relative">
@@ -624,7 +679,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
             <p className="text-stone-400 font-light max-w-2xl mx-auto leading-relaxed">
               {getText(
                 <>
-                  名刺代わりのWebサイト制作「クラウド名刺」を中心に、<br className="hidden md:block" />
+                  名刺代わりのWebサイト制作「Webca（ウェブカ）」を中心に、<br className="hidden md:block" />
                   生成AIを活用した制作・開発支援を行っています。
                 </>,
                 <>
@@ -641,7 +696,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange }) => {
             <button onClick={handleShowService} className="text-left group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 hover:bg-emerald-950/20 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">01</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">
-                {getText('クラウド名刺', 'Cloud Business Card')}
+                {getText('Webca（ウェブカ）', 'Cloud Business Card')}
               </h4>
               <p className="text-stone-500 text-xs leading-relaxed">
                 {getText(

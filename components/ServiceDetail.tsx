@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion, Variants } from 'framer-motion';
 import { useLanguage } from '../contexts/LanguageContext';
 
@@ -23,12 +23,43 @@ const quickStagger: Variants = {
 
 interface ServiceDetailProps {
     onBack: () => void;
+    onPagesChange?: (pages: number) => void;
 }
 
-export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
+export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesChange }) => {
     const { language } = useLanguage();
     const isEnglish = language === 'en';
     const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+    const contentRef = useRef<HTMLElement | null>(null);
+
+    useEffect(() => {
+        if (!onPagesChange) return;
+        const node = contentRef.current;
+        if (!node) return;
+
+        const updatePages = () => {
+            const height = node.scrollHeight;
+            const viewport = window.innerHeight || 1;
+            const pages = Math.max(1, height / viewport);
+            onPagesChange(pages);
+        };
+
+        updatePages();
+        if (document.fonts && typeof document.fonts.ready?.then === 'function') {
+            document.fonts.ready.then(() => updatePages());
+        }
+        let resizeObserver: ResizeObserver | null = null;
+        if (typeof ResizeObserver !== 'undefined') {
+            resizeObserver = new ResizeObserver(() => updatePages());
+            resizeObserver.observe(node);
+        }
+        window.addEventListener('resize', updatePages);
+        return () => {
+            window.removeEventListener('resize', updatePages);
+            resizeObserver?.disconnect();
+            onPagesChange(0);
+        };
+    }, [language, onPagesChange]);
     return (
         <motion.main
             initial="hidden"
@@ -36,6 +67,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
             exit="exit"
             variants={quickStagger}
             className="w-full min-h-screen pb-20"
+            ref={contentRef}
         >
             {/* Fixed Back Button - Top Left */}
             <motion.div
@@ -60,16 +92,20 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                         {getText('SERVICES / サービス・料金', 'SERVICES / PRICING')}
                     </p>
                     <h1 className="text-4xl md:text-6xl font-serif text-stone-100 mb-6 leading-tight">
-                        {getText('Webサイト+名刺制作プラン', 'Website + Business Card Plan')}
+                        {getText('Webca（ウェブカ）', 'Webca')}
                     </h1>
                     <p className="text-stone-400 font-light max-w-2xl text-lg leading-relaxed">
                         {getText(
                             <>
-                                名刺代わりのポートフォリオから、事業の成長に合わせた本格的なWebサイトまで。<br />
+                                Webca（ウェブカ）は、Webサイト＋名刺をひとつの導線として設計するプランです。<br />
+                                名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容に加えて、趣味や推しの空気感まで一枚に整理します。<br />
+                                ポートフォリオ規模から、事業の成長に合わせた法人向けウェブサイトまで。<br />
                                 「公開方法」と「制作内容」を組み合わせて、あなたに最適な形をご提案します。
                             </>,
                             <>
-                                From a portfolio that works as your business card to a full website that grows with your business.<br />
+                                Webca is a plan that designs your website and business card as one flow.<br />
+                                Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and contact flow into one page.<br />
+                                From a portfolio-scale site to a corporate website that grows with your business.<br />
                                 We combine “release method” and “production scope” to suggest the best fit for you.
                             </>
                         )}
@@ -203,7 +239,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                             <div className="p-8 border-b border-stone-800">
                                 <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI LITE</h3>
                                 <h4 className="text-2xl font-serif text-stone-100">
-                                    {getText('クラウド名刺 Lite', 'Cloud Business Card Lite')}
+                                    {getText('Webca（ウェブカ） Lite', 'Cloud Business Card Lite')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">49,800</span>
@@ -252,7 +288,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                             <div className="p-8 border-b border-emerald-900/30">
                                 <h3 className="text-emerald-500 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI STANDARD</h3>
                                 <h4 className="text-2xl font-serif text-white">
-                                    {getText('クラウド名刺 Standard', 'Cloud Business Card Standard')}
+                                    {getText('Webca（ウェブカ） Standard', 'Cloud Business Card Standard')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-xl text-stone-500 line-through decoration-stone-500/50 mr-2">99,800</span>
@@ -291,12 +327,12 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                             </div>
                         </div>
 
-                        {/* PORTAL PLAN */}
+                        {/* CORPORATE PLAN */}
                         <div className="bg-stone-900/40 border border-stone-800 rounded-sm flex flex-col hover:border-emerald-500/30 transition-all duration-300">
                             <div className="p-8 border-b border-stone-800">
-                                <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">BUSINESS PORTAL</h3>
+                                <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">CORPORATE WEBSITE</h3>
                                 <h4 className="text-2xl font-serif text-stone-100">
-                                    {getText('事業ポータル', 'Business Portal')}
+                                    {getText('法人向けウェブサイト', 'Corporate Website')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">198,000</span>
@@ -305,10 +341,10 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack }) => {
                                 <p className="mt-4 text-stone-500 text-sm leading-relaxed">
                                     {getText(
                                         <>
-                                            実績・サービス・FAQまで網羅。<br />事業の信頼性を高める本格Web。
+                                            実績・サービス・FAQまで網羅。<br />法人向けの信頼性を高めるWebサイト。
                                         </>,
                                         <>
-                                            Covers achievements, services, and FAQ.<br />A full website that builds business credibility.
+                                            Covers achievements, services, and FAQ.<br />A corporate website that builds trust and credibility.
                                         </>
                                     )}
                                 </p>
