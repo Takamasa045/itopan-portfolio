@@ -11,6 +11,7 @@ import { VibeBootcamp } from './VibeBootcamp';
 
 // Types for Project Data
 type MediaType = 'video' | 'music' | 'mv' | 'web' | 'saas' | 'image' | 'event';
+type Pillar = 'creative' | 'development' | 'offline';
 
 // Individual Content Item (Child)
 interface ContentItem {
@@ -34,6 +35,7 @@ interface ProjectCollection {
   titleEn: string;
   category: string;
   categoryEn: string;
+  pillar: Pillar;
   mainType: MediaType; // Determines the overall theme/visual
   description: string;
   descriptionEn: string;
@@ -52,6 +54,7 @@ const projects: ProjectCollection[] = [
     titleEn: 'AI Video Samples',
     category: 'Generative Video Collection',
     categoryEn: 'Generative Video Collection',
+    pillar: 'creative',
     mainType: 'video',
     description: '多数の動画生成AIモデルを使用し、生成結果の違いや組み合わせをテストした映像コレクション。',
     descriptionEn: 'A video collection testing differences and combinations across multiple generative video AI models.',
@@ -92,6 +95,7 @@ const projects: ProjectCollection[] = [
     titleEn: 'MV Collection',
     category: 'AI Music Video',
     categoryEn: 'AI Music Video',
+    pillar: 'creative',
     mainType: 'mv',
     description: 'Suno AIで生成した楽曲に、動画生成AIで映像を組み合わせたミュージックビデオコレクション。',
     descriptionEn: 'A music video collection combining Suno AI tracks with AI-generated visuals.',
@@ -168,6 +172,7 @@ const projects: ProjectCollection[] = [
     titleEn: 'Musuhi Labs',
     category: 'Web & SaaS Prototypes',
     categoryEn: 'Web & SaaS Prototypes',
+    pillar: 'development',
     mainType: 'saas',
     description: 'アニミズム思想をUI/UXに落とし込んだ、実験的アプリケーション開発の記録。',
     descriptionEn: 'Records of experimental app development that translates animist ideas into UI/UX.',
@@ -209,6 +214,7 @@ const projects: ProjectCollection[] = [
     titleEn: 'Events & Community',
     category: 'イベント・コミュニティ',
     categoryEn: 'Events & Community',
+    pillar: 'offline',
     mainType: 'event',
     description: '生成AIハッカソンやワークショップなど、地域で開催するイベント活動の記録。',
     descriptionEn: 'Records of local events such as generative AI hackathons and workshops.',
@@ -244,6 +250,56 @@ const projects: ProjectCollection[] = [
     ]
   }
 ];
+
+const pillarOrder: Pillar[] = ['creative', 'development', 'offline'];
+
+const pillarMeta: Record<Pillar, { labelJa: string; labelEn: string; descriptionJa: string; descriptionEn: string; accent: string; border: string; glow: string; orb: string; pattern: string; patternSize: string; patternOpacity: number; patternHoverOpacity: number; glowColor: string; }> = {
+  creative: {
+    labelJa: 'クリエイティブ',
+    labelEn: 'Creative',
+    descriptionJa: '映像・音楽・生成表現',
+    descriptionEn: 'Film, music, generative expression',
+    accent: 'text-emerald-300',
+    border: 'border-emerald-500/30',
+    glow: 'from-emerald-500/20 via-emerald-950/10 to-transparent',
+    orb: 'bg-emerald-500/20',
+    pattern: 'data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%3Cdefs%3E%0A%3Cpattern%20id%3D%27p%27%20width%3D%2732%27%20height%3D%2732%27%20patternUnits%3D%27userSpaceOnUse%27%3E%0A%3Cpath%20d%3D%27M16%200%20L32%208%20L32%2024%20L16%2032%20L0%2024%20L0%208%20Z%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.12%27%20stroke-width%3D%271%27%2F%3E%0A%3Cpath%20d%3D%27M16%200%20L16%2032%20M0%208%20L32%2024%20M32%208%20L0%2024%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.08%27%20stroke-width%3D%271%27%2F%3E%0A%3C%2Fpattern%3E%0A%3C%2Fdefs%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23p%29%27%2F%3E%0A%3C%2Fsvg%3E',
+    patternSize: '72px 72px',
+    patternOpacity: 0.45,
+    patternHoverOpacity: 0.75,
+    glowColor: 'rgba(110, 231, 183, 0.35)'
+  },
+  development: {
+    labelJa: '開発',
+    labelEn: 'Development',
+    descriptionJa: 'プロダクト・ツール・実験',
+    descriptionEn: 'Products, tools, experiments',
+    accent: 'text-cyan-300',
+    border: 'border-cyan-500/30',
+    glow: 'from-cyan-500/20 via-emerald-950/10 to-transparent',
+    orb: 'bg-cyan-500/20',
+    pattern: 'data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%3Cdefs%3E%0A%3Cpattern%20id%3D%27p%27%20width%3D%2764%27%20height%3D%2764%27%20patternUnits%3D%27userSpaceOnUse%27%3E%0A%3Cg%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-width%3D%271%27%3E%0A%3Ccircle%20cx%3D%270%27%20cy%3D%2764%27%20r%3D%2732%27%20stroke-opacity%3D%270.12%27%2F%3E%0A%3Ccircle%20cx%3D%2764%27%20cy%3D%2764%27%20r%3D%2732%27%20stroke-opacity%3D%270.12%27%2F%3E%0A%3Ccircle%20cx%3D%2732%27%20cy%3D%270%27%20r%3D%2732%27%20stroke-opacity%3D%270.12%27%2F%3E%0A%3Ccircle%20cx%3D%270%27%20cy%3D%2764%27%20r%3D%2716%27%20stroke-opacity%3D%270.08%27%2F%3E%0A%3Ccircle%20cx%3D%2764%27%20cy%3D%2764%27%20r%3D%2716%27%20stroke-opacity%3D%270.08%27%2F%3E%0A%3Ccircle%20cx%3D%2732%27%20cy%3D%270%27%20r%3D%2716%27%20stroke-opacity%3D%270.08%27%2F%3E%0A%3C%2Fg%3E%0A%3C%2Fpattern%3E%0A%3C%2Fdefs%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23p%29%27%2F%3E%0A%3C%2Fsvg%3E',
+    patternSize: '96px 96px',
+    patternOpacity: 0.4,
+    patternHoverOpacity: 0.7,
+    glowColor: 'rgba(34, 211, 238, 0.35)'
+  },
+  offline: {
+    labelJa: 'オフライン',
+    labelEn: 'Offline',
+    descriptionJa: '地域・イベント・コミュニティ',
+    descriptionEn: 'Local events and community',
+    accent: 'text-amber-300',
+    border: 'border-amber-500/30',
+    glow: 'from-amber-500/20 via-emerald-950/10 to-transparent',
+    orb: 'bg-amber-500/20',
+    pattern: 'data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%2764%27%20height%3D%2764%27%20viewBox%3D%270%200%2064%2064%27%3E%0A%3Cdefs%3E%0A%3Cpattern%20id%3D%27p%27%20width%3D%2732%27%20height%3D%2732%27%20patternUnits%3D%27userSpaceOnUse%27%3E%0A%3Ccircle%20cx%3D%2716%27%20cy%3D%2716%27%20r%3D%2714%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.12%27%20stroke-width%3D%271%27%2F%3E%0A%3Ccircle%20cx%3D%270%27%20cy%3D%2716%27%20r%3D%2714%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.08%27%20stroke-width%3D%271%27%2F%3E%0A%3Ccircle%20cx%3D%2732%27%20cy%3D%2716%27%20r%3D%2714%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.08%27%20stroke-width%3D%271%27%2F%3E%0A%3Ccircle%20cx%3D%2716%27%20cy%3D%270%27%20r%3D%2714%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.08%27%20stroke-width%3D%271%27%2F%3E%0A%3Ccircle%20cx%3D%2716%27%20cy%3D%2732%27%20r%3D%2714%27%20fill%3D%27none%27%20stroke%3D%27white%27%20stroke-opacity%3D%270.08%27%20stroke-width%3D%271%27%2F%3E%0A%3C%2Fpattern%3E%0A%3C%2Fdefs%3E%0A%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23p%29%27%2F%3E%0A%3C%2Fsvg%3E',
+    patternSize: '64px 64px',
+    patternOpacity: 0.35,
+    patternHoverOpacity: 0.65,
+    glowColor: 'rgba(251, 191, 36, 0.35)'
+  }
+};
 
 // Section Wrapper
 const Section: React.FC<{ children: React.ReactNode; className?: string; id?: string }> = ({ children, className = "", id }) => {
@@ -300,11 +356,17 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showServiceDetail, setShowServiceDetail] = useState(false);
   const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
+  const [expandedPillar, setExpandedPillar] = useState<Pillar | null>(null);
   const contentRef = useRef<HTMLElement | null>(null);
   const { language } = useLanguage();
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
   const selectedProject = projects.find(p => p.id === selectedProjectId);
+  const projectGroups = pillarOrder.map((pillar) => ({
+    pillar,
+    projects: projects.filter((project) => project.pillar === pillar)
+  }));
+  const featuredCount = 2;
   const scroll = useScroll();
   const { setIsDetailOpen } = useDetailView();
   const { invalidate } = useThree();
@@ -368,13 +430,19 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
       scroll.el.scrollTo({ top: 0, left: 0, behavior: 'auto' });
       scroll.offset = 0;
       scroll.delta = 0;
+      const fixedRoot = scroll.fixed?.firstElementChild as HTMLElement | null;
+      if (fixedRoot) {
+        fixedRoot.style.transform = 'translate3d(0px, 0px, 0px)';
+      }
+      scroll.el.dispatchEvent(new Event('scroll'));
       invalidate();
     };
 
     applyReset();
     requestAnimationFrame(applyReset);
-    setTimeout(applyReset, 50);
-    setTimeout(applyReset, 150);
+    setTimeout(applyReset, 80);
+    setTimeout(applyReset, 200);
+    setTimeout(applyReset, 400);
   }, [invalidate, scroll]);
 
   // Handler for showing About detail with scroll to top
@@ -419,6 +487,10 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   const handleBackFromService = () => {
     setShowServiceDetail(false);
     resetScroll();
+  };
+
+  const togglePillar = (pillar: Pillar) => {
+    setExpandedPillar((current) => (current === pillar ? null : pillar));
   };
 
   // Show Service Detail page
@@ -606,14 +678,49 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
                 </motion.p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                {projects.map((project) => (
-                  <RichProjectCard
-                    key={project.id}
-                    data={project}
-                    onClick={() => setSelectedProjectId(project.id)}
-                  />
-                ))}
+              <div className="flex flex-col gap-12 w-full">
+                {projectGroups.map(({ pillar, projects: groupProjects }) => {
+                  if (groupProjects.length === 0) return null;
+                  const meta = pillarMeta[pillar];
+                  const isExpanded = expandedPillar === pillar;
+                  const visibleProjects = isExpanded ? groupProjects : groupProjects.slice(0, featuredCount);
+                  const showToggle = groupProjects.length > featuredCount;
+                  return (
+                    <div key={pillar} className="flex flex-col gap-6">
+                      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 border-b border-emerald-900/30 pb-4">
+                        <div className="flex flex-col gap-1">
+                          <div className="flex items-center gap-3">
+                            <span className={`w-2 h-2 rounded-full ${meta.orb}`} />
+                            <h4 className="text-2xl md:text-3xl font-serif text-stone-200">
+                              {getText(meta.labelJa, meta.labelEn)}
+                            </h4>
+                          </div>
+                          <p className="text-xs md:text-sm text-stone-500 font-light">
+                            {getText(meta.descriptionJa, meta.descriptionEn)}
+                          </p>
+                        </div>
+                        {showToggle && (
+                          <button
+                            type="button"
+                            onClick={() => togglePillar(pillar)}
+                            className={`text-xs font-mono tracking-widest uppercase ${meta.accent} border ${meta.border} px-4 py-2 rounded-sm bg-black/30 hover:bg-black/50 transition-colors`}
+                          >
+                            {isExpanded ? getText('閉じる', 'Close') : getText('一覧を見る', 'View All')}
+                          </button>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+                        {visibleProjects.map((project) => (
+                          <RichProjectCard
+                            key={project.id}
+                            data={project}
+                            onClick={() => setSelectedProjectId(project.id)}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </motion.div>
           ) : (
@@ -847,7 +954,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
           {/* Footer */}
           <motion.div variants={fadeUp} className="text-center pt-8 border-t border-emerald-900/20 pb-8 md:pb-0">
             <p className="text-xs text-stone-700">
-              &copy; 2025 Takamasa Ito. All rights reserved.
+              &copy; 2026 Takamasa Ito. All rights reserved.
             </p>
           </motion.div>
 
@@ -859,110 +966,71 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
 };
 
 // --- COMPONENT: LIST CARD (Collection Entry) ---
-interface MediaItem {
-  type: 'video' | 'image';
-  url: string;
-}
+const CardBackdrop: React.FC<{ pillar: Pillar }> = ({ pillar }) => {
+  const meta = pillarMeta[pillar];
+  return (
+    <div className="absolute inset-0 overflow-hidden">
+      <div className={`absolute inset-0 bg-gradient-to-br ${meta.glow}`} />
+      <div
+        className="absolute inset-0 pattern-layer"
+        style={{
+          backgroundImage: `url(\"${meta.pattern}\")`,
+          backgroundSize: meta.patternSize,
+          backgroundPosition: 'center',
+          mixBlendMode: 'screen',
+          ['--pattern-opacity' as any]: String(meta.patternOpacity),
+          ['--pattern-opacity-hover' as any]: String(meta.patternHoverOpacity),
+          ['--pattern-glow' as any]: meta.glowColor
+        } as React.CSSProperties}
+      />
+      <div className={`absolute -top-12 -right-10 h-40 w-40 rounded-full blur-3xl ${meta.orb}`} />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#020403] via-transparent to-transparent opacity-80" />
+    </div>
+  );
+};
 
 const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }> = ({ data, onClick }) => {
   const { language } = useLanguage();
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
-  // Get all media (videos and images) from items, sorted by date (newest first)
-  const mediaItems: MediaItem[] = [...data.items]
-    .filter(item => item.videoUrl || item.imageUrl)
-    .sort((a, b) => {
-      const dateA = a.date || '0000.00';
-      const dateB = b.date || '0000.00';
-      return dateB.localeCompare(dateA);
-    })
-    .map(item => ({
-      type: item.videoUrl ? 'video' : 'image' as 'video' | 'image',
-      url: (item.videoUrl || item.imageUrl)!
-    }));
-  const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
-
-  // Cycle through media every 8 seconds
-  useEffect(() => {
-    if (mediaItems.length <= 1) return;
-
-    const interval = setInterval(() => {
-      setCurrentMediaIndex(prev => (prev + 1) % mediaItems.length);
-    }, 8000);
-
-    return () => clearInterval(interval);
-  }, [mediaItems.length]);
-
-  const currentMedia = mediaItems[currentMediaIndex];
+  const titleText = isEnglish ? data.titleEn : data.title;
+  const meta = pillarMeta[data.pillar];
 
   return (
     <motion.article
       variants={fadeUp}
       onClick={onClick}
-      className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/50 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
+      className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/40 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
     >
+      <CardBackdrop pillar={data.pillar} />
+
       {/* Content Container */}
-      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between bg-gradient-to-t from-[#020403] via-[#020403]/60 to-transparent opacity-90">
+      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between">
         <div className="flex justify-between items-start">
-          <div className="bg-black/40 backdrop-blur-sm px-3 py-1 border border-white/10 text-emerald-400 text-xs font-mono tracking-wider uppercase rounded-sm">
-            {data.mainType}
-          </div>
-          {/* Media indicator dots */}
-          {mediaItems.length > 1 && (
-            <div className="flex gap-1.5">
-              {mediaItems.map((_, i) => (
-                <div
-                  key={i}
-                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${i === currentMediaIndex ? 'bg-emerald-400' : 'bg-white/20'
-                    }`}
-                />
-              ))}
-            </div>
-          )}
+          <span className={`px-3 py-1 text-[10px] font-mono tracking-widest uppercase rounded-sm border ${meta.border} ${meta.accent} bg-black/40`}>
+            {getText(meta.labelJa, meta.labelEn)}
+          </span>
         </div>
 
-        <div className="transform group-hover:translate-y-[-8px] transition-transform duration-500">
-          <p className="text-emerald-300 text-xs mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
+        <div className="space-y-3">
+          <p className="text-xs text-stone-500">
             {getText(data.category, data.categoryEn)}
           </p>
-          <h4 className="text-2xl font-serif text-stone-100 mb-2 group-hover:text-white">
-            {getText(data.title, data.titleEn)}
+          <h4
+            className="text-2xl font-serif text-stone-100 group-hover:text-white transition-colors title-glow"
+            data-text={titleText}
+          >
+            {titleText}
           </h4>
-          <p className="text-sm text-stone-400 leading-relaxed line-clamp-2 group-hover:line-clamp-none group-hover:text-stone-300">
+          <p className="text-sm text-stone-400 leading-relaxed line-clamp-2">
             {getText(data.description, data.descriptionEn)}
           </p>
+        </div>
 
-          <div className="mt-4 flex items-center gap-2 text-emerald-400 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-            {getText('コレクションを見る', 'View Collection')} <span className="text-lg">→</span>
-          </div>
+        <div className={`text-xs font-mono tracking-widest ${meta.accent} opacity-70 group-hover:opacity-100 transition-opacity`}>
+          {getText('コレクションを見る', 'View Collection')} <span className="text-base">→</span>
         </div>
       </div>
-
-      {/* Media Preview Background - Show video or image if available (Lazy loaded) */}
-      {currentMedia ? (
-        <div className="absolute inset-0 z-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500">
-          {currentMedia.type === 'video' ? (
-            <LazyVideo
-              key={currentMedia.url}
-              src={currentMedia.url}
-              autoPlay
-              muted
-              loop
-              playsInline
-              className="w-full h-full"
-            />
-          ) : (
-            <LazyImage
-              key={currentMedia.url}
-              src={currentMedia.url}
-              alt=""
-              className="w-full h-full"
-            />
-          )}
-        </div>
-      ) : (
-        <MediaBackground type={data.mainType} />
-      )}
     </motion.article>
   );
 };

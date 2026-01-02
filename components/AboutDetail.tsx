@@ -602,7 +602,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange,
             <span>{getText('ホームに戻る', 'Back to home')}</span>
           </button>
           <p className="text-stone-700 text-xs mt-8">
-            &copy; 2025 Takamasa Ito / ITOPAN
+            &copy; 2026 Takamasa Ito / ITOPAN
           </p>
         </motion.div>
       </footer>
