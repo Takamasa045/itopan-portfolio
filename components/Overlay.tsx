@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef, useCallback } from 'react';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useScroll } from '@react-three/drei';
 import { useThree } from '@react-three/fiber';
@@ -360,29 +360,27 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     };
   }, [language, onPagesChange, selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp]);
 
+  const resetScroll = useCallback(() => {
+    const applyReset = () => {
+      if (!scroll.el) return;
+      scroll.el.scrollTop = 0;
+      scroll.el.scrollLeft = 0;
+      scroll.el.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+      scroll.offset = 0;
+      scroll.delta = 0;
+      invalidate();
+    };
+
+    applyReset();
+    requestAnimationFrame(applyReset);
+    setTimeout(applyReset, 50);
+    setTimeout(applyReset, 150);
+  }, [invalidate, scroll]);
+
   // Handler for showing About detail with scroll to top
   const handleShowAbout = () => {
-    // Scroll to top BEFORE state change for immediate effect
-    if (scroll.el) {
-      scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-    }
+    resetScroll();
     setShowAboutDetail(true);
-  };
-
-  const resetScroll = () => {
-    // Use multiple attempts to reset scroll position
-    const _reset = () => {
-      if (scroll.el) {
-        scroll.el.scrollTop = 0;
-        scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-      }
-    };
-    // Immediate reset
-    _reset();
-    // Delayed resets to catch after render
-    setTimeout(_reset, 0);
-    setTimeout(_reset, 100);
-    setTimeout(_reset, 200);
   };
 
   // Handler for showing Service detail with scroll to top
@@ -397,9 +395,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   };
 
   const handleShowBootcamp = () => {
-    if (scroll.el) {
-      scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-    }
+    resetScroll();
     setShowVibeBootcamp(true);
   };
 
@@ -409,15 +405,10 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
 
   // Also ensure scroll is at top when Detail is shown
   useEffect(() => {
-    if ((showAboutDetail || showServiceDetail || showVibeBootcamp) && scroll.el) {
-      // Force scroll to top with requestAnimationFrame for next frame
-      requestAnimationFrame(() => {
-        if (scroll.el) {
-          scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-        }
-      });
+    if (showAboutDetail || showServiceDetail || showVibeBootcamp) {
+      resetScroll();
     }
-  }, [showAboutDetail, showServiceDetail, showVibeBootcamp, scroll.el]);
+  }, [showAboutDetail, showServiceDetail, showVibeBootcamp, resetScroll]);
 
   // Handler for going back from About detail with scroll to top
   const handleBackFromAbout = () => {
