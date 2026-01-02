@@ -98,12 +98,14 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                         {getText(
                             <>
                                 Webca（ウェブカ）は、Webサイト＋名刺をひとつの導線として設計するプランです。<br />
-                                名刺代わりのポートフォリオから、事業の成長に合わせた本格的なWebサイトまで。<br />
+                                名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容・連絡導線まで一枚に整理します。<br />
+                                ポートフォリオ規模から、事業の成長に合わせた法人向けウェブサイトまで。<br />
                                 「公開方法」と「制作内容」を組み合わせて、あなたに最適な形をご提案します。
                             </>,
                             <>
                                 Webca is a plan that designs your website and business card as one flow.<br />
-                                From a portfolio that works as your business card to a full website that grows with your business.<br />
+                                Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and contact flow into one page.<br />
+                                From a portfolio-scale site to a corporate website that grows with your business.<br />
                                 We combine “release method” and “production scope” to suggest the best fit for you.
                             </>
                         )}
@@ -237,7 +239,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             <div className="p-8 border-b border-stone-800">
                                 <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI LITE</h3>
                                 <h4 className="text-2xl font-serif text-stone-100">
-                                    {getText('Webca(ウェブカ) Lite', 'Cloud Business Card Lite')}
+                                    {getText('Webca（ウェブカ） Lite', 'Cloud Business Card Lite')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">49,800</span>
@@ -286,7 +288,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             <div className="p-8 border-b border-emerald-900/30">
                                 <h3 className="text-emerald-500 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI STANDARD</h3>
                                 <h4 className="text-2xl font-serif text-white">
-                                    {getText('Webca(ウェブカ) Standard', 'Cloud Business Card Standard')}
+                                    {getText('Webca（ウェブカ） Standard', 'Cloud Business Card Standard')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-xl text-stone-500 line-through decoration-stone-500/50 mr-2">99,800</span>

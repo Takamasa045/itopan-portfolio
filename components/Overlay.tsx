@@ -679,7 +679,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
             <p className="text-stone-400 font-light max-w-2xl mx-auto leading-relaxed">
               {getText(
                 <>
-                  名刺代わりのWebサイト制作「Webca(ウェブカ)」を中心に、<br className="hidden md:block" />
+                  名刺代わりのWebサイト制作「Webca（ウェブカ）」を中心に、<br className="hidden md:block" />
                   生成AIを活用した制作・開発支援を行っています。
                 </>,
                 <>
@@ -696,7 +696,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
             <button onClick={handleShowService} className="text-left group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 hover:bg-emerald-950/20 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">01</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">
-                {getText('Webca(ウェブカ)', 'Cloud Business Card')}
+                {getText('Webca（ウェブカ）', 'Cloud Business Card')}
               </h4>
               <p className="text-stone-500 text-xs leading-relaxed">
                 {getText(
