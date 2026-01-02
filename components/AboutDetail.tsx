@@ -552,7 +552,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange,
                 </h3>
                 <p className="text-stone-400 font-light leading-relaxed">
                   {getText(
-                    '名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容・連絡導線まで一枚に整理します。',
+                    '名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容に加えて、趣味や推しの空気感まで一枚に整理します。',
                     'Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and contact flow into one page.'
                   )}
                 </p>
