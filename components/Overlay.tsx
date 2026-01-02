@@ -369,18 +369,30 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     setShowAboutDetail(true);
   };
 
+  const resetScroll = () => {
+    // Use multiple attempts to reset scroll position
+    const _reset = () => {
+      if (scroll.el) {
+        scroll.el.scrollTop = 0;
+        scroll.el.scrollTo({ top: 0, behavior: 'auto' });
+      }
+    };
+    // Immediate reset
+    _reset();
+    // Delayed resets to catch after render
+    setTimeout(_reset, 0);
+    setTimeout(_reset, 100);
+    setTimeout(_reset, 200);
+  };
+
   // Handler for showing Service detail with scroll to top
   const handleShowService = () => {
-    if (scroll.el) {
-      scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-    }
+    resetScroll();
     setShowServiceDetail(true);
   };
 
   const handleShowServiceFromAbout = () => {
-    if (scroll.el) {
-      scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-    }
+    resetScroll();
     setShowServiceDetail(true);
   };
 
@@ -406,22 +418,6 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
       });
     }
   }, [showAboutDetail, showServiceDetail, showVibeBootcamp, scroll.el]);
-
-  const resetScroll = () => {
-    // Use multiple attempts to reset scroll position
-    const _reset = () => {
-      if (scroll.el) {
-        scroll.el.scrollTop = 0;
-        scroll.el.scrollTo({ top: 0, behavior: 'auto' });
-      }
-    };
-    // Immediate reset
-    _reset();
-    // Delayed resets to catch after render
-    setTimeout(_reset, 0);
-    setTimeout(_reset, 100);
-    setTimeout(_reset, 200);
-  };
 
   // Handler for going back from About detail with scroll to top
   const handleBackFromAbout = () => {
