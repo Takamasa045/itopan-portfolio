@@ -327,12 +327,12 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             </div>
                         </div>
 
-                        {/* PORTAL PLAN */}
+                        {/* CORPORATE PLAN */}
                         <div className="bg-stone-900/40 border border-stone-800 rounded-sm flex flex-col hover:border-emerald-500/30 transition-all duration-300">
                             <div className="p-8 border-b border-stone-800">
-                                <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">BUSINESS PORTAL</h3>
+                                <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">CORPORATE WEBSITE</h3>
                                 <h4 className="text-2xl font-serif text-stone-100">
-                                    {getText('事業ポータル', 'Business Portal')}
+                                    {getText('法人向けウェブサイト', 'Corporate Website')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">198,000</span>
@@ -341,10 +341,10 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                                 <p className="mt-4 text-stone-500 text-sm leading-relaxed">
                                     {getText(
                                         <>
-                                            実績・サービス・FAQまで網羅。<br />事業の信頼性を高める本格Web。
+                                            実績・サービス・FAQまで網羅。<br />法人向けの信頼性を高めるWebサイト。
                                         </>,
                                         <>
-                                            Covers achievements, services, and FAQ.<br />A full website that builds business credibility.
+                                            Covers achievements, services, and FAQ.<br />A corporate website that builds trust and credibility.
                                         </>
                                     )}
                                 </p>
