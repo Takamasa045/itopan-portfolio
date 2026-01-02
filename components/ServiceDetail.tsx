@@ -97,14 +97,12 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                     <p className="text-stone-400 font-light max-w-2xl text-lg leading-relaxed">
                         {getText(
                             <>
-                                Webca（ウェブカ）は、Webサイト＋名刺をひとつの導線として設計するプランです。<br />
-                                名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容に加えて、趣味や推しの空気感まで一枚に整理します。<br />
+                                Webca（ウェブカ）は、Webサイト＋名刺をひとつの導線として設計するプランです。名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容に加えて、趣味や推しの空気感まで一枚に整理します。<br />
                                 ポートフォリオ規模から、事業の成長に合わせた法人向けウェブサイトまで。<br />
                                 「公開方法」と「制作内容」を組み合わせて、あなたに最適な形をご提案します。
                             </>,
                             <>
-                                Webca is a plan that designs your website and business card as one flow.<br />
-                                Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and contact flow into one page.<br />
+                                Webca is a plan that designs your website and business card as one flow. Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and even your hobbies or favorites into one page.<br />
                                 From a portfolio-scale site to a corporate website that grows with your business.<br />
                                 We combine “release method” and “production scope” to suggest the best fit for you.
                             </>

@@ -553,7 +553,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange,
                 <p className="text-stone-400 font-light leading-relaxed">
                   {getText(
                     '名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。プロフィール・活動内容に加えて、趣味や推しの空気感まで一枚に整理します。',
-                    'Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and contact flow into one page.'
+                    'Turn your business-card website into a gateway that communicates at a glance. We unify your profile, activities, and even your hobbies or favorites into one page.'
                   )}
                 </p>
                 <ul className="mt-6 space-y-2 text-sm text-stone-500">
