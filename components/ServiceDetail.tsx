@@ -235,7 +235,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             <div className="p-8 border-b border-stone-800">
                                 <h3 className="text-stone-400 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI LITE</h3>
                                 <h4 className="text-2xl font-serif text-stone-100">
-                                    {getText('クラウド名刺 Lite', 'Cloud Business Card Lite')}
+                                    {getText('Webca(ウェブカ) Lite', 'Cloud Business Card Lite')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-3xl font-bold text-emerald-400">49,800</span>
@@ -284,7 +284,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             <div className="p-8 border-b border-emerald-900/30">
                                 <h3 className="text-emerald-500 font-mono tracking-widest text-sm mb-2">CLOUD MEISHI STANDARD</h3>
                                 <h4 className="text-2xl font-serif text-white">
-                                    {getText('クラウド名刺 Standard', 'Cloud Business Card Standard')}
+                                    {getText('Webca(ウェブカ) Standard', 'Cloud Business Card Standard')}
                                 </h4>
                                 <div className="mt-4 flex items-baseline gap-2">
                                     <span className="text-xl text-stone-500 line-through decoration-stone-500/50 mr-2">99,800</span>

@@ -548,7 +548,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange,
                   {getText('CLOUD BUSINESS CARD', 'CLOUD BUSINESS CARD')}
                 </p>
                 <h3 className="text-2xl md:text-3xl font-serif text-stone-200 mb-4">
-                  {getText('クラウド名刺', 'Cloud Business Card')}
+                  {getText('Webca(ウェブカ)', 'Cloud Business Card')}
                 </h3>
                 <p className="text-stone-400 font-light leading-relaxed">
                   {getText(
@@ -579,7 +579,7 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange,
                   className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-stone-900/60 hover:bg-emerald-950/50 border border-stone-700 hover:border-emerald-500/70 text-stone-300 transition-all duration-300 rounded-sm group"
                 >
                   <span className="text-stone-300 group-hover:text-emerald-300 transition-colors">
-                    {getText('クラウド名刺の相談をする', 'Ask about Cloud Business Card')}
+                    {getText('Webca(ウェブカ)の相談をする', 'Ask about Cloud Business Card')}
                   </span>
                   <span className="text-stone-500 text-sm">&rarr;</span>
                 </a>
