@@ -357,6 +357,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   const [showServiceDetail, setShowServiceDetail] = useState(false);
   const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
   const [expandedPillar, setExpandedPillar] = useState<Pillar | null>(null);
+  const listScrollTopRef = useRef<number | null>(null);
   const contentRef = useRef<HTMLElement | null>(null);
   const { language } = useLanguage();
   const isEnglish = language === 'en';
@@ -488,6 +489,29 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     setShowServiceDetail(false);
     resetScroll();
   };
+
+  const restoreProjectScroll = useCallback(() => {
+    const savedTop = listScrollTopRef.current;
+    if (savedTop === null || !scroll.el) return;
+    scroll.el.scrollTop = savedTop;
+    scroll.el.scrollTo({ top: savedTop, behavior: 'auto' });
+    scroll.el.dispatchEvent(new Event('scroll'));
+    invalidate();
+  }, [invalidate, scroll]);
+
+  const handleProjectOpen = (id: string) => {
+    if (scroll.el) {
+      listScrollTopRef.current = scroll.el.scrollTop;
+    }
+    setSelectedProjectId(id);
+  };
+
+  useEffect(() => {
+    if (!selectedProjectId) return;
+    restoreProjectScroll();
+    requestAnimationFrame(restoreProjectScroll);
+    setTimeout(restoreProjectScroll, 60);
+  }, [selectedProjectId, restoreProjectScroll]);
 
   const togglePillar = (pillar: Pillar) => {
     setExpandedPillar((current) => (current === pillar ? null : pillar));
@@ -714,7 +738,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
                           <RichProjectCard
                             key={project.id}
                             data={project}
-                            onClick={() => setSelectedProjectId(project.id)}
+                            onClick={() => handleProjectOpen(project.id)}
                           />
                         ))}
                       </div>
