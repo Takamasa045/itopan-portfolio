@@ -230,7 +230,7 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                         </h2>
                         <p className="text-xs md:text-sm text-stone-500 font-light">
                             {getText(
-                                '※地元（長野・松本近郊）割引あり。詳細はご相談ください。',
+                                '※地元（北安曇郡近郊）割引あり。詳細はご相談ください。',
                                 'Local discount (Nagano/Matsumoto area) available. Ask for details.'
                             )}
                         </p>
