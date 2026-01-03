@@ -121,7 +121,6 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                         </h2>
                         <p className="text-stone-400 font-light">
                             {getText(
-                                '公開方法を分けることで、「ドメイン更新どうする？」の悩みを必要な人だけの話にできます。',
                                 'By separating release methods, “How do we handle domain renewals?” becomes a concern only for those who need it.'
                             )}
                         </p>
