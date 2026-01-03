@@ -356,6 +356,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showServiceDetail, setShowServiceDetail] = useState(false);
   const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
+  const [selectedPillar, setSelectedPillar] = useState<Pillar | null>(null);
   const listScrollTopRef = useRef<number | null>(null);
   const contentRef = useRef<HTMLElement | null>(null);
   const { language } = useLanguage();
@@ -372,9 +373,9 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
 
   // Sync detail view state with context (controls 3D scene visibility)
   useEffect(() => {
-    const isDetailActive = selectedProjectId !== null || showAboutDetail || showServiceDetail || showVibeBootcamp;
+    const isDetailActive = selectedProjectId !== null || selectedPillar !== null || showAboutDetail || showServiceDetail || showVibeBootcamp;
     setIsDetailOpen(isDetailActive);
-  }, [selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp, setIsDetailOpen]);
+  }, [selectedProjectId, selectedPillar, showAboutDetail, showServiceDetail, showVibeBootcamp, setIsDetailOpen]);
 
   useEffect(() => {
     invalidate();
@@ -419,7 +420,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
         cancelAnimationFrame(frame);
       }
     };
-  }, [language, onPagesChange, selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp]);
+  }, [language, onPagesChange, selectedProjectId, selectedPillar, showAboutDetail, showServiceDetail, showVibeBootcamp]);
 
   const resetScroll = useCallback(() => {
     const applyReset = () => {
@@ -508,11 +509,21 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   };
 
   useEffect(() => {
-    if (!selectedProjectId) return;
+    if (!selectedProjectId && !selectedPillar) return;
     restoreWorksScroll();
     requestAnimationFrame(restoreWorksScroll);
     setTimeout(restoreWorksScroll, 60);
-  }, [selectedProjectId, restoreWorksScroll]);
+  }, [selectedProjectId, selectedPillar, restoreWorksScroll]);
+
+  const handlePillarOpen = (pillar: Pillar) => {
+    saveWorksScroll();
+    setSelectedPillar(pillar);
+  };
+
+  const handleBackFromPillar = () => {
+    setSelectedPillar(null);
+    requestAnimationFrame(restoreWorksScroll);
+  };
 
   // Show Service Detail page
   if (showServiceDetail) {
@@ -679,7 +690,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
       {/* WORKS / PROJECTS SECTION - Hierarchical View */}
       <Section className="justify-start pt-20 min-h-0">
         <AnimatePresence mode="wait">
-          {!selectedProjectId ? (
+          {!selectedPillar && !selectedProjectId ? (
             /* LIST VIEW */
             <motion.div
               key="list"
@@ -699,29 +710,29 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
                 </motion.p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                 {projectGroups.map(({ pillar, projects: groupProjects }) => {
                   if (groupProjects.length === 0) return null;
                   return (
-                    <div key={pillar} className="flex flex-col gap-6">
-                      <PillarCard
-                        pillar={pillar}
-                        projects={groupProjects}
-                      />
-                      <div className="flex flex-col gap-6">
-                        {groupProjects.map((project) => (
-                          <RichProjectCard
-                            key={project.id}
-                            data={project}
-                            onClick={() => handleProjectOpen(project.id)}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                    <PillarCard
+                      key={pillar}
+                      pillar={pillar}
+                      projects={groupProjects}
+                      onClick={() => handlePillarOpen(pillar)}
+                    />
                   );
                 })}
               </div>
             </motion.div>
+          ) : null}
+          {selectedPillar && !selectedProjectId ? (
+            <PillarDetail
+              key={`pillar-${selectedPillar}`}
+              pillar={selectedPillar}
+              projects={projectGroups.find((group) => group.pillar === selectedPillar)?.projects ?? []}
+              onBack={handleBackFromPillar}
+              onSelectProject={handleProjectOpen}
+            />
           ) : null}
           {selectedProjectId ? (
             /* DETAIL VIEW */
@@ -989,14 +1000,13 @@ const CardBackdrop: React.FC<{ pillar: Pillar }> = ({ pillar }) => {
   );
 };
 
-const PillarCard: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onClick?: () => void }> = ({ pillar, projects, onClick }) => {
+const PillarCard: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onClick: () => void }> = ({ pillar, projects, onClick }) => {
   const { language } = useLanguage();
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
   const meta = pillarMeta[pillar];
   const title = getText(meta.labelJa, meta.labelEn);
   const description = getText(meta.descriptionJa, meta.descriptionEn);
-  const isInteractive = Boolean(onClick);
   const projectNames = projects.map((project) => ({
     id: project.id,
     name: getText(project.title, project.titleEn)
@@ -1006,7 +1016,7 @@ const PillarCard: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onCl
     <motion.article
       variants={fadeUp}
       onClick={onClick}
-      className={`group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/40 transition-colors duration-500 h-80 rounded-sm ${isInteractive ? 'cursor-pointer' : 'cursor-default'}`}
+      className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/40 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
     >
       <CardBackdrop pillar={pillar} />
 
@@ -1039,11 +1049,9 @@ const PillarCard: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onCl
           </div>
         </div>
 
-        {isInteractive ? (
-          <div className={`text-xs font-mono tracking-widest ${meta.accent} opacity-80 group-hover:opacity-100 transition-opacity`}>
-            {getText('柱を見る', 'Open Pillar')} <span className="text-base">→</span>
-          </div>
-        ) : null}
+        <div className={`text-xs font-mono tracking-widest ${meta.accent} opacity-80 group-hover:opacity-100 transition-opacity`}>
+          {getText('柱を見る', 'Open Pillar')} <span className="text-base">→</span>
+        </div>
       </div>
     </motion.article>
   );
@@ -1055,6 +1063,25 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
   const titleText = isEnglish ? data.titleEn : data.title;
   const meta = pillarMeta[data.pillar];
+  const mediaItems = data.items.filter((item) => item.videoUrl || item.imageUrl);
+  const [activeMediaIndex, setActiveMediaIndex] = useState(0);
+
+  useEffect(() => {
+    if (mediaItems.length <= 1) return;
+    const intervalId = window.setInterval(() => {
+      setActiveMediaIndex((current) => (current + 1) % mediaItems.length);
+    }, 4200);
+    return () => window.clearInterval(intervalId);
+  }, [mediaItems.length]);
+
+  useEffect(() => {
+    if (mediaItems.length === 0) return;
+    if (activeMediaIndex >= mediaItems.length) {
+      setActiveMediaIndex(0);
+    }
+  }, [activeMediaIndex, mediaItems.length]);
+
+  const activeMedia = mediaItems.length > 0 ? mediaItems[activeMediaIndex] : null;
 
   return (
     <motion.article
@@ -1072,7 +1099,39 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
           </span>
         </div>
 
-        <div className="space-y-3">
+        <div className="space-y-4">
+          <div className="relative w-full aspect-video overflow-hidden rounded-sm border border-emerald-900/30 bg-black/60">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={`${data.id}-${activeMediaIndex}`}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.6 }}
+                className="absolute inset-0"
+              >
+                {activeMedia?.videoUrl ? (
+                  <LazyVideo
+                    src={activeMedia.videoUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full"
+                  />
+                ) : activeMedia?.imageUrl ? (
+                  <LazyImage
+                    src={activeMedia.imageUrl}
+                    alt={titleText}
+                    className="w-full h-full"
+                  />
+                ) : (
+                  <MediaBackground type={data.mainType} />
+                )}
+              </motion.div>
+            </AnimatePresence>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
+          </div>
           <p className="text-xs text-stone-500">
             {getText(data.category, data.categoryEn)}
           </p>
@@ -1092,6 +1151,68 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
         </div>
       </div>
     </motion.article>
+  );
+};
+
+const PillarDetail: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onBack: () => void; onSelectProject: (id: string) => void }> = ({
+  pillar,
+  projects,
+  onBack,
+  onSelectProject
+}) => {
+  const { language } = useLanguage();
+  const isEnglish = language === 'en';
+  const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+  const meta = pillarMeta[pillar];
+  const title = getText(meta.labelJa, meta.labelEn);
+  const description = getText(meta.descriptionJa, meta.descriptionEn);
+
+  return (
+    <motion.div
+      key={`pillar-${pillar}`}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={quickStagger}
+      className="w-full flex flex-col gap-10"
+    >
+      <div className="flex justify-between items-center border-b border-emerald-900/50 pb-6">
+        <motion.button
+          variants={quickFade}
+          onClick={onBack}
+          className="group text-emerald-400 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest bg-emerald-950/40 hover:bg-emerald-900/60 px-4 py-2 rounded-md border border-emerald-700/50 hover:border-emerald-500 transition-all duration-300"
+        >
+          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>{getText('一覧に戻る', 'Back to list')}</span>
+        </motion.button>
+        <motion.div variants={quickFade} className="text-xs font-mono text-stone-600 hidden md:block">
+          {getText('PILLAR', 'PILLAR')}: {title.toUpperCase()}
+        </motion.div>
+      </div>
+
+      <motion.div variants={quickFade} className="flex items-center gap-3">
+        <span className={`w-2.5 h-2.5 rounded-full ${meta.orb}`} />
+        <h3 className="text-3xl md:text-4xl font-serif text-stone-100 title-glow" data-text={title}>
+          {title}
+        </h3>
+      </motion.div>
+
+      <motion.p variants={quickFade} className="text-stone-400 font-light max-w-2xl">
+        {description}
+      </motion.p>
+
+      <motion.div variants={quickFade} className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+        {projects.map((project) => (
+          <RichProjectCard
+            key={project.id}
+            data={project}
+            onClick={() => onSelectProject(project.id)}
+          />
+        ))}
+      </motion.div>
+    </motion.div>
   );
 };
 
