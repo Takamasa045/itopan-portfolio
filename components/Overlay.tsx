@@ -688,7 +688,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
       </Section>
 
       {/* WORKS / PROJECTS SECTION - Hierarchical View */}
-      <Section className="justify-start pt-20 min-h-0">
+      <section className="w-full flex flex-col justify-start p-8 md:p-20 max-w-7xl mx-auto pt-20 pb-12 md:pb-16">
         <AnimatePresence mode="wait">
           {!selectedPillar && !selectedProjectId ? (
             /* LIST VIEW */
@@ -743,7 +743,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
             />
           ) : null}
         </AnimatePresence>
-      </Section>
+      </section>
 
       {/* DIVIDER SECTION */}
       <section className="w-full py-20 px-8 md:px-20">
