@@ -265,6 +265,9 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                                         <span className="text-emerald-500">✓</span> {getText('1ページ制作', 'One-page site')}
                                     </li>
                                     <li className="flex items-start gap-3">
+                                        <span className="text-emerald-500">✓</span> {getText('スマホ対応', 'Mobile-friendly')}
+                                    </li>
+                                    <li className="flex items-start gap-3">
                                         <span className="text-emerald-500">✓</span> {getText('世界観ヒアリング 30分', '30-min vision interview')}
                                     </li>
                                     <li className="flex items-start gap-3">
@@ -314,6 +317,9 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                                     <li className="flex items-start gap-3">
                                         <span className="text-emerald-400">✦</span> {getText('Liteの内容すべて', 'Everything in Lite')}
                                     </li>
+                                    <li className="flex items-start gap-3">
+                                        <span className="text-emerald-400">✦</span> {getText('スマホ対応', 'Mobile-friendly')}
+                                    </li>
                                     <li className="flex items-start gap-3 font-bold text-emerald-200">
                                         <span className="text-emerald-400">✦</span> {getText('肩書き／提供価値の整理', 'Clarify title & value proposition')}
                                     </li>
@@ -356,6 +362,9 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                                 <ul className="space-y-4 text-sm text-stone-300">
                                     <li className="flex items-start gap-3">
                                         <span className="text-emerald-500">✓</span> {getText('3〜5ページ制作', '3–5 pages')}
+                                    </li>
+                                    <li className="flex items-start gap-3">
+                                        <span className="text-emerald-500">✓</span> {getText('スマホ対応', 'Mobile-friendly')}
                                     </li>
                                     <li className="flex items-start gap-3 text-xs text-stone-500 pl-6 -mt-2">
                                         {getText('プロフィール/実績/サービス/FAQ等', 'Profile / Achievements / Services / FAQ')}
