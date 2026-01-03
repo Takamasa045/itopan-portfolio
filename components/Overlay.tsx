@@ -1062,15 +1062,24 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
   const isEnglish = language === 'en';
   const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
   const titleText = isEnglish ? data.titleEn : data.title;
-  const meta = pillarMeta[data.pillar];
-  const mediaItems = data.items.filter((item) => item.videoUrl || item.imageUrl);
+  const mediaItems = [...data.items]
+    .filter((item) => item.videoUrl || item.imageUrl)
+    .sort((a, b) => {
+      const dateA = a.date || '0000.00';
+      const dateB = b.date || '0000.00';
+      return dateB.localeCompare(dateA);
+    })
+    .map((item) => ({
+      type: item.videoUrl ? 'video' : 'image' as 'video' | 'image',
+      url: (item.videoUrl || item.imageUrl)!
+    }));
   const [activeMediaIndex, setActiveMediaIndex] = useState(0);
 
   useEffect(() => {
     if (mediaItems.length <= 1) return;
     const intervalId = window.setInterval(() => {
       setActiveMediaIndex((current) => (current + 1) % mediaItems.length);
-    }, 4200);
+    }, 8000);
     return () => window.clearInterval(intervalId);
   }, [mediaItems.length]);
 
@@ -1082,74 +1091,77 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
   }, [activeMediaIndex, mediaItems.length]);
 
   const activeMedia = mediaItems.length > 0 ? mediaItems[activeMediaIndex] : null;
+  const activeDotClass =
+    data.pillar === 'development' ? 'bg-cyan-400' : data.pillar === 'offline' ? 'bg-amber-400' : 'bg-emerald-400';
 
   return (
     <motion.article
       variants={fadeUp}
       onClick={onClick}
-      className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/40 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
+      className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/50 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
     >
-      <CardBackdrop pillar={data.pillar} />
-
       {/* Content Container */}
-      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between">
+      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between bg-gradient-to-t from-[#020403] via-[#020403]/60 to-transparent opacity-90">
         <div className="flex justify-between items-start">
-          <span className={`px-3 py-1 text-[10px] font-mono tracking-widest uppercase rounded-sm border ${meta.border} ${meta.accent} bg-black/40`}>
-            {getText(meta.labelJa, meta.labelEn)}
-          </span>
+          <div className="bg-black/40 backdrop-blur-sm px-3 py-1 border border-white/10 text-emerald-400 text-xs font-mono tracking-wider uppercase rounded-sm">
+            {data.mainType}
+          </div>
+          {mediaItems.length > 1 && (
+            <div className="flex gap-1.5">
+              {mediaItems.map((_, index) => (
+                <div
+                  key={index}
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${index === activeMediaIndex ? activeDotClass : 'bg-white/20'}`}
+                />
+              ))}
+            </div>
+          )}
         </div>
 
-        <div className="space-y-4">
-          <div className="relative w-full aspect-video overflow-hidden rounded-sm border border-emerald-900/30 bg-black/60">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`${data.id}-${activeMediaIndex}`}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.6 }}
-                className="absolute inset-0"
-              >
-                {activeMedia?.videoUrl ? (
-                  <LazyVideo
-                    src={activeMedia.videoUrl}
-                    autoPlay
-                    muted
-                    loop
-                    playsInline
-                    className="w-full h-full"
-                  />
-                ) : activeMedia?.imageUrl ? (
-                  <LazyImage
-                    src={activeMedia.imageUrl}
-                    alt={titleText}
-                    className="w-full h-full"
-                  />
-                ) : (
-                  <MediaBackground type={data.mainType} />
-                )}
-              </motion.div>
-            </AnimatePresence>
-            <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent" />
-          </div>
-          <p className="text-xs text-stone-500">
+        <div className="transform group-hover:translate-y-[-8px] transition-transform duration-500">
+          <p className="text-emerald-300 text-xs mb-2 opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-100">
             {getText(data.category, data.categoryEn)}
           </p>
           <h4
-            className="text-2xl font-serif text-stone-100 group-hover:text-white transition-colors title-glow"
+            className="text-2xl font-serif text-stone-100 mb-2 group-hover:text-white transition-colors"
             data-text={titleText}
           >
             {titleText}
           </h4>
-          <p className="text-sm text-stone-400 leading-relaxed line-clamp-2">
+          <p className="text-sm text-stone-400 leading-relaxed line-clamp-2 group-hover:line-clamp-none group-hover:text-stone-300">
             {getText(data.description, data.descriptionEn)}
           </p>
-        </div>
 
-        <div className={`text-xs font-mono tracking-widest ${meta.accent} opacity-70 group-hover:opacity-100 transition-opacity`}>
-          {getText('コレクションを見る', 'View Collection')} <span className="text-base">→</span>
+          <div className="mt-4 flex items-center gap-2 text-emerald-400 text-xs tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+            {getText('コレクションを見る', 'VIEW COLLECTION')} <span className="text-lg">→</span>
+          </div>
         </div>
       </div>
+
+      {activeMedia ? (
+        <div className="absolute inset-0 z-0 opacity-60 group-hover:opacity-80 transition-opacity duration-500">
+          {activeMedia.type === 'video' ? (
+            <LazyVideo
+              key={activeMedia.url}
+              src={activeMedia.url}
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full"
+            />
+          ) : (
+            <LazyImage
+              key={activeMedia.url}
+              src={activeMedia.url}
+              alt={titleText}
+              className="w-full h-full"
+            />
+          )}
+        </div>
+      ) : (
+        <MediaBackground type={data.mainType} />
+      )}
     </motion.article>
   );
 };
