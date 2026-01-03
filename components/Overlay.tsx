@@ -356,7 +356,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   const [showAboutDetail, setShowAboutDetail] = useState(false);
   const [showServiceDetail, setShowServiceDetail] = useState(false);
   const [showVibeBootcamp, setShowVibeBootcamp] = useState(false);
-  const [expandedPillar, setExpandedPillar] = useState<Pillar | null>(null);
+  const [selectedPillar, setSelectedPillar] = useState<Pillar | null>(null);
   const listScrollTopRef = useRef<number | null>(null);
   const contentRef = useRef<HTMLElement | null>(null);
   const { language } = useLanguage();
@@ -367,16 +367,15 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     pillar,
     projects: projects.filter((project) => project.pillar === pillar)
   }));
-  const featuredCount = 2;
   const scroll = useScroll();
   const { setIsDetailOpen } = useDetailView();
   const { invalidate } = useThree();
 
   // Sync detail view state with context (controls 3D scene visibility)
   useEffect(() => {
-    const isDetailActive = selectedProjectId !== null || showAboutDetail || showServiceDetail || showVibeBootcamp;
+    const isDetailActive = selectedProjectId !== null || selectedPillar !== null || showAboutDetail || showServiceDetail || showVibeBootcamp;
     setIsDetailOpen(isDetailActive);
-  }, [selectedProjectId, showAboutDetail, showServiceDetail, showVibeBootcamp, setIsDetailOpen]);
+  }, [selectedProjectId, selectedPillar, showAboutDetail, showServiceDetail, showVibeBootcamp, setIsDetailOpen]);
 
   useEffect(() => {
     invalidate();
@@ -490,7 +489,12 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
     resetScroll();
   };
 
-  const restoreProjectScroll = useCallback(() => {
+  const saveWorksScroll = useCallback(() => {
+    if (!scroll.el) return;
+    listScrollTopRef.current = scroll.el.scrollTop;
+  }, [scroll]);
+
+  const restoreWorksScroll = useCallback(() => {
     const savedTop = listScrollTopRef.current;
     if (savedTop === null || !scroll.el) return;
     scroll.el.scrollTop = savedTop;
@@ -500,21 +504,25 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
   }, [invalidate, scroll]);
 
   const handleProjectOpen = (id: string) => {
-    if (scroll.el) {
-      listScrollTopRef.current = scroll.el.scrollTop;
-    }
+    saveWorksScroll();
     setSelectedProjectId(id);
   };
 
   useEffect(() => {
-    if (!selectedProjectId) return;
-    restoreProjectScroll();
-    requestAnimationFrame(restoreProjectScroll);
-    setTimeout(restoreProjectScroll, 60);
-  }, [selectedProjectId, restoreProjectScroll]);
+    if (!selectedProjectId && !selectedPillar) return;
+    restoreWorksScroll();
+    requestAnimationFrame(restoreWorksScroll);
+    setTimeout(restoreWorksScroll, 60);
+  }, [selectedProjectId, selectedPillar, restoreWorksScroll]);
 
-  const togglePillar = (pillar: Pillar) => {
-    setExpandedPillar((current) => (current === pillar ? null : pillar));
+  const handlePillarOpen = (pillar: Pillar) => {
+    saveWorksScroll();
+    setSelectedPillar(pillar);
+  };
+
+  const handleBackFromPillar = () => {
+    setSelectedPillar(null);
+    requestAnimationFrame(restoreWorksScroll);
   };
 
   // Show Service Detail page
@@ -682,7 +690,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
       {/* WORKS / PROJECTS SECTION - Hierarchical View */}
       <Section className="justify-start pt-20 min-h-[120vh]">
         <AnimatePresence mode="wait">
-          {!selectedProjectId ? (
+          {!selectedPillar && !selectedProjectId ? (
             /* LIST VIEW */
             <motion.div
               key="list"
@@ -702,59 +710,38 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
                 </motion.p>
               </div>
 
-              <div className="flex flex-col gap-12 w-full">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
                 {projectGroups.map(({ pillar, projects: groupProjects }) => {
                   if (groupProjects.length === 0) return null;
-                  const meta = pillarMeta[pillar];
-                  const isExpanded = expandedPillar === pillar;
-                  const visibleProjects = isExpanded ? groupProjects : groupProjects.slice(0, featuredCount);
-                  const showToggle = groupProjects.length > featuredCount;
                   return (
-                    <div key={pillar} className="flex flex-col gap-6">
-                      <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3 border-b border-emerald-900/30 pb-4">
-                        <div className="flex flex-col gap-1">
-                          <div className="flex items-center gap-3">
-                            <span className={`w-2 h-2 rounded-full ${meta.orb}`} />
-                            <h4 className="text-2xl md:text-3xl font-serif text-stone-200">
-                              {getText(meta.labelJa, meta.labelEn)}
-                            </h4>
-                          </div>
-                          <p className="text-xs md:text-sm text-stone-500 font-light">
-                            {getText(meta.descriptionJa, meta.descriptionEn)}
-                          </p>
-                        </div>
-                        {showToggle && (
-                          <button
-                            type="button"
-                            onClick={() => togglePillar(pillar)}
-                            className={`text-xs font-mono tracking-widest uppercase ${meta.accent} border ${meta.border} px-4 py-2 rounded-sm bg-black/30 hover:bg-black/50 transition-colors`}
-                          >
-                            {isExpanded ? getText('閉じる', 'Close') : getText('一覧を見る', 'View All')}
-                          </button>
-                        )}
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
-                        {visibleProjects.map((project) => (
-                          <RichProjectCard
-                            key={project.id}
-                            data={project}
-                            onClick={() => handleProjectOpen(project.id)}
-                          />
-                        ))}
-                      </div>
-                    </div>
+                    <PillarCard
+                      key={pillar}
+                      pillar={pillar}
+                      projects={groupProjects}
+                      onClick={() => handlePillarOpen(pillar)}
+                    />
                   );
                 })}
               </div>
             </motion.div>
-          ) : (
+          ) : null}
+          {selectedPillar && !selectedProjectId ? (
+            <PillarDetail
+              key={`pillar-${selectedPillar}`}
+              pillar={selectedPillar}
+              projects={projectGroups.find((group) => group.pillar === selectedPillar)?.projects ?? []}
+              onBack={handleBackFromPillar}
+              onSelectProject={handleProjectOpen}
+            />
+          ) : null}
+          {selectedProjectId ? (
             /* DETAIL VIEW */
             <ProjectDetail
               key="detail"
               project={selectedProject!}
               onBack={() => setSelectedProjectId(null)}
             />
-          )}
+          ) : null}
         </AnimatePresence>
       </Section>
 
@@ -1013,6 +1000,63 @@ const CardBackdrop: React.FC<{ pillar: Pillar }> = ({ pillar }) => {
   );
 };
 
+const PillarCard: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onClick: () => void }> = ({ pillar, projects, onClick }) => {
+  const { language } = useLanguage();
+  const isEnglish = language === 'en';
+  const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+  const meta = pillarMeta[pillar];
+  const title = getText(meta.labelJa, meta.labelEn);
+  const description = getText(meta.descriptionJa, meta.descriptionEn);
+  const projectNames = projects.map((project) => ({
+    id: project.id,
+    name: getText(project.title, project.titleEn)
+  }));
+
+  return (
+    <motion.article
+      variants={fadeUp}
+      onClick={onClick}
+      className="group relative block bg-emerald-950/20 border border-emerald-900/30 overflow-hidden hover:border-emerald-500/40 transition-colors duration-500 h-80 rounded-sm cursor-pointer"
+    >
+      <CardBackdrop pillar={pillar} />
+
+      <div className="absolute inset-0 p-6 z-10 flex flex-col justify-between">
+        <div className="flex items-center justify-between">
+          <span className={`px-3 py-1 text-[10px] font-mono tracking-widest uppercase rounded-sm border ${meta.border} ${meta.accent} bg-black/40`}>
+            {title}
+          </span>
+          <span className="text-[10px] font-mono text-stone-500">
+            {projects.length} {getText('件', 'Collections')}
+          </span>
+        </div>
+
+        <div className="space-y-3">
+          <h4 className="text-3xl font-serif text-stone-100 group-hover:text-white transition-colors title-glow" data-text={title}>
+            {title}
+          </h4>
+          <p className="text-sm text-stone-400 leading-relaxed">
+            {description}
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {projectNames.map((project) => (
+              <span
+                key={project.id}
+                className="text-[10px] font-mono text-stone-500 border border-white/10 px-2 py-1 rounded-sm bg-black/30"
+              >
+                {project.name}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div className={`text-xs font-mono tracking-widest ${meta.accent} opacity-80 group-hover:opacity-100 transition-opacity`}>
+          {getText('柱を見る', 'Open Pillar')} <span className="text-base">→</span>
+        </div>
+      </div>
+    </motion.article>
+  );
+};
+
 const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }> = ({ data, onClick }) => {
   const { language } = useLanguage();
   const isEnglish = language === 'en';
@@ -1056,6 +1100,68 @@ const RichProjectCard: React.FC<{ data: ProjectCollection; onClick: () => void }
         </div>
       </div>
     </motion.article>
+  );
+};
+
+const PillarDetail: React.FC<{ pillar: Pillar; projects: ProjectCollection[]; onBack: () => void; onSelectProject: (id: string) => void }> = ({
+  pillar,
+  projects,
+  onBack,
+  onSelectProject
+}) => {
+  const { language } = useLanguage();
+  const isEnglish = language === 'en';
+  const getText = (ja: React.ReactNode, en: React.ReactNode) => (isEnglish ? en : ja);
+  const meta = pillarMeta[pillar];
+  const title = getText(meta.labelJa, meta.labelEn);
+  const description = getText(meta.descriptionJa, meta.descriptionEn);
+
+  return (
+    <motion.div
+      key={`pillar-${pillar}`}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      variants={quickStagger}
+      className="w-full flex flex-col gap-10"
+    >
+      <div className="flex justify-between items-center border-b border-emerald-900/50 pb-6">
+        <motion.button
+          variants={quickFade}
+          onClick={onBack}
+          className="group text-emerald-400 hover:text-emerald-300 flex items-center gap-2 text-sm font-mono tracking-widest bg-emerald-950/40 hover:bg-emerald-900/60 px-4 py-2 rounded-md border border-emerald-700/50 hover:border-emerald-500 transition-all duration-300"
+        >
+          <svg className="w-4 h-4 group-hover:-translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          <span>{getText('一覧に戻る', 'Back to list')}</span>
+        </motion.button>
+        <motion.div variants={quickFade} className="text-xs font-mono text-stone-600 hidden md:block">
+          {getText('PILLAR', 'PILLAR')}: {title.toUpperCase()}
+        </motion.div>
+      </div>
+
+      <motion.div variants={quickFade} className="flex items-center gap-3">
+        <span className={`w-2.5 h-2.5 rounded-full ${meta.orb}`} />
+        <h3 className="text-3xl md:text-4xl font-serif text-stone-100 title-glow" data-text={title}>
+          {title}
+        </h3>
+      </motion.div>
+
+      <motion.p variants={quickFade} className="text-stone-400 font-light max-w-2xl">
+        {description}
+      </motion.p>
+
+      <motion.div variants={quickFade} className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+        {projects.map((project) => (
+          <RichProjectCard
+            key={project.id}
+            data={project}
+            onClick={() => onSelectProject(project.id)}
+          />
+        ))}
+      </motion.div>
+    </motion.div>
   );
 };
 
