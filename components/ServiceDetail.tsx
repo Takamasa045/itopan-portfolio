@@ -317,14 +317,14 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                                     <li className="flex items-start gap-3">
                                         <span className="text-emerald-400">✦</span> {getText('Liteの内容すべて', 'Everything in Lite')}
                                     </li>
-                                    <li className="flex items-start gap-3">
-                                        <span className="text-emerald-400">✦</span> {getText('スマホ対応', 'Mobile-friendly')}
-                                    </li>
                                     <li className="flex items-start gap-3 font-bold text-emerald-200">
                                         <span className="text-emerald-400">✦</span> {getText('肩書き／提供価値の整理', 'Clarify title & value proposition')}
                                     </li>
                                     <li className="flex items-start gap-3">
                                         <span className="text-emerald-400">✦</span> {getText('SNS固定文 (自己紹介テンプレ)', 'Pinned SNS bio template')}
+                                    </li>
+                                    <li className="flex items-start gap-3">
+                                        <span className="text-emerald-400">✦</span> {getText('2〜3ページ追加制作', 'Additional 2–3 pages')}
                                     </li>
                                     <li className="flex items-start gap-3">
                                         <span className="text-emerald-400">✦</span> {getText('名刺印刷 200部へ増量 (希望者)', 'Increase to 200 business card prints (optional)')}
