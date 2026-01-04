@@ -119,11 +119,6 @@ export const ServiceDetail: React.FC<ServiceDetailProps> = ({ onBack, onPagesCha
                             <span className="text-emerald-500/50 font-mono text-4xl">01</span>
                             {getText('公開方法を選ぶ', 'Choose a Release Method')}
                         </h2>
-                        <p className="text-stone-400 font-light">
-                            {getText(
-                                'By separating release methods, “How do we handle domain renewals?” becomes a concern only for those who need it.'
-                            )}
-                        </p>
                     </motion.div>
 
                     <motion.div variants={quickFade} className="grid grid-cols-1 md:grid-cols-3 gap-6">
