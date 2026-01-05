@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" href="/favicon.jpg?v=2" />
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#020403" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webca（ウェブカ） | ITOPAN</title>
+  <meta name="description" content="Webca（ウェブカ）は、Webサイト＋名刺をひとつの導線として設計するプランです。名刺代わりのWebサイトを、渡した瞬間に伝わる“入口”へ。" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://itopan.jp/webca/" />
+  <meta property="og:title" content="Webca（ウェブカ） | ITOPAN" />
+  <meta property="og:description" content="Webサイト＋名刺をひとつの導線として設計するプラン。渡した瞬間に伝わる“入口”へ。" />
+  <meta property="og:image" content="https://itopan.jp/favicon.jpg" />
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image" />
+  <meta property="twitter:url" content="https://itopan.jp/webca/" />
+  <meta property="twitter:title" content="Webca（ウェブカ） | ITOPAN" />
+  <meta property="twitter:description" content="Webサイト＋名刺をひとつの導線として設計するプラン。" />
+  <meta property="twitter:image" content="https://itopan.jp/favicon.jpg" />
+
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "Webca（ウェブカ）",
+      "url": "https://itopan.jp/webca/",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "ITOPAN",
+        "url": "https://itopan.jp/"
+      }
+    }
+  </script>
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-589FJ5ZFHW"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-589FJ5ZFHW');
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zen+Old+Mincho:wght@400;500;700;900&display=swap"
+    rel="stylesheet">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Zen Old Mincho', serif;
+      background-color: #020403;
+      color: #e4e7e5;
+      overflow-x: hidden;
+    }
+
+    /* Custom Scrollbar Hide */
+    ::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+
+    .noise-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 50;
+      opacity: 0.05;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/webca-DyOSlvO-.js"></script>
+  <link rel="modulepreload" crossorigin href="/assets/LanguageToggle-LCDH_olc.js">
+  <link rel="modulepreload" crossorigin href="/assets/ServiceDetail-3ND4SnDo.js">
+</head>
+
+<body>
+  <div id="root"></div>
+  <div class="noise-overlay"></div>
+</body>
+
+</html>
+

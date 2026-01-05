@@ -8,6 +8,13 @@ export default defineConfig(({ mode }) => {
       base: '/',
       build: {
         outDir: 'dist',
+        rollupOptions: {
+          input: {
+            main: path.resolve(__dirname, 'index.html'),
+            webca: path.resolve(__dirname, 'webca/index.html'),
+            webcaLp: path.resolve(__dirname, 'webca/lp/index.html')
+          }
+        }
       },
       server: {
         port: 3000,
