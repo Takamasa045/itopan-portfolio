@@ -563,15 +563,15 @@ export const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, onPagesChange,
                 </ul>
               </div>
               <div className="flex flex-col gap-4">
-                <button
-                  onClick={handleShowService}
+                <a
+                  href="/webca/"
                   className="flex items-center justify-center gap-3 w-full px-6 py-4 bg-emerald-900/40 hover:bg-emerald-800/60 border border-emerald-700/50 text-stone-200 transition-all duration-300 rounded-sm group"
                 >
                   <span className="text-emerald-300 group-hover:text-white transition-colors">
                     {getText('プラン・料金を見る', 'View plans & pricing')}
                   </span>
                   <span className="text-stone-500 text-sm">&rarr;</span>
-                </button>
+                </a>
                 <a
                   href="https://forms.gle/BBfLfsDWmWbPiTLb8"
                   target="_blank"

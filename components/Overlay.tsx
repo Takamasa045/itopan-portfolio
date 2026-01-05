@@ -798,7 +798,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
           {/* Service Cards (Clickable) */}
           <motion.div variants={fadeUp} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-16">
             {/* 01: Cloud Meishi (Clickable) */}
-            <button onClick={handleShowService} className="text-left group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 hover:bg-emerald-950/20 relative overflow-hidden">
+            <a href="/webca/" className="text-left group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 hover:bg-emerald-950/20 relative overflow-hidden">
               <span className="text-2xl font-serif text-emerald-900/50 group-hover:text-emerald-700/50 transition-colors">01</span>
               <h4 className="text-stone-200 font-serif mt-3 mb-2 group-hover:text-emerald-300 transition-colors">
                 {getText('Webca（ウェブカ）', 'Cloud Business Card')}
@@ -818,7 +818,7 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
               <div className="absolute top-4 right-4 text-emerald-500/20 group-hover:text-emerald-500/60 transition-colors">
                 <svg className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </div>
-            </button>
+            </a>
 
             {/* 02: Dev Support (Hover only) */}
             <div className="group bg-stone-950/40 border border-emerald-900/20 hover:border-emerald-500/40 rounded-sm p-6 transition-all duration-300 relative overflow-hidden">
@@ -897,12 +897,12 @@ export const Overlay: React.FC<OverlayProps> = ({ onDetailPagesChange, onPagesCh
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button
-                  onClick={handleShowService}
+                <a
+                  href="/webca/"
                   className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-transparent hover:bg-emerald-950/30 border border-emerald-700/50 hover:border-emerald-500 text-emerald-400 transition-all duration-300 rounded-sm font-mono text-sm"
                 >
                   <span>{getText('プラン・料金を見る', 'View plans & pricing')}</span>
-                </button>
+                </a>
                 <a
                   href="https://forms.gle/BBfLfsDWmWbPiTLb8"
                   target="_blank"
